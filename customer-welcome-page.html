@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+        <title>Welcome to Our Site Please Login with Your Email and Password</title>
+</head>
+
+<body>
+    <h1>Welcome to Our Site Please Login with Your Email and Password</h1>
+    <p></p>
+
+    <div id="login-div" name="login-div">
+        <form name="login-form" id="login-form" action="control/login-handler.php" method="post">
+            <fieldset><legend>login</legend>
+                <p>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" size="60" required>
+                </p>
+                <p>
+                    <label for="pass">Password</label>
+                    <input type="password" id="pass" name="pass" minlength="1" maxlength="15" size="25" required> 
+                <p>
+                <input type="submit" value="login">
+            </fieldset>    
+        </form>
+    </div>
+    <p></p>
+
+    <div id="new-account-div" name="new-account-div">
+        <p><button type="button" onclick="launch_registration()">I Don't Have an Account</button></p>
+    </div>
+
+    <script>
+        function launch_registration () {
+            location.href = "form/registration.html";
+        }
+    </script>
+</body>
+<html>  
