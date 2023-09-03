@@ -1,14 +1,17 @@
 <?php declare(strict_types=1);
 namespace global;
 
-use EmptyStringException;
 use Exception;
+use exceptions\EmptyStringException;
 
 require_once('bootstrap.php');
-//require_once('EmptyStringException.php');
+//require_once('EntityException.php');
 
 class Validate {
-    puconst const ZIP_CODE_PATTERN = '/[0-9]{5}/';
+    public const MINIMUM_CREDIT_CARD_LENGTH = 8;
+    public const MAXIMUM_CREDIT_CARD_LENGTH = 24;
+    public const CVN_CODE_LENGTH = 3;
+    public const  ZIP_CODE_PATTERN = '/[0-9]{5}/';
     public const AREA_CODE_PATTERN = '/([0-9]{3}|\([0-9]{3}\))/';
     public const EXCHANGE_PATTERN = '/[0-9]{3}/';
     public const LINE_NUMBER_PATTERN = '/[0-9]{4}/';
@@ -114,11 +117,46 @@ class Validate {
     /**
      * @throws Exception
      */
-    public static function phone_area_code (String $areaCode, int $line_number): string {
-        if (preg_match(Validate::AREA_CODE_PATTERN, $areaCode) != 1) {
-            throw new Exception(('Phone: ' . $areaCode . ' is not a correctly formatted area code'), $line_number);
+    public static function phone_area_code (String $area_code, int $line_number): string {
+        if (preg_match(Validate::AREA_CODE_PATTERN, $area_code) != 1) {
+            throw new Exception(('Phone: ' . $area_code . ' is not a correctly formatted area code'), $line_number);
         }
-        return $areaCode;
+        return $area_code;
     } // close validate_areaCode
+
+    /**
+     * @throws Exception
+     */
+    public static function card_number (string $card_number, int $line_number): string {
+        if (!self::numeric_string_length($card_number, self::MINIMUM_CREDIT_CARD_LENGTH, self::MAXIMUM_CREDIT_CARD_LENGTH)) {
+            throw new Exception(
+                (
+                    'Credit Card Number: ' . $card_number . ' is outside the [' . self::MINIMUM_CREDIT_CARD_LENGTH
+                    . ', ' . self::MAXIMUM_CREDIT_CARD_LENGTH . '] length bounds or is not a numeric string'
+                ),
+                $line_number);
+        }
+        return $card_number;
+    } //
+
+    public static function cvn_code (string $cvn_code, int $line_number): string {
+        if (!self::numeric_string_length($cvn_code, self::CVN_CODE_LENGTH, self::CVN_CODE_LENGTH)) {
+            $message = 'CVN Code: ' . $cvn_code
+                . ' is outside the [' . self::MINIMUM_CREDIT_CARD_LENGTH
+                . ', ' . self::MAXIMUM_CREDIT_CARD_LENGTH . '] length bounds or is not a numeric string';
+            throw new Exception($message, $line_number);
+        }
+        return $cvn_code;
+    } //
+
+    public static function numeric_string_length (
+        string $string,
+        int $minimum_length,
+        int $maximum_length
+    ): bool {
+        return is_numeric($string)
+            && (strlen($string) >= $minimum_length)
+            && (strlen($string) <= $maximum_length);
+    }
 } // end class validate
 ?>

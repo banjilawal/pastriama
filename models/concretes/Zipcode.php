@@ -1,6 +1,5 @@
 <?php
-
-namespace model;
+namespace models\concretes;
 
 use Exception;
 use global\Validate;
@@ -16,19 +15,14 @@ class Zipcode {
         $this->zip_code = Validate::zip_code($zip_code, 'Zipcode', 'zip_code', 15);
     }
     
-    public function get_zip_code (): string {
-        return $this->zip_code;
-    }
+    public function get_zip_code (): string { return $this->zip_code; }
     
     /**
      * @throws Exception
      */
     public function set_zip_code (string $zip_code): void {
-        $this->zip_code = Validate::zip_code($zip_code, 'Zipcode', 'zip_code', 27);
+        $this->zip_code = Validate::zip_code($zip_code, 'Zipcode', 'zip_code', 24);
     }
     
-    public function __toString (): string {
-        return 'zip-code:' . $this->zip_code;
-    }
-    
-}
+    public function __toString (): string { return 'zip-code:' . $this->zip_code; }
+} // end class Zipcode

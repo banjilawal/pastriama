@@ -1,18 +1,11 @@
 <?php declare(strict_types=1);
-namespace model;
+namespace models\concretes;
 
-use model\Address;
-use model\Road;
-use model\State;
-use model\Zipcode;
+use model\abstract\Address;
 
 require_once('bootstrap.php');
-require_once('Address.php');
-require_once('Zipcode.php');
-require_once('State.php');
-require_once('RoadCategory.php');
 require_once('Orientation.php');
-//   require_once('EmptyStringException.php');
+//   require_once('EntityException.php');
 
 class PostalAddress extends Address {
     private String $streetNumber;

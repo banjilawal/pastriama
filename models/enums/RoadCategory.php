@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
-    require_once('bootstrap.php');
+
+namespace models\enums;
+require_once('bootstrap.php');
 
 class RoadCategory {
     const AVE = 'Avenue';
@@ -11,8 +13,9 @@ class RoadCategory {
     const HWY = 'Highway';
     const PBox = 'PO Box';
     const NA = 'None';
-    
-    public static function toString($enumValue) {
+
+    public static function toString($enumValue): string
+    {
         switch ($enumValue) {
             case self::AVE:
                 return 'Avenue';
