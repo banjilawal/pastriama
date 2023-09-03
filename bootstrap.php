@@ -63,7 +63,6 @@
     }
 
     function print_date (\DateTime $date) {
-
         if (($date instanceof \DateTime) != 1) {
             throw new \Exception($date . ' is not a valid DateTime object');
         }
@@ -76,12 +75,10 @@
         else {
             return $date->format('Y-m-d hh:mm:s');
         }
-
     } // close print_date
 
 
     function date_handler (\DateTime $date) {
-
         if (is_string($date)) {
             return new \DateTime($date);
         }
@@ -91,6 +88,5 @@
         else {
             return new \DateTime('0000-01-01');
         }
-        
     } // close date_handler
 ?>
