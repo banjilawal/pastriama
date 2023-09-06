@@ -2,4 +2,4 @@
 namespace model\abstract;
 //    require_once('Entity.php');
 
-abstract class Address extends Entity { } // end class Address
+abstract class Address extends AnonymousEntity { } // end class Address

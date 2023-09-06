@@ -14,8 +14,7 @@ class RoadCategory {
     const PBox = 'PO Box';
     const NA = 'None';
 
-    public static function toString($enumValue): string
-    {
+    public static function toString($enumValue): string {
         switch ($enumValue) {
             case self::AVE:
                 return 'Avenue';
@@ -38,5 +37,5 @@ class RoadCategory {
             default:
                 return '';
         }
-    }
+    } // close toString
 } // end enum RoadCategory
