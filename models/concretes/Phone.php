@@ -21,7 +21,6 @@ class Phone {
         $this->line_number = Validate::phone_area_code($line_number, 18);
     }
 
-
     public function get_area_code () : string { return $this->area_code; }
     public function get_exchange () : string { return $this->exchange; }
     public function get_line_number () : string { return $this->line_number; }
@@ -40,4 +39,43 @@ class Phone {
     }
 
     public function __toString(): string { return 'phone:(' . $this->area_code . ') ' . $this->exchange . '-' . $this->line_number; }
+    
+    public function to_row () {
+        $elem = '<tr class="phone-row">'
+            . '<td class="cell">' . $this->area_code . '</td>'
+            . '<td class="cell">' . $this->exchange . '</td>'
+            . '<td class="cell">' . $this->line_number . '</td>'
+            . '</tr>';
+        return $elem;
+    } // close to_row;
+    
+    public function to_table () {
+        $elem = '<table class="phone-table">'
+            . '<thead class="phone-table-head>'
+            . '<tr class="phone-table-header-row">'
+            . '<th>Area Code</th>'
+            . '<th>Exchange</th>'
+            . '<th>Number</th>'
+            . '</tr>'
+            . '</thead>'
+            . '<tbody>'
+            . '<tr>'
+            . '<td>' . $this->area_code . '</td>'
+            . '<td>' . $this->exchange . '</td>'
+            . '<td>' . $this->line_number . '</td>'
+            . '</tr>'
+            . '</tbody>'
+            . '</table>';
+        return $elem;
+    } // close function to_table
+    
+    /**
+     * @throws \Exception
+     */
+    public static function build (String $string): Phone {
+        $areaCode = substr($string, (strpos($string,'(') + 1 ),  (strpos($string,')') - 1 ) );
+        $exchange = substr($string, (strpos($string,' ') + 1 ),  (strpos($string,')') - 1 ) );
+        $number = substr($string, (strpos($string,'-') + 1 ) );
+        return new Phone($areaCode, $exchange, $number);
+    } // close build
 } // end Phone
