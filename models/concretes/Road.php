@@ -34,6 +34,13 @@ class Road extends AnonymousEntity implements Nameable {
         $this->category = $category;
     }
     
+    public function equals ($object): boolean {
+        if ($object instanceof Road) {
+            return $this->name === $object->get_name() && $this->category === $object->get_category();
+        }
+        return false;
+    }
+    
     public function __toString (): string {
         return $this->name . \models\enums\RoadCategory::toString($this->category);
     }

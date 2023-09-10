@@ -29,6 +29,15 @@ class Phone {
     public function set_area_code (string $area_code) : void { $this->area_code = Validate::phone_area_code($area_code, 28); }
     public function set_exchange (string $exchange) : void { $this->exchange = Validate::phone_area_code($exchange, 29); }
     public function set_line_number (string $line_number) : void { $this->line_number = Validate::phone_area_code($line_number, 30); }
+    
+    public function equals (Object $object): boolean {
+        if ($object instanceof Phone) {
+            return $this->area_code === $object->get_area_code()
+                && $this->exchange === $object->get_exchange()
+                && $this->line_number === $object->get_line_number();
+        }
+        return false;
+    }
 
     public function __toString(): string { return 'phone:(' . $this->area_code . ') ' . $this->exchange . '-' . $this->line_number; }
 } // end Phone

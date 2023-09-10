@@ -3,8 +3,7 @@
 namespace models\enums;
 require_once('bootstrap.php');
 
-enum Orientation: string
-{
+enum Orientation: string {
     case N = 'North';
     case NE = 'North East';
     case E = 'East';

@@ -5,5 +5,5 @@ require_once('../bootstrap.php');
 require_once('Validate.php');
 require_once('EmptyStringException.php');
 
-abstract class AnonymousEntity { }
+abstract class AnonymousEntity {n}
 ?>

@@ -25,6 +25,13 @@ class State extends AnonymousEntity {
         $this->acronym = Validate::STATES[$acronym];
         $this->name = Validate::STATES[$acronym];
     }
+    
+    public function equals ($object): boolean {
+        if ($object instanceof State) {
+            return $this->name === $object->get_name() && $this->acronym === $object->get_acronym();
+        }
+        return false;
+    }
 
     public function __toString (): string { return $this->acronym; }
 } // end class State Zipcode

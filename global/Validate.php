@@ -15,6 +15,10 @@ class Validate {
     public const AREA_CODE_PATTERN = '/([0-9]{3}|\([0-9]{3}\))/';
     public const EXCHANGE_PATTERN = '/[0-9]{3}/';
     public const LINE_NUMBER_PATTERN = '/[0-9]{4}/';
+    public const CREDIT_CARD_CVN_PATTERN = '/[0-9]{3,4}/';
+    public const CREDIT_CARD_NUMBER_PATTERN = '/([0-9]{3,}-){2,}/i';
+
+    public const CREDIT_CARD_STATES = ['chargable', 'expired', 'declined'];
     
     public const ROAD_CATEGORIES = [
         'Ave' => 'Avenue', 'St' => 'Street', 'Rt' => 'Route',

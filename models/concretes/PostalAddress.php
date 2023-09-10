@@ -8,21 +8,21 @@ require_once('Orientation.php');
 //   require_once('EntityException.php');
 
 class PostalAddress extends Address {
-    private String $streetNumber;
+    private String $street_number;
     private Road $road;
     private String $city;
     private State $state;
     private Zipcode $zipcode;
     
     public function __constructor (
-        String $streetNumber,
+        String $street_number,
         Road $road,
         String $city, State $state,
         Zipcode $zipcode
     ): void {
-        echo 'received street ' . $streetNumber;
-        $this->streetNumber = $streetNumber;
-        echo 'set  street <- ' . $this->streetNumber . '<br';
+        echo 'received street ' . $street_number;
+        $this->street_number = $street_number;
+        echo 'set  street <- ' . $this->street_number . '<br';
         $this->road = $road;
         echo 'received city ' . $city . '<br>';
         $this->city = $city;
@@ -34,21 +34,32 @@ class PostalAddress extends Address {
     //public function get_roadCategory () { return $this->roadCategory; }
     //public function get_orientation () { return $this->orientation; }
     public function get_zipcode (): Zipcode { return $this->zipcode; }
-    public function get_street_number (): string { return $this->streetNumber; }
+    public function get_street_number (): string { return $this->street_number; }
     public function get_state (): State { return $this->state; }
     public function get_road (): Road { return $this->road; }
     public function get_city (): string { return $this->city; }
 
-    public function set_streetNumber (String $streetNumber): void { $this->streetNumber = $streetNumber; }
-    public function set_zipCode (ZipCode $zipCode): void { $this->zipcode = $zipCode; }
+    public function set_street_number (String $street_number): void { $this->street_number = $street_number; }
+    public function set_zipcode (ZipCode $zipcode): void { $this->zipcode = $zipcode; }
     public function set_road (Road $road): void { $this->road = $road; }
     public function set_state (State $state): void { $this->state = $state; }
     public function set_city (String $city): void { $this->city = $city; }
+    
+    public function equals ($object): boolean {
+        if ($object instanceof PostalAddress) {
+            return $this->street_number === $object->get_street_number()
+                && $this->zipcode->equals($object->get_zipcode())
+                && $this->state->equals($object->get_state())
+                && $this->city === $object->get_city()
+                && $this->road->equals($object->road);
+        }
+        return false;
+    }
 
     public function __toString (): string {
         if (is_null($this)) {
             return '';
-        } return $this->streetNumber
+        } return $this->street_number
             . ' ' . $this->road
             . ' ' .$this->$this->city
             . ', ' . $this->state
@@ -58,7 +69,7 @@ class PostalAddress extends Address {
     public function to_row () {
         $elem = '<tr class="postal-address-row">'
                 . '<td class="field-name">number</td>'
-                . '<td>' . $this->streetNumber . '</td>'
+                . '<td>' . $this->street_number . '</td>'
                 . '<td class=field-name">road</td>'
                 . '<td>' . $this->road . '</td>'
                 . '<td class=field-name">city</td>'
@@ -84,7 +95,7 @@ class PostalAddress extends Address {
             . '</thead>'
             . '<tbody>'
                 . '<tr>'
-                    . '<td>' . $this->streetNumber . '</td>'
+                    . '<td>' . $this->street_number . '</td>'
                     . '<td>' . $this->road . '</td>'
                     . '<td>' . $this->city . '</td>'
                     . '<td>' . $this->state . '</td>'

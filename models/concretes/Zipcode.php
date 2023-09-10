@@ -24,5 +24,12 @@ class Zipcode {
         $this->zip_code = Validate::zip_code($zip_code, 'Zipcode', 'zip_code', 24);
     }
     
+    public function equals ($object): boolean {
+        if ($object instanceof Zipcode) {
+            return parent::quals($object) && $this->zip_code === $object->get_zip_code();
+        }
+        return false;
+    }
+    
     public function __toString (): string { return 'zip-code:' . $this->zip_code; }
 } // end class Zipcode
