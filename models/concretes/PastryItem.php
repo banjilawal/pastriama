@@ -19,8 +19,11 @@ class PastryItem extends Item {
         );
     }
     
+    
     public function equals ($object): boolean {
-        if ($object instanceof Item) return parent::equals($object);
+        if ($object instanceof Item) {
+            return parent::equals($object);
+        }
         return false;
     }
 } // end class PastryItem

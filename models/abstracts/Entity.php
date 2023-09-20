@@ -34,7 +34,7 @@ abstract class Entity extends AnonymousEntity {
     
     public function equals ($object): boolean {
         if ($object instanceof Entity) {
-            return $this->id === $object->get_id();
+            return $this->id === $object->get_id() && $this->status == $object->get_status();
         }
         return false;
     }

@@ -3,6 +3,7 @@ namespace models\enums;
 
 enum OrderStatus {
     public const SAVED = 'Saved';
+    public const SUBMITTED = 'Submitted';
     public const  RETURNED = 'Returned';
     public const CANCELLED = 'Cancelled';
     public const IN_TRANSIT = 'In Transit';
@@ -14,6 +15,7 @@ enum OrderStatus {
     public static function toString($enumValue): string {
         return match ($enumValue) {
             self::SAVED => 'Saved',
+            self::SUBMITTED => 'Submitted',
             self::RETURNED => 'Returned',
             self::CANCELLED => 'Cancelled',
             self::IN_TRANSIT => 'In Transit',

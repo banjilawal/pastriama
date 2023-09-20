@@ -28,6 +28,14 @@ class Domain extends AnonymousEntity implements Nameable {
         $this->name = Validate::non_empty_string($name, 'Domain', 'name', 14);
     }
     
+    
+    public function equals ($object): boolean {
+        if ($object instanceof Domain) {
+            return parent::equals($object) && $this->name === $object->get_name() && $this->tld === $object->get_tld();
+        }
+        return false;
+    }
+    
     /**
      * @throws EmptyStringException
      */

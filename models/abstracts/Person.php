@@ -55,9 +55,9 @@ abstract class Person extends NamedEntity {
         if ($object instanceof Person) {
             return parent::equals($object)
                 && $this->lastname === $object->get_lastname()
-                && $this->postalAddress === $object->get_postal_address()
-                && $this->emailAddress === $object->get_email_address()
-                && $this->phone == $object->get_phone();
+                && $this->postalAddress->equals($object->get_postal_address())
+                && $this->emailAddress->equals($object->get_email_address())
+                && $this->phone->equals($object->get_phone());
         }
         return false;
     }

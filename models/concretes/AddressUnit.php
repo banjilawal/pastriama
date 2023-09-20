@@ -5,6 +5,7 @@ namespace models\concretes;
 use exceptions\EmptyStringException;
 use global\Validate;
 use model\abstract\AnonymousEntity;
+use model\abstract\Entity;
 use models\enums\BuildingUnitCategory;
 use models\interfaces\Nameable;
 
@@ -22,6 +23,14 @@ class AddressUnit extends AnonymousEntity {
     
     public function get_unit (): string { return $this->unit; }
     public function get_category (): BuildingUnitCategory { return $this->category; }
+    
+    public function equals($object): boolean {
+        if ($object instanceof AddressUnit) {
+            return parent::equals($object) && $this->unit === $object->get_unit()
+                && $this->Category == $object->get_category();
+        }
+        return false;
+    }
     
     /**
      * @throws EmptyStringException

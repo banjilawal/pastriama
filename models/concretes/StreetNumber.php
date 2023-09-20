@@ -21,29 +21,47 @@ class StreetNumber extends AnonymousEntity {
         $this->orientation = $orientation;
     }
     
+    
     public function get_unit (): AddressUnit {
         return $this->unit;
     }
+    
     
     public function get_road (): Road {
         return $this->road;
     }
     
+    
     public function get_orientation (): Orientation {
         return $this->orientation;
     }
+    
     
     public function set_unit (AddressUnit $unit): void {
         $this->unit = $unit;
     }
     
+    
     public function set_road (Road $road): void {
         $this->road = $road;
     }
     
+    
     public function set_orientation (Orientation $orientation): void {
         $this->orientation = $orientation;
     }
+    
+    
+    public function equals ($object): boolean {
+        if ($object instanceof StreetNumber) {
+            return parent::equals($object)
+                && $this->unit->equals($object->get_unit())
+                && $this->road->equals($object->get_road())
+                && $this->orientation ===  $object->get_orientation();
+        }
+        return false;
+    }
+    
     
     public function __toString (): string {
         return $this->unit

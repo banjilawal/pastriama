@@ -30,7 +30,7 @@ class CreditCard extends Entity implements CustomerItem {
         \DatePeriod $expiration_year,
         \DatePeriod $expiration_month,
         CreditCardStatus $status,
-        int $customer_id,
+        Customer $customer,,
         string $number,
         string $cvn
     ) {
@@ -39,7 +39,7 @@ class CreditCard extends Entity implements CustomerItem {
         $this->expiration_month = $expiration_month;
         $this->number = Validate::card_number($number, 23);
         $this->cvn = Validate::cvn_code($cvn, 24);
-        $this->customer_id = $customer_id;
+        $this->customer_id = $customer->get_id();
         $this->status = $this->status;
     } //
 
@@ -79,13 +79,16 @@ class CreditCard extends Entity implements CustomerItem {
     
     public function set_customer_id (int $customer_id): void { $this->customer_id = $customer_id;}
     
+    
     public function equals ($object): boolean {
         if ($object instanceof CreditCard) {
             return parent::equals($object) && $this->customer_id === $object->get_customer_id()
                 && $this->expiration_year === $object->get_expiration_year()
                 && $this->expiration_month === $object->expiration_month
                 && $this->number === $object->get_number()
-                && $this->cvn == $object->get_cvn();
+                && $this->status === $object->get_status()
+                && $this->cvn === $object->get_cvn();
+
         }
         return false;
     }
