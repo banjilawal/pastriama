@@ -17,7 +17,7 @@ class Phone {
      * @throws \Exception
      */
     public function __construct(Customer $customer, string $area_code, string $exchange, string $line_number) {
-        $this->customer_id = $customer->get_id();
+        $this->customer_id = $customer->getId();
         $this->area_code = Validate::phone_area_code($area_code, 18);
         $this->exchange = Validate::phone_area_code($exchange, 17);
         $this->line_number = Validate::phone_area_code($line_number, 18);
@@ -27,7 +27,7 @@ class Phone {
     public function get_area_code () : string { return $this->area_code; }
     public function get_exchange () : string { return $this->exchange; }
     public function get_line_number () : string { return $this->line_number; }
-    public function set_customer_id (Customer $customer) :void { $this->customer_id = $customer->get_id(); }
+    public function set_customer_id (Customer $customer) :void { $this->customer_id = $customer->getId(); }
     
     /**
      * @throws \Exception

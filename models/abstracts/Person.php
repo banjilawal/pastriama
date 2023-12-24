@@ -29,42 +29,42 @@ abstract class Person extends NamedEntity {
         $this->phone = $phone;
     }
     
-    public function get_firstname (): string { return $this->get_name(); }
-    public function get_lastname (): string { return $this->lastname; }
-    public function get_postal_address (): PostalAddress { return $this->postalAddress; }
-    public function get_email_address (): EmailAddress { return $this->emailAddress; }
-    public function get_phone (): Phone { return $this->phone; }
+    public function getFirstname (): string { return $this->getName(); }
+    public function getLastname (): string { return $this->lastname; }
+    public function getPostalAddress (): PostalAddress { return $this->postalAddress; }
+    public function getEmailAddress (): EmailAddress { return $this->emailAddress; }
+    public function getPhone (): Phone { return $this->phone; }
     
     /**
      * @throws EmptyStringException
      */
-    public function set_firstname (string $firstname): void { $this->set_name($firstname); }
+    public function setFirstname (string $firstname): void { $this->setName($firstname); }
     
     /**
      * @throws EmptyStringException
      */
-    public function set_lastname (string $lastname): void {
+    public function setLastname (string $lastname): void {
         $this->lastname = Validate::non_empty_string($lastname, 'Person', 'lastname', 43);
     }
     
-    public function set_postal_address (PostalAddress $postalAddress): void { $this->postalAddress = $postalAddress; }
-    public function set_email_address (EmailAddress $emailAddress): void { $this->emailAddress = $emailAddress; }
-    public function set_phone (Phone $phone): void { $this->phone = $phone; }
+    public function setPostalAddress (PostalAddress $postalAddress): void { $this->postalAddress = $postalAddress; }
+    public function setEmailAddress (EmailAddress $emailAddress): void { $this->emailAddress = $emailAddress; }
+    public function setPhone (Phone $phone): void { $this->phone = $phone; }
     
     public function equals ($object): boolean {
         if ($object instanceof Person) {
             return parent::equals($object)
-                && $this->lastname === $object->get_lastname()
-                && $this->postalAddress->equals($object->get_postal_address())
-                && $this->emailAddress->equals($object->get_email_address())
-                && $this->phone->equals($object->get_phone());
+                && $this->lastname === $object->getLastname()
+                && $this->postalAddress->equals($object->getPostalAddress())
+                && $this->emailAddress->equals($object->getEmailAddress())
+                && $this->phone->equals($object->getPhone());
         }
         return false;
     }
     
     public function __toString (): string {
-        return $this->get_id()
-            . ' firstname:' . $this->get_firstname()
+        return $this->getId()
+            . ' firstname:' . $this->getFirstname()
             . ' lastname:' . $this->lastname
             . ' postal address:' . $this->postalAddress
             . ' email:' . $this->emailAddress

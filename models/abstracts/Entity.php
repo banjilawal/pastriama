@@ -18,14 +18,13 @@ abstract class Entity extends AnonymousEntity {
         $this->id = Validate::id($id);
     }
 
-    public function get_id (): int { return $this->id; }
-    public function get_status (): EntityStatus { return  $this->status; }
+    public function getId (): int { return $this->id; }
+    public function getStatus (): EntityStatus { return  $this->status; }
 
     /**
      * @throws \Exception
      */
-    public function set_id (int $id): void { $this->id = Validate::id($id); }
-    public function set_status (EntityStatus $status): EntityStatus { $this->status = $status; }
+    public function setStatus (EntityStatus $status): EntityStatus { $this->status = $status; }
     
     public function print_status (): string {
         if ($this->status == EntityStatus::ACTIVE) return '';
@@ -33,12 +32,13 @@ abstract class Entity extends AnonymousEntity {
     }
     
     public function equals ($object): boolean {
+        if ($this === $object) return true;
+        if (is_null($object)) return false;
         if ($object instanceof Entity) {
-            return $this->id === $object->get_id() && $this->status == $object->get_status();
+            return $this->id === $object->getId() && $this->status == $object->getStatus();
         }
         return false;
     }
 
     public function __toString (): string { return $this->print_status() . 'id:' . $this->id; }
 } // end class Entity
-?>

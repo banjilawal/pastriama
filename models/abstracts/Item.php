@@ -5,58 +5,64 @@ use model\abstract\NamedEntity;
 
 abstract class Item extends NamedEntity {
     private float $price;
-    private string $image_name;
+    private string $imageName;
     private string $description;
 
     /**
      * @param float $price
-     * @param string $image_name
+     * @param string $imageName
      * @param string $description
+     * @throws \Exception
      */
     public function __construct (
-        int $id,
+        int    $id,
         string $name,
-        float $price,
-        string $image_name,
+        float  $price,
+        string $imageName,
         string $description
     ) {
         parent::__construct($id, $name);
         $this->price = $price;
-        $this->image_name = $image_name;
+        $this->imageName = $imageName;
         $this->description = $description;
     }
 
-    public function get_price (): float { return $this->price; }
-    public function get_image_name (): string { return $this->image_name; }
-    public function get_description (): string { return $this->description; }
+    public function getPrice (): float { return $this->price; }
+    public function getImageName (): string { return $this->imageName; }
+    public function getDescription (): string { return $this->description; }
 
-    public function set_price (float $price): void {
+    public function setPrice (float $price): void {
         if ($price < LOWEST_PRICE || $price > HIGHEST_PRICE) {
             throw new Exception($price . ' is outside the acceptable retail price range');
         }
         $this->price = $price;
-    } // close set_price
+    }
 
 
-    public function set_image_name (string $image_name): void {
-        if (!empty($this->image_name)) {
-            throw new Exception('The image path has already been set to ' . $this->image_name);
+    public function setImageName (string $imageName): void {
+        if (!empty($imageName)) {
+            throw new Exception('Attempting to set the image name to an empty string ');
         }
-        $this->image_name = $image_name;
-    } // close set_image_path
+        $this->imageName = $imageName;
+    }
 
 
-    public function set_description (string $description): void {
+    public function setDescription (string $description): void {
+        if (!empty($description)) {
+            throw new Exception('Attempting to set the description to an empty string ');
+        }
         $this->description = $description;
-    } // close description
+    }
     
     
     public function equals ($object): boolean {
+        if ($this === $object) return true;
+        if (is_null($object)) return false;
         if ($object instanceof Item) {
             return parent::equals($object)
-                && $this->price === $object->get_price()
-                && $this->image_name === $object->get_image_name()
-                && $this->get_description() === $object->description;
+                && $this->price === $object->getPrice()
+                && $this->imageName === $object->getImageName()
+                && $this->description === $object->getDescription();
         }
         return false;
     }
@@ -64,30 +70,31 @@ abstract class Item extends NamedEntity {
     public function __toString(): string {
         return parent::__toString()
             . ' price:' . $this->price
-            . ' image_path:' . $this->image_name
+            . ' image_path:' . $this->iimageName
             . ' description:' . $this->description;
     }
 
-    public function load_image (int $width, int $height): string {
-        return '<img src="' . $this->image_name
+    public function loadImage (int $width, int $height): string {
+        return '<img src="' . $this->imageName
             . '" width="' . $width
             . '" height="' . $height
             . '">';
     } // close load_image
 
-    public function to_row (): string {
-        return '<tr id="' . $this->get_id() . '" name="' . $this->get_id() . '" onclick="send_protein_bar(this)">'
-            . '<td hidden>' . $this->get_id() . '</td>'
-            . '<td>' . $this->load_image(90, 100) . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
-            . '<td>' . $this->get_name() . '</td>'
+    public function toRow (): string {
+        return '<tr id="' . $this->getId() . '" name="' . $this->getId() . '" onclick="send_protein_bar(this)">'
+            . '<td hidden>' . $this->getId() . '</td>'
+            . '<td>' . $this->loadImage(90, 100) . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
+            . '<td>' . $this->getName() . '</td>'
             . '<td>' . $this->description . '</td>'
             . '<td>' . $this->grams . '</td>'
             . '<td>' . $this->price . '</td>'
             . '</tr>';
-    } // close to_row
+    }
 
-    public function to_table (): string {
-        $elem = '<table class=>'
+
+    public function toTable (): string {
+        return '<table class=>'
             . '<thead>'
             . '<tr>'
             . '<th>Picture</th>'
@@ -99,14 +106,13 @@ abstract class Item extends NamedEntity {
             . '</thead>'
             . '<tbody>'
             . '<tr>'
-            . '<td>' . $this->load_image(300, 400) . '</td>'
-            . '<td>' . $this->get_name() . '</td>'
+            . '<td>' . $this->loadImage(300, 400) . '</td>'
+            . '<td>' . $this->getName() . '</td>'
             . '<td>' . $this->description . '</td>'
             . '<td>' . $this->price . '</td>'
             . '</tr>'
             . '</tbody>'
             . '</table>'
-            . '<br>product id:' . $this->get_id();
-        return $elem;
-    } //close to_table
+            . '<br>product id:' . $this->getId();
+    }
 } // end class Item

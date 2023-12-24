@@ -2,12 +2,10 @@
 
 namespace models\concretes;
 
-use exceptions\EmptyStringException;
 use global\Validate;
 use model\abstract\AnonymousEntity;
-use model\abstract\Entity;
+use exceptions\EmptyStringException;
 use models\enums\BuildingUnitCategory;
-use models\interfaces\Nameable;
 
 class AddressUnit extends AnonymousEntity {
     private string $unit;
@@ -21,25 +19,32 @@ class AddressUnit extends AnonymousEntity {
         $this->category = $category;
     }
     
-    public function get_unit (): string { return $this->unit; }
-    public function get_category (): BuildingUnitCategory { return $this->category; }
+    public function getUnit (): string { return $this->unit; }
+    public function getCategory (): BuildingUnitCategory { return $this->category; }
     
     public function equals($object): boolean {
         if ($object instanceof AddressUnit) {
-            return parent::equals($object) && $this->unit === $object->get_unit()
-                && $this->Category == $object->get_category();
+            return parent::equals($object) && $this->unit === $object->getUnit()
+                && $this->Category == $object->getCategory();
         }
         return false;
     }
-    
+
+
     /**
      * @throws EmptyStringException
      */
-    public function set_unit (string $unit): void {
+    public function setUnit (string $unit): void {
         $this->unit = Validate::non_empty_string($unit, 'BuildingUnit', 'unit', 22);
     }
-    
-    public function set_category (BuildingUnitCategory $category): void { $this->category = $category; }
-    
-    public function __toString (): string  { return $this->unit . ' ' . BuildingUnitCategory::toString($this->category); }
+
+
+    public function setCategory (BuildingUnitCategory $category): void {
+        $this->category = $category;
+    }
+
+
+    public function __toString (): string  {
+        return $this->unit . ' ' . BuildingUnitCategory::toString($this->category);
+    }
 }

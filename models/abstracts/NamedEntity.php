@@ -12,18 +12,18 @@ abstract class NamedEntity extends Entity {
         $this->name = Validate::non_empty_string($name, 'NamedEntity', 'name', 11);
     }
 
-    public function get_name (): string { return $this->name; }
+    public function getName (): string { return $this->name; }
 
     /**
      * @throws EmptyStringException
      */
-    public function set_name (string $name): void {
+    public function setName (string $name): void {
         $this->name = Validate::non_empty_string($name, 'NamedEntity', 'name', 11);
     }
     
     public function equals ($object): boolean {
         if ($object instanceof NamedEntity) {
-            return parent::equals($object) && $this->name === $object->get_name();
+            return parent::equals($object) && $this->name === $object->getName();
         }
         return false;
     }

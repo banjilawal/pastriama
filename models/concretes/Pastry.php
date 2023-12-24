@@ -3,27 +3,29 @@ namespace models\concretes;
 
 use model\abstract\Item;
 
-class PastryItem extends Item {
+class Pastry extends Item {
     public function __construct (
-        int $id,
+        int    $id,
         string $name,
-        float $price,
-        string $image_name,
+        float  $price,
+        string $imageName,
         string $description) {
         parent::__construct(
             $id,
             $name,
             $price,
-            $image_name,
+            $imageName,
             $description
         );
     }
     
     
     public function equals ($object): boolean {
+        if ($this === $object) return true;
+        if (is_null($object)) return false;
         if ($object instanceof Item) {
             return parent::equals($object);
         }
         return false;
     }
-} // end class PastryItem
+} // end class Pastry
