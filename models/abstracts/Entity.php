@@ -6,7 +6,7 @@ use models\enums\EntityStatus;
 
 //    require_once('../bootstrap.php');
 
-abstract class Entity extends AnonymousEntity {
+abstract class Entity {
     private EntityStatus $status;
     private int $id;
 
@@ -18,20 +18,31 @@ abstract class Entity extends AnonymousEntity {
         $this->id = Validate::id($id);
     }
 
-    public function getId (): int { return $this->id; }
-    public function getStatus (): EntityStatus { return  $this->status; }
+    public function getId (): int {
+        return $this->id;
+    }
+    
+    
+    public function getStatus (): EntityStatus {
+        return  $this->status;
+    }
+    
 
     /**
      * @throws \Exception
      */
-    public function setStatus (EntityStatus $status): EntityStatus { $this->status = $status; }
+    public function setStatus (EntityStatus $status): void {
+        $this->status = $status;
+    }
     
-    public function print_status (): string {
+    
+    public function printStatus (): string {
         if ($this->status == EntityStatus::ACTIVE) return '';
         else return $this->status::toString() . ' ';
     }
     
-    public function equals ($object): boolean {
+    
+    public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
         if ($object instanceof Entity) {
@@ -40,5 +51,6 @@ abstract class Entity extends AnonymousEntity {
         return false;
     }
 
-    public function __toString (): string { return $this->print_status() . 'id:' . $this->id; }
+    
+    public function __toString (): string { return $this->printStatus() . ' id:' . $this->id; }
 } // end class Entity

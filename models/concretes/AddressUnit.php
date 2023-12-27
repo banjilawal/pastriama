@@ -3,11 +3,10 @@
 namespace models\concretes;
 
 use global\Validate;
-use model\abstract\AnonymousEntity;
 use exceptions\EmptyStringException;
 use models\enums\BuildingUnitCategory;
 
-class AddressUnit extends AnonymousEntity {
+class AddressUnit {
     private string $unit;
     private BuildingUnitCategory $category;
     
@@ -19,15 +18,13 @@ class AddressUnit extends AnonymousEntity {
         $this->category = $category;
     }
     
-    public function getUnit (): string { return $this->unit; }
-    public function getCategory (): BuildingUnitCategory { return $this->category; }
+    public function getUnit (): string {
+        return $this->unit;
+    }
     
-    public function equals($object): boolean {
-        if ($object instanceof AddressUnit) {
-            return parent::equals($object) && $this->unit === $object->getUnit()
-                && $this->Category == $object->getCategory();
-        }
-        return false;
+    
+    public function getCategory (): BuildingUnitCategory {
+        return $this->category;
     }
 
 
@@ -46,5 +43,14 @@ class AddressUnit extends AnonymousEntity {
 
     public function __toString (): string  {
         return $this->unit . ' ' . BuildingUnitCategory::toString($this->category);
+    }
+    
+    
+    public function equals($object): bool {
+        if ($object instanceof AddressUnit) {
+            return $this->unit === $object->getUnit()
+                && $this->category === $object->getCategory();
+        }
+        return false;
     }
 }

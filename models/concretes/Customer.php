@@ -1,64 +1,63 @@
 <?php
 namespace models\concretes;
 
+use Exception;
 use global\Validate;
 use model\abstract\Person;
-use model\abstract\Purchase;
-use models\containers\IntegerBag;
-use models\containers\Purchases;
+use model\abstract\Order;
+
+use models\containers\Orders;
+use models\containers\Reviews;
+use models\containers\WishLists;
 
 class Customer extends Person {
     private array $creditCards;
-
-    private array $wishlist;
-    private array $reviews;
-    private IntegerBag $card_ids;
-    private IntegerBag $review_ids;
+    
     
     public function __construct (
         int $id,
         string $firstname,
         string $lastname,
         PostalAddress $postalAddress,
-        EmailAddress $emailAddress,
+        string $emailAddress, //EmailAddress $emailAddress,
         Phone $phone,
-        CreditCard $creditCard
+//        CreditCard $creditCard
     ) {
         parent::__construct($id, $firstname, $lastname, $postalAddress, $emailAddress, $phone);
         $this->creditCards = array();
-        $this->creditCards[$creditCard->getNumber()] = $creditCard;
+//        $this->creditCards[$creditCard->getNumber()] = $creditCard;
     }
 
+//
+//    /**
+//     * @throws Exception
+//     */
+//    public function createCreditCard (string $cardNumber, \DateTime $expirationDate, string $cvn): void {
+//        $creditCard = new CreditCard($this->getFirstname(), $this->getLastname(), $cardNumber, $expirationDate, $cvn);
+//        if (array_key_exists($cardNumber, $this->creditCards)) {
+//            throw new Exception('A card with id ' . $cardNumber . ' is already in the list');
+//        }
+//        $this->creditCards[$cardNumber] = $creditCard;
+//    }
 
-    /**
-     * @throws \Exception
-     */
-    public function addCreditCard (string $cardNumber, \DateTime $expirationDate, string $cvn): void {
-        $creditCard = new CreditCard($this->getFirstname(), $this->getLastname(), $cardNumber, $expirationDate, $cvn);
-        if (array_key_exists($cardNumber, $this->creditCards)) {
-            throw new Exception('A card with id ' . $cardNumber . ' is already in the list');
+
+    public function addCreditCard (CreditCard $card): void {
+        $id = $card->getId();
+        if (array_key_exists($id, $this->creditCards)) {
+            throw new Exception('A card with id ' . $id . ' is already in the list');
         }
-        $this->creditCards[$cardNumber] = $creditCard;
+        $this->creditCards[$id] = $card;
     }
 
 
-    public function newCard (CreditCard $card): void {
-        $number = $card->get_number();
-        if (array_key_exists($number, $this->cards)) {
-            throw new Exception('A card with id ' . $number . ' is already in the list');
+    public function searchCreditCards (String $cardNumber): ?CreditCard {
+        foreach ($this->creditCards as $creditCard) {
+            if ($creditCard->getNumber() === $cardNumber)
+                return $creditCard;
         }
-        $this->creditCards[$number] = $card;
-    }
-
-
-    public function searchCreditCards (String $cardNumber) {
-        if (array_key_exists($cardNumber, $this->creditCards))
-            return $this->creditCards[$cardNumber];
-        else
-            return null;
+        return null;
     } // close search
-
-
+    
 
     public function printCreditCards (): string {
         $string = '(Cards: ';
@@ -71,8 +70,8 @@ class Customer extends Person {
     } // close toString
 
 
-    public function creditCardTable (): string {
-        $elem = '<table class="table" id="credit-cards-table" name="credit-cards-table">'
+    public function creditCardsTable (): string {
+        $elem = '<table class="table" name="credit-cards-table" id="credit-cards-table">'
             . '<thead>'
             . '<tr>'
             . '<th hidden>ID/th>'
@@ -101,24 +100,21 @@ class Customer extends Person {
         $elem .= '</select>';
         return $elem;
     } // close to_selector
+    
 
-
-
-    public function getPurchases (\DateTime $startDate, \DateTime $endDate): array {
+    public function getOrders (\DateTime $startDate, \DateTime $endDate): array {
         $matches = array();
-        foreach (Purchases::getPurchases() as $purchase) {
-            if ($purchase->getCustomer() === $this && $purchase->getSubmitTime() >= $startDate && $purchase->getSubmitTime() <= $endDate)
-                $matches[] = $purchase;
+        foreach (Orders::getOrders() as $order) {
+            if ($order->getCustomer() === $this && $order->getSubmitTime() >= $startDate && $order->getSubmitTime() <= $endDate)
+                $matches[] = $order;
         }
         return $matches;
     }
 
-
-
-    public function ordersTable (\DateTime $startDate, \DateTime $endDate): string {
-        $purchases =  $this->getPurchases($startDate, $endDate);
-        $tableName = 'customer-orders-table-' . $startDate->format('Y-m-d') . '-' .$endDate->format('Y-m-d');
-        $elem = '<table class="customer-orders-table" id="' . $tableName . '" name="' . $tableName . '">';
+    
+    public function ordersToTable (\DateTime $startDate, \DateTime $endDate): string {
+        $tableName = $this->getId() . '-order-table-'. $startDate->format('Y-m-d') . '-' .$endDate->format('Y-m-d');
+        $elem = '<table class="customer-orders-table" id="' . $tableName . '" name="' . $tableName . '">'
             . '<thead>'
             . '<tr>'
             . '<th>Order Id</th>'
@@ -128,40 +124,80 @@ class Customer extends Person {
             . '</tr>'
             . '</thead>'
             . '<tbody>';
-        foreach ($purchases as $purchase) {
-            $elem .= $purchase->toRow();
+        foreach ($this->getOrders($startDate, $endDate) as $order) {
+            $elem .= $order->toRow();
+        }
+        $elem .= '</tbody></table>';
+        return $elem;
+    }
+    
+    
+    public function getWishList (\DateTime $startDate, \DateTime $endDate): array {
+        $matches = array();
+        foreach (WishLists::getWishLists() as $wishList) {
+            if ($wishList->getCustomer() === $this && $wishList->getSubmitTime() >= $startDate && $wishList->getSubmitTime() <= $endDate)
+                $matches[] = $wishList;
+        }
+        return $matches;
+    }
+    
+    
+    public function wishListToTable (\DateTime $startDate, \DateTime $endDate): string {
+        $tableName = $this->getId() . '-wishList-table-'. $startDate->format('Y-m-d') . '-' .$endDate->format('Y-m-d');
+        $elem = '<table class="customer-wishList-table" id="' . $tableName . '" name="' . $tableName . '">'
+            . '<thead>'
+            . '<tr>'
+            . '<th></th>'
+            . '<th>Date Added</th>'
+            . '<th>Picture</th>'
+            . '<th>Name</th>'
+            . '<th>Description</th>'
+            . '<th>Price</th>'
+            . '</tr>'
+            . '</thead>'
+            . '<tbody>';
+        foreach ($this->getWishList($startDate, $endDate) as $wishListItem) {
+            $elem .= $wishListItem->toRow();
+        }
+        $elem .= '</tbody></table>';
+        return $elem;
+    }
+    
+    
+    public function getRatings (\DateTime $startDate, \DateTime $endDate): array {
+        $matches = array();
+        foreach (Reviews::getReviews() as $rating) {
+            if ($rating->getCustomer() === $this && $rating->getSubmitTime() >= $startDate && $rating->getSubmitTime() <= $endDate)
+                $matches[] = $rating;
+        }
+        return $matches;
+    }
+    
+    
+    public function ratingsToTable (\DateTime $startDate, \DateTime $endDate): string {
+        $tableName = $this->getId() . '-order-table-'. $startDate->format('Y-m-d') . '-' .$endDate->format('Y-m-d');
+        $elem = '<table class="customer-orders-table" id="' . $tableName . '" name="' . $tableName . '">'
+            . '<thead>'
+            . '<tr>'
+            . '<th>Order Id</th>'
+            . '<th>Date</th>'
+            . '<th>Reviewer</th>'
+            . '<th>Pastry</th>'
+            . '<th>Stars</th>'
+            . '<th>Comment</th>'
+            . '</tr>'
+            . '</thead>'
+            . '<tbody>';
+        foreach ($this->getRatings($startDate, $endDate) as $rating) {
+            $elem .= $rating->toRow();
         }
         $elem .= '</tbody></table>';
         return $elem;
     }
 
 
-//    public function toTable (): string {
-//        $elem = '<table class="table" id="credit-cards-table" name="credit-cards-table">'
-//            . '<thead>'
-//            . '<tr>'
-//            . '<th hidden>ID/th>'
-//            . '<th>Card Number</th>'
-//            . '<th>Expiration</th>'
-//            . '<th>CVN</th>'
-//            . '</tr>'
-//            . '</thead>'
-//            . '<tbody>';
-//        foreach ($this->cards as $id => $card) {
-//            $elem .= $this->cards[$id]->to_row();
-//        }
-//        $elem .= '<tbody></table>';
-//        return $elem;
-//    } // close to_table
-
-
-
-    public function equals ($object): boolean {
+    public function equals ($object): bool {
         if ($object instanceof Customer) return parent::equals($object);
         return false;
-    }
-    
-    public function __toString (): string {
-        return parent::__toString();
     }
 } // end class Customer

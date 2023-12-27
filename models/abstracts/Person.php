@@ -11,7 +11,8 @@ use models\concretes\PostalAddress;
 abstract class Person extends NamedEntity {
     private string $lastname;
     private PostalAddress $postalAddress;
-    private EmailAddress $emailAddress;
+    private String $emailAddress;
+//    private EmailAddress $emailAddress;
     private Phone $phone;
     
     public function __construct (
@@ -19,7 +20,8 @@ abstract class Person extends NamedEntity {
         string $firstname,
         string $lastname,
         PostalAddress $postalAddress,
-        EmailAddress $emailAddress,
+        string $emailAddress,
+//        EmailAddress $emailAddress,
         Phone $phone
     ) {
         parent::__construct($id, $firstname);
@@ -29,16 +31,38 @@ abstract class Person extends NamedEntity {
         $this->phone = $phone;
     }
     
-    public function getFirstname (): string { return $this->getName(); }
-    public function getLastname (): string { return $this->lastname; }
-    public function getPostalAddress (): PostalAddress { return $this->postalAddress; }
-    public function getEmailAddress (): EmailAddress { return $this->emailAddress; }
-    public function getPhone (): Phone { return $this->phone; }
+    public function getFirstname (): string {
+        return $this->getName();
+    }
+    
+    
+    public function getLastname (): string {
+        return $this->lastname;
+    }
+    
+    
+    public function getPostalAddress (): PostalAddress {
+        return $this->postalAddress;
+    }
+    
+    
+    public function getEmailAddress (): string {
+        return $this->emailAddress;
+    }
+    
+    
+    public function getPhone (): Phone {
+        return $this->phone;
+    }
+    
     
     /**
      * @throws EmptyStringException
      */
-    public function setFirstname (string $firstname): void { $this->setName($firstname); }
+    public function setFirstname (string $firstname): void {
+        $this->setName($firstname);
+    }
+    
     
     /**
      * @throws EmptyStringException
@@ -47,20 +71,34 @@ abstract class Person extends NamedEntity {
         $this->lastname = Validate::non_empty_string($lastname, 'Person', 'lastname', 43);
     }
     
-    public function setPostalAddress (PostalAddress $postalAddress): void { $this->postalAddress = $postalAddress; }
-    public function setEmailAddress (EmailAddress $emailAddress): void { $this->emailAddress = $emailAddress; }
-    public function setPhone (Phone $phone): void { $this->phone = $phone; }
+    public function setPostalAddress (PostalAddress $postalAddress): void {
+        $this->postalAddress = $postalAddress;
+    }
     
-    public function equals ($object): boolean {
+    
+    public function setEmailAddress (string $emailAddress): void {
+        $this->emailAddress = $emailAddress;
+    }
+    
+    
+    public function setPhone (Phone $phone): void {
+        $this->phone = $phone;
+    }
+    
+    
+    public function equals ($object): bool {
+        if ($this === $object) return true;
+        if (is_null($object)) return false;
         if ($object instanceof Person) {
             return parent::equals($object)
                 && $this->lastname === $object->getLastname()
                 && $this->postalAddress->equals($object->getPostalAddress())
-                && $this->emailAddress->equals($object->getEmailAddress())
+                && $this->emailAddress === $object->getEmailAddress()
                 && $this->phone->equals($object->getPhone());
         }
         return false;
     }
+    
     
     public function __toString (): string {
         return $this->getId()

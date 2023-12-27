@@ -3,7 +3,7 @@
         session_start();
     }
     require_once ('../bootstrap.php');
-    require_once (MODEL_PATH . '/customer.php');
+    require_once (MODEL_PATH . '/customerView.php');
     require_once (QUERY_PATH . '/customer-queries.php'); #'../db/customer-queries.php');
 
     $street = sanitize_input($_POST['street']);

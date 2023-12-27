@@ -3,45 +3,45 @@ namespace models\concretes;
 
 use exceptions\EmptyStringException;
 use global\Validate;
-use model\abstract\AnonymousEntity;
+use models\enums\RoadCategory;
 use models\interfaces\Nameable;
 
-class Road extends AnonymousEntity implements Nameable {
+class Road {
     private string $name;
-    private \models\enums\RoadCategory $category;
+    private RoadCategory $category;
     
     /**
      * @throws EmptyStringException
      */
-    public function __construct (string $name, \models\enums\RoadCategory $roadCategory) {
-        $this->name = Validate::non_empty_string($name, 'Road', self::get_name(), 15);//'name', 15);
+    public function __construct (string $name, RoadCategory $roadCategory) {
+        $this->name = Validate::non_empty_string($name, 'Road', self::getName(), 15);//'name', 15);
         $this->category = $roadCategory;
     }
     
-    public function get_name (): string {
+    public function getName (): string {
         return $this->name;
     }
     
-    public function get_category (): \models\enums\RoadCategory {
+    public function getCategory (): RoadCategory {
         return $this->category;
     }
     
-    public function set_name (string $name): void {
+    public function setName (string $name): void {
         $this->name = $name;
     }
     
-    public function set_category (\models\enums\RoadCategory $category): void {
+    public function setCategory (RoadCategory $category): void {
         $this->category = $category;
     }
     
-    public function equals ($object): boolean {
+    public function equals ($object): bool {
         if ($object instanceof Road) {
-            return $this->name === $object->get_name() && $this->category === $object->get_category();
+            return $this->name === $object->getName() && $this->category === $object->getCategory();
         }
         return false;
     }
     
     public function __toString (): string {
-        return $this->name . \models\enums\RoadCategory::toString($this->category);
+        return $this->name . ' ' . RoadCategory::toString($this->category);
     }
 } // end class Road

@@ -2,13 +2,13 @@
 
 namespace models\concretes;
 
-use model\abstract\AnonymousEntity;
 use models\enums\Orientation;
 
-class StreetNumber extends AnonymousEntity {
+class StreetNumber {
     private AddressUnit $unit;
     private Road $road;
     private Orientation $orientation;
+    
     
     /**
      * @param AddressUnit $unit
@@ -22,42 +22,43 @@ class StreetNumber extends AnonymousEntity {
     }
     
     
-    public function get_unit (): AddressUnit {
+    public function getUnit (): AddressUnit {
         return $this->unit;
     }
     
     
-    public function get_road (): Road {
+    public function getRoad (): Road {
         return $this->road;
     }
     
     
-    public function get_orientation (): Orientation {
+    public function getOrientation (): Orientation {
         return $this->orientation;
     }
     
     
-    public function set_unit (AddressUnit $unit): void {
+    public function setUnit (AddressUnit $unit): void {
         $this->unit = $unit;
     }
     
     
-    public function set_road (Road $road): void {
+    public function setRoad (Road $road): void {
         $this->road = $road;
     }
     
     
-    public function set_orientation (Orientation $orientation): void {
+    public function setOrientation (Orientation $orientation): void {
         $this->orientation = $orientation;
     }
     
     
-    public function equals ($object): boolean {
+    public function equals ($object): bool {
+        if ($this === $object) return true;
+        if (is_null($object)) return false;
         if ($object instanceof StreetNumber) {
-            return parent::equals($object)
-                && $this->unit->equals($object->get_unit())
-                && $this->road->equals($object->get_road())
-                && $this->orientation ===  $object->get_orientation();
+            return $this->unit->equals($object->getUnit())
+                && $this->road->equals($object->getRoad())
+                && $this->orientation ===  $object->getOrientation();
         }
         return false;
     }
@@ -66,6 +67,6 @@ class StreetNumber extends AnonymousEntity {
     public function __toString (): string {
         return $this->unit
             . ' ' . $this->road
-            . ' ' . Orientation::toString($this->orientation);
+            . ' ' . $this->orientation;
     }
 }

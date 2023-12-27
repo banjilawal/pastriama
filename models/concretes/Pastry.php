@@ -20,10 +20,10 @@ class Pastry extends Item {
     }
     
     
-    public function equals ($object): boolean {
+    public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
-        if ($object instanceof Item) {
+        if ($object instanceof Pastry) {
             return parent::equals($object);
         }
         return false;

@@ -3,31 +3,29 @@ namespace models\concretes;
 
 use Exception;
 use global\Validate;
+use model\abstract\Entity;
 use models\enums\CreditCardStatus;
 
-class CreditCard {
-    private string $ownerFirstname;
-    private string $ownerLastname;
+class CreditCard extends Entity {
     private string $number;
     private \DateTime $expiration;
     private string $cvn;
-
     
     /**
-     * @param \DateTime $expiration
+     * @param string $ownerFirstname
+     * @param string $ownerLastname
      * @param string $number
+     * @param \DateTime $expiration
      * @param string $cvn
      * @throws Exception
      */
     public function __construct (
-        string $ownerFirstname,
-        string $ownerLastname,
+        int $id,
         string $number,
         \DateTime $expiration,
         string $cvn
     ) {
-        $this->ownerFirstname = $ownerFirstname;
-        $this->ownerLastname = $ownerLastname;
+        parent::__construct($id);
         $this->expiration = $expiration;
         $this->number = Validate::card_number($number, 23);
         $this->cvn = Validate::cvn_code($cvn, 24);
@@ -40,7 +38,7 @@ class CreditCard {
 
 
     public function getExpirationMonth (): int {
-        return (int) $this->expiration->format('nm');
+        return (int) $this->expiration->format('m');
     }
 
     public function getExpirationYear (): \int {
@@ -50,18 +48,7 @@ class CreditCard {
     public function getNumber (): string {
         return $this->number;
     }
-
-    public function getStatus (): CreditCardStatus {
-        return $this->status;
-    }
-
-    public function getOwnerFirstname (): string {
-        return $this->ownerFirstname;
-    }
-
-    public function getOwnerLastname (): string {
-        return $this->ownerLastname;
-    }
+    
 
 
     public function getCVN (): string {
@@ -76,22 +63,20 @@ class CreditCard {
     }
     
     
-    public function equals ($object): boolean {
+    public function equals ($object): bool {
         if ($this == $object) return true;
         if (is_null($object )) return false;
         if ($object instanceof CreditCard) {
-            return parent::equals($object) && $this->ownerFirstname === $object->getOwnerFirstname()
-                && $this->ownerLastname === $object->getOwnerLastname()
+            return parent::equals($object)
                 && $this->expiration === $object->getExpiration()
-                && $this->number === $object->get_number()
-                && $this->cvn === $object->get_cvn();
+                && $this->number === $object->getNumber()
+                && $this->cvn === $object->getCvn();
         }
         return false;
     }
 
 
-    public function __toString() {
-//        return 'customer_id:' . $this->customer_id
+    public function __toString(): string {
         return __CLASS__ . ':' . $this->securelyPrintCardNumber()
 //            .  ' Credit Card:' . $this->print_number()
             . ' expiration:' . $this->printExpirationDate ()
@@ -112,23 +97,21 @@ class CreditCard {
 
 
     public function toRow (): string {
-        $elem = '<tr id="' . $this->securelyPrintCardNumber() . '" onclick="send_card(this)">'
+        return '<tr id="' . $this->securelyPrintCardNumber() . '" onclick="send_card(this)">'
             . '<td>**-' . $this->securelyPrintCardNumber() . '</td>'
-            . '<td>' .  $this->print_expiration_date() .'</td>'
+            . '<td>' .  $this->printExpirationDate() .'</td>'
             . '<td>' . $this->cvn . '</td>'
             . '</tr>';
-        return $elem;
     }
 
 
-    public function toTable () {
-        $elem = '<table class="card-table">'
+    public function toTable (): string {
+        return '<table class="card-table">'
             . '<tr>'
             . '<td>**-' . $this->securelyPrintCardNumber() . '</td>'
             . '<td>' .  $this->printExpirationDate() .'</td>'
             . '<td>' . $this->cvn . '</td>'
             . '</tr>'
             . '</table>';
-        return $elem;
     }
 } // end class CreditCard

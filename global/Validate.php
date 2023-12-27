@@ -10,6 +10,7 @@ require_once('bootstrap.php');
 class Validate {
     public const MINIMUM_CREDIT_CARD_LENGTH = 8;
     public const MAXIMUM_CREDIT_CARD_LENGTH = 24;
+    
     public const CVN_CODE_LENGTH = 3;
     public const  ZIP_CODE_PATTERN = '/[0-9]{5}/';
     public const AREA_CODE_PATTERN = '/([0-9]{3}|\([0-9]{3}\))/';

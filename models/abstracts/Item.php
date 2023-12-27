@@ -1,18 +1,22 @@
 <?php
 namespace model\abstract;
 
+use Exception;
 use model\abstract\NamedEntity;
 
 abstract class Item extends NamedEntity {
     private float $price;
     private string $imageName;
     private string $description;
-
+    
+    
     /**
+     * @param int $id
+     * @param string $name
      * @param float $price
      * @param string $imageName
      * @param string $description
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct (
         int    $id,
@@ -26,11 +30,26 @@ abstract class Item extends NamedEntity {
         $this->imageName = $imageName;
         $this->description = $description;
     }
+    
 
-    public function getPrice (): float { return $this->price; }
-    public function getImageName (): string { return $this->imageName; }
-    public function getDescription (): string { return $this->description; }
-
+    public function getPrice (): float {
+        return $this->price;
+    }
+    
+    
+    public function getImageName (): string {
+        return $this->imageName;
+    }
+    
+    
+    public function getDescription (): string {
+        return $this->description;
+    }
+    
+    
+    /**
+     * @throws Exception
+     */
     public function setPrice (float $price): void {
         if ($price < LOWEST_PRICE || $price > HIGHEST_PRICE) {
             throw new Exception($price . ' is outside the acceptable retail price range');
@@ -55,7 +74,7 @@ abstract class Item extends NamedEntity {
     }
     
     
-    public function equals ($object): boolean {
+    public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
         if ($object instanceof Item) {
@@ -66,20 +85,23 @@ abstract class Item extends NamedEntity {
         }
         return false;
     }
+    
 
     public function __toString(): string {
         return parent::__toString()
             . ' price:' . $this->price
-            . ' image_path:' . $this->iimageName
+            . ' image_path:' . $this->imageName
             . ' description:' . $this->description;
     }
+    
 
     public function loadImage (int $width, int $height): string {
         return '<img src="' . $this->imageName
             . '" width="' . $width
             . '" height="' . $height
             . '">';
-    } // close load_image
+    }
+    
 
     public function toRow (): string {
         return '<tr id="' . $this->getId() . '" name="' . $this->getId() . '" onclick="send_protein_bar(this)">'
@@ -87,20 +109,18 @@ abstract class Item extends NamedEntity {
             . '<td>' . $this->loadImage(90, 100) . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
             . '<td>' . $this->getName() . '</td>'
             . '<td>' . $this->description . '</td>'
-            . '<td>' . $this->grams . '</td>'
             . '<td>' . $this->price . '</td>'
             . '</tr>';
     }
 
 
     public function toTable (): string {
-        return '<table class=>'
+        return '<table class="item-table">'
             . '<thead>'
             . '<tr>'
             . '<th>Picture</th>'
             . '<th>Name</th>'
             . '<th>Description</th>'
-            . '<th>Grams</th>'
             . '<th>Price</th>'
             . '</tr>'
             . '</thead>'

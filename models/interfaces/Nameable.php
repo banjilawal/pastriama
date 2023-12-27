@@ -2,6 +2,6 @@
 namespace models\interfaces;
 
 interface Nameable {
-    public function get_name (): string;
-    public function set_name (string $name): void;
+    public function getName (): string;
+    public function setName (string $name): void;
 } // end interface Nameable

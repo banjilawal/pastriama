@@ -11,8 +11,12 @@ abstract class NamedEntity extends Entity {
         parent::__construct($id);
         $this->name = Validate::non_empty_string($name, 'NamedEntity', 'name', 11);
     }
+    
 
-    public function getName (): string { return $this->name; }
+    public function getName (): string {
+        return $this->name;
+    }
+    
 
     /**
      * @throws EmptyStringException
@@ -21,13 +25,14 @@ abstract class NamedEntity extends Entity {
         $this->name = Validate::non_empty_string($name, 'NamedEntity', 'name', 11);
     }
     
-    public function equals ($object): boolean {
+    public function equals ($object): bool {
         if ($object instanceof NamedEntity) {
             return parent::equals($object) && $this->name === $object->getName();
         }
         return false;
     }
 
-    public function __toString (): string { return parent::__toString() . ' name:' . $this->name; }
+    public function __toString (): string {
+        return parent::__toString() . ' name:' . $this->name;
+    }
 } // end class NamedEntity
-?>

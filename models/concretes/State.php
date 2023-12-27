@@ -1,34 +1,32 @@
 <?php
 namespace models\concretes;
 
+use Exception;
 use global\Validate;
-use model\abstract\AnonymousEntity;
 
-class State extends AnonymousEntity {
+class State {
     private String $name;
     private String $acronym;
 
     /**
      * @param String $acronym
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct (string $acronym) {
         $this->acronym = Validate::state($acronym);
         $this->name = Validate::STATES[$acronym];
     }
 
-    public function get_acronym (): string { return $this->acronym; }
+    public function getAcronym (): string { return $this->acronym; }
 
-    public function get_name (): string { return $this->name; }
-
-    public function set_acronym (string $acronym): void {
-        $this->acronym = Validate::STATES[$acronym];
-        $this->name = Validate::STATES[$acronym];
-    }
+    public function getName (): string { return $this->name; }
     
-    public function equals ($object): boolean {
+    
+    public function equals ($object): bool {
+        if ($this === $object) return true;
+        if (is_null($object)) return false;
         if ($object instanceof State) {
-            return $this->name === $object->get_name() && $this->acronym === $object->get_acronym();
+            return $this->name === $object->getName() && $this->acronym === $object->getAcronym();
         }
         return false;
     }

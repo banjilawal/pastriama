@@ -2,13 +2,13 @@
 namespace model\abstract;
 //    require_once('Entity.php');
 
-abstract class Address extends Entity {
-    public function __construct (int $id) {
-        parent::__construct($id);
+abstract class Address {
+    public function __construct () {
     }
     
-    public function equals ($object): boolean {
-        if ($object instanceof Address) return parent::equals($object);
+    
+    public function equals ($object): bool {
+        if ($this === $object) return true;
         return false;
     }
 } // end class Address

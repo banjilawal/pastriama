@@ -14,4 +14,3 @@ enum Orientation: string {
     case NW = 'NorthWest';
     case None = 'None';
 } // end enum Orientation
-?>

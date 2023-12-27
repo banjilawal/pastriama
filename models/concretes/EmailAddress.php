@@ -5,9 +5,10 @@ use exceptions\EmptyStringException;
 use global\Validate;
 use model\abstract\Address;
 
-class EmailAddress extends Address {
+class EmailAddress {
     private string $mailbox;
     private Domain $domain;
+    
     
     /**
      * @param string $mailbox
@@ -15,35 +16,31 @@ class EmailAddress extends Address {
      * @throws EmptyStringException
      * @throws \Exception
      */
-    public function __construct (int $id, string $mailbox, Domain $domain) {
-        parent::__construct($id);
+    public function __construct (string $mailbox, Domain $domain) {
         $this->mailbox = Validate::non_empty_string($mailbox, 'EmailAddress', 'mailbox', 17);
         $this->domain = $domain;
     }
     
-    public function get_mailbox (): string { return $this->mailbox; }
-    public function get_domain (): Domain { return $this->domain; }
-    
-    /**
-     * @throws EmptyStringException
-     */
-    public function set_mailbox (string $mailbox): void {
-        $this->mailbox = Validate::non_empty_string($mailbox, 'EmailAddress', 'mailbox', 30);
+    public function getMailbox (): string {
+        return $this->mailbox;
     }
     
     
-    public function set_domain (Domain $domain): void {
-        $this->domain = $domain;
+    public function getDomain (): Domain {
+        return $this->domain;
     }
     
     
-    public function equals ($object): boolean {
+    public function equals ($object): bool {
         if ($object instanceof EmailAddress) {
-            return parent::equals($object)
-                && $this->mailbox === $object->get_mailbox()
-                && $this->domain === $object->get_domain();
+            return $this->mailbox === $object->getMailbox()
+                && $this->domain === $object->getDomain();
         }
         return false;
     }
-    public function __toString (): string { return $this->mailbox . '@' . $this->domain; }
+    
+    
+    public function __toString (): string {
+        return $this->mailbox . '@' . $this->domain;
+    }
 } // end class EmailAddress

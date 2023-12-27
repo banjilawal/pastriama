@@ -5,31 +5,38 @@ use Exception;
 use global\Validate;
 
 class Zipcode {
-    private string $zip_code;
+    private string $zipcode;
+    
     
     /**
-     * @param string $zip_code
+     * @param string $zipcode
      * @throws Exception
      */
-    public function __construct (string $zip_code) {
-        $this->zip_code = Validate::zip_code($zip_code, 'Zipcode', 'zip_code', 15);
+    public function __construct (string $zipcode) {
+        $this->zipcode = Validate::zip_code($zipcode, 'Zipcode', 'zip_code', 15);
     }
     
-    public function get_zip_code (): string { return $this->zip_code; }
+    
+    public function getZipcode (): string {
+        return $this->zipcode;
+    }
+    
     
     /**
      * @throws Exception
      */
-    public function set_zip_code (string $zip_code): void {
-        $this->zip_code = Validate::zip_code($zip_code, 'Zipcode', 'zip_code', 24);
+    public function setZipcode (string $zipcode): void {
+        $this->zipcode = Validate::zip_code($zipcode, 'Zipcode', 'zip_code', 24);
     }
     
-    public function equals ($object): boolean {
+    public function equals ($object): bool {
         if ($object instanceof Zipcode) {
-            return parent::quals($object) && $this->zip_code === $object->get_zip_code();
+            return $this->zipcode === $object->getZipcode();
         }
         return false;
     }
     
-    public function __toString (): string { return 'zip-code:' . $this->zip_code; }
+    public function __toString (): string {
+        return 'zip-code:' . $this->zipcode;
+    }
 } // end class Zipcode
