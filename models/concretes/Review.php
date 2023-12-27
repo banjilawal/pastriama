@@ -12,18 +12,18 @@ class Review extends Entity {
     private Customer $customer;
     private Pastry $pastry;
     private string $comment;
-    private int $numberOfStars;
+    private int $rating;
     private \DateTime $timestamp;
     
 
-    public function __construct(int $id, Customer $customer, Pastry $pastry, int $numberOfStars, string $comment) {
+    public function __construct(int $id, Customer $customer, Pastry $pastry, int $rating, string $comment) {
         parent::__construct($id);
-        if ($numberOfStars < self::MINIMUM_STARS || $numberOfStars > self::MAXIMUM_STARS) {
-            throw new Exception($numberOfStars . ' is outside the range');
+        if ($rating < self::MINIMUM_STARS || $rating > self::MAXIMUM_STARS) {
+            throw new Exception($rating . ' is outside the range');
         }
         $this->customer = $customer;
         $this->pastry = $pastry;
-        $this->numberOfStars = $numberOfStars;
+        $this->rating = $rating;
         $this->comment = $comment;
         $this->timestamp = DateTime::createFromFormat('U', time());
     }
@@ -44,8 +44,8 @@ class Review extends Entity {
     }
 
 
-    public function getNumberOfStars (): int {
-        return $this->numberOfStars;
+    public function getRating (): int {
+        return $this->rating;
     }
 
 
@@ -59,20 +59,20 @@ class Review extends Entity {
         if (is_null($object)) return false;
         if ($object instanceof Review)
             return parent::equals($object)
-                && $this->customer === $object->getCustomer()
-                && $this->numberOfStars === $object->getNumberOfStars()
+                && $this->customer->equals( $object->getCustomer())
+                && $this->pastry->equals($object->getPastry())
                 && $this->timestamp === $object->getTimestamp()
                 && $this->comment === $object->getComment()
-                && $this->pastry === $object->getPastry();
+                && $this->rating === $object->getRating();
         return false;
     }
 
     
     public function __toString (): string {
-        return __CLASS__ . ' pastry:' . $this->pastry->getName()
+        return __CLASS__ . parent::__toString() . ' pastry:' . $this->pastry->getName()
             . ' ' . $this->timestamp->format('Y-m-d H:i:s')
             . ' reviewer:' . $this->customer->getFirstname() . ' ' . substr($this->customer->getLastname(), 0, 1)
-            . ' stars:' . $this->numberOfStars
+            . ' rating:' . $this->rating
             . ' comment:' . $this->comment;
     }
 
@@ -84,7 +84,7 @@ class Review extends Entity {
             . '<td>' . $this->timestamp->format('Y-m-d H:i:s') . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
             . '<td>' . $this->customer->getFirstname() . ' ' . substr($this->customer->getLastname(), 0, 1) . '</td>'
             . '<td>' . $this->pastry->getName() . '</td>'
-            . '<td>' . $this->numberOfStars . '</td>'
+            . '<td>' . $this->rating . '</td>'
             . '<td>' . $this->comment . '</td>'
             . '</tr>';
     }
@@ -107,7 +107,7 @@ class Review extends Entity {
             . '<td>' . $this->timestamp->format('Y-m-d H:i:s') . '</td>'
             . '<td>' . $this->customer->getFirstname() . ' ' . substr($this->customer->getLastname(), 0, 1) . '</td>'
             . '<td>' . $this->pastry->getName() . '</td>'
-            . '<td>' . $this->numberOfStars . '</td>'
+            . '<td>' . $this->rating . '</td>'
             . '<td>' . $this->comment . '</td>'
             . '</tbody>'
             . '</table>';

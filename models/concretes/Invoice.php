@@ -6,11 +6,11 @@ use models\concretes\CreditCard;
 use models\concretes\Customer;
 
 
-class Order extends Entity {
+class Invoice extends Entity {
     public const ESTIMATED_TRANSIT_DAYS = 5;
     private Customer $customer;
     private CreditCard $creditCard;
-    private OrderItemList $orderItems;
+    private InvoiceItemList $invoiceItems;
     private \DateTime $submitTime;
     private DateTime $actualDeliveryDate;
     
@@ -26,7 +26,7 @@ class Order extends Entity {
         $this->customer = $customer;
         $this->creditCard = $creditCard;
         $this->submitTime = $submitTime;
-        $this->orderItems = new OrderItemList();
+        $this->invoiceItems = new InvoiceItemList();
         $this->actualDeliveryDate =$actualDeliveryDate;
     }
     
@@ -41,8 +41,8 @@ class Order extends Entity {
     }
     
     
-    public function getOrderItems (): OrderItemList {
-       return $this->orderItems;
+    public function getInvoiceItems (): InvoiceItemList {
+       return $this->invoiceItems;
     }
     
     
@@ -64,12 +64,21 @@ class Order extends Entity {
     public function setActualDeliveryDate (DateTime $deliveryDate): void {
         $this->actualDeliveryDate = $deliveryDate;
     }
+
+
+    public function searchItems (Pastry $pastry): ?InvoiceItem {
+        foreach ($this->invoiceItems as $id => $invoiceItem) {
+            if (!is_null($invoiceItem->find($pastry)))
+                return $this->invoiceItems[$invoiceItem->getId()];
+        }
+        return null;
+    }
     
     
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
-        if ($object instanceof Order) {
+        if ($object instanceof Invoice) {
             return parent::equals($object)
                 && $this->customer === $object->getCustomer()
                 && $this->creditCard->equals($object->getCreditCard())
@@ -88,7 +97,7 @@ class Order extends Entity {
     
     public function __toString (): string {
         $string = '';
-        foreach ($this->orderItems as $item) {
+        foreach ($this->invoiceItems as $item) {
             $string .= nl2br($item);
         }
         return $string;
@@ -103,7 +112,7 @@ class Order extends Entity {
             . '<td>' . $this->getId() . '</td>'
             . '<td>' . $this->submitTime->format('Y-m-d H:i:s'). '</td>'
             . '<td>' . $this->printDeliveryDate() . '</td>'
-            . '<td>' . $this->orderItems->getTotalCharge(). '</td></tr>';
+            . '<td>' . $this->invoiceItems->getTotalCharge(). '</td></tr>';
     }
 
 
@@ -124,13 +133,13 @@ class Order extends Entity {
             . '<td>' . $this->submitTime->format('Y-m-d H:i:s'). '</td>'
             . '<td>' . $this->printDeliveryDate() . '</td>'
             . '</tr>';
-        foreach ($this->orderItems as $item) {
+        foreach ($this->invoiceItems as $item) {
             $elem .= $item->toRow();
         }
         $elem .= '<tr>'
-            . '<td>Cost</td><td>' . $this->orderItems->getPreTaxTotal() . '</td>'
-            . '<td>Tax</td><td>' . $this->orderItems->getTaxAmount() . '</td>'
-            . '<td>Total Charge</td><td>' . $this->orderItems->getTotalCharge() . '</td>'
+            . '<td>Cost</td><td>' . $this->invoiceItems->getPreTaxTotal() . '</td>'
+            . '<td>Tax</td><td>' . $this->invoiceItems->getTaxAmount() . '</td>'
+            . '<td>Total Charge</td><td>' . $this->invoiceItems->getTotalCharge() . '</td>'
             . '</tr></tbody></table>';
         return $elem;
 //

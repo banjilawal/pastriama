@@ -3,8 +3,8 @@ namespace models\containers;
 
 use DateTime;
 use Exception;
-use model\abstract\Order;
-use model\abstract\OrderItemList;
+use model\abstract\Invoice;
+use model\abstract\InvoiceItemList;
 use model\abstract\WishList;
 use models\concretes\CreditCard;
 use models\concretes\Customer;
@@ -41,7 +41,7 @@ class WishLists {
     } // close add
 
     
-    public static function find (Customer $customer): ?Order {
+    public static function find (Customer $customer): ?Invoice {
         foreach (self::$wishLists as $wishList) {
             if ($wishList->getCustomer() === $customer)
                 return $wishList;

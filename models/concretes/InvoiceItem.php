@@ -4,11 +4,12 @@ namespace models\concretes;
 
 use Exception;
 
-class OrderItem {
+class InvoiceItem extends Entity {
     private Pastry $pastry;
     private int $quantity;
 
-    public function __construct(Pastry $pastry, int $quantity) {
+    public function __construct(int $id, Pastry $pastry, int $quantity) {
+        parent::__construct($id);
         $this->pastry = $pastry;
         $this->quantity = $quantity;
     }
@@ -53,13 +54,14 @@ class OrderItem {
         return $this->pastry->getPrice() * $this->quantity;
     }
 
-
     
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
-        if ($object instanceof OrderItem)
-            return  $this->pastry === $object->getPastry() && $this->quantity === $object->getQuantity();
+        if ($object instanceof InvoiceItem)
+            return  parent::__equals($object)
+                && $this->pastry === $object->getPastry()
+                && $this->quantity === $object->getQuantity();
         return false;
     }
 

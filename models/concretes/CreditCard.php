@@ -12,19 +12,12 @@ class CreditCard extends Entity {
     private string $cvn;
     
     /**
-     * @param string $ownerFirstname
-     * @param string $ownerLastname
      * @param string $number
      * @param \DateTime $expiration
      * @param string $cvn
      * @throws Exception
      */
-    public function __construct (
-        int $id,
-        string $number,
-        \DateTime $expiration,
-        string $cvn
-    ) {
+    public function __construct (int $id, string $number, \DateTime $expiration, string $cvn) {
         parent::__construct($id);
         $this->expiration = $expiration;
         $this->number = Validate::card_number($number, 23);
@@ -32,8 +25,18 @@ class CreditCard extends Entity {
     }
 
 
+    public function getNumber (): string {
+        return $this->number;
+    }
+
+
     public function getExpiration (): \DateTime {
         return $this->expiration;
+    }
+
+
+    public function getCVN (): string {
+        return $this->cvn;
     }
 
 
@@ -44,17 +47,6 @@ class CreditCard extends Entity {
     public function getExpirationYear (): \int {
         return (int) $this->expiration->format('Y');
     }
-
-    public function getNumber (): string {
-        return $this->number;
-    }
-    
-
-
-    public function getCVN (): string {
-        return $this->cvn;
-    }
-
 
     public function securelyPrintCardNumber (): string {
         $blocks = explode('-', $this->number);
@@ -77,7 +69,7 @@ class CreditCard extends Entity {
 
 
     public function __toString(): string {
-        return __CLASS__ . ':' . $this->securelyPrintCardNumber()
+        return __CLASS__ . parent::__toString() . ':' . $this->securelyPrintCardNumber()
 //            .  ' Credit Card:' . $this->print_number()
             . ' expiration:' . $this->printExpirationDate ()
             . ' cvn' . $this->cvn;

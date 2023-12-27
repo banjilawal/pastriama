@@ -3,8 +3,8 @@ namespace models\containers;
 
 use DateTime;
 use Exception;
-use model\abstract\Order;
-use model\abstract\OrderItemList;
+use model\abstract\Invoice;
+use model\abstract\InvoiceItemList;
 use model\abstract\WishList;
 use models\concretes\CreditCard;
 use models\concretes\Customer;

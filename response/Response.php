@@ -4,17 +4,17 @@ namespace response;
 
 use database\DBConnect;
 use DateTime;
-use model\abstract\Order;
-use model\abstract\OrderItemList;
+use model\abstract\Invoice;
+use model\abstract\InvoiceItemList;
 use models\concretes\CreditCard;
 use models\concretes\Customer;
-use models\concretes\OrderItem;
+use models\concretes\InvoiceItem;
 use models\concretes\Pastry;
 use models\concretes\PostalAddress;
 use models\concretes\Review;
 use models\concretes\State;
 use models\concretes\Zipcode;
-use models\containers\Orders;
+use models\containers\Invoices;
 use models\containers\Reviews;
 use request\CreditCardsQueryRequest;
 use request\CustomerRequest;
@@ -65,7 +65,7 @@ class Response {
     /**
      * @throws \Exception
      */
-    public static function orderItemsQuery (OrderItemQueryRequest $request) : Order {
+    public static function orderItemsQuery (OrderItemQueryRequest $request) : Invoice {
         $orderItemId = null;
         $pastryId = null;
         $pastryName = null;
@@ -86,8 +86,8 @@ class Response {
         $stmt->bind_result($orderItemId, $pastryQuantity, $pastryId, $pastryName, $pastryImageName, $pastryDescription, $pastryPrice);
         while ($stmt->fetch()) {
             $pastry = new Pastry((int) $pastryId, $pastryName, (float) $pastryPrice, $pastryImageName, $pastryDescription);
-            $orderItem = new OrderItem($pastry, (int)$pastryQuantity);
-            $request->getOrder()->getOrderItems()->addItem($orderItem);
+            $orderItem = new InvoiceItem($pastry, (int)$pastryQuantity);
+            $request->getOrder()->getInvoiceItems()->addItem($orderItem);
         }
         $mysqli->close();
         return $request->getOrder();
@@ -152,12 +152,12 @@ class Response {
             $expirationDate = \DateTime::createFromFormat('Y-m',$cardExpiration);
             $actualDeliveryDate = \DateTime::createFromFormat('Y-m-d H:i:s',$deliveryDate);
             $creditCard = new CreditCard($customer->getFirstname(), $customer->getLastname(), $cardNumber, $expirationDate, $cardCVN);
-            $orderItemRequest = new OrderItemQueryRequest(new Order((int) $orderId, $customer, $creditCard, $submitTime, $actualDeliveryDate));
+            $orderItemRequest = new OrderItemQueryRequest(new Invoice((int) $orderId, $customer, $creditCard, $submitTime, $actualDeliveryDate));
             $order = Response::orderItemsQuery($orderItemRequest);
-            Orders::add($order);
+            Invoices::add($order);
         }
         $mysqli->close();
-        return Orders::getOrders();
+        return Invoices::getInvoices();
     }
     
     
@@ -195,7 +195,7 @@ class Response {
             Reviews::getReviews()->add(new Review((int) $reviewId, $customer, $pastry, (int) $reviewStars, $reviewComment));
         }
         $mysqli->close();
-        return Orders::getOrders();
+        return Invoices::getInvoices();
     }
     
     

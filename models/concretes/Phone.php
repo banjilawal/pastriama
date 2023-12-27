@@ -103,6 +103,4 @@ class Phone {
             . '</tbody>'
             . '</table>';
     }
-    
-
 } // end Phone
