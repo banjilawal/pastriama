@@ -1,8 +1,6 @@
 <?php
 
-namespace request;
-
-use global\Validate;
+namespace services\request;
 
 class CreditCardRequest {
     private string $ownerFirstname;

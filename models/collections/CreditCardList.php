@@ -1,17 +1,8 @@
 <?php
-namespace model\abstract;
+namespace Shop\Model\collections;
 
 use Exception;
-use global\Validate;
-use model\abstract\Person;
-use model\abstract\Invoice;
-
 use models\concretes\CreditCard;
-use models\concretes\Phone;
-use models\concretes\PostalAddress;
-use models\containers\Invoices;
-use models\containers\Reviews;
-use models\containers\WishLists;
 
 class CreditCardList {
     private array $cards;
@@ -27,7 +18,7 @@ class CreditCardList {
     }
 
 
-    public function addCards (CreditCardList $cards): void {
+    public function addCards (ReviewList $cards): void {
         foreach ($cards as $id => $card) {
             $this->add($card);
         }
@@ -48,7 +39,7 @@ class CreditCardList {
     /**
      * @throws Exception
      */
-    public function removeCards (CreditCardList $cards): void {
+    public function removeCards (ReviewList $cards): void {
         foreach ($cards as $id => $card) {
             $this->remove($card);
         }

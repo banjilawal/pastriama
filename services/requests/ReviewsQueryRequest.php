@@ -1,11 +1,10 @@
 <?php
 
-namespace request;
+namespace services\request;
 
-use Cassandra\Date;
 use models\concretes\Customer;
 
-class OrdersQueryRequest extends Request {
+class ReviewsQueryRequest extends Request {
     private Customer $customer;
     private \DateTime $startDate;
     private \DateTime $endDate;

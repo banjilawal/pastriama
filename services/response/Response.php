@@ -1,6 +1,6 @@
 <?php
 
-namespace response;
+namespace services\response;
 
 use database\DBConnect;
 use DateTime;
@@ -14,14 +14,13 @@ use models\concretes\PostalAddress;
 use models\concretes\Review;
 use models\concretes\State;
 use models\concretes\Zipcode;
-use models\containers\Invoices;
-use models\containers\Reviews;
-use request\CreditCardsQueryRequest;
-use request\CustomerRequest;
-use request\OrdersQueryRequest;
-use request\CustomerQueryRequest;
-use request\OrderItemQueryRequest;
-use request\ReviewsQueryRequest;
+use models\containers\InvoicesCatalog;
+use models\containers\ReviewsCatalog;
+use services\request\CreditCardsQueryRequest;
+use services\request\CustomerQueryRequest;
+use services\request\OrderItemQueryRequest;
+use services\request\OrdersQueryRequest;
+use services\request\ReviewsQueryRequest;
 use Shop\Model\Factory;
 
 
@@ -154,10 +153,10 @@ class Response {
             $creditCard = new CreditCard($customer->getFirstname(), $customer->getLastname(), $cardNumber, $expirationDate, $cardCVN);
             $orderItemRequest = new OrderItemQueryRequest(new Invoice((int) $orderId, $customer, $creditCard, $submitTime, $actualDeliveryDate));
             $order = Response::orderItemsQuery($orderItemRequest);
-            Invoices::add($order);
+            InvoicesCatalog::add($order);
         }
         $mysqli->close();
-        return Invoices::getInvoices();
+        return InvoicesCatalog::getCatalog();
     }
     
     
@@ -192,10 +191,10 @@ class Response {
         while ($stmt->fetch()) {
             $submitTime = \DateTime::createFromFormat('Y-m-d H:i:s', $timestamp);
             $pastry = new Pastry((int) $pastryId, $pastryName, (float) $pastryPrice, $pastryImageName, $pastryDescription);
-            Reviews::getReviews()->add(new Review((int) $reviewId, $customer, $pastry, (int) $reviewStars, $reviewComment));
+            ReviewsCatalog::getReviews()->add(new Review((int) $reviewId, $customer, $pastry, (int) $reviewStars, $reviewComment));
         }
         $mysqli->close();
-        return Invoices::getInvoices();
+        return InvoicesCatalog::getCatalog();
     }
     
     

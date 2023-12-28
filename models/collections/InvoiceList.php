@@ -1,17 +1,10 @@
 <?php
-namespace model\abstract;
+namespace Shop\Model\collections;
 
 use Exception;
-use global\Validate;
-use model\abstract\Person;
-use model\abstract\Invoice;
+use models\concretes\Invoice;
+use models\concretes\Pastry;
 
-use models\concretes\CreditCard;
-use models\concretes\Phone;
-use models\concretes\PostalAddress;
-use models\containers\Invoices;
-use models\containers\Reviews;
-use models\containers\WishLists;
 
 class InvoiceList {
     private array $invoices;
@@ -27,7 +20,7 @@ class InvoiceList {
     }
 
 
-    public function addInvoices (InvoiceList $invoices): void {
+    public function addInvoices (PastryList $invoices): void {
         foreach ($invoices as $id => $invoice) {
             $this->add($invoice);
         }
@@ -45,10 +38,32 @@ class InvoiceList {
     }
 
 
-    public function searchInvoices (Pastry $pastry): InvoiceList {
-        $matches = new InvoiceList();
+    /**
+     * @throws Exception
+     */
+    public function removeInvoices (InvoiceList $invoices): void {
+        foreach ($invoices as $id => $invoice) {
+            $this->remove($invoice);
+        }
+    }
+
+
+    /**
+     * @throws Exception
+     */
+    public function remove (Invoice $invoice): void {
+        $id = $invoice->getId();
+        if (!array_key_exists($id, $this->invoices)) {
+            throw new Exception($invoice->getId() . ' is not in the list. Cannot remove nonexistent card');
+        }
+        unset($this->invoices[$id]);
+    }
+
+
+    public function search (Pastry $pastry): PastryList {
+        $matches = new PastryList();
         foreach ($this->invoices as $id => $invoice) {
-            if (!is_null($invoice->searchItems($pastry)))
+            if (!is_null($invoice->search($pastry)))
                 $matches->add($invoice);
         }
         return $matches;

@@ -7,7 +7,7 @@ use models\concretes\CreditCard;
 use models\concretes\Customer;
 use models\concretes\InvoiceItem;
 use models\concretes\Pastry;
-use models\concretes\WishListItem;
+use models\concretes\Wish;
 use models\enums\OrderStatus;
 
 class WishList extends Entity {
@@ -45,7 +45,7 @@ class WishList extends Entity {
     /**
      * @throws Exception
      */
-    public function add (WishListItem $wishListItem): void {
+    public function add (Wish $wishListItem): void {
         $id = $wishListItem->getPastry()->getId();
         if (array_key_exists($id, $this->wishList)) {
             throw new Exception($wishListItem->getPastry()->getName() . '  is already in your wish list.');
@@ -57,7 +57,7 @@ class WishList extends Entity {
     /**
      * @throws Exception
      */
-    public function remove (WishListItem $wishListItem): void {
+    public function remove (Wish $wishListItem): void {
         $id = $wishListItem->getPastry()->getId();
         if (!array_key_exists($id, $this->wishList)) {
             throw new Exception($wishListItem->getPastry()->getName() . '  does not exist in your wish list it cannot be removed.');

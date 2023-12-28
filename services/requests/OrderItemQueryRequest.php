@@ -1,10 +1,8 @@
 <?php
 
-namespace request;
+namespace services\request;
 
-use Cassandra\Date;
 use model\abstract\Invoice;
-use models\concretes\Customer;
 
 class OrderItemQueryRequest extends Request {
     private Invoice $order;

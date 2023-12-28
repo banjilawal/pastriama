@@ -1,5 +1,5 @@
 <?php
-namespace model\abstract;
+namespace Shop\Model\collections;
 
 use Exception;
 use global\IdGenerator;
@@ -148,7 +148,7 @@ class InvoiceItemList{
     }
 
 
-    public function find (Pastry $pastry): ?InvoiceItem {
+    public function search (Pastry $pastry): ?InvoiceItem {
         foreach ($this->invoiceItems as $id => $invoiceItem) {
             if ($this[$id]->getPastry()->equals($pastry))
                 return $invoiceItem;

@@ -1,5 +1,5 @@
 <?php
-namespace model\abstract;
+namespace model\concretes;
 
 use DateTime;
 use models\concretes\CreditCard;
@@ -66,7 +66,7 @@ class Invoice extends Entity {
     }
 
 
-    public function searchItems (Pastry $pastry): ?InvoiceItem {
+    public function search (Pastry $pastry): ?InvoiceItem {
         foreach ($this->invoiceItems as $id => $invoiceItem) {
             if (!is_null($invoiceItem->find($pastry)))
                 return $this->invoiceItems[$invoiceItem->getId()];

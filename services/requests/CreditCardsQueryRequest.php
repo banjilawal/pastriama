@@ -1,8 +1,7 @@
 <?php
 
-namespace request;
+namespace services\request;
 
-use Cassandra\Date;
 use models\concretes\Customer;
 
 class CreditCardsQueryRequest extends Request {

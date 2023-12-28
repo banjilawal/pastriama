@@ -1,6 +1,6 @@
 <?php
 
-namespace request;
+namespace services\request;
 
 class CustomerQueryRequest extends Request {
     private int $customerId;

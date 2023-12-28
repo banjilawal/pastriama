@@ -2,16 +2,17 @@
 
 namespace global;
 
-use models\containers\Reviews;
+use models\containers\ReviewsCatalog;
 
 class IdGenerator{
     private static $ids;
 
     private function __construct () {
         self::$ids = array();
-        self::$ids['customer'] = 1;
         self::$ids['pastry'] = 1;
         self::$ids['invoice'] = 1;
+        self::$ids['reviewID'] = 1;
+        self::$ids['customer'] = 1;
         self::$ids['invoiceItem'] = 1;
     }
 
@@ -34,6 +35,12 @@ class IdGenerator{
     public static function nextPastryId () {
         self::$ids['pastry'] += 1;
         return self::$ids['pastry'];
+    }
+
+
+    public static function nextReviewId () {
+        self::$ids['review'] += 1;
+        return self::$ids['review'];
     }
 
 
