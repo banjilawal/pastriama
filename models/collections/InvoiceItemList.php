@@ -2,27 +2,20 @@
 namespace Shop\Model\collections;
 
 use Exception;
+use global\Constants;
 use global\IdGenerator;
 use models\concretes\InvoiceItem;
 use models\concretes\Pastry;
 
 class InvoiceItemList{
     
-    public const DEFAULT_TAX_PERCENT = 5;
-    public const MINIMUM_TAX_PERCENTAGE = 0;
-    public const MAXIMUM_TAX_PERCENTAGE = 35;
+
     private int $percentTax;
     private array $invoiceItems;
     
 
     public function __construct () {
-        $this->percentTax = self::DEFAULT_TAX_PERCENT;
         $this->invoiceItems = array();
-    }
-    
-
-    public function getPercentTax (): int {
-        return $this->percentTax;
     }
 
     
@@ -53,7 +46,7 @@ class InvoiceItemList{
     
     
     public function getTaxAmount (): float {
-        return $this->getPreTaxTotal() * $this->percentTax / 100;
+        return $this->getPreTaxTotal() * Constants::DEFAULT_TAX_PERCENTAGE / 100;
     }
     
     
@@ -61,15 +54,6 @@ class InvoiceItemList{
         return $this->getPreTaxTotal() + $this->getTaxAmount();
     }
     
-    /**
-     * @throws Exception
-     */
-    public function setPercentTax (int $percentTax): void {
-        if ($percentTax < self::MINIMUM_TAX_PERCENTAGE || $percentTax > self::MAXIMUM_TAX_PERCENTAGE) {
-            throw new Exception($percentTax . ' percent tax is outside the allowed range');
-        }
-        $this->percentTax = $percentTax;
-    }
     
     /**
      * @param mixed $invoiceItems
@@ -120,7 +104,7 @@ class InvoiceItemList{
      * @throws Exception
      */
     public function addPastry (Pastry $pastry, int $quantity): void {
-        $invoiceItem = $this->find($pastry);
+        $invoiceItem = $this->search($pastry);
         if (!is_null($invoiceItem)) {
             $invoiceItem = new InvoiceItem(IdGenerator::nextInvoiceItemId(), $pastry, $quantity);
             $this->invoiceItems[$invoiceItem->getId()] = $invoiceItem;
@@ -134,7 +118,7 @@ class InvoiceItemList{
      * @throws Exception
      */
     public function removePastry (Pastry $pastry, int $quantity): void {
-        $invoiceItem = $this->find($pastry);
+        $invoiceItem = $this->search($pastry);
         if (is_null($invoiceItem)) {
             throw new Exception($pastry->getName() . ' is not in the list so it cannot be removed');
         }

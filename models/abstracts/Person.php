@@ -1,34 +1,39 @@
 <?php
-namespace model\abstract;
+namespace model\abstracts;
 
+use Cassandra\Date;
+use DateTime;
 use exceptions\EmptyStringException;
 use global\Validate;
-use model\abstract\NamedEntity;
 use models\concretes\EmailAddress;
 use models\concretes\Phone;
 use models\concretes\PostalAddress;
 
 abstract class Person extends NamedEntity {
     private string $lastname;
-    private PostalAddress $postalAddress;
-    private String $emailAddress;
-//    private EmailAddress $emailAddress;
+    private DateTime $birthdate;
     private Phone $phone;
+    private EmailAddress $email;
+    private string $password;
+    private PostalAddress $postalAddress;
     
     public function __construct (
         int $id,
         string $firstname,
         string $lastname,
-        PostalAddress $postalAddress,
-        string $emailAddress,
-//        EmailAddress $emailAddress,
-        Phone $phone
+        DateTime $birthdate,
+        Phone $phone,
+        EmailAddress $email,
+        string $password,
+        PostalAddress $postalAddress
     ) {
         parent::__construct($id, $firstname);
         $this->lastname = Validate::non_empty_string($lastname, 'Person', 'lastname', 26);
-        $this->postalAddress = $postalAddress;
-        $this->emailAddress = $emailAddress;
+        $this->birthdate = $birthdate;
         $this->phone = $phone;
+        $this->email = $email;
+        $this->password = $password;
+        $this->postalAddress = $postalAddress;
     }
     
     public function getFirstname (): string {
@@ -40,19 +45,23 @@ abstract class Person extends NamedEntity {
         return $this->lastname;
     }
     
-    
-    public function getPostalAddress (): PostalAddress {
-        return $this->postalAddress;
-    }
-    
-    
-    public function getEmailAddress (): string {
-        return $this->emailAddress;
+    public function getBirthdate (): DateTime {
+        return $this->birthdate;
     }
     
     
     public function getPhone (): Phone {
         return $this->phone;
+    }
+    
+    
+    public function getEmail (): string {
+        return $this->email;
+    }
+    
+    
+    public function getPostalAddress (): PostalAddress {
+        return $this->postalAddress;
     }
     
     
@@ -71,18 +80,23 @@ abstract class Person extends NamedEntity {
         $this->lastname = Validate::non_empty_string($lastname, 'Person', 'lastname', 43);
     }
     
-    public function setPostalAddress (PostalAddress $postalAddress): void {
-        $this->postalAddress = $postalAddress;
-    }
-    
-    
-    public function setEmailAddress (string $emailAddress): void {
-        $this->emailAddress = $emailAddress;
+    public function setBirthdate (DateTime $birthdate): void {
+        $this->birthdate = $birthdate;
     }
     
     
     public function setPhone (Phone $phone): void {
         $this->phone = $phone;
+    }
+    
+    
+    public function setEmails (EmailAddress $email): void {
+        $this->email = $email;
+    }
+    
+    
+    public function setPostalAddress (PostalAddress $postalAddress): void {
+        $this->postalAddress = $postalAddress;
     }
     
     
@@ -92,8 +106,9 @@ abstract class Person extends NamedEntity {
         if ($object instanceof Person) {
             return parent::equals($object)
                 && $this->lastname === $object->getLastname()
+                && $this->birthdate === $object->getBirthdate()
                 && $this->postalAddress->equals($object->getPostalAddress())
-                && $this->emailAddress === $object->getEmailAddress()
+                && $this->email->equals($object->getEmail())
                 && $this->phone->equals($object->getPhone());
         }
         return false;
@@ -104,8 +119,9 @@ abstract class Person extends NamedEntity {
         return $this->getId()
             . ' firstname:' . $this->getFirstname()
             . ' lastname:' . $this->lastname
-            . ' postal address:' . $this->postalAddress
-            . ' email:' . $this->emailAddress
-            . ' phone:' . $this->phone;
+            . ' birthdate:' . $this->birthdate->format('Y-m-d')
+            . ' phone:' . $this->phone
+            . ' email:' . $this->email
+            . ' postal address:' . $this->postalAddress;
     }
 } // end class Person

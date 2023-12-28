@@ -2,9 +2,9 @@
 namespace models\singletons;
 
 use Exception;
-use model\abstract\Invoice;
-use model\abstract\InvoiceItemList;
+
 use models\concretes\Customer;
+use models\concretes\Pastry;
 use Shop\Model\collections\InvoiceList;
 
 class InvoicesCatalog {
@@ -16,7 +16,7 @@ class InvoicesCatalog {
 
     public static function getCatalog (): InvoiceList {
         if (!isset(self::$invoices)) {
-            self::$invoices = new self();
+            self::$invoices = new InvoiceList();
         }
         return self::$invoices;
     }

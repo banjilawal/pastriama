@@ -1,42 +1,37 @@
 <?php declare(strict_types=1);
 namespace models\concretes;
 
-use model\abstract\Address;
 
-require_once('bootstrap.php');
-require_once('Orientation.php');
-//   require_once('EntityException.php');
+use models\abstracts\Address;
 
 class PostalAddress extends Address {
-    private string $streetNumber;
-//    private Road $road;
+    private string $street;
     private string $city;
     private State $state;
     private Zipcode $zipcode;
     
     
     public function __construct (
-        string $street_number,
-//        Road $road,
+        string $street,
         string $city,
         State $state,
         Zipcode $zipcode
     ) {
         parent::__construct();
-        $this->streetNumber = $street_number;
+        $this->street = $street;
         $this->city = $city;
         $this->state = $state;
         $this->zipcode = $zipcode;
     }
     
     
-    public function getZipcode (): Zipcode {
-        return $this->zipcode;
+    public function getStreet (): string {
+        return $this->street;
     }
     
     
-    public function getStreetNumber (): string {
-        return $this->streetNumber;
+    public function getCity (): string {
+        return $this->city;
     }
     
     
@@ -45,33 +40,13 @@ class PostalAddress extends Address {
     }
     
     
-//    public function getRoad (): Road {
-//        return $this->road;
-//    }
-    
-    
-    public function getCity (): string {
-        return $this->city;
-    }
-
-    
-    public function setStreetNumber (string $streetNumber): void {
-        $this->streetNumber = $streetNumber;
+    public function getZipcode (): Zipcode {
+        return $this->zipcode;
     }
     
     
-    public function setZipcode (ZipCode $zipcode): void {
-        $this->zipcode = $zipcode;
-    }
-    
-    
-//    public function setRoad (Road $road): void {
-//        $this->road = $road;
-//    }
-    
-    
-    public function setState (State $state): void {
-        $this->state = $state;
+    public function setStreet (string $street): void {
+        $this->street = $street;
     }
     
     
@@ -80,37 +55,38 @@ class PostalAddress extends Address {
     }
     
     
+    public function setState (State $state): void {
+        $this->state = $state;
+    }
+    
+    
+    public function setZipcode (ZipCode $zipcode): void {
+        $this->zipcode = $zipcode;
+    }
+
+    
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
         if ($object instanceof PostalAddress) {
-            return $this->streetNumber === $object->getStreetNumber()
-                && $this->zipcode->equals($object->getZipcode())
+            return $this->street === $object->getStreet()
+                && $this->city === $object->getCity()
                 && $this->state->equals($object->getState())
-                && $this->city === $object->getCity();
-//                && $this->road->equals($object->getRoad());
+                && $this->zipcode->equals($object->getZipcode());
         }
         return false;
     }
 
     
     public function __toString (): string {
-        if (is_null($this)) {
-            return '';
-        } return $this->streetNumber
-//            . ' ' . $this->road
-            . ' ' .$this->$this->city
-            . ', ' . $this->state
-            . ' ' . $this->zipcode;
+        return $this->street . ' ' . $this->city . ', ' . $this->state . ' ' . $this->zipcode;
     }
     
 
     public function toRow (): string {
         return '<tr class="postal-address-row">'
                 . '<td class="field-name">number</td>'
-                . '<td>' . $this->streetNumber . '</td>'
-//                . '<td class=field-name">road</td>'
-//                . '<td>' . $this->road . '</td>'
+                . '<td>' . $this->street . '</td>'
                 . '<td class=field-name">city</td>'
                 . '<td>' . $this->city . '</td>'
                 . '<td class="field-name">state</td>'
@@ -122,11 +98,10 @@ class PostalAddress extends Address {
     
 
     public function toTable (): string {
-        return '<table class="address-table">'
-            . '<thead class="address-table-head>'
+        return '<table class="postal-address-table" id="postal-address-table" name="postal-address-table">'
+            . '<thead>'
                 . '<tr>'
                     .   '<th>Street</th>'
-                    .   '<th>Road</th>'
                     .   '<th>City</th>'
                     .   '<th>State</th>'
                     .   '<th>Zip</th>'
@@ -134,8 +109,7 @@ class PostalAddress extends Address {
             . '</thead>'
             . '<tbody>'
                 . '<tr>'
-                    . '<td>' . $this->streetNumber . '</td>'
-//                    . '<td>' . $this->road . '</td>'
+                    . '<td>' . $this->street . '</td>'
                     . '<td>' . $this->city . '</td>'
                     . '<td>' . $this->state . '</td>'
                     . '<td>' . $this->zipcode . '</td>'

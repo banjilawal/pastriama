@@ -2,7 +2,7 @@
 namespace Shop\Model\collections;
 
 use Exception;
-use models\concretes\Invoice;
+use model\concretes\Invoice;
 use models\concretes\Pastry;
 
 
@@ -18,8 +18,10 @@ class InvoiceList {
     public function getInvoices (): Invoice|array {
         return $this->invoices;
     }
-
-
+    
+    /**
+     * @throws Exception
+     */
     public function addInvoices (PastryList $invoices): void {
         foreach ($invoices as $id => $invoice) {
             $this->add($invoice);

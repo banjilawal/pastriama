@@ -1,21 +1,23 @@
 <?php
 namespace models\concretes;
 
-use model\abstract\Item;
+
+use model\abstracts\Item;
 
 class Pastry extends Item {
     public function __construct (
         int    $id,
         string $name,
-        float  $price,
+        string $description,
         string $imageName,
-        string $description) {
+        float  $price
+    ) {
         parent::__construct(
             $id,
             $name,
-            $price,
+            $description,
             $imageName,
-            $description
+            $price
         );
     }
     
@@ -27,5 +29,10 @@ class Pastry extends Item {
             return parent::equals($object);
         }
         return false;
+    }
+    
+    
+    public function __toString (): string {
+        return parent::__toString();
     }
 } // end class Pastry

@@ -1,11 +1,12 @@
 <?php
 namespace models\concretes;
 
+use Exception;
 use exceptions\EmptyStringException;
 use global\Validate;
-use model\abstract\Address;
+use models\abstracts\Address;
 
-class EmailAddress {
+class EmailAddress extends Address {
     private string $mailbox;
     private Domain $domain;
     
@@ -14,9 +15,10 @@ class EmailAddress {
      * @param string $mailbox
      * @param Domain $domain
      * @throws EmptyStringException
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct (string $mailbox, Domain $domain) {
+        parent::__construct();
         $this->mailbox = Validate::non_empty_string($mailbox, 'EmailAddress', 'mailbox', 17);
         $this->domain = $domain;
     }
@@ -32,8 +34,11 @@ class EmailAddress {
     
     
     public function equals ($object): bool {
+        if ($this === $object) return true;
+        if (is_null($object)) return false;
         if ($object instanceof EmailAddress) {
-            return $this->mailbox === $object->getMailbox()
+            return parent::equals($object)
+                && $this->mailbox === $object->getMailbox()
                 && $this->domain === $object->getDomain();
         }
         return false;

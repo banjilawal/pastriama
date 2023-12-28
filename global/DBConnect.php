@@ -1,12 +1,12 @@
 <?php
 
-namespace database;
+namespace global;
 
 use mysqli;
 
 class DBConnect {
     const SERVER = 'localhost';
-    const DATABASE = 'shop';
+    const DATABASE = 'bakery';
     const USER = 'root';
     const PASSWORD = '';
     

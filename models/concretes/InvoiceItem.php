@@ -3,6 +3,7 @@ namespace models\concretes;
 
 
 use Exception;
+use model\abstracts\Entity;
 
 class InvoiceItem extends Entity {
     private Pastry $pastry;
@@ -59,21 +60,22 @@ class InvoiceItem extends Entity {
         if ($this === $object) return true;
         if (is_null($object)) return false;
         if ($object instanceof InvoiceItem)
-            return  parent::__equals($object)
-                && $this->pastry === $object->getPastry()
+            return  parent::equals($object)
+                && $this->pastry->equals($object->getPastry())
                 && $this->quantity === $object->getQuantity();
         return false;
     }
 
     
     public function __toString (): string {
-        return __CLASS__ . ': quantity:' . $this->quantity . ' ' . $this->pastry . ' cost:' . $this->getCost() ;
+        return __CLASS__ . ' ' . parent::__toString()
+            . ': quantity:' . $this->quantity
+            . ' ' . $this->pastry . ' cost:' . $this->getCost();
     }
 
 
     public function toRow (): string {
-        $rowName = 'order-item-' . $this->pastry->getId() . '-row';
-        return '<tr class="' . 'order-item-row" id="' . $rowName . '" name="' . $rowName . '" onclick="send_protein_bar(this)">'
+        return '<tr class="invoice-item-row" id="invoice-item-row" name="invoice-item-row">'
             . '<td hidden>' . $this->pastry->getId() . '</td>'
             . '<td>' . $this->pastry->getName() . '</td>'
             . '<td>' . $this->pastry->loadImage(90, 100) . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
@@ -86,8 +88,7 @@ class InvoiceItem extends Entity {
 
 
     public function toTable (): string {
-        $tableName = 'order-item-' . $this->pastry->getId() . '-table';
-        return '<table class="order-item-table" id="' . $tableName . '" name="' .$tableName . '">'
+        return '<table class="invoice-item-table" id="invoice-item-table" name="invoice-item-table">'
             . '<thead>'
             . '<tr>'
             . '<th>Picture</th>'

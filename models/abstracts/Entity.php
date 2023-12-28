@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace model\abstract;
+namespace model\abstracts;
 
 use global\Validate;
 use models\enums\EntityStatus;
@@ -46,7 +46,8 @@ abstract class Entity {
         if ($this === $object) return true;
         if (is_null($object)) return false;
         if ($object instanceof Entity) {
-            return $this->id === $object->getId() && $this->status == $object->getStatus();
+            return $this->id === $object->getId()
+                && $this->status == $object->getStatus();
         }
         return false;
     }

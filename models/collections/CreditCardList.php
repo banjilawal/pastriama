@@ -16,8 +16,10 @@ class CreditCardList {
     public function getCards (): CreditCard|array {
         return $this->cards;
     }
-
-
+    
+    /**
+     * @throws Exception
+     */
     public function addCards (ReviewList $cards): void {
         foreach ($cards as $id => $card) {
             $this->add($card);

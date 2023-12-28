@@ -37,6 +37,6 @@ class Zipcode {
     }
     
     public function __toString (): string {
-        return 'zip-code:' . $this->zipcode;
+        return 'zipcode:' . $this->zipcode;
     }
 } // end class Zipcode

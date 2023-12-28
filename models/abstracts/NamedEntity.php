@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace model\abstract;
+namespace model\abstracts;
 
 use exceptions\EmptyStringException;
 use global\Validate;

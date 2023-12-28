@@ -1,10 +1,7 @@
 <?php
-namespace models\containers;
+namespace models\singletons;
 
 use Exception;
-use model\abstract\Invoice;
-use model\abstract\InvoiceItemList;
-use model\abstract\PastryList;
 use models\concretes\Customer;
 use models\concretes\Pastry;
 use models\concretes\Review;
@@ -19,7 +16,7 @@ class ReviewsCatalog {
 
     public static function getCatalog (): ReviewList {
         if (!isset(self::$reviews)) {
-            self::$reviews = new self();
+            self::$reviews = new ReviewList();
         }
         return self::$reviews;
     }

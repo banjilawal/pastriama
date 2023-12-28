@@ -1,15 +1,13 @@
 <?php
 namespace models\concretes;
 
+use DateTime;
 use Exception;
 use global\Validate;
-use model\abstract\PastryList;
-use model\abstract\Person;
-use model\abstract\Invoice;
 
-use models\containers\InvoicesCatalog;
-use models\containers\ReviewsCatalog;
-use models\containers\WishLists;
+use model\abstracts\Person;
+use models\singletons\InvoicesCatalog;
+use models\singletons\ReviewsCatalog;
 use Shop\Model\collections\CreditCardList;
 use Shop\Model\collections\InvoiceList;
 use Shop\Model\collections\ReviewList;
@@ -24,12 +22,22 @@ class Customer extends Person {
         int $id,
         string $firstname,
         string $lastname,
-        PostalAddress $postalAddress,
-        string $emailAddress, //EmailAddress $emailAddress,
+        DateTime $birthdate,
         Phone $phone,
-
+        EmailAddress $email,
+        string $password,
+        PostalAddress $postalAddress
     ) {
-        parent::__construct($id, $firstname, $lastname, $postalAddress, $emailAddress, $phone);
+        parent::__construct(
+            $id,
+            $firstname,
+            $lastname,
+            $birthdate,
+            $phone,
+            $email,
+            $password,
+            $postalAddress
+        );
         $this->creditCards = new CreditCardList();
         $this->wishes = new WishList();
     }
@@ -48,12 +56,12 @@ class Customer extends Person {
     /**
      * @throws Exception
      */
-    public function getInvoices (\DateTime $startDate, \DateTime $endDate): InvoiceList {
+    public function getInvoices (DateTime $startDate, DateTime $endDate): InvoiceList {
         return InvoicesCatalog::search($this, $startDate, $endDate);
     }
 
 
-    public function getReviews (\DateTime $startDate, \DateTime $endDate): ReviewList {
+    public function getReviews (DateTime $startDate, DateTime $endDate): ReviewList {
         return ReviewsCatalog::search($this, $startDate, $endDate);
     }
 

@@ -1,13 +1,15 @@
 <?php
-namespace model\abstract;
+namespace model\abstracts;
 
 use Exception;
-use model\abstract\NamedEntity;
+
 
 abstract class Item extends NamedEntity {
-    private float $price;
-    private string $imageName;
+
     private string $description;
+    private string $imageName;
+    private float $price;
+
     
     
     /**
@@ -19,31 +21,50 @@ abstract class Item extends NamedEntity {
      * @throws Exception
      */
     public function __construct (
-        int    $id,
+        int $id,
         string $name,
-        float  $price,
+        string $description,
         string $imageName,
-        string $description
+        float $price
     ) {
         parent::__construct($id, $name);
-        $this->price = $price;
-        $this->imageName = $imageName;
         $this->description = $description;
+        $this->imageName = $imageName;
+        $this->price = $price;
     }
     
-
-    public function getPrice (): float {
-        return $this->price;
-    }
     
+    public function getDescription (): string {
+        return $this->description;
+    }
     
     public function getImageName (): string {
         return $this->imageName;
     }
     
     
-    public function getDescription (): string {
-        return $this->description;
+    public function getPrice (): float {
+        return $this->price;
+    }
+    
+    /**
+     * @throws Exception
+     */
+    public function setDescription (string $description): void {
+        if (!empty($description)) {
+            throw new Exception('Attempting to set the description to an empty string ');
+        }
+        $this->description = $description;
+    }
+    
+    /**
+     * @throws Exception
+     */
+    public function setImageName (string $imageName): void {
+        if (!empty($imageName)) {
+            throw new Exception('Attempting to set the image name to an empty string ');
+        }
+        $this->imageName = $imageName;
     }
     
     
@@ -56,24 +77,7 @@ abstract class Item extends NamedEntity {
         }
         $this->price = $price;
     }
-
-
-    public function setImageName (string $imageName): void {
-        if (!empty($imageName)) {
-            throw new Exception('Attempting to set the image name to an empty string ');
-        }
-        $this->imageName = $imageName;
-    }
-
-
-    public function setDescription (string $description): void {
-        if (!empty($description)) {
-            throw new Exception('Attempting to set the description to an empty string ');
-        }
-        $this->description = $description;
-    }
-    
-    
+ 
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
@@ -89,9 +93,9 @@ abstract class Item extends NamedEntity {
 
     public function __toString(): string {
         return parent::__toString()
-            . ' price:' . $this->price
             . ' image_path:' . $this->imageName
-            . ' description:' . $this->description;
+            . ' description:' . $this->description
+            . ' price:' . $this->price;
     }
     
 

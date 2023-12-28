@@ -1,23 +1,24 @@
 <?php
 namespace models\concretes;
 
+use DateTime;
 use Exception;
 use global\Validate;
-use model\abstract\Entity;
-use models\enums\CreditCardStatus;
+use model\abstracts\Entity;
 
 class CreditCard extends Entity {
     private string $number;
-    private \DateTime $expiration;
+    private DateTime $expiration;
     private string $cvn;
     
     /**
+     * @param int $id
      * @param string $number
-     * @param \DateTime $expiration
+     * @param DateTime $expiration
      * @param string $cvn
      * @throws Exception
      */
-    public function __construct (int $id, string $number, \DateTime $expiration, string $cvn) {
+    public function __construct (int $id, string $number, DateTime $expiration, string $cvn) {
         parent::__construct($id);
         $this->expiration = $expiration;
         $this->number = Validate::card_number($number, 23);
@@ -30,7 +31,7 @@ class CreditCard extends Entity {
     }
 
 
-    public function getExpiration (): \DateTime {
+    public function getExpiration (): DateTime {
         return $this->expiration;
     }
 
