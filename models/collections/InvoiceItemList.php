@@ -36,7 +36,7 @@ class InvoiceItemList{
     }
     
     
-    public function getPreTaxTotal (): float {
+    public function getSubTotal (): float {
         $cost = 0.00;
         foreach ($this->invoiceItems as $id => $invoiceItem) {
             $cost += $this->invoiceItems[$id]->getCost();
@@ -45,13 +45,13 @@ class InvoiceItemList{
     }
     
     
-    public function getTaxAmount (): float {
-        return $this->getPreTaxTotal() * Constants::DEFAULT_TAX_PERCENTAGE / 100;
+    public function getTax (): float {
+        return $this->getSubTotal() * Constants::DEFAULT_TAX_PERCENTAGE / 100;
     }
     
     
-    public function getTotalCharge (): float  {
-        return $this->getPreTaxTotal() + $this->getTaxAmount();
+    public function getTotal (): float  {
+        return $this->getSubTotal() + $this->getTax();
     }
     
     

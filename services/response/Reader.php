@@ -22,7 +22,7 @@ use services\request\OrderItemQueryRequest;
 use services\request\OrdersQueryRequest;
 use services\request\ReviewsQueryRequest;
 
-class Query extends Response {
+class Reader extends Response {
     /**
      * @throws \Exception
      */
@@ -52,7 +52,7 @@ class Query extends Response {
         while ($stmt->fetch()) {
             $postalAddress = new PostalAddress($streetNumber, $city, (new State($state)), (new Zipcode($zipcode)));
             $request = new CreditCardsQueryRequest(new Customer((int) $id, $firstname, $lastname, $postalAddress, $email, Factory::buildPhone($phone)));
-            $customer = Query::creditCardsQuery($request);
+            $customer = Reader::creditCardsQuery($request);
         }
         $mysqli->close();
         return $customer;
@@ -150,7 +150,7 @@ class Query extends Response {
             $actualDeliveryDate = \DateTime::createFromFormat('Y-m-d H:i:s',$deliveryDate);
             $creditCard = new CreditCard($customer->getFirstname(), $customer->getLastname(), $cardNumber, $expirationDate, $cardCVN);
             $orderItemRequest = new OrderItemQueryRequest(new Invoice((int) $orderId, $customer, $creditCard, $submitTime, $actualDeliveryDate));
-            $order = Query::orderItemsQuery($orderItemRequest);
+            $order = Reader::orderItemsQuery($orderItemRequest);
             InvoicesCatalog::getCatalog()->add($order);
         }
         $mysqli->close();

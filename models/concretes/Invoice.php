@@ -5,10 +5,6 @@ use DateTime;
 
 use global\Constants;
 use model\abstracts\Entity;
-use models\concretes\CreditCard;
-use models\concretes\Customer;
-use models\concretes\InvoiceItem;
-use models\concretes\Pastry;
 use Shop\Model\collections\InvoiceItemList;
 
 class Invoice extends Entity {
@@ -16,8 +12,8 @@ class Invoice extends Entity {
     private Customer $customer;
     private CreditCard $creditCard;
     private \DateTime $submissionTime;
-    private DateTime $realDeliveryDate;
-    private InvoiceItemList $invoiceItems;
+    private DateTime $realDelivery;
+    private InvoiceItemList $items;
     
 
     public function __construct (
@@ -29,8 +25,8 @@ class Invoice extends Entity {
         $this->customer = $customer;
         $this->creditCard = $creditCard;
         $this->submissionTime = DateTime::createFromFormat('U', time());
-        $this->realDeliveryDate = null;
-        $this->invoiceItems = new InvoiceItemList();
+        $this->realDelivery = null;
+        $this->items = new InvoiceItemList();
     }
     
     
@@ -49,30 +45,30 @@ class Invoice extends Entity {
     }
     
     
-    public function getRealDeliveryDate (): ?DateTime {
-        return $this->realDeliveryDate;
+    public function getRealDelivery (): ?DateTime {
+        return $this->realDelivery;
     }
     
     
-    public function getInvoiceItems (): InvoiceItemList {
-       return $this->invoiceItems;
+    public function getItems (): InvoiceItemList {
+       return $this->items;
     }
     
     
-    public function getProjectedDeliveryDate (): DateTime {
+    public function getProjectedDelivery (): DateTime {
         return $this->submissionTime->modify('+ ' . Constants::ESTIMATED_TRANSIT_DAYS . ' days');
     }
     
     
-    public function setRealDeliveryDate (DateTime $deliveryDate): void {
-        $this->realDeliveryDate = $deliveryDate;
+    public function setRealDelivery (DateTime $deliveryDate): void {
+        $this->realDelivery = $deliveryDate;
     }
 
 
     public function search (Pastry $pastry): ?InvoiceItem {
-        foreach ($this->invoiceItems as $id => $invoiceItem) {
-            if (!is_null($invoiceItem->find($pastry)))
-                return $this->invoiceItems[$invoiceItem->getId()];
+        foreach ($this->items as $id => $item) {
+            if (!is_null($item->find($pastry)))
+                return $this->items[$item->getId()];
         }
         return null;
     }
@@ -92,15 +88,15 @@ class Invoice extends Entity {
 
     
     public function printDeliveryDate (): string {
-        if (is_null($this->realDeliveryDate))
-            return 'estimated delivery on ' . $this->getProjectedDeliveryDate()->format('Y-m-d');
-        return $this->realDeliveryDate->format('Y-m-d');
+        if (is_null($this->realDelivery))
+            return 'estimated delivery on ' . $this->getProjectedDelivery()->format('Y-m-d');
+        return $this->realDelivery->format('Y-m-d');
     }
     
     
     public function __toString (): string {
         $string = '';
-        foreach ($this->invoiceItems as $item) {
+        foreach ($this->items as $item) {
             $string .= nl2br($item);
         }
         return $string;
@@ -114,7 +110,7 @@ class Invoice extends Entity {
             . '<td>' . $this->getId() . '</td>'
             . '<td>' . $this->submissionTime->format('Y-m-d H:i:s'). '</td>'
             . '<td>' . $this->printDeliveryDate() . '</td>'
-            . '<td>' . $this->invoiceItems->getTotalCharge(). '</td></tr>';
+            . '<td>' . $this->items->getTotal(). '</td></tr>';
     }
 
 
@@ -134,13 +130,13 @@ class Invoice extends Entity {
             . '<td>' . $this->submissionTime->format('Y-m-d H:i:s'). '</td>'
             . '<td>' . $this->printDeliveryDate() . '</td>'
             . '</tr>';
-        foreach ($this->invoiceItems as $item) {
+        foreach ($this->items as $item) {
             $elem .= $item->toRow();
         }
         $elem .= '<tr>'
-            . '<td>Cost</td><td>' . $this->invoiceItems->getPreTaxTotal() . '</td>'
-            . '<td>Tax</td><td>' . $this->invoiceItems->getTaxAmount() . '</td>'
-            . '<td>Total Charge</td><td>' . $this->invoiceItems->getTotalCharge() . '</td>'
+            . '<td>Cost</td><td>' . $this->items->getSubTotal() . '</td>'
+            . '<td>Tax</td><td>' . $this->items->getTax() . '</td>'
+            . '<td>Total Charge</td><td>' . $this->items->getTotal() . '</td>'
             . '</tr></tbody></table>';
         return $elem;
     }
