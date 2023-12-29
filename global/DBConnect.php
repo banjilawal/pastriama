@@ -4,6 +4,8 @@ namespace global;
 
 use mysqli;
 
+require_once('vendor\autoload.php');
+
 class DBConnect {
     const SERVER = 'localhost';
     const DATABASE = 'bakery';

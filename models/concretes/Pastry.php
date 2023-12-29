@@ -2,7 +2,13 @@
 namespace models\concretes;
 
 
-use model\abstracts\Item;
+
+
+use models\abstracts\Item;
+
+
+require_once('vendor\autoload.php');
+//require_once('models\abstracts\Item.php');
 
 class Pastry extends Item {
     public function __construct (

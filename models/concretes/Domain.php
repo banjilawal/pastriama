@@ -4,6 +4,8 @@ namespace models\concretes;
 use exceptions\EmptyStringException;
 use global\Validate;
 
+require_once('vendor\autoload.php');
+
 class Domain {
     private string $name;
     private string $tld;

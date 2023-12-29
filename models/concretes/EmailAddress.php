@@ -6,6 +6,8 @@ use exceptions\EmptyStringException;
 use global\Validate;
 use models\abstracts\Address;
 
+require_once('vendor\autoload.php');
+
 class EmailAddress extends Address {
     private string $mailbox;
     private Domain $domain;

@@ -5,21 +5,20 @@ namespace models\concretes;
 use Exception;
 use global\Validate;
 
+require_once('vendor\autoload.php');
+
 class Phone {
     private string $areaCode;
     private string $exchange;
     private string $lineNumber;
 
     /**
-     * @param string $area_code
-     * @param string $exchange
-     * @param string $line_number
      * @throws Exception
      */
-    public function __construct(string $area_code, string $exchange, string $line_number) {
-        $this->areaCode = Validate::phone_area_code($area_code, 18);
-        $this->exchange = Validate::phone_area_code($exchange, 17);
-        $this->lineNumber = Validate::phone_area_code($line_number, 18);
+    public function __construct(string $areaCode, string $exchange, string $lineNumber) {
+        $this->areaCode = $areaCode; //Validate::phone_area_code($area_code, 18);
+        $this->exchange = $exchange; //Validate::phone_area_code($exchange, 17);
+        $this->lineNumber = $lineNumber; //Validate::phone_area_code($line_number, 18);
     }
     
     
@@ -38,27 +37,27 @@ class Phone {
     }
     
     
-    /**
-     * @throws Exception
-     */
+//    /**
+//     * @throws Exception
+//     */
     public function setAreaCode (string $areaCode): void {
-        $this->areaCode = Validate::phone_area_code($areaCode, 28);
+        $this->areaCode = $areaCode; //Validate::phone_area_code($areaCode, 28);
     }
     
     
-    /**
-     * @throws Exception
-     */
+//    /**
+//     * @throws Exception
+//     */
     public function setExchange (string $exchange): void {
-        $this->exchange = Validate::phone_area_code($exchange, 29);
+        $this->exchange = $exchange; //Validate::phone_area_code($exchange, 29);
     }
     
     
-    /**
-     * @throws Exception
-     */
+//    /**
+//     * @throws Exception
+//     */
     public function setLineNumber (string $lineNumber): void {
-        $this->lineNumber = Validate::phone_area_code($lineNumber, 30);
+        $this->lineNumber = $lineNumber; //Validate::phone_area_code($lineNumber, 30);
     }
     
     
@@ -86,8 +85,8 @@ class Phone {
     }
     
     public function toTable (): string {
-        return '<table class="phone-table">'
-            . '<thead class="phone-table-head>'
+        return '<table>'
+            . '<thead>'
             . '<tr>'
             . '<th>Area Code</th>'
             . '<th>Exchange</th>'

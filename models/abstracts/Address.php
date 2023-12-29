@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 namespace models\abstracts;
+
+require_once('vendor\autoload.php');
 //    require_once('Entity.php');
 
 abstract class Address {

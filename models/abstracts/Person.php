@@ -1,13 +1,16 @@
 <?php
-namespace model\abstracts;
+namespace models\abstracts;
 
-use Cassandra\Date;
+
 use DateTime;
 use exceptions\EmptyStringException;
 use global\Validate;
+use models\abstracts\NamedEntity;
 use models\concretes\EmailAddress;
 use models\concretes\Phone;
 use models\concretes\PostalAddress;
+
+require_once('vendor\autoload.php');
 
 abstract class Person extends NamedEntity {
     private string $lastname;
@@ -28,7 +31,7 @@ abstract class Person extends NamedEntity {
         PostalAddress $postalAddress
     ) {
         parent::__construct($id, $firstname);
-        $this->lastname = Validate::non_empty_string($lastname, 'Person', 'lastname', 26);
+        $this->lastname = $firstname; // Validate::non_empty_string($lastname, 'Person', 'lastname', 26);
         $this->birthdate = $birthdate;
         $this->phone = $phone;
         $this->email = $email;
@@ -60,24 +63,23 @@ abstract class Person extends NamedEntity {
     }
     
     
+    public function getPassword (): string {
+        return $this->password;
+    }
+    
+    
     public function getPostalAddress (): PostalAddress {
         return $this->postalAddress;
     }
     
     
-    /**
-     * @throws EmptyStringException
-     */
     public function setFirstname (string $firstname): void {
         $this->setName($firstname);
     }
     
     
-    /**
-     * @throws EmptyStringException
-     */
     public function setLastname (string $lastname): void {
-        $this->lastname = Validate::non_empty_string($lastname, 'Person', 'lastname', 43);
+        $this->lastname = $lastname; //Validate::non_empty_string($lastname, 'Person', 'lastname', 43);
     }
     
     public function setBirthdate (DateTime $birthdate): void {
@@ -94,6 +96,10 @@ abstract class Person extends NamedEntity {
         $this->email = $email;
     }
     
+    
+    public function setPassword (string $password): void {
+        $this->password = $password;
+    }
     
     public function setPostalAddress (PostalAddress $postalAddress): void {
         $this->postalAddress = $postalAddress;

@@ -1,15 +1,17 @@
 <?php declare(strict_types=1);
-namespace model\abstracts;
+namespace models\abstracts;
 
-use exceptions\EmptyStringException;
-use global\Validate;
+require_once('vendor\autoload.php');
+
+//require_once('models\abstracts\Entity.php');
+
 
 abstract class NamedEntity extends Entity {
     private String $name;
 
     public function __construct (int $id, String $name) {
         parent::__construct($id);
-        $this->name = Validate::non_empty_string($name, 'NamedEntity', 'name', 11);
+        $this->name = $name; //Validate::non_empty_string($name, 'NamedEntity', 'name', 11);
     }
     
 
@@ -18,11 +20,8 @@ abstract class NamedEntity extends Entity {
     }
     
 
-    /**
-     * @throws EmptyStringException
-     */
     public function setName (string $name): void {
-        $this->name = Validate::non_empty_string($name, 'NamedEntity', 'name', 11);
+        $this->name = $name; //Validate::non_empty_string($name, 'NamedEntity', 'name', 11);
     }
     
     public function equals ($object): bool {

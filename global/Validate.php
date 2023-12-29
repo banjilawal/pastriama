@@ -4,6 +4,7 @@ namespace global;
 use Exception;
 use exceptions\EmptyStringException;
 
+require_once('vendor\autoload.php');
 require_once('bootstrap.php');
 //require_once('EntityException.php');
 

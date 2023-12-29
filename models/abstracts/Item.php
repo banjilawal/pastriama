@@ -1,8 +1,13 @@
 <?php
-namespace model\abstracts;
+namespace models\abstracts;
+
 
 use Exception;
+use global\Constants;
+use models\abstracts\NamedEntity;
 
+//require_once('models\abstracts\NamedEntity.php');
+require_once('vendor\autoload.php');
 
 abstract class Item extends NamedEntity {
 
@@ -27,6 +32,9 @@ abstract class Item extends NamedEntity {
         string $imageName,
         float $price
     ) {
+        if ($price < Constants::ITEM_MINIMUM_PRICE || $price > Constants::ITEM_MAXIMUM_PRICE) {
+            throw new Exception($price . ' is outside the acceptable retail price range');
+        }
         parent::__construct($id, $name);
         $this->description = $description;
         $this->imageName = $imageName;
@@ -72,7 +80,7 @@ abstract class Item extends NamedEntity {
      * @throws Exception
      */
     public function setPrice (float $price): void {
-        if ($price < LOWEST_PRICE || $price > HIGHEST_PRICE) {
+        if ($price < Constants::ITEM_MINIMUM_PRICE || $price > Constants::ITEM_MAXIMUM_PRICE) {
             throw new Exception($price . ' is outside the acceptable retail price range');
         }
         $this->price = $price;
