@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/app/models/abstracts/Person.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Person.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/abstracts/StoreItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/StoreItem.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/Domain.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Domain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/EmailAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/EmailAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/Invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Invoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/InvoiceItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/InvoiceItem.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/Pastry.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Pastry.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/Phone.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Phone.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Review.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/State.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/State.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/Wish.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Wish.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/Zipcode.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Zipcode.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/lists/CreditCardList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/CreditCardList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/lists/InvoiceItemList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/InvoiceItemList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/lists/InvoiceList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/InvoiceList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/lists/PastryList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/PastryList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/lists/ReviewList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/ReviewList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/lists/WishList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/WishList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/singletons/InvoiceCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/singletons/InvoiceCatalog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/singletons/ReviewCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/singletons/ReviewCatalog.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2aEqk6CEzk2fs0UplCkNiMSRpPe" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/xampp/htdocs/pastriama/app/models/lists",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "php.override.implement.member.chooser.php.doc": "NONE",
+    "settings.editor.selected.configurable": "fileTemplates",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="" />
+      <created>1703894228358</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1703894228358</updated>
+      <workItem from="1703894229846" duration="13183000" />
+      <workItem from="1703952529499" duration="36154000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

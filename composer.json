@@ -1,0 +1,21 @@
+{
+    "name": "griot/pastriama",
+    "description": "Bakery online ordering application.",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        },
+        "classmap": [
+            "app/models"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Banji Lawal",
+            "email": "banji.k.lawal@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
