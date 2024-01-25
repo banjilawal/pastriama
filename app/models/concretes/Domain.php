@@ -14,8 +14,8 @@ class Domain extends Model {
      */
     public function __construct (string $name, string $tld) {
         parent::__construct();
-        $this->name = $name;
-        $this->tld = $tld;
+        $this->name = trim($name, ' ');
+        $this->tld = trim($tld, ' ');
     }
 
     public function getName (): string {
@@ -23,15 +23,15 @@ class Domain extends Model {
     }
 
     public function getTld (): string {
-        return $this->tld;
+        return trim($this->tld, ' ');
     }
 
     public function setName (string $name): void {
-        $this->name = $name;
+        $this->name = trim($name, ' ');
     }
 
     public function setTld (string $tld): void {
-        $this->tld = $tld;
+        $this->tld = trim($tld, ' ');
     }
 
     public function equals ($object): bool {
@@ -46,6 +46,6 @@ class Domain extends Model {
     }
 
     public function __toString (): string {
-        return parent::__toString() . $this->getName() . '\.' . $this->getTld();
+        return $this->getName() . '.' . $this->getTld();
     }
 }

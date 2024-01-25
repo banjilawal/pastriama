@@ -56,7 +56,7 @@ class CreditCardList extends Model {
         unset($this->cards[$card->getId()]);
     }
 
-    public function search (String $cardNumber, strin $cvn): ?CreditCard {
+    public function search (String $cardNumber, string $cvn): ?CreditCard {
         foreach ($this->cards as $id => $card) {
             if ($card->getNumber() === $cardNumber && $card->getCvn() === $cvn)
                 return $card;
@@ -84,7 +84,7 @@ class CreditCardList extends Model {
             . '</thead>'
             . '<tbody>';
         foreach ($this->cards as $id => $card) {
-            $elem .= $this->cards[$id]->to_row();
+            $elem .= $this->cards[$id]->toRow();
         }
         $elem .= '<tbody></table>';
         return $elem;

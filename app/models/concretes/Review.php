@@ -13,6 +13,7 @@ class Review extends Entity {
     private User $user;
     private Pastry $pastry;
     private int $rating;
+    private string $title;
     private string $comment;
     private DateTime $submissionTime;
 
@@ -20,16 +21,23 @@ class Review extends Entity {
     /**
      * @throws Exception
      */
-    public function __construct(int $id, User $user, Pastry $pastry, int $rating, string $comment) {
+    public function __construct(
+        int $id,
+        User $user,
+        Pastry $pastry,
+        int $rating, string $title,
+        string $comment
+    ) {
         parent::__construct($id);
-        if ($rating < self::MINIMUM_RATING || $rating > self::MAXIMUM_RATING) {
-            throw new Exception($rating . ' is outside the range');
-        }
+//        if ($rating < self::MINIMUM_RATING || $rating > self::MAXIMUM_RATING) {
+//            throw new Exception($rating . ' is outside the range');
+//        }
         $this->user = $user;
         $this->pastry = $pastry;
         $this->rating = $rating;
-        $this->comment = $comment;
-        $this->submissionTime = DateTime::createFromFormat('U', date('Y-m-d H:i:s'));
+        $this->title = trim($title);
+        $this->comment = trim($comment);
+        $this->submissionTime = new DateTime(); //DateTime::createFromFormat('U', date('Y-m-d H:i:s'));
     }
 
     public function getUser (): User {
@@ -42,6 +50,10 @@ class Review extends Entity {
 
     public function getRating (): int {
         return $this->rating;
+    }
+
+    public function getTitle (): string {
+        return $this->title;
     }
 
     public function getComment (): string {
@@ -70,15 +82,16 @@ class Review extends Entity {
             . ' ' . $this->submissionTime->format('Y-m-d H:i:s')
             . ' reviewer:' . $this->user->getFirstname() . ' ' . substr($this->user->getLastname(), 0, 1)
             . ' rating:' . $this->rating
+            . ' title:' . $this->title
             . ' comment:' . $this->comment;
     }
 
     public function toRow (): string {
-        $rowName = 'rating-' . $this->pastry->getId() . '-' . $this->customer->getId() . '-row';
-        return '<tr class="rating-row" id="' . $rowName . '" name="' . $rowName . '" onclick="send_protein_bar(this)">'
+        $rowName = 'rating-' . $this->pastry->getId() . '-' . $this->user->getId() . '-row';
+        return '<tr class="rating-row" id="' . $rowName . '"' . ' onclick="send_protein_bar(this)">'
             . '<td hidden>' . $this->pastry->getId() . '</td>'
             . '<td>' . $this->submissionTime->format('Y-m-d H:i:s') . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
-            . '<td>' . $this->customer->getFirstname() . ' ' . substr($this->customer->getLastname(), 0, 1) . '</td>'
+            . '<td>' . $this->user->getFirstname() . ' ' . substr($this->user->getLastname(), 0, 1) . '</td>'
             . '<td>' . $this->pastry->getName() . '</td>'
             . '<td>' . $this->rating . '</td>'
             . '<td>' . $this->comment . '</td>'
@@ -86,8 +99,8 @@ class Review extends Entity {
     }
 
     public function toTable (): string {
-        $tableName = 'rating-' . $this->pastry->getId() . '-' . $this->customer->getId() . '-table';
-        return '<table class="rating-table" id="' . $tableName . '" name="' . $tableName . '">'
+        $tableName = 'rating-' . $this->pastry->getId() . '-' . $this->user->getId() . '-table';
+        return '<table class="rating-table" id="' . $tableName . '">'
             . '<thead>'
             . '<tr>'
             . '<th>Date</th>'
@@ -100,7 +113,7 @@ class Review extends Entity {
             . '<tbody>'
             . '<tr>'
             . '<td>' . $this->submissionTime->format('Y-m-d H:i:s') . '</td>'
-            . '<td>' . $this->customer->getFirstname() . ' ' . substr($this->customer->getLastname(), 0, 1) . '</td>'
+            . '<td>' . $this->user->getFirstname() . ' ' . substr($this->user->getLastname(), 0, 1) . '</td>'
             . '<td>' . $this->pastry->getName() . '</td>'
             . '<td>' . $this->rating . '</td>'
             . '<td>' . $this->comment . '</td>'

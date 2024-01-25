@@ -1,6 +1,6 @@
 <?php
 
-namespace Aapp\models\singletons;
+namespace app\models\singletons;
 
 use app\models\abstracts\Model;
 use App\Models\Concretes\Pastry;
@@ -25,8 +25,8 @@ class ReviewCatalog extends Model {
         return self::$reviews;
     }
 
-    private function __clone () {}
-    private function __wakeup () {}
+//    private function __clone () {}
+//    private function __wakeup () {}
 
     /**
      * @throws Exception

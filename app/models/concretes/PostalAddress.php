@@ -71,7 +71,7 @@ class PostalAddress extends Address {
     }
 
     public function __toString (): string {
-        return  $this->street . ' ' . $this->city . ', ' . $this->state . ' ' . $this->zipcode;
+        return  $this->street . ' ' . $this->city . ', ' . $this->state->getAcronym() . ' ' . $this->zipcode;
     }
 
     public function toRow (): string {

@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-
 namespace app\models\abstracts;
-
 
 abstract class NamedEntity extends Entity {
     private string $name;

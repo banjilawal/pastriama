@@ -4,30 +4,77 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="">
+    <list default="true" id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="Gont classes to work with composer for autoloadng casses and managing dependencies">
+      <change afterPath="$PROJECT_DIR$/RandomPrimitive.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/builders/QueryPredicate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/global/SerialNumberGenerator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/concretes/PageLink.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/lists/PageLinkList.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/Query.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/UnaryOtringClause.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/builders/QueryBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/builders/interfaces/SelectQueryBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/interfaces/BetweenOperator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/interfaces/EqualsOperator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/interfaces/ExistsOperator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/interfaces/InOperator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/interfaces/LikeOperator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/interfaces/NullOperator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/interfaces/NumberOperator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/select/SelectQuery.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/select/clause/Clause.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/select/clause/orderBy/OrderByClause.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/select/clause/orderBy/OrderByList.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/select/clause/where/EqualsClause.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/select/clause/where/ExistsClause.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/select/clause/where/InClause.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/select/clause/where/LikeClause.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/select/clause/where/NumberClause.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/query/select/clause/where/WhereClause.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/requests/Request.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/requests/queries/PastryQueryRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/test/RandomUserBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/test/datasets/addresses.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/navigation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/datasets/addresses.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/datasets/food_reviews.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/datasets/foods.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/components/navigation/bread.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/components/navigation/cake.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/components/navigation/cookie.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/components/navigation/savory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/store/item/pastryWebPage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/user_cards.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/user_contact_info.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/user_dashboard.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/user_home.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/user_orders.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/user_security.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/user_shopping_cart.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpages/user_wishlist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/abstracts/NamedEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/NamedEntity.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/abstracts/Person.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Person.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/abstracts/StoreItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/StoreItem.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/Domain.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Domain.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/EmailAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/EmailAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Invoice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/InvoiceItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/InvoiceItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Pastry.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Pastry.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/Phone.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Phone.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Review.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/State.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/State.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Wish.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Wish.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Zipcode.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Zipcode.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/lists/CreditCardList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/CreditCardList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/InvoiceItemList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/InvoiceItemList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/InvoiceList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/InvoiceList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/PastryList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/PastryList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/ReviewList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/ReviewList.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/lists/WishList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/WishList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/singletons/InvoiceCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/singletons/InvoiceCatalog.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/singletons/ReviewCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/singletons/ReviewCatalog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/autoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +84,13 @@
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,23 +109,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/xampp/htdocs/pastriama/app/models/lists",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "php.override.implement.member.chooser.php.doc": "NONE",
-    "settings.editor.selected.configurable": "fileTemplates",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/pastriama/webpages&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\pastriama\webpages" />
+      <recent name="C:\xampp\htdocs\pastriama\webpages\user" />
+      <recent name="C:\xampp\htdocs\pastriama\app\webpages\components" />
+      <recent name="C:\xampp\htdocs\pastriama\app\pages\components\navigation" />
+      <recent name="C:\xampp\htdocs\pastriama\app\pages\user" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\pastriama" />
+      <recent name="C:\xampp\htdocs\pastriama\datasets" />
+      <recent name="C:\xampp\htdocs\pastriama\webpages" />
+      <recent name="C:\xampp\htdocs\pastriama\app" />
+      <recent name="C:\xampp\htdocs\pastriama\test" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="user_cards.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/webpages/user_cards.php">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHP Script.user_cards.php" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -81,12 +162,52 @@
       <option name="presentableId" value="Default" />
       <updated>1703894228358</updated>
       <workItem from="1703894229846" duration="13183000" />
-      <workItem from="1703952529499" duration="36154000" />
+      <workItem from="1703952529499" duration="61778000" />
+      <workItem from="1704297175566" duration="30207000" />
+      <workItem from="1704651427665" duration="20001000" />
+      <workItem from="1704845724381" duration="14558000" />
+      <workItem from="1705007805987" duration="14792000" />
+      <workItem from="1705040118999" duration="18112000" />
+      <workItem from="1705153913670" duration="8861000" />
+      <workItem from="1705248791578" duration="2102000" />
+      <workItem from="1705456836968" duration="1481000" />
+      <workItem from="1705521389318" duration="431000" />
+      <workItem from="1706060688107" duration="3899000" />
+      <workItem from="1706069405924" duration="3121000" />
+      <workItem from="1706131064782" duration="9840000" />
     </task>
+    <task id="LOCAL-00001" summary="Gont classes to work with composer for autoloadng casses and managing dependencies">
+      <option name="closed" value="true" />
+      <created>1704003854532</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1704003854532</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Gont classes to work with composer for autoloadng casses and managing dependencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gont classes to work with composer for autoloadng casses and managing dependencies" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/webpages/user_orders.php</url>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/test_index.php</url>
+          <line>6</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

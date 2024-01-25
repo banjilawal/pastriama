@@ -43,14 +43,6 @@ class CreditCard extends Entity {
         return $this->expiration;
     }
 
-    public function getExpirationMonth (): int {
-        return (int) $this->expiration->format('m');
-    }
-
-    public function getExpirationYear (): \int {
-        return (int) $this->expiration->format('Y');
-    }
-
     public function equals ($object): bool {
         if ($this == $object) return true;
         if (is_null($object )) return false;
@@ -64,19 +56,20 @@ class CreditCard extends Entity {
     }
 
     public function __toString(): string {
-        return parent::__toString() . ':' . $this->securelyPrintCardNumber()
-            . ' expiration:' . $this->printExpirationDate ()
-            . ' cvn' . $this->cvn;
+        return parent::__toString() . ' number:' . $this->securelyPrintCardNumber()
+            . ' expiration:' . $this->printExpirationDate()
+            . ' cvn:' . $this->cvn;
     }
 
     private function securelyPrintCardNumber (): string {
-        $blocks = explode('-', $this->number);
+        $blocks = explode(' ', $this->number);
+  //      print_r($blocks);
         $lastBlock = $blocks[sizeof($blocks) - 1];
         return $this->addLeadingZeros($lastBlock);
     }
 
     private function printExpirationDate (): string {
-        return $this->expiration->format('Y') . '-' . $this->expiration->format('m');
+        return $this->expiration->format('y') . '/' . $this->expiration->format('m');
     }
 
     private function addLeadingZeros ($number): string {

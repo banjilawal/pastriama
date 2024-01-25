@@ -93,7 +93,7 @@ class Phone extends Model {
     }
 
     public function __toString ():string {
-        return parent::__toString() . ':(' . $this->areaCode . ') ' . $this->exchange . '-' . $this->lineNumber;
+        return parent::__toString() . '(' . $this->areaCode . ') ' . $this->exchange . '-' . $this->lineNumber;
     }
 
     public function toRow (): string {

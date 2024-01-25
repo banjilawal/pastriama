@@ -2,10 +2,9 @@
 
 namespace app\models\abstracts;
 
-
-use App\models\concretes\EmailAddress;
-use App\Models\Concretes\Phone;
-use App\models\concretes\PostalAddress;
+use app\models\concretes\EmailAddress;
+use app\Models\Concretes\Phone;
+use app\models\concretes\PostalAddress;
 use DateTime;
 
 abstract class Person extends NamedEntity {
@@ -17,6 +16,8 @@ abstract class Person extends NamedEntity {
     private PostalAddress $postalAddress;
 
     /**
+     * @param int $id
+     * @param string $firstname
      * @param string $lastname
      * @param DateTime $birthdate
      * @param Phone $phone
@@ -114,15 +115,15 @@ abstract class Person extends NamedEntity {
     }
 
     public function printName (): string {
-        return $this->getFirstname() . ' ' . $this->getLastname();
+        return $this->getFirstname() . ' ' . $this->lastname;
     }
 
     public function __toString (): string {
-        return $this->getId()
-            . ' name:' . $this->printName()
-            . ' birthdate:' . $this->birthdate->format('Y-m-d')
-            . ' phone:' . $this->phone
-            . ' email:' . $this->email
-            . ' postal address:' . $this->postalAddress;
+        return 'id:' . $this->getId() . '<br>' . PHP_EOL
+            . ' name:' . $this->printName() . '<br>' . PHP_EOL
+            . ' birthdate:' . $this->birthdate->format('Y-m-d'). '<br>' . PHP_EOL
+            . ' phone:' . $this->phone .'<br>' . PHP_EOL
+            . ' email:' . $this->email .'<br>' . PHP_EOL
+            . ' postal address:' . $this->postalAddress .'<br>' . PHP_EOL;
     }
 }

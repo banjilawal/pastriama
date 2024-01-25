@@ -3,15 +3,26 @@
 namespace app\models\concretes;
 
 
+use app\models\singletons\ReviewCatalog;
 use app\models\abstracts\Person;
 
+use app\models\lists\CreditCardList;
+use app\models\lists\InvoiceList;
+use App\models\lists\ReviewList;
+use app\models\singletons\InvoiceCatalog;
+use app\models\lists\WishList;
 use DateTime;
+use Exception;
 
 class User extends Person {
 
     private CreditCardList $cards;
     private WishList $wishes;
+    private CreditCardList $creditCards;
 
+    /**
+     * @throws Exception
+     */
     public function __construct (
         int $id,
         string $firstname,
@@ -20,7 +31,8 @@ class User extends Person {
         Phone $phone,
         EmailAddress $email,
         string $password,
-        PostalAddress $postalAddress
+        PostalAddress $postalAddress,
+        CreditCard $creditCard
     ) {
         parent::__construct(
             $id,
@@ -34,6 +46,7 @@ class User extends Person {
         );
         $this->creditCards = new CreditCardList();
         $this->wishes = new WishList();
+        $this->creditCards->add($creditCard);
     }
 
     public function getCreditCards (): CreditCardList {
@@ -44,16 +57,19 @@ class User extends Person {
         return $this->wishes;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getInvoices (DateTime $startDate, DateTime $endDate): InvoiceList {
         return InvoiceCatalog::userSearch($this, $startDate, $endDate);
     }
 
     public function getReviews (DateTime $startDate, DateTime $endDate): ReviewList {
-        return ReviewsCatalog::search($this, $startDate, $endDate);
+        return ReviewCatalog::search($this, $startDate, $endDate);
     }
 
     public function equals ($object): bool {
-        if ($object instanceof Customer) return parent::equals($object);
+        if ($object instanceof User) return parent::equals($object);
         return false;
     }
 }

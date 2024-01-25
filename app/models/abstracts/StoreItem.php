@@ -2,6 +2,7 @@
 
 namespace app\models\abstracts;
 
+
 abstract class StoreItem extends NamedEntity {
     const DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH = 90;
     const DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT = 100;
@@ -103,7 +104,7 @@ abstract class StoreItem extends NamedEntity {
             . '</thead>'
             . '<tbody>'
             . '<tr>'
-            . '<td>' . $this->loadImage($imageWidth, $imageHeight) . '</td>'
+            . '<td>' . $this->getImgTag($imageWidth, $imageHeight) . '</td>'
             . '<td>' . $this->getName() . '</td>'
             . '<td>' . $this->description . '</td>'
             . '<td>' . $this->price . '</td>'

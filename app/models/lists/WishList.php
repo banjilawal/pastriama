@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-
+namespace app\models\lists;
 
 use app\models\abstracts\Model;
 use app\models\concretes\Pastry;

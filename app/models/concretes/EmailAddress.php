@@ -15,7 +15,7 @@ class EmailAddress extends Address {
      */
     public function __construct (string $mailbox, Domain $domain) {
         parent::__construct();
-        $this->mailbox = $mailbox;
+        $this->mailbox = trim($mailbox, ' ');
         $this->domain = $domain;
     }
 
@@ -47,6 +47,6 @@ class EmailAddress extends Address {
     }
 
     public function __toString (): string {
-        return $this->mailbox . '@' . $this->domain;
+        return $this->mailbox . trim('@') . $this->domain;
     }
 }
