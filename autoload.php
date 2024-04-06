@@ -4,7 +4,7 @@
 
     const PROJECT_ROOT = __DIR__;
     const APP_PATH = PROJECT_ROOT . '/app';
-    const ASSETS_PATH =  PROJECT_ROOT . '/images';
+    const ASSETS_PATH =  PROJECT_ROOT . '/food_images';
 
     spl_autoload_register(function ($class) {
         // convert the class namespace to a file path

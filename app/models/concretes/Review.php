@@ -3,6 +3,7 @@
 namespace app\models\concretes;
 
 use app\models\abstracts\Entity;
+
 use DateTime;
 use Exception;
 
@@ -25,7 +26,8 @@ class Review extends Entity {
         int $id,
         User $user,
         Pastry $pastry,
-        int $rating, string $title,
+        int $rating,
+        string $title,
         string $comment
     ) {
         parent::__construct($id);
@@ -101,22 +103,26 @@ class Review extends Entity {
     public function toTable (): string {
         $tableName = 'rating-' . $this->pastry->getId() . '-' . $this->user->getId() . '-table';
         return '<table class="rating-table" id="' . $tableName . '">'
-            . '<thead>'
-            . '<tr>'
-            . '<th>Date</th>'
-            . '<th>Reviewer</th>'
-            . '<th>Pastry</th>'
-            . '<th>Stars</th>'
-            . '<th>Comment</th>'
-            . '</tr>'
-            . '</thead>'
+//            . '<thead>'
+//            . '<tr>'
+//            . '<th>Date</th>'
+//            . '<th>Reviewer</th>'
+//            . '<th>Pastry</th>'
+//            . '<th>Stars</th>'
+//            . '<th>Comment</th>'
+//            . '</tr>'
+//            . '</thead>'
             . '<tbody>'
             . '<tr>'
-            . '<td>' . $this->submissionTime->format('Y-m-d H:i:s') . '</td>'
             . '<td>' . $this->user->getFirstname() . ' ' . substr($this->user->getLastname(), 0, 1) . '</td>'
             . '<td>' . $this->pastry->getName() . '</td>'
-            . '<td>' . $this->rating . '</td>'
-            . '<td>' . $this->comment . '</td>'
+            . '</tr>'
+            . '<tr><td>' . $this->rating . '</td><td>' .$this->title . '</td></tr>'
+            . '<tr><td>' . $this->submissionTime->format('Y-m-d') . '</td></tr>'
+//            .
+//            . '<td>' . $this->pastry->getName() . '</td>'
+
+            . '<tr><td>' . $this->comment . '</td><tr>'
             . '</tbody>'
             . '</table>';
     }

@@ -35,6 +35,13 @@ class CreditCard extends Entity {
         return $this->number;
     }
 
+    public function getSecureNumber (): string {
+        $blocks = explode(' ', $this->number);
+        $lastBlock = $blocks[sizeof($blocks) - 1];
+        return $this->addLeadingZeros($lastBlock);
+    }
+
+
     public function getCVN (): string {
         return $this->cvn;
     }
@@ -69,7 +76,7 @@ class CreditCard extends Entity {
     }
 
     private function printExpirationDate (): string {
-        return $this->expiration->format('y') . '/' . $this->expiration->format('m');
+        return $this->expiration->format('m') . '/' . $this->expiration->format('y');
     }
 
     private function addLeadingZeros ($number): string {

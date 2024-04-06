@@ -3,7 +3,7 @@
 namespace app\models\lists;
 
 use app\models\concretes\PageLink;
-use app\pages\Exception;
+use app\oldpages\Exception;
 
 class PageLinkList {
 

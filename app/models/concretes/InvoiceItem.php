@@ -1,8 +1,11 @@
-<?php
-
+<?php declare(strict_types=1);
 namespace app\models\concretes;
 
 use app\models\abstracts\Entity;
+use app\models\abstracts\StoreItem;
+use Exception;
+use const app\oldpages\PASTRY_IMAGE_HEIGHT;
+use const app\oldpages\PASTRY_IMAGE_WIDTH;
 
 class InvoiceItem extends Entity {
     private Pastry $pastry;
@@ -76,20 +79,23 @@ class InvoiceItem extends Entity {
     }
 
     public function __toString (): string {
-        return  parent::__toString()
+        return  'InvoiceItem_toString( ' . parent::__toString()
             . ': quantity:' . $this->quantity
-            . ' ' . $this->pastry . ' cost:' . $this->getCost();
+            . ' ' . $this->pastry . ' cost:' . number_format($this->getCost(), 2) . ')';
     }
 
-    public function toRow (): string {
-        return '<tr class="invoice-item-row" id="invoice-item-row" name="invoice-item-row">'
+    public function toRow (
+        int $imageWidth=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
+        int $imageHeight=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
+    ): string {
+        return '<tr class="invoice-item-row" id="invoice-item-row">' // name="invoice-item-row">'
             . '<td hidden>' . $this->pastry->getId() . '</td>'
             . '<td>' . $this->pastry->getName() . '</td>'
-//            . '<td>' . $this->pastry->getImgTag($imageWidth, $imageHeight) . '</td>'
-            . '<td>' . $this->pastry->getDescription() . '</td>'
-            . '<td>' . $this->pastry->getPrice() . '</td>'
+            . '<td>' . $this->pastry->getImgTag($imageWidth, $imageHeight) . '</td>'
+//            . '<td>' . $this->pastry->getDescription() . '</td>'
+            . '<td>' . number_format($this->pastry->getPrice(), 2) . '</td>'
             . '<td>' . $this->quantity . '</td>'
-            . '<td>' . $this->getCost() . '</td>'
+            . '<td>' . number_format($this->getCost(), 2) . '</td>'
             . '</tr>';
     }
 
@@ -99,7 +105,7 @@ class InvoiceItem extends Entity {
             . '<tr>'
 //            . '<th>Picture</th>'
             . '<th>Name</th>'
-            . '<th>Description</th>'
+//            . '<th>Description</th>'
             . '<th>Price</th>'
             . '<th>Quantity</th>'
             . '<th>Cost</th>'
@@ -109,10 +115,10 @@ class InvoiceItem extends Entity {
             . '<tr>'
 //            . '<td>' . $this->pastry->getImgTag($imageWidth, $imageHeight) . '</td>'
             . '<td>' . $this->pastry->getName() . '</td>'
-            . '<td>' . $this->pastry->getDescription() . '</td>'
+//            . '<td>' . $this->pastry->getDescription() . '</td>'
             . '<td>' . $this->pastry->getPrice() . '</td>'
             . '<td>' . $this->quantity . '</td>'
-            . '<td>' . $this->getCost() . '</td>'
+            . '<td>' . number_format($this->getCost(), 2) . '</td>'
             . '</tbody>'
             . '</table>';
     }

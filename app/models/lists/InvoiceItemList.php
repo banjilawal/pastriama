@@ -47,7 +47,7 @@ class InvoiceItemList extends Model {
         return $this->getSubTotal() * self::DEFAULT_TAX_PERCENTAGE / 100;
     }
 
-    public function getTotal (): float  {
+    public function getTotalCharge (): float  {
         return $this->getSubTotal() + $this->getTax();
     }
 
@@ -56,7 +56,7 @@ class InvoiceItemList extends Model {
      */
     public function addItems (InvoiceItemList $items): void {
         foreach ($items as $id => $item) {
-            $this->add($item);
+            $this->addItem($item);
         }
     }
 
@@ -76,14 +76,14 @@ class InvoiceItemList extends Model {
      */
     public function removeItems (InvoiceItemList $items): void {
         foreach ($items as $id => $item) {
-            $this->remove($item);
+            $this->removeItem($item);
         }
     }
 
     /**
      * @throws Exception
      */
-    public function remove (InvoiceItem $item): void {
+    public function removeItem (InvoiceItem $item): void {
         $id = $item->getId();
         if (!array_key_exists($id, $this->items)) {
             throw new Exception($item->getPastry()->__toString() . ' does not exist in order. Cannot remove nonexistent item');
@@ -140,15 +140,18 @@ class InvoiceItemList extends Model {
     }
 
     public function __toString (): string {
-        $string = '';
-        foreach ($this->items as $id => $item) {
-            $string .= $this->items[$id] . PHP_EOL;
-        }
+        $string = ''; //$this->items
+        foreach ($this->items as $item) {
+            $string .= $item . PHP_EOL;
+        };
+        $string .= 'subtotal:' . number_format($this->getSubTotal() , 2)
+            . ' tax:' . number_format($this->getTax() , 2)
+            . ' total charge:' . number_format($this->getTotalCharge(), 2);
         return $string;
     }
 
     public function toTable (): string {
-        $elem = '<table class="invoice-item-table" name="invoice-item-table">'
+        $elem = '<table class="invoice-item-table">'
             . '<thead>'
             . '<tr>'
             . '<th>Picture</th>'
@@ -160,10 +163,13 @@ class InvoiceItemList extends Model {
             . '</tr>'
             . '</thead>'
             . '<tbody>';
-        foreach ($this->items as $id => $item) {
-            $elem .= $this->items[$id]->toRow();
+        foreach ($this->items as $item) {
+//            echo $item . '<br>' . PHP_EOL;
+            $elem .= $item->toRow();
         }
-        $elem .= '</tbody></table>';
+        $elem .= '<tr><td>Tax</td><td>' . number_format($this->getTax(), 2) . '</td></tr>'
+            . '<tr><td>Total</td><td>' . number_format($this->getTotalCharge(), 2)  . '</td></tr>'
+            . '</tbody></table>';
         return $elem;
     }
 }

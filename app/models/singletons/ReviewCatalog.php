@@ -42,7 +42,7 @@ class ReviewCatalog extends Model {
         $matches = new ReviewList();
         foreach (self::$reviews as $review) {
             if ($review->getSubmitTime() >= $startDate && $review->getSubmitTime() <= $endDate)
-                $matches->add(self::$review);
+                $matches->add($review);
         }
         return $matches;
     }

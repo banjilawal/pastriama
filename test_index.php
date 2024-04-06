@@ -1,22 +1,24 @@
 <?php declare(strict_types=1);
+
+namespace {
     require_once 'bootstrap.php';
+    require_once 'EntityGenerator.php';
     //session_start();
     //
     //require_once 'vendor\autoload.php';
 
-    use app\global\SerialNumberGenerator;
-    use app\models\concretes\CreditCard;
-    use app\models\Concretes\Domain;
-    use app\models\concretes\EmailAddress;
     use app\models\Concretes\Pastry;
-    use App\Models\Concretes\Phone;
-    use App\Models\Concretes\PostalAddress;
-    use App\Models\Concretes\State;
-    use app\models\concretes\User;
-    use app\models\concretes\Zipcode;
     use app\models\lists\PastryList;
+    use app\test\EntityGenerator;
+    use app\test\TestUser;
 
-    //const USER_PAGE_ROOT = 'app\webpages\user';
+//require_once 'RandomPrimitive.php';
+
+//const CEILING = 65563;
+//
+    $primitive = new EntityGenerator();
+
+//const USER_PAGE_ROOT = 'app\old_webpages\user';
     //$page = USER_PAGE_ROOT . DIRECTORY_SEPARATOR . 'user_home.php';
 
     //$serialNumber = SerialNumberGenerator::getInstance();
@@ -49,13 +51,18 @@
     //    'p',
     //    $postalAddress
     //);
+//    $user = null;
+//    try {
+//        $user = TestUser::
+//    } catch (Exception $e) {
+//    }
+
     $user = null;
+    $builder = new TestUser($primitive->id(), $primitive->id());
     try {
-        $user = RandomUserBuilder::getInstance()->createUser();
+        $user = $builder->createUser();
     } catch (Exception $e) {
     }
-
-
     $pastries = new PastryList();
     //$pastry1 = new Pastry(1,
     //    'Glazed Ginger-Almond Donut',
@@ -68,20 +75,22 @@
             new Pastry(1,
                 'Raspberry Filled Donut',
                 'Raspberry with an almond and vanilla infusion inside. Powdered sugar outside.',
-                '..\assets\1.jpg',
+                '..\images\1.jpg',
                 1.99)
         );
-    } catch (Exception $e) {}
+    } catch (Exception $e) {
+    }
     try {
         $pastries->add(
             new Pastry(2,
-            'Glazed Ginger-Almond Donut',
-            'We have a fresh take of the glazed donut with our barrel aged ginger extract sourced locally 
+                'Glazed Ginger-Almond Donut',
+                'We have a fresh take of the glazed donut with our barrel aged ginger extract sourced locally 
             with hints of almond that does not overwhelm the honey.',
-            '..\assets\2.jpg',
-            2.99)
+                '..\assets\2.jpg',
+                2.99)
         );
-    } catch (Exception $e) {}
+    } catch (Exception $e) {
+    }
     try {
         $pastries->add(
             new Pastry(
@@ -91,7 +100,8 @@
                 '..\assets\3.jpg',
                 3.99)
         );
-    } catch (Exception $e) {}
+    } catch (Exception $e) {
+    }
     try {
         $pastries->add(
             new Pastry(4,
@@ -100,7 +110,8 @@
                 '..\assets\4.jpg',
                 4.99)
         );
-    } catch (Exception $e) {}
+    } catch (Exception $e) {
+    }
     try {
         $pastries->add(
             new Pastry(
@@ -110,7 +121,8 @@
                 '..\assets\5.jpg',
                 5.99)
         );
-    } catch (Exception $e) {}
+    } catch (Exception $e) {
+    }
 
     $_SESSION['pastries'] = serialize($pastries);
 
@@ -120,5 +132,6 @@
     $serialized_user = serialize($user);
     $_SESSION['user'] = $serialized_user;
     $_SESSION['firstname'] = $user->getFirstname();
-    header('Location: webpages\user_home.php');
+    header('Location: old_webpages\user_home.php');
     exit();
+}

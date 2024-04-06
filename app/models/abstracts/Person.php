@@ -36,7 +36,7 @@ abstract class Person extends NamedEntity {
         PostalAddress $postalAddress
     ) {
         parent::__construct($id, $firstname);
-        $this->lastname = $firstname;
+        $this->lastname = $lastname;
         $this->birthdate = $birthdate;
         $this->phone = $phone;
         $this->email = $email;
@@ -125,5 +125,14 @@ abstract class Person extends NamedEntity {
             . ' phone:' . $this->phone .'<br>' . PHP_EOL
             . ' email:' . $this->email .'<br>' . PHP_EOL
             . ' postal address:' . $this->postalAddress .'<br>' . PHP_EOL;
+    }
+
+    public function toRow (): string {
+        return '<tr id="' . $this->getId() . '">' // onclick="get_item(this)">'
+            . '<td>' . $this->printName() . '</td>'
+            . '<td>' . $this->phone .'</td>'
+            . '<td>' . $this->email . '</td>'
+            . '<td>' . $this->postalAddress . '</td>'
+            . '</tr>';
     }
 }

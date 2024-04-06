@@ -64,8 +64,11 @@ class User extends Person {
         return InvoiceCatalog::userSearch($this, $startDate, $endDate);
     }
 
+    /**
+     * @throws Exception
+     */
     public function getReviews (DateTime $startDate, DateTime $endDate): ReviewList {
-        return ReviewCatalog::search($this, $startDate, $endDate);
+        return ReviewCatalog::userSearch($this, $startDate, $endDate);
     }
 
     public function equals ($object): bool {

@@ -7,15 +7,15 @@ use app\models\concretes\CreditCard;
 use Exception;
 
 class CreditCardList extends Model {
-    private array $cards;
+    private array $items;
 
     public function __construct () {
         parent::__construct();
-        $this->cards = array();
+        $this->items = array();
     }
 
-    public function getCards (): CreditCard|array {
-        return $this->cards;
+    public function getItems (): CreditCard|array {
+        return $this->items;
     }
 
     /**
@@ -31,17 +31,17 @@ class CreditCardList extends Model {
      * @throws Exception
      */
     public function add (CreditCard $card): void {
-        if (array_key_exists($card->getId(), $this->cards)) {
+        if (array_key_exists($card->getId(), $this->items)) {
             throw new Exception($card->getNumber() . ' is already in the list');
         }
-        $this->cards[$card->getId()] = $card;
+        $this->items[$card->getId()] = $card;
     }
 
     /**
      * @throws Exception
      */
-    public function removeCards (ReviewList $cards): void {
-        foreach ($cards as $id => $card) {
+    public function removeCards (CreditCardList $cards): void {
+        foreach ($cards as $card) {
             $this->remove($card);
         }
     }
@@ -50,14 +50,14 @@ class CreditCardList extends Model {
      * @throws Exception
      */
     public function remove (CreditCard $card): void {
-        if (!array_key_exists($card->getId(), $this->cards)) {
+        if (!array_key_exists($card->getId(), $this->items)) {
             throw new Exception($card->getNumber() . ' is not in the list. Cannot remove nonexistent card');
         }
-        unset($this->cards[$card->getId()]);
+        unset($this->items[$card->getId()]);
     }
 
     public function search (String $cardNumber, string $cvn): ?CreditCard {
-        foreach ($this->cards as $id => $card) {
+        foreach ($this->items as $id => $card) {
             if ($card->getNumber() === $cardNumber && $card->getCvn() === $cvn)
                 return $card;
         }
@@ -66,7 +66,7 @@ class CreditCardList extends Model {
 
     public function toString  (): string {
         $string = 'Cards:' . PHP_EOL;
-        foreach ($this->cards as $id => $card) {
+        foreach ($this->items as $id => $card) {
             $string  .=  $card . PHP_EOL;
         }
         return $string;
@@ -83,8 +83,8 @@ class CreditCardList extends Model {
             . '</tr>'
             . '</thead>'
             . '<tbody>';
-        foreach ($this->cards as $id => $card) {
-            $elem .= $this->cards[$id]->toRow();
+        foreach ($this->items as $id => $card) {
+            $elem .= $this->items[$id]->toRow();
         }
         $elem .= '<tbody></table>';
         return $elem;
