@@ -8,7 +8,7 @@ namespace {
     //require_once 'vendor\autoload.php';
 
     use app\models\Concretes\Pastry;
-    use app\models\lists\PastryList;
+    use app\models\lists\Pastries;
     use app\test\EntityGenerator;
     use app\test\TestUser;
 
@@ -63,7 +63,7 @@ namespace {
         $user = $builder->createUser();
     } catch (Exception $e) {
     }
-    $pastries = new PastryList();
+    $pastries = new Pastries();
     //$pastry1 = new Pastry(1,
     //    'Glazed Ginger-Almond Donut',
     //    'We have a fresh take of the glazed donut with our barrel aged ginger extract sourced locally

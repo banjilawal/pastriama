@@ -8,7 +8,7 @@ use app\test\EntityGenerator;
 use app\test\ListGenerator;
 
 
-class UserDashboard extends WebPage {
+class CreditCardManagementPage extends WebPage {
     private User $user;
 
     public function __construct (User $user) {
@@ -51,14 +51,14 @@ $user = $datasets['users']->getItems()[array_rand($datasets['users']->getItems()
 for ($i = 0; $i < rand(4, 8); $i++) {
     if (rand(0, 9) < 4) {
         try {
-            $datasets['invoices']->add(EntityGenerator::invoice($user, $datasets['pastries']));
+            $datasets['invoices']->add(EntityGenerator::order($user, $datasets['pastries']));
         } catch (Exception $e) {
             echo $e;
         }
     }
 }
 
-$page = new UserDashboard($user);
+$page = new CreditCardManagementPage($user);
 ?>
 
 
@@ -76,7 +76,7 @@ $page = new UserDashboard($user);
     <?php echo '<h1>' . $page->getTitle() . '</h1>'; ?>
 <main>
     <?php
-        echo '<p>' . $page->getUser()->getEmail() . '<br>';
+        echo '<p>' . $page->getUser()->getEmailAddress() . '<br>';
         echo $page->getUser()->getPostalAddress() . '<br>';
         echo $page->getUser()->getPhone() . '<br>';
         echo $page->getUser()->getCreditCards()->toTable() . '</p>';

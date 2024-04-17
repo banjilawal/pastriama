@@ -71,21 +71,20 @@ class PostalAddress extends Address {
     }
 
     public function __toString (): string {
-        return  $this->street . ' ' . $this->city . ', ' . $this->state->getAcronym() . ' ' . $this->zipcode;
+        return  $this->street . ' ' . $this->city . ', ' . $this->state->getPostalCode() . ' ' . $this->zipcode;
     }
 
     public function toRow (): string {
-        return '<tr class="postal-address-row">'
+        return '<tr>'
             . '<td>street</td>' . '<td>' . $this->street . '</td>'
             . '<td>city</td>' . '<td>' . $this->city . '</td>'
-            . '<td>state</td>' . '<td>' . $this->state . '</td>'
+            . '<td>state</td>' . '<td>' . $this->state->getPostalCode() . '</td>'
             . '<td>zipcode</td>' . '<td>' . $this->zipcode . '</td>'
             . '</tr>';
     }
 
-
     public function toTable (): string {
-        return '<table class="postal-address-table" id="postal-address-table" name="postal-address-table">'
+        return '<table  id="postalAddressTable>'
             . '<thead>'
             . '<tr>'
             .   '<th>Street</th>'
@@ -98,7 +97,7 @@ class PostalAddress extends Address {
             . '<tr>'
             . '<td>' . $this->street . '</td>'
             . '<td>' . $this->city . '</td>'
-            . '<td>' . $this->state . '</td>'
+            . '<td>' . $this->state->getPostalCode() . '</td>'
             . '<td>' . $this->zipcode . '</td>'
             . '</tr>'
             . '</tbody>'

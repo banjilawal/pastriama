@@ -2,6 +2,8 @@
 namespace {
     require_once 'vendor/autoload.php'; // DIRECTORY_SEPARATOR . 'autoload.php';
 
+    define("UNDELIVERED_DATE", DateTime::createFromFormat('Y-m-d', '2525-01-01'));
+
     const PROJECT_ROOT = __DIR__;
     const APP = PROJECT_ROOT . '\app';
     const TEST = PROJECT_ROOT . '\test';
@@ -12,8 +14,7 @@ namespace {
     const WEBPAGE_COMPONENTS = WEBPAGES . '\components';
     const NAVIGATION_PAGES = WEBPAGE_COMPONENTS . '\navigation';
 
-
-    echo DATASETS . '<br>' . PHP_EOL;
+    echo nl2br('From bootstrap.php: Datasets_PATH = ' . DATASETS . PHP_EOL);
 
 //$files = scandir(DATASETS);
 //print_r($files);
@@ -32,9 +33,10 @@ namespace {
 
     const ALPHA_NUMERICS = array(
         '1', '2', '3', '4', '5', '6', '7',
-        '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G'
-    , 'H', 'J', 'K', 'M', 'N', 'P', 'Q', 'R', 'S',
-        'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+        '8', '9', 'A', 'B', 'C', 'D', 'E',
+        'F', 'G', 'H', 'J', 'K', 'M', 'N',
+        'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+        'W', 'X', 'Y', 'Z'
     );
 
     const EMAIL_SEPARATORS = array('', '.', '_', '-');
@@ -54,5 +56,15 @@ namespace {
         'windstream.net', 'mac.com', 'centurytel.net', 'chello.nl', 'live.ca', 'aim.com', 'bigpond.net.au'
     );
 
-    session_start();
+    /**
+     * @throws Exception
+     */
+    function sanitize_input ($data): string {
+        if (!isset($data)) {
+            Throw new \Exception($data . ' Cannot process null data');
+        }
+        $data = trim($data);
+        $data = stripslashes($data);
+        return htmlspecialchars($data);
+    }
 }

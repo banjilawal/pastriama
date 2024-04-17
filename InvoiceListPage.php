@@ -2,18 +2,18 @@
 
 require_once 'WebPage.php';
 
-use app\models\lists\InvoiceList;
+use app\models\lists\Orders;
 use app\test\ListGenerator;
 
 class InvoiceListPage extends WebPage {
-    private InvoiceList $invoiceList;
+    private Orders $invoiceList;
 
-    public function __construct (InvoiceList $invoiceList, string $title) {
+    public function __construct (Orders $orderList, string $title) {
         parent::__construct($title);
-        $this->invoiceList = $invoiceList;
+        $this->invoiceList = $orderList;
     }
 
-    public function getInvoiceList (): InvoiceList {
+    public function getInvoiceList (): Orders {
         return $this->invoiceList;
     }
 }
@@ -34,7 +34,7 @@ echo 'Number of users:' . count($users->getItems()) . '<br>' . PHP_EOL;
 
 $invoices = null;
 try {
-    $invoices = ListGenerator::invoiceList($users, $pastries);
+    $invoices = ListGenerator::Orders($users, $pastries);
 } catch (Exception $e) {}
 
 $page = new InvoiceListPage($invoices, 'Test Invoices');

@@ -40,8 +40,11 @@ class Wish extends Entity {
             . ' added on:' . $this->submissionTime->format('Y-m-d H:i:s');
     }
 
-    public function toRow (int $imageWidth, int $imageHeight): string {
-        return '<tr class="wish-row" id="wish-row" name="wish-row">'
+    public function toRow (
+        int $imageWidth=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
+        int $imageHeight=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
+    ): string {
+        return '<tr id="wishRow">'
             . '<td>' . $this->getId() . '</td>'
             . '<td>' . $this->submissionTime->format('Y-m-d H:i:s') . '</td>'
             . '<td>' . $this->pastry->getName() . '</td>'
@@ -51,8 +54,11 @@ class Wish extends Entity {
             . '</tr>';
     }
 
-    public function toTable (int $imageWidth, int $imageHeight): string {
-        return '<table class="wish-table" id="wish-table" name="wish-table">'
+    public function toTable (
+        int $imageWidth=StoreItem::DEFAULT_STORE_ITEM_TABLE_IMAGE_WIDTH,
+        int $imageHeight=StoreItem::DEFAULT_STORE_ITEM_TABLE_IMAGE_HEIGHT
+    ): string {
+        return '<table id="wishTable">'
             . '<thead>'
             . '<tr>'
             . '<th>Date Added</th>'

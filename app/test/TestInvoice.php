@@ -2,11 +2,11 @@
 namespace app\test;
 
 use app\models\concretes\CreditCard;
-use app\models\concretes\Invoice;
+use app\models\concretes\Order;
 use app\models\concretes\InvoiceItem;
 use app\models\concretes\User;
-use app\models\lists\InvoiceItemList;
-use app\models\lists\PastryList;
+use app\models\lists\Invoice;
+use app\models\lists\Pastries;
 use DateTime;
 use Exception;
 
@@ -66,16 +66,16 @@ class TestInvoice {
 //        return 'Order Submission Date:' . $this->getSubmissionDate()->format('Y-m-d H:i:s')
 //            . PHP_EOL . 'Customer:' . $this->user->getFirstname() . ' ' .  $this->user->getLastname()
 //            . PHP_EOL . 'Credit Card:' . $this->getRandomCard()
-//            . PHP_EOL . 'Invoice Size:' . $this->invoiceSize;
+//            . PHP_EOL . 'Order Size:' . $this->invoiceSize;
 //    }
 
 //    /**
 //     * @throws Exception
 //     */
-    public static function createInvoice (int $invoiceId, User $user, PastryList $inventory, int $invoiceSize): Invoice {
+    public static function createInvoice (int $invoiceId, User $user, Pastries $inventory, int $invoiceSize): Order {
         $index = array_rand($user->getCreditCards()->getItems());
         $card = $user->getCreditCards()->getItems()[$index];
-        $invoice = new Invoice($invoiceId, $user, $card);
+        $invoice = new Order($invoiceId, $user, $card);
         $counter = 0;
         while ($counter < $invoiceSize) {
 //            $pastry = $inventory->getPastries()[array_rand($inventory->getPastries())];

@@ -4,6 +4,7 @@ namespace app\models\concretes;
 
 use app\models\abstracts\Entity;
 use app\models\abstracts\Model;
+use app\test\EntityGenerator;
 use DateTime;
 use Exception;
 
@@ -13,22 +14,45 @@ class CreditCard extends Entity {
     public const MAXIMUM_CREDIT_CARD_LENGTH = 20;
     public const CREDIT_CARD_CVN_PATTERN = '/[0-9]{3}/';
     public const CREDIT_CARD_NUMBER_PATTERN = '/([0-9]{4,} ){4,}/i';
+    public const CREDIT_CARD_VENDORS = ['Mastercard', 'Visa', 'American Express', 'Discover'];
+
+    private string $vendor;
+    private string $nameOnCard;
     private string $number;
     private DateTime $expiration;
     private string $cvn;
 
     /**
      * @param int $id
+     * @param string $vendor
+     * @param $nameOnCard
      * @param string $number
      * @param DateTime $expiration
      * @param string $cvn
      * @throws Exception
      */
-    public function __construct (int $id, string $number, DateTime $expiration, string $cvn) {
+    public function __construct (
+        int $id,
+        string $vendor,
+        string $nameOnCard,
+        string $number,
+        DateTime $expiration,
+        string $cvn
+    ) {
         parent::__construct($id);
+        $this->nameOnCard = $nameOnCard;
+        $this->vendor = $vendor;
         $this->number = $number;
         $this->expiration = $expiration;
         $this->cvn = $cvn;
+    }
+
+    public function getVendor (): string {
+        return $this->vendor;
+    }
+
+    public function getNameOnCard (): string {
+        return $this->nameOnCard;
     }
 
     public function getNumber (): string {
@@ -40,7 +64,6 @@ class CreditCard extends Entity {
         $lastBlock = $blocks[sizeof($blocks) - 1];
         return $this->addLeadingZeros($lastBlock);
     }
-
 
     public function getCVN (): string {
         return $this->cvn;
@@ -63,19 +86,20 @@ class CreditCard extends Entity {
     }
 
     public function __toString(): string {
-        return parent::__toString() . ' number:' . $this->securelyPrintCardNumber()
+        return parent::__toString() . ' ' . $this->vendor
+            . ' number:' . $this->securelyPrintCardNumber()
             . ' expiration:' . $this->printExpirationDate()
             . ' cvn:' . $this->cvn;
     }
 
-    private function securelyPrintCardNumber (): string {
+    public function securelyPrintCardNumber (): string {
         $blocks = explode(' ', $this->number);
   //      print_r($blocks);
         $lastBlock = $blocks[sizeof($blocks) - 1];
         return $this->addLeadingZeros($lastBlock);
     }
 
-    private function printExpirationDate (): string {
+    public function printExpirationDate (): string {
         return $this->expiration->format('m') . '/' . $this->expiration->format('y');
     }
 
@@ -85,18 +109,24 @@ class CreditCard extends Entity {
         return $text;
     }
 
+    public function printCardNumber (): string {
+        return $this->securelyPrintCardNumber();
+    }
+
     public function toRow (): string {
         return '<tr id="' . $this->securelyPrintCardNumber() . '" onclick="send_card(this)">'
-            . '<td>**-' . $this->securelyPrintCardNumber() . '</td>'
+            . '<td>***-' . $this->securelyPrintCardNumber() . '</td>'
             . '<td>' .  $this->printExpirationDate() .'</td>'
             . '<td>' . $this->cvn . '</td>'
             . '</tr>';
     }
 
     public function toTable (): string {
-        return '<table class="card-table">'
+        return '<table class="creditCard_"' . $this->getId() .'_table">'
             . '<thead>'
             . '<tr>'
+            . '<th>ID</th>'
+            . '<th>Vendor</th>'
             . '<th>Number</th>'
             . '<th>Expiration</th>'
             . '<th>CVN</th>'
@@ -104,11 +134,53 @@ class CreditCard extends Entity {
             . '</thead>'
             . '<tbody>'
             . '<tr>'
+            . '<td>' . $this->getId() . '</td>'
+            . '<td>' . $this->vendor . '</td>'
             . '<td>**-' . $this->securelyPrintCardNumber() . '</td>'
             . '<td>' .  $this->printExpirationDate() .'</td>'
             . '<td>' . $this->cvn . '</td>'
             . '</tr>'
             . '</table>'
             . '</table>';
+    }
+
+    public static function getVendorSelector (): string {
+        $elem = '<label for="vendor">Credit Card Type</label>'
+            . '<select id="vendor" name="vendor" required>';
+        foreach (CreditCard::CREDIT_CARD_VENDORS as $vendor) {
+            $elem .= '<option value"' . $vendor . '">' . $vendor . '</option>';
+        }
+        $elem .= '</select>';
+        return $elem;
+    }
+
+    public static function getExpirationMonthSelector (): string {
+        return '<label for="expirationMonth">Expiration Month </label>'
+            . '<select name="expirationMonth" id="expirationMonth">'
+            . '<option value="1">January</option>'
+            . '<option value="2">February</option>'
+            . '<option value="3">March</option>'
+            . '<option value="4">April</option>'
+            . '<option value="5">May</option>'
+            . '<option value="6">June</option>'
+            . '<option value="7">July</option>'
+            . '<option value="8">August</option>'
+            . '<option value="9">September</option>'
+            . '<option value="10">October</option>'
+            . '<option value="11">November</option>'
+            . '<option value="12">December</option>'
+        . '</select>';
+    }
+
+    public static function getExpirationYearSelector (int $numberOfYears=5): string {
+        $currentYear= (int) date('Y');
+        $elem = '<label for="expirationYear"> Expiration Year </label>'
+            . '<select name="expirationYear" id="expirationYear">';
+        for ($i = 0; $i < $numberOfYears; $i++) {
+            $year = $currentYear + $i;
+            $elem .= '<option value="' . $year . '">' . $year . '</option>';
+        }
+        $elem .= '</selec>';
+        return $elem;
     }
 }

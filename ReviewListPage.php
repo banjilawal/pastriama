@@ -46,6 +46,7 @@ $page = new ReviewListPage($reviews, 'Pastry Reviews');
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
     <title>
         <?php echo $page->getTitle(); ?>
     </title>

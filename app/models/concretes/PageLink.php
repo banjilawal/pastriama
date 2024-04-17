@@ -2,7 +2,6 @@
 
 namespace app\models\concretes;
 
-use app\global\SerialNumberGenerator;
 use app\models\abstracts\Entity;
 
 class PageLink extends Entity {

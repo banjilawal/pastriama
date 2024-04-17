@@ -2,18 +2,18 @@
 
 require_once 'WebPage.php';
 
-use app\models\lists\UserList;
+use app\models\lists\Users;
 use app\test\ListGenerator;
 
 class UserListPage extends WebPage {
-    private UserList $userList;
+    private Users $userList;
 
-    public function __construct (Userlist $userList, string $title) {
+    public function __construct (Users $userList, string $title) {
         parent::__construct($title);
         $this->userList = $userList;
     }
 
-    public function getUserList (): UserList {
+    public function getUserList (): Users {
         return $this->userList;
     }
 }

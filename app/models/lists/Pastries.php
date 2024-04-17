@@ -5,9 +5,10 @@ namespace app\models\lists;
 use app\models\abstracts\Model;
 use app\models\abstracts\StoreItem;
 use App\models\concretes\Pastry;
+use DateTime;
 use Exception;
 
-class PastryList extends Model {
+class Pastries extends Model {
     private array $items;
 
     public function __construct () {
@@ -22,7 +23,7 @@ class PastryList extends Model {
     /**
      * @throws Exception
      */
-    public function addPastries (PastryList $pastries): void {
+    public function addPastries (Pastries $pastries): void {
         foreach ($pastries as $id => $pastry) {
             $this->add($pastry);
         }
@@ -41,7 +42,7 @@ class PastryList extends Model {
     /**
      * @throws Exception
      */
-    public function removePastries (PastryList $pastries): void {
+    public function removePastries (Pastries $pastries): void {
         foreach ($pastries as $id => $pastry) {
             $this->remove($pastry);
         }
@@ -58,10 +59,17 @@ class PastryList extends Model {
         unset($this->items[$id]);
     }
 
-    public function search (string $name): ?Pastry {
-        foreach ($this->items as $id => $pastry) {
-            if ($this->items[$id]->getName() === $name)
-                return $this->items[$id];
+    public function searchById (int $id): ?Pastry {
+        if (array_key_exists($id, $this->items)) {
+            return $this->items[$id];
+        }
+        return null;
+    }
+
+    public function searchByName (string $name): ?Pastry {
+        foreach ($this->items as $pastry) {
+            if ($pastry->getName() === $name)
+                return $pastry;
         }
         return null;
     }
@@ -72,32 +80,50 @@ class PastryList extends Model {
 
 
     public function __toString  (): string {
-        $string = 'Pastries' . PHP_EOL;
+        $string = nl2br('Pastries' . PHP_EOL);
         foreach ($this->items as $id => $pastry) {
             $string  .= $this->items[$id] . PHP_EOL;
         }
         return $string;
     }
 
-    public function toTable (int $imageWidth=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH, int $imageHeight=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT): string {
-        $elem ='<table class="pastry-table" id="pastry-table">'
+    public function toTable (
+        int $imageWidth=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
+        int $imageHeight=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
+    ): string {
+        $elem ='<table id="pastryTable">'
             . '<thead>'
             . '<tr>'
-            . '<th>Picture</th>'
-            . '<th>Name</th>'
-            . '<th>Description</th>'
-            . '<th>Price</th>'
+                . '<th>Id</th>'
+                . '<th>Picture</th>'
+                . '<th>Name</th>'
+                . '<th>Description</th>'
+                . '<th>Price</th>'
+//                . '<th>Average Rating</th>'
             . '</tr>'
             . '</thead>'
             . '<tbody>';
         foreach ($this->items as $id => $pastry) {
-            $elem .= $this->items[$id]->toRow($imageWidth, $imageHeight);
+            $elem .= '<tr onclick="send(' . $pastry->getId() . ')">'
+                . '<td>' . $id . '</td>'
+                . '<td>' . $pastry->getImgTag() . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
+                . '<td>' . $pastry->getName() . '</td>'
+                . '<td>' . $pastry->getDescription() . '</td>'
+                . '<td>' . number_format($pastry->getPrice(), 2) . '</td>'
+//                . '<td>' . $pastry->getReveiws(
+//                    DateTime::createFromFormat('Y-m-d', '2020-01-01'),
+//                    DateTime::createFromFormat('Y-m-d', '2029-01-01')
+//                )->getAverageRating() . '</td>'
+                . '</tr>';
         }
         $elem .= '</tbody></table>';
         return $elem;
     }
 
-    public function toDashboard(int $imageWidth, int $imageHeight): string {
+    public function toDashboard(
+        int $imageWidth=StoreItem::DEFAULT_STORE_ITEM_TABLE_IMAGE_WIDTH,
+        int $imageHeight=StoreItem::DEFAULT_STORE_ITEM_TABLE_IMAGE_HEIGHT
+    ): string {
         $elem ='<table class="pastry-dashboard" id="pastry-dashboard">'
             . '<thead>'
             . '<tr>'

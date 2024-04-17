@@ -4,7 +4,7 @@ namespace app\models\concretes;
 
 use app\models\abstracts\StoreItem;
 use app\models\lists\ReviewList;
-use app\models\singletons\ReviewCatalog;
+use app\models\singletons\ReviewsCatalog;
 use DateTime;
 use Exception;
 
@@ -45,7 +45,7 @@ class Pastry extends StoreItem {
     /**
      * @throws Exception
      */
-    public function getReviews (DateTime $startDate, DateTime $endDate): ReviewList {
-        return ReviewCatalog::pastrySearch($this, $startDate, $endDate);
+    public function getReviews (ReviewList $reviews): ReviewList {
+        return $reviews->filterByPastry($this);
     }
 }

@@ -2,11 +2,11 @@
 namespace app\test;
 
 use app\models\concretes\CreditCard;
-use app\models\concretes\Invoice;
+use app\models\concretes\Order;
 use app\models\concretes\InvoiceItem;
 use app\models\concretes\Pastry;
 use app\models\concretes\User;
-use app\models\lists\PastryList;
+use app\models\lists\Pastries;
 use DateTime;
 use Exception;
 
@@ -22,7 +22,7 @@ class ComplexEntityGenerator {
         return $user->getCreditCards()->getItems()[$index];
     }
 
-    private static function getRandomItem (PastryList $inventory): Pastry {
+    private static function getRandomItem (Pastries $inventory): Pastry {
         return $inventory->getItems()[array_rand($inventory->getItems())];
     }
 
@@ -63,8 +63,8 @@ class ComplexEntityGenerator {
         return $user;
     }
 
-    public static function createInvoice (int $invoiceId, User $user, PastryList $inventory, int $invoiceSize): Invoice {
-        $invoice = new Invoice($invoiceId, $user, self::getRandomCard($user));
+    public static function createInvoice (int $invoiceId, User $user, Pastries $inventory, int $invoiceSize): Order {
+        $invoice = new Order($invoiceId, $user, self::getRandomCard($user));
         for ($i = 0; $i < $invoiceSize; $i++) {
             $invoice->getItems()->addItem(
                 new InvoiceItem(

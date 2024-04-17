@@ -122,4 +122,15 @@ class InvoiceItem extends Entity {
             . '</tbody>'
             . '</table>';
     }
+
+    public static function quantitySelector (): string {
+        $maxQuantity = 10;
+        $elem = '<label for ="quantity">Quantity to Order</label>'
+            . '<select id="quantity" name="quantity" required>';
+        for ($i = 1; $i <= $maxQuantity; $i++) {
+            $elem .= '<option value="' . $i . '">' . $i . '</option>';
+        }
+        $elem .= '</select>';
+        return $elem;
+    }
 }

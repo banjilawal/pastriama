@@ -1,11 +1,13 @@
 <?php declare(strict_types=1);
 namespace app\test;
 
+use app\models\concretes\InvoiceItem;
 use app\models\concretes\Pastry;
-use app\models\lists\InvoiceList;
-use app\models\lists\PastryList;
+use app\models\lists\Invoice;
+use app\models\lists\Orders;
+use app\models\lists\Pastries;
 use app\models\lists\ReviewList;
-use app\models\lists\UserList;
+use app\models\lists\Users;
 use Exception;
 
 class ListGenerator {
@@ -13,11 +15,11 @@ class ListGenerator {
     /**
      * @throws Exception
      */
-    public static function pastryList (int $size=10): PastryList {
+    public static function pastryList (int $size=10): Pastries {
         if ($size < 1) {
             throw new Exception( $size . ' is outsize the acceptable size of a list');
         }
-        $list = new PastryList();
+        $list = new Pastries();
         for ($i = 0; $i < $size; $i++) {
 //            echo app\test\EntityGenerator::pastryName();
 //            echo 'pastry# ' . $i . '<br>' . PHP_EOL;
@@ -29,11 +31,11 @@ class ListGenerator {
     /**
      * @throws Exception
      */
-    public static function userList (int $size=10): UserList {
+    public static function userList (int $size=10): Users {
         if ($size < 1) {
             throw new Exception( $size . ' is outsize the acceptable size of a list');
         }
-        $list = new UserList();
+        $list = new Users();
         for ($i = 0; $i < $size; $i++) {
 //            echo 'user#' . $i . '<br>' . PHP_EOL;
             $list->add(EntityGenerator::user());
@@ -47,7 +49,12 @@ class ListGenerator {
     /**
      * @throws Exception
      */
-    public static function addReviews (ReviewList $reviews, UserList $users, Pastry $pastry, int $numberOfReviews): void {
+    public static function addReviews (
+        ReviewList $reviews,
+        Users      $users,
+        Pastry     $pastry,
+        int        $numberOfReviews
+    ): void {
         $count = 0;
         $availableReviewers = count($users->getItems());
 //        echo 'count:' . $count . ' ' . $availableReviewers . ' reviewers are available<br>' . PHP_EOL;
@@ -78,7 +85,7 @@ class ListGenerator {
     /**
      * @throws Exception
      */
-    public static function reviewList (UserList $users, PastryList $pastries): ReviewList {
+    public static function reviewList (Users $users, Pastries $pastries): ReviewList {
         $list = new ReviewList();
         foreach ($pastries->getItems() as $pastry) {
             $numberOfReviews = rand(1, count($users->getItems()) - 1);
@@ -102,12 +109,24 @@ class ListGenerator {
     /**
      * @throws Exception
      */
-    public static function invoiceList (UserList $users, PastryList $pastries): InvoiceList {
-        $list = new InvoiceList();
+    public static function Orders (Users $users, Pastries $pastries): Orders {
+        $orders = new Orders();
         foreach ($users->getItems() as $user) {
-            $list->add(EntityGenerator::invoice($user, $pastries));
+            $orders->addOrder(EntityGenerator::order($user, $pastries));
         }
-        return $list;
+        return $orders;
+    }
+
+
+    /**
+     * @throws Exception
+     */
+    public static function inventory (Pastries$pastries): Invoice {
+        $inventory = new Invoice();
+        foreach ($pastries->getItems() as $pastry) {
+            $inventory->add(new InvoiceItem($pastry, 50)); ;
+        }
+        return $inventory;
     }
 
     /**
@@ -116,8 +135,9 @@ class ListGenerator {
     public static function lists (int $numberOfUsers=30, int $numberOfPastries=90): array {
         $users = self::userList($numberOfUsers);
         $pastries = self::pastryList($numberOfPastries);
-        $invoices = self::invoiceList($users, $pastries);
+        $orders = self::Orders($users, $pastries);
         $reviews = self::reviewList($users, $pastries);
-        return array('users' => $users, 'pastries' => $pastries, 'invoices' => $invoices, 'reviews' => $reviews);
+        $inventory = self::inventory($pastries);
+        return array('users' => $users, 'inventory' => $inventory, 'orders' => $orders, 'reviews' => $reviews);
     }
 }

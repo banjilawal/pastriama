@@ -3,22 +3,25 @@
 namespace app\models\concretes;
 
 
-use app\models\singletons\ReviewCatalog;
+use app\models\lists\Invoice;
+use app\models\lists\PostalAddressList;
+use app\models\singletons\ReviewsCatalog;
 use app\models\abstracts\Person;
 
 use app\models\lists\CreditCardList;
-use app\models\lists\InvoiceList;
+use app\models\lists\Orders;
 use App\models\lists\ReviewList;
-use app\models\singletons\InvoiceCatalog;
-use app\models\lists\WishList;
+use app\models\singletons\OrdersCatalog;
+use app\models\lists\Wishes;
 use DateTime;
 use Exception;
 
 class User extends Person {
 
-    private CreditCardList $cards;
-    private WishList $wishes;
+    private Wishes $wishes;
+    private Invoice $shoppingCart;
     private CreditCardList $creditCards;
+    private PostalAddressList $shippingAddresses;
 
     /**
      * @throws Exception
@@ -31,7 +34,7 @@ class User extends Person {
         Phone $phone,
         EmailAddress $email,
         string $password,
-        PostalAddress $postalAddress,
+        PostalAddress $billingAddress,
         CreditCard $creditCard
     ) {
         parent::__construct(
@@ -42,33 +45,49 @@ class User extends Person {
             $phone,
             $email,
             $password,
-            $postalAddress
+            $billingAddress
         );
+        $this->shippingAddresses = new PostalAddressList();
         $this->creditCards = new CreditCardList();
-        $this->wishes = new WishList();
+        $this->shoppingCart = new Invoice();
+        $this->wishes = new Wishes();
+
+        $this->shippingAddresses->setPrimaryShippingAddress($billingAddress);
         $this->creditCards->add($creditCard);
+    }
+
+    public function getBillingAddress (): PostalAddress {
+        return $this->getPostalAddress();
+    }
+
+    public function getShippingAddresses (): PostalAddressList {
+        return $this->shippingAddresses;
     }
 
     public function getCreditCards (): CreditCardList {
         return $this->creditCards;
     }
 
-    public function getWishes(): WishList {
+    public function getShoppingCart (): Invoice {
+        return $this->shoppingCart;
+    }
+
+    public function getWishes(): Wishes {
         return $this->wishes;
     }
 
     /**
      * @throws Exception
      */
-    public function getInvoices (DateTime $startDate, DateTime $endDate): InvoiceList {
-        return InvoiceCatalog::userSearch($this, $startDate, $endDate);
+    public function getOrders (Orders $source): Orders { //DateTime $startDate, DateTime $endDate): Orders {
+        return $source->filterByUser($this);
     }
 
     /**
      * @throws Exception
      */
-    public function getReviews (DateTime $startDate, DateTime $endDate): ReviewList {
-        return ReviewCatalog::userSearch($this, $startDate, $endDate);
+    public function getReviews (ReviewList $source): ReviewList { //DateTime $startDate, DateTime $endDate): ReviewList {
+        return $source->filterByUser($this); //userSearch($this, $startDate, $endDate);
     }
 
     public function equals ($object): bool {

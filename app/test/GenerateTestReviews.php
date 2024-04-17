@@ -3,9 +3,9 @@
 namespace app\test;
 
 use app\models\concretes\Pastry;
-use app\models\lists\PastryList;
+use app\models\lists\Pastries;
 use app\models\lists\ReviewList;
-use app\models\lists\UserList;
+use app\models\lists\Users;
 use Exception;
 
 class GenerateTestReviews {
@@ -13,7 +13,7 @@ class GenerateTestReviews {
     /**
      * @throws Exception
      */
-    private static function addReviews (ReviewList $reviews, UserList $users, Pastry $pastry, int $numberOfReviews): void {
+    private static function addReviews (ReviewList $reviews, Users $users, Pastry $pastry, int $numberOfReviews): void {
        for ($index = 0; $index < $numberOfReviews; $index++) {
            $user = $users->searchById(array_rand($users->getItems()));
            while (!is_null($reviews->filterByPastry($pastry)->filterByUser($user))) {
@@ -28,7 +28,7 @@ class GenerateTestReviews {
     /**
      * @throws Exception
      */
-    public static function createReviewList (PastryList $pastries, UserList $users, int $numberOfItems): ReviewList {
+    public static function createReviewList (Pastries $pastries, Users $users, int $numberOfItems): ReviewList {
         $reviewList = new ReviewList();
         for ($index = 0; $index < $numberOfItems; $index++) {
             $pastry = $pastries->getItems()[(array_rand($pastries->getItems()))];

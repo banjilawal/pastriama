@@ -3,7 +3,7 @@ namespace app\oldpages;
 
 require_once '..\..\bootstrap.php';
 
-use app\models\singletons\ReviewCatalog;
+use app\models\singletons\ReviewsCatalog;
 use app\test\OldPrimitiveGenerator;
 
 class OldPastryPage {
@@ -18,7 +18,7 @@ $pastry = $generator->pastry();
 $pageTitle = '<title>' . $pastry->getName() . '</title>';
 $pageHeading = '<h1>' . $pastry->getName() . '</h1>';
 
-$reviewsCatalog = ReviewCatalog::getCatalog();
+$reviewsCatalog = ReviewsCatalog::getCatalog();
 $reviews = $reviewsCatalog->filterByPastry($pastry);
 
 

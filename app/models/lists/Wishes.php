@@ -7,7 +7,7 @@ use app\models\concretes\Wish;
 use DateTime;
 use Exception;
 
-class WishList extends Model {
+class Wishes extends Model {
     private array $items;
 
     public function __construct () {
@@ -34,7 +34,8 @@ class WishList extends Model {
      */
     public function remove (Pastry $pastry): void {
         if (!array_key_exists($pastry->getId(), $this->items)) {
-            throw new Exception($pastry->getName() . '  does not exist in your wish list it cannot be removed.');
+            throw new Exception($pastry->getName()
+                . ' does not exist in your wish list it cannot be removed.');
         }
         unset($this->items[$pastry->getId()]);
     }
@@ -48,8 +49,8 @@ class WishList extends Model {
     /**
      * @throws Exception
      */
-    public function filter (DateTime $startDate, DaTeTime $endDate): WishList {
-        $matches = new WishList();
+    public function filter (DateTime $startDate, DaTeTime $endDate): Wishes {
+        $matches = new Wishes();
         foreach ($this->items as $wish) {
             if ($wish->getSubmitTime() >= $startDate && $wish->getSubbmitTime() <= $endDate)
                 $matches->add($wish);
@@ -66,7 +67,7 @@ class WishList extends Model {
     }
 
     public function toTable (): string {
-        $elem = '<table class="wish-list-table" id="wish-list-table">'
+        $elem = '<table id="wishesTable">'
             . '<thead>'
             . '<tr>'
             . '<th></th>'

@@ -36,17 +36,29 @@ class EmailAddress extends Address {
     }
 
     public function equals ($object): bool {
-        if ($this === $object) return true;
-        if (is_null($object)) return false;
-        if ($object instanceof EmailAddress) {
-            return parent::equals($object)
-                && $this->mailbox === $object->getMailbox()
-                && $this->domain === $object->getDomain();
+        if ($this->__toString() === $object->__toString()) {
+            echo $this . ' is equal <br>' . PHP_EOL;
+            return true;
         }
-        return false;
+        else {
+            echo $this . ' is not equal to ' . $object . '<br>' . PHP_EOL;
+            return false;
+        }
+//        if ($this === $object) return true;
+//        if (is_null($object)) return false;
+//        if ($object instanceof EmailAddress) {
+//            return parent::equals($object)
+//                && $this->mailbox === $object->getMailbox()
+//                && $this->domain === $object->getDomain();
+//        }
+//        return false;
     }
 
     public function __toString (): string {
-        return $this->mailbox . trim('@') . $this->domain;
+        return $this->mailbox . '@' . $this->domain;
+    }
+
+    public static function buildFromString () {
+
     }
 }

@@ -12,7 +12,6 @@ use Exception;
 class ReviewList extends Model {
     private array $items;
 
-
     public function __construct () {
         parent::__construct();
         $this->items = array();
@@ -36,9 +35,9 @@ class ReviewList extends Model {
      * @throws Exception
      */
     public function add (Review $review): void {
-//        if (array_key_exists($review->getId(), $this->items)) {
-//            throw new Exception('A review with that id ' . $review->getId() . ' already exists');
-//        }
+        if (array_key_exists($review->getId(), $this->items)) {
+            throw new Exception('A review with that id ' . $review->getId() . ' already exists');
+        }
 //        if (!is_null($this->search($review->getUser(), $review->getPastry()))) {
 //            throw new Exception($review->getUser()->printName() . ' already reviewed ' . $review->getPastry()->getName());
 //        }
@@ -103,6 +102,9 @@ class ReviewList extends Model {
     }
 
 
+    /**
+     * @throws Exception
+     */
     public function filterByDateRange (DateTime $startDate, DateTime $endDate): ReviewList {
         $matches = new ReviewList();
         foreach ($this->items as $review) {
@@ -127,6 +129,17 @@ class ReviewList extends Model {
         return $this->filterByUser($user)->filterByPastry($pastry);
     }
 
+    public function getAverageRating (): int {
+        if (count($this->items) == 0) {
+            return 0;
+        }
+        $sum = 0;
+        foreach ($this->items as $review) {
+            $sum += $review->getRating();
+        }
+        return $sum / count($this->items);
+    }
+
     public function toString  (): string {
         $string = nl2br('Reviews:');
         foreach ($this->items as $id => $review) {
@@ -136,16 +149,16 @@ class ReviewList extends Model {
     }
 
     public function toTable (): string {
-        $elem = '<table class="review-table" id="review-table">'
-//            . '<thead>'
-//            . '<tr>'
-//            . '<th>Date</th>'
-//            . '<th>Reviewer</th>'
-//            . '<th>Pastry</th>'
-//            . '<th>Stars</th>'
-//            . '<th>Comment</th>'
-//            . '</tr>'
-//            . '</thead>'
+        $elem = '<table id="reviewsTable">'
+            . '<thead>'
+            . '<tr>'
+            . '<th>Date</th>'
+            . '<th>Reviewer</th>'
+            . '<th>Pastry</th>'
+            . '<th>Stars</th>'
+            . '<th>Comment</th>'
+            . '</tr>'
+            . '</thead>'
             . '<tbody>';
         foreach ($this->items as $id => $review) {
             $elem .= '<tr>' . $review->toTable() . '</tr>';

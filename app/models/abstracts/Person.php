@@ -60,7 +60,7 @@ abstract class Person extends NamedEntity {
         return $this->phone;
     }
 
-    public function getEmail (): EmailAddress {
+    public function getEmailAddress (): EmailAddress {
         return $this->email;
     }
 
@@ -108,7 +108,7 @@ abstract class Person extends NamedEntity {
                 && $this->lastname === $object->getLastname()
                 && $this->birthdate === $object->getBirthdate()
                 && $this->postalAddress->equals($object->getPostalAddress())
-                && $this->email->equals($object->getEmail())
+                && $this->email->equals($object->getEmailAddress())
                 && $this->phone->equals($object->getPhone());
         }
         return false;
@@ -119,12 +119,12 @@ abstract class Person extends NamedEntity {
     }
 
     public function __toString (): string {
-        return 'id:' . $this->getId() . '<br>' . PHP_EOL
-            . ' name:' . $this->printName() . '<br>' . PHP_EOL
-            . ' birthdate:' . $this->birthdate->format('Y-m-d'). '<br>' . PHP_EOL
-            . ' phone:' . $this->phone .'<br>' . PHP_EOL
-            . ' email:' . $this->email .'<br>' . PHP_EOL
-            . ' postal address:' . $this->postalAddress .'<br>' . PHP_EOL;
+        return 'id:' . $this->getId() // . '<br>' . PHP_EOL
+            . ' name:' . $this->printName() // . '<br>' . PHP_EOL
+            . ' birthdate:' . $this->birthdate->format('Y-m-d') //. '<br>' . PHP_EOL
+            . ' phone:' . $this->phone //.'<br>' . PHP_EOL
+            . ' email:' . $this->email //.'<br>' . PHP_EOL
+            . ' postal address:' . $this->postalAddress; // .'<br>' . PHP_EOL;
     }
 
     public function toRow (): string {

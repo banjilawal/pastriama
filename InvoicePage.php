@@ -1,34 +1,35 @@
 <?php declare(strict_types=1);
+session_start();
 
 require_once 'bootstrap.php';
 require_once 'WebPage.php';
 
-use app\models\concretes\Invoice;
+use app\models\concretes\Order;
 use app\test\ListGenerator;
 
 
 class InvoicePage extends WebPage {
-    private Invoice $invoice;
+    private Order $order;
 
-    public function __construct (Invoice $invoice) {
-        parent::__construct('Invoice# ' . $invoice->getId() . ' Details'); //  $invoice->getSubmissionTime()->format('Y-m-d H:i:s'));
-        $this->invoice = $invoice;
+    public function __construct (Order $order) {
+        parent::__construct('Order# ' . $order->getId() . ' Details'); //  $invoice->getSubmissionTime()->format('Y-m-d H:i:s'));
+        $this->order = $order;
     }
 
-    public function getInvoice (): Invoice {
-        return $this->invoice;
+    public function getOrder (): Order {
+        return $this->order;
     }
 
     private function printDeliveryAddress (): string {
-        return $this->invoice->getUser()->getFirstname() . ' ' . $this->invoice->getUser()->getLastname() . '<br>' . PHP_EOL
-            . $this->invoice->getUser()->getPostalAddress()->getStreet() . '<br>' . PHP_EOL
-            . $this->invoice->getUser()->getPostalAddress()->getCity() . '<br>' . PHP_EOL
-            . $this->invoice->getUser()->getPostalAddress()->getState() . ' '
-            . $this->invoice->getUser()->getPostalAddress()->getZipcode() . '<br>' . PHP_EOL;
+        return $this->order->getUser()->getFirstname() . ' ' . $this->order->getUser()->getLastname() . '<br>' . PHP_EOL
+            . $this->order->getUser()->getPostalAddress()->getStreet() . '<br>' . PHP_EOL
+            . $this->order->getUser()->getPostalAddress()->getCity() . '<br>' . PHP_EOL
+            . $this->order->getUser()->getPostalAddress()->getState() . ' '
+            . $this->order->getUser()->getPostalAddress()->getZipcode() . '<br>' . PHP_EOL;
     }
 
     public function deliveryDetailsTable (): string {
-        $elem = '<table>'
+        return '<table>'
             . '<thead>'
             . '<tr>'
             . '<th>Order Placed</th>'
@@ -40,14 +41,14 @@ class InvoicePage extends WebPage {
             . '</thead>'
             . '<tbody>'
             . '<tr>'
-            . '<td>' . $this->invoice->getSubmissionTime()->format('Y-m-d') . '</td>'
-            . '<td>' . number_format($this->invoice->getItems()->getTotalCharge(), 2) . '</td>'
-            . '<td>Card ending **' . $this->invoice->getCreditCard()->getSecureNumber() . '</td>'
-            . '<td>' . $this->invoice->getUser()->getPostalAddress() . '</td>'
-            . '<td>' . $this->invoice->getRealDeliveryDate()->format('Y-m-d') . '</td>'
+            . '<td>' . $this->order->getSubmissionTime()->format('Y-m-d') . '</td>'
+            . '<td>' . number_format($this->order->getInvoice()->getTotalCharge(), 2) . '</td>'
+            . '<td>Card ending **' . $this->order->getCreditCard()->getSecureNumber() . '</td>'
+            . '<td>' . $this->order->getShipToAddress() . '</td>'
+            . '<td>' . $this->order->getDateDelivered()->format('Y-m-d') . '</td>'
             . '</tr>'
             . '</tbody></table>';
-        return $elem;
+//        return $elem;
     }
 } // end class InvoicePage
 $lists = null;
@@ -64,6 +65,7 @@ $page = new InvoicePage($invoice);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
     <title>
         <?php echo $page->getTitle(); ?>
     </title>
@@ -77,7 +79,7 @@ $page = new InvoicePage($invoice);
         echo '<p>' . $page->deliveryDetailsTable() . '</p>';
 //        echo '<p><h2>Delivered on ' . $page->getInvoice()->getRealDeliveryDate()->format('Y-m-d') . '</h2></p>';
 //        echo '<h2>Order Items</h2>';
-        echo '<p>' . $page->getInvoice()->toTable() . '</p>';
+        echo '<p>' . $page->getOrder()->toTable() . '</p>';
     ?>
 </main>
 <footer>

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\builders;
+namespace app\utils;
 
 class Single {
     private string

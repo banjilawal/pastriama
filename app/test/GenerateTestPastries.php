@@ -2,7 +2,7 @@
 
 namespace app\test;
 
-use app\models\lists\PastryList;
+use app\models\lists\Pastries;
 use Exception;
 
 class GenerateTestPastries {
@@ -34,9 +34,9 @@ class GenerateTestPastries {
     /**
      * @throws Exception
      */
-    public static function pastryList (int $size=10): PastryList {
+    public static function pastryList (int $size=10): Pastries {
 //        $generator = new OldPrimitiveGenerator();
-        $pastryList = new PastryList();
+        $pastryList = new Pastries();
         for ($index = 0; $index < $size; $index++) {
 //            echo 'Generated FOod Description:' . OldPrimitiveGenerator::foodDescription() . '<br>' . PHP_EOL;
             $pastryList->add(EntityGenerator::pastry());

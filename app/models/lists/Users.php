@@ -3,12 +3,12 @@
 namespace app\models\lists;
 
 use app\models\abstracts\Model;
+use app\models\concretes\EmailAddress;
 use app\models\concretes\User;
 use Exception;
 
-class UserList extends Model {
+class Users extends Model {
     private array $items;
-
 
     public function __construct () {
         parent::__construct();
@@ -22,8 +22,8 @@ class UserList extends Model {
     /**
      * @throws Exception
      */
-    public function addUsers (UserList $users): void {
-        foreach ($users as $id => $user) {
+    public function addUsers (Users $users): void {
+        foreach ($users as $user) {
             $this->add($user);
         }
     }
@@ -35,8 +35,8 @@ class UserList extends Model {
         if (array_key_exists($user->getId(), $this->items)) {
             throw new Exception($user->getId() . ' is already in the list');
         }
-        if (!is_null($this->searchByEmail($user->getEmail()))) {
-           throw new Exception('A user with email ' . $user->getEmail() . ' already exists. Adding user operations failed');
+        if (!is_null($this->searchByEmail($user->getEmailAddress()))) {
+           throw new Exception('A user with email ' . $user->getEmailAddress() . ' already exists. Adding user operations failed');
         }
         $this->items[$user->getId()] = $user;
     }
@@ -44,7 +44,7 @@ class UserList extends Model {
     /**
      * @throws Exception
      */
-    public function removePUsers (UserList $users): void {
+    public function removeUsers (Users $users): void {
         foreach ($users as $id => $user) {
             $this->remove($user);
         }
@@ -56,15 +56,19 @@ class UserList extends Model {
     public function remove (User $user): void {
         $id = $user->getId();
         if (!array_key_exists($id, $this->items)) {
-            throw new Exception($user->getEmail() . ' does not exist in the list. Cannot remove nonexistent user named ' . $user->getName());
+            throw new Exception($user->getEmailAddress()
+                . ' does not exist in the list. Cannot remove nonexistent user named ' . $user->getName());
         }
         unset($this->items[$id]);
     }
 
-    public function searchByEmail (string $email): ?User {
+    public function searchByEmail (EmailAddress $email): ?User {
         foreach ($this->items as $user) {
-            if ($user->getEmail() === $email)
+//            echo nl2br('testing if ' . $user->printName() . ' has email ' . $email . PHP_EOL);
+            if ($user->getEmailAddress()->equals($email) === true) { //__toString() === $email->__toString()) {
+                echo nl2br($user->printName() . ' has email ' . $email . PHP_EOL);
                 return $user;
+            }
         }
         return null;
     }
@@ -78,7 +82,7 @@ class UserList extends Model {
     }
 
     public function toTable (): string {
-        $elem ='<table class="user-table" id="user-table">'
+        $elem ='<table id="usersTable">'
             . '<thead>'
             . '<tr>'
             . '<th>Name</th>'

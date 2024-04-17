@@ -28,7 +28,8 @@ class Review extends Entity {
         Pastry $pastry,
         int $rating,
         string $title,
-        string $comment
+        string $comment,
+        DateTime $submissionTime
     ) {
         parent::__construct($id);
 //        if ($rating < self::MINIMUM_RATING || $rating > self::MAXIMUM_RATING) {
@@ -39,7 +40,7 @@ class Review extends Entity {
         $this->rating = $rating;
         $this->title = trim($title);
         $this->comment = trim($comment);
-        $this->submissionTime = new DateTime(); //DateTime::createFromFormat('U', date('Y-m-d H:i:s'));
+        $this->submissionTime = $submissionTime; // DateTime(); //DateTime::createFromFormat('U', date('Y-m-d H:i:s'));
     }
 
     public function getUser (): User {
@@ -82,7 +83,7 @@ class Review extends Entity {
     public function __toString (): string {
         return __CLASS__ . parent::__toString() . ' pastry:' . $this->pastry->getName()
             . ' ' . $this->submissionTime->format('Y-m-d H:i:s')
-            . ' reviewer:' . $this->user->getFirstname() . ' ' . substr($this->user->getLastname(), 0, 1)
+            . ' reviewer:' . $this->user->printName() //getFirstname() . ' ' . substr($this->user->getLastname(), 0, 1)
             . ' rating:' . $this->rating
             . ' title:' . $this->title
             . ' comment:' . $this->comment;
@@ -101,8 +102,7 @@ class Review extends Entity {
     }
 
     public function toTable (): string {
-        $tableName = 'rating-' . $this->pastry->getId() . '-' . $this->user->getId() . '-table';
-        return '<table class="rating-table" id="' . $tableName . '">'
+        return '<table class="reviewTable">'
 //            . '<thead>'
 //            . '<tr>'
 //            . '<th>Date</th>'
@@ -121,9 +121,18 @@ class Review extends Entity {
             . '<tr><td>' . $this->submissionTime->format('Y-m-d') . '</td></tr>'
 //            .
 //            . '<td>' . $this->pastry->getName() . '</td>'
-
             . '<tr><td>' . $this->comment . '</td><tr>'
             . '</tbody>'
             . '</table>';
+    }
+
+    public static function ratingSelector (): string {
+        $elem = '<label for="rating">How Many Stars</label>'
+            . '<select id="rating" name="rating" required>';
+        for ($i = Review::MINIMUM_RATING; $i <= Review::MAXIMUM_RATING; $i++) {
+            $elem .= '<option value="' . $i . '">' . $i . '</option>';
+        }
+        $elem .= '</select>';
+        return $elem;
     }
 }

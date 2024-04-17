@@ -4,7 +4,6 @@ require_once 'bootstrap.php';
 require_once 'WebPage.php';
 
 use app\models\concretes\Review;
-use app\test\EntityGenerator;
 use app\test\ListGenerator;
 
 
@@ -21,31 +20,41 @@ class ReviewPage extends WebPage {
         return $this->review;
     }
 }
-
-$pastries = null;
+$lists = null;
 try {
-    $pastries = ListGenerator::pastryList(30);
+    $lists = ListGenerator::lists(30, 60);
 } catch (Exception $e) {
+    echo $e;
 }
-echo 'Number of pastries:' . count($pastries->getItems()) . '<br>' . PHP_EOL;
+//$pastry = $lists['pastries']->getItems()[array_rand($lists['pastries']->getItems())];
+$review = $lists['reviews']->getItems()[array_rand($lists['reviews']->getItems())];
+$page = new ReviewPage($review);
 
-$users = null;
-try {
-    $users = ListGenerator::userList(15);
-} catch (Exception $e) {
-}
-echo 'Number of users:' . count($users->getItems()) . '<br>' . PHP_EOL;
-////$index = array_rand($users->getItems());
-$user = $users->searchById(array_rand($users->getItems())); //$index);
-$pastry = $pastries->getItems()[(array_rand($pastries->getItems()))];
 //
-
-$reviews = null;
-try {
-    $reviews = ListGenerator::reviewList($pastries, $users);
-} catch (Exception $e) {
-}
-$review = $reviews->getItems()[(array_rand($reviews->getItems()))];
+//$pastries = null;
+//try {
+//    $pastries = ListGenerator::pastryList(30);
+//} catch (Exception $e) {
+//}
+//echo 'Number of pastries:' . count($pastries->getItems()) . '<br>' . PHP_EOL;
+//
+//$users = null;
+//try {
+//    $users = ListGenerator::userList(15);
+//} catch (Exception $e) {
+//}
+//echo 'Number of users:' . count($users->getItems()) . '<br>' . PHP_EOL;
+//////$index = array_rand($users->getItems());
+//$user = $users->searchById(array_rand($users->getItems())); //$index);
+//$pastry = $pastries->getItems()[(array_rand($pastries->getItems()))];
+////
+//
+//$reviews = null;
+//try {
+//    $reviews = ListGenerator::reviewList($pastries, $users);
+//} catch (Exception $e) {
+//}
+//$review = $reviews->getItems()[(array_rand($reviews->getItems()))];
 //try {
 //    $review = EntityGenerator::review($user, $pastry);
 //} catch (Exception $e) {
@@ -59,6 +68,7 @@ $page = new ReviewPage($review);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
     <title>
         <?php echo $page->getTitle(); ?>
     </title>

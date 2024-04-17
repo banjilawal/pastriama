@@ -97,7 +97,7 @@ class Phone extends Model {
     }
 
     public function toRow (): string {
-        return '<tr class="phone-row">'
+        return '<tr>'
             . '<td>' . $this->areaCode . '</td>'
             . '<td>' . $this->exchange . '</td>'
             . '<td>' . $this->lineNumber . '</td>'
@@ -105,7 +105,7 @@ class Phone extends Model {
     }
 
     public function toTable (): string {
-        return '<table class="phone-table" id="phone-table" name="phone-table">'
+        return '<table id="phoneTable">'
             . '<thead>'
             . '<tr>'
             . '<th>Area Code</th>'
