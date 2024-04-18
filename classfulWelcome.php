@@ -14,22 +14,6 @@ use app\models\singletons\UsersCatalog;
 use app\test\ListGenerator;
 require_once 'bootstrap.php';
 
-
-//$users = null;
-//try {
-//    $users = ListGenerator::userList(20);
-//} catch (Exception $e) {
-//    echo $e;
-//}
-//
-//$pastries = null;
-//try {
-//    $pastries = ListGenerator::pastryList(20);
-//} catch (Exception $e) {
-//    echo $e;
-//}
-//echo print_r($pastries);
-
 $datasets = null;
 try {
     $datasets = ListGenerator::lists(4, 10);
@@ -56,78 +40,7 @@ if (is_null($users->searchByEmail($user->getEmailAddress()))) {
 else {
     echo nl2br(PHP_EOL . 'Hello ' . $user->printName() . PHP_EOL);
 }
-//$inventory = Inventory::getInstance();
-//foreach ($datasets['pastries']->getItems() as $pastry) {
-//    try {
-//        $inventory->addPastry($pastry);
-//    } catch (Exception $e) {
-//        echo $e;
-//    }
-//}
-//$_SESSION['inventory'] = serialize($inventory);
-//echo nl2br('the inventory has ' . $inventory->getInventory()->getNumberOfItems()
-//    . ' items in ' . count(unserialize($_SESSION['inventory'])->getInventory()->getItems()) . ' products' . PHP_EOL);
-//print_r($_SESSION['inventory']);
-//
-//$ordersCatalog = $datasets['orders'];
-//$_SESSION['ordersCatalog'] = serialize($ordersCatalog);
-//foreach ($datasets['orders']->getItems() as $order) {
-//    try {
-//        $ordersCatalog->add($order);
-//    } catch (Exception $e) {
-//        echo $e;
-//    }
-//}
-//echo nl2br('there are ' . count($ordersCatalog->getOrders()->getItems()) . ' orders' . PHP_EOL);
-//$_SESSION['ordersCatalog'] = serialize($ordersCatalog);
-//
-//$reviewsCatalog = ReviewsCatalog::getInstance();
-//foreach ($datasets['reviews']->getItems() as $review) {
-//    try {
-//        $reviewsCatalog->add($review);
-//    } catch (Exception $e) {
-//        echo $e;
-//    }
-//}
-//echo nl2br('there are ' . count($reviewsCatalog->getReviews()->getItems()) . ' reviews' . PHP_EOL);
-//$_SESSION['reviewsCatalog'] = serialize($reviewsCatalog);
-//
-//$users = UsersCatalog::getInstance();
-//foreach ($datasets['users']->getItems() as $user) {
-//    try {
-//        $users->add($user);
-//    } catch (Exception $e) {
-//        echo $e;
-//    }
-//}
-//echo nl2br('there are ' . count($users->getUsers()->getItems()) . ' users' . PHP_EOL);
-//$user = $users->randomUser();
-//$_SESSION['users'] = serialize($users);
-//$_SESSION['user'] = serialize($user);
-//echo print_r($datasets['orders']);
-//$inventory = Inventory::getInventory();
-//try {
-//    Inventory::getInventory()->addPastries($datasets['pastries']);
-//} catch (Exception $e) {
-//}
-
-//$_SESSION['datasets'] = serialize($datasets);
-//$_SESSION['pastries'] = serialize($datasets['pastries']);
-////$_SESSION['users'] = serialize($datasets['users']);
-//$_SESSION['orders'] = serialize($datasets['orders']);
-//$_SESSION['reviews'] = serialize($datasets['reviews']);
-//$user = $users->getUsers()->getItems()[array_rand($datasets['users']->getItems())];
-//$userInvoices = $datasets['orders']->filterByUser($user);
-//$userReviews = $datasets['reviews']->filterByUser($user);
-
-
-//$_SESSION['pastries'] = serialize($pastries);
-
 echo $user;
-//$_SESSION['user'] = serialize($user);
-//$_SESSION['userInvoices'] = serialize($userInvoices);
-//$_SESSION['userReviews'] = serialize($userReviews);
-//$page = new PastryListPage($datasets['pastries'], 'Welcome to Our Pastry Store');
 ?>
 
 <!DOCTYPE html>
@@ -190,10 +103,9 @@ echo $user;
 
     <script>
         function send (id) {
-           let cookie = document.cookie = "inventoryItemId=" + id + ""; // + "; max-age=5";
+           let cookie = document.cookie = "productId=" + id + ""; // + "; max-age=5";
             alert(cookie);
-           location.href = "inventoryItemPage.php";
-           //location.href = "renders/getProductPage.php";
+            location.href = "renders/getProductPage.php";
         }
     </script>
 </main>

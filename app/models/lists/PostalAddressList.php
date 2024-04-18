@@ -163,7 +163,7 @@ class PostalAddressList extends Model {
         return $elem;
     }
 
-    public function shipToAddressSelector (): string {
+    public function selector (): string {
         $elem = '<label for ="shipTo"">Ship To</label><select id="shipTo" name="shipTo">'
             . '<option value="' . $this->items[self::$PRIMARY_SHIPPING_ADDRESS_INDEX] . '" selected>'
             . $this->items[self::$PRIMARY_SHIPPING_ADDRESS_INDEX] . '</option>';

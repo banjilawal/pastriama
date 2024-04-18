@@ -45,7 +45,7 @@ class Pastry extends StoreItem {
     /**
      * @throws Exception
      */
-    public function getReviews (ReviewList $reviews): ReviewList {
-        return $reviews->filterByPastry($this);
+    public function getReviews (): ReviewList { //(ReviewList $reviews): ReviewList {
+        return new ReviewList();
     }
 }

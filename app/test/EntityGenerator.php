@@ -2,19 +2,23 @@
 
 namespace app\test;
 
+use app\enums\CreditCardProvider;
+use app\enums\State;
 use app\models\concretes\CreditCard;
 use app\models\concretes\Domain;
 use app\models\concretes\EmailAddress;
 use app\models\concretes\Order;
-use app\models\concretes\InvoiceItem;
+use app\models\concretes\InventoryItem;
 use app\models\concretes\Pastry;
 use app\models\concretes\Phone;
 use app\models\concretes\PostalAddress;
 use app\models\concretes\Review;
-use app\models\concretes\State;
+use app\models\concretes\StateClass;
 use app\models\concretes\User;
 use app\models\concretes\Zipcode;
+use app\models\lists\Products;
 use app\models\lists\Pastries;
+use app\models\singletons\Inventory;
 use app\utils\SerialNumber;
 use DateTime;
 use Exception;
@@ -28,7 +32,7 @@ class EntityGenerator {
     private const MAX_PASTRY_PRICE = 3;
 
     private const MIN_INVOICE_SIZE = 0;
-    private const MAX_INVOICE_SIZE = 10;
+    private const MAX_INVOICE_SIZE = 4;
     private const MIN_ADDITIONAL_CARDS = 0;
     private const MAX_ADDITIONAL_CARDS = 5;
     private const MINIMUM_ITEM_QUANTITY = 1;
@@ -73,8 +77,6 @@ class EntityGenerator {
 
     public static function imagePath (): string {
         $pictures = scandir(FOOD_IMAGES);
-//        print_r($files);
-//        $index = rand(2, count($files) - 1);
         $picture = $pictures[rand(2, count($pictures) - 1)];
 //        $path = 'images' . DIRECTORY_SEPARATOR . $files[$index]; //FOOD_IMAGES . DIRECTORY_SEPARATOR . $files[$index];
 //        echo 'image path:' . $path . '<br>' . PHP_EOL;
@@ -94,7 +96,7 @@ class EntityGenerator {
         $street = $number . ' ' . $fields[1];
 //        echo 'street:' . $street . PHP_EOL . '<br>';
         $city = trim($fields[2], ' \'');
-        $state = new State('MN');
+        $state = State::from('Minnesota');
         $zipcode = new Zipcode($fields[3]);
 //        $address = new PostalAddress($street, $city, $state, $zipcode);
 //        echo $address->getStreet() . PHP_EOL . '<br>';
@@ -165,45 +167,30 @@ class EntityGenerator {
         return DateTime::createFromFormat('H:i s', $time);
     }
 
+    public static function yearSelector (
+        DateTime $startYear,
+        int $numberOfYears=5,
+        string $id='expirationYear',
+        string $label='Expiration Year'
+    ): string {
+        $currentYear= (int) date('Y');
+        $elem = '<label for="' . $id . '">' . $label . '</label>'
+            . '<select name=' . $id . '" id="' . $id . '">';
+        for ($i = 0; $i < $numberOfYears; $i++) {
+            $year = $currentYear + $i;
+            $elem .= '<option value="' . $year . '">' . $year . '</option>';
+        }
+        $elem .= '</selec>';
+        return $elem;
+    }
+
     /**
      * @throws Exception
      */
     public static function someDateTime (DateTime $floor, DateTime $ceiling): DateTime {
-//        $floorTimestamp = $floor->getTimestamp();
-//        $maxSeconds = $ceiling->getTimestamp() - $floor->getTimeStamp(); // ($ceiling->getTimestamp() - $floor->getTimestamp()) / (60 * 60 * 24);
-//        $interval = (int) rand(0, $maxSeconds);
-//        $epochTime = $floorTimestamp + $interval; //($actualSeconds * 60 * 60 * 24);
         $epochTime = $floor->getTimestamp() + (int) rand(0, ($ceiling->getTimestamp() - $floor->getTimeStamp()));
-//        return new DateTime("@epochTime");
-        $dateTime = new DateTime("@$epochTime");
-//        echo nl2br(
-//            'floor:' . $floor->format('Y-m-d')
-//            . 'ceiling:' . $ceiling->format('Y-m-d')
-//            . 'floor seconds: ' . $floorTimestamp
-//            . ' ceiling seconds:' . $ceiling->getTimestamp()
-//            . ' max seconds:' . $maxSeconds
-//            . ' actual seconds:' . $interval
-//            . ' unixTime:' . $epochTime
-//            . ' date picked:' . $dateTime->format('Y-m-d')
-//            . PHP_EOL
-//        );
-        return $dateTime;
-//        $dateTime = DateTime::createFromFormat('U', $unixTime);
-//        echo 'unixTime: ' . $unixTime . ' ISO time:' .  $dateTime->format('Y-m-d H:i:s');
-//        return (new DateTime())->setTimestamp($unixTime);// ::createFromFormat('U', $unixTime); //$dateTime;
+        return new DateTime("@$epochTime");
     }
-
-//    /**
-//     * @throws Exception
-//     */
-//    public static function imageFile (): string {
-//            $files = array_diff(scandir(ASSETS), ['.', '..']);
-//            if (empty($files)) {
-//                throw new Exception('Cannot select a jpg file ' . ASSETS . ' directory is empty.');
-//            }
-//            $index = array_rand($files);
-//            return $files[$index];
-//    }
 
     /**
      * @throws Exception
@@ -226,16 +213,7 @@ class EntityGenerator {
     public static function email (string $firstname, string $lastname): EmailAddress {
         $separator = trim(EMAIL_SEPARATORS[array_rand(EMAIL_SEPARATORS)]);
         $extraChars = trim(self::getExtraChars());
-
-//        echo PHP_EOL . '<br>' . 'email separator:' . $separator . PHP_EOL . '<br>';
-//        echo 'extra characters:' . $extraChars . PHP_EOL . '<br>';
         $mailbox = trim(strtolower($firstname)) . trim($separator) . trim(strtolower($lastname)) . $extraChars;
-//        echo ' mailbox:' . $mailbox;
-
-
-//        if ((mt_rand() / mt_getrandmax()) > 0.5) {
-//            $mailbox = strtolower($lastname) . $separator . strtolower($firstname);
-//        }
         $index = array_rand(EMAIL_PROVIDERS);
         $fields = explode('.', EMAIL_PROVIDERS[array_rand(EMAIL_PROVIDERS)]);
         $name = trim(implode('.', array_slice($fields, 0, -1))); //$providerFields)
@@ -275,7 +253,7 @@ class EntityGenerator {
         $cvn = self::numeric(3);
         return new CreditCard(
             SerialNumber::nextCreditCardId(),
-            $vendor,
+            CreditCardProvider::random(),
             $nameOnCard,
             $number,
             $expirationDate,
@@ -310,10 +288,6 @@ class EntityGenerator {
 //        print_r($data);
         $title = trim($tuple[0], '"');
         $content = trim($tuple[1], '"');
-//        $content[1] = trim($content[1], ' "');
-//        return array('title' => $title, 'content' => $content);
-//        $content = self::reviewContent();
-//        $rating = 3;
         return new Review(
             SerialNumber::nextReviewId(),
             $user,
@@ -346,8 +320,16 @@ class EntityGenerator {
         return $pastries->getItems()[array_rand($pastries->getItems())];
     }
 
+    public static function invoice (Products $products): Products {
+        $invoice = new Products();
+        $totalItems = rand(0, count($products->getProducts()));
+        for ($i = 0; $i < $totalItems; $i++) {
+            $invoice->add($products->randomItem());
+        }
+        return $invoice;
+    }
+
     /**
-     * @throws Exception
      * @throws Exception
      */
     public static function user (): User {
@@ -393,26 +375,49 @@ class EntityGenerator {
     /**
      * @throws Exception
      */
-    public static function order (User $user, Pastries $pastries): Order {
-        $submissionTime = self::someDateTime(
-            DateTime::createFromFormat('Y-m-d', '2020-01-01'),
-            new DateTime()
-        );
-        $order = new Order(
-            SerialNumber::nextOrderId(),
-            $user,
-            self::pickCreditCard($user),
-            $user->printName(),
-            $user->getPostalAddress(), //self::pickShippingAddress($user),
-            $submissionTime
-        );
-        for ($i = 0; $i < rand(self::MIN_INVOICE_SIZE, self::MAX_INVOICE_SIZE); $i++) {
-            $order->getInvoice()->add(
-                new InvoiceItem(
-                    self::pickPastry($pastries),
-                    rand(self::MINIMUM_ITEM_QUANTITY, self::MAXIMUM_ITEM_QUANTITY)
-                ));
+    public static function order (User $user): ?Order {
+        if (count($user->getShoppingCart()->getProducts()) > 0) {
+            $submissionTime = self::someDateTime(
+                DateTime::createFromFormat('Y-m-d', '2020-01-01'),
+                new DateTime()
+            );
+            $order = new Order(
+                SerialNumber::nextOrderId(),
+                $user,
+                self::pickCreditCard($user),
+                $user->printName(),
+                $user->getPostalAddress(), //self::pickShippingAddress($user),
+                $submissionTime
+            );
+            $user->getShoppingCart()->transferToTarget($order->getInvoice());
+            return $order;
         }
-        return $order;
+        return null;
     }
+
+//    /**
+//     * @throws Exception
+//     */
+//    public static function order (User $user, Pastries $pastries): Order {
+//        $submissionTime = self::someDateTime(
+//            DateTime::createFromFormat('Y-m-d', '2020-01-01'),
+//            new DateTime()
+//        );
+//        $order = new Order(
+//            SerialNumber::nextOrderId(),
+//            $user,
+//            self::pickCreditCard($user),
+//            $user->printName(),
+//            $user->getPostalAddress(), //self::pickShippingAddress($user),
+//            $submissionTime
+//        );
+//        for ($i = 0; $i < rand(self::MIN_INVOICE_SIZE, self::MAX_INVOICE_SIZE); $i++) {
+//            $order->getInvoice()->add(
+//                new InventoryItem(
+//                    self::pickPastry($pastries),
+//                    rand(self::MINIMUM_ITEM_QUANTITY, self::MAXIMUM_ITEM_QUANTITY)
+//                ));
+//        }
+//        return $order;
+//    }
 }

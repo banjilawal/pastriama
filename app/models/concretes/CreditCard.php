@@ -2,6 +2,7 @@
 
 namespace app\models\concretes;
 
+use app\enums\CreditCardProvider;
 use app\models\abstracts\Entity;
 use app\models\abstracts\Model;
 use app\test\EntityGenerator;
@@ -16,7 +17,7 @@ class CreditCard extends Entity {
     public const CREDIT_CARD_NUMBER_PATTERN = '/([0-9]{4,} ){4,}/i';
     public const CREDIT_CARD_VENDORS = ['Mastercard', 'Visa', 'American Express', 'Discover'];
 
-    private string $vendor;
+    private CreditCardProvider $cardProvider;
     private string $nameOnCard;
     private string $number;
     private DateTime $expiration;
@@ -24,7 +25,7 @@ class CreditCard extends Entity {
 
     /**
      * @param int $id
-     * @param string $vendor
+     * @param CreditCardProvider $cardProvider
      * @param $nameOnCard
      * @param string $number
      * @param DateTime $expiration
@@ -33,7 +34,7 @@ class CreditCard extends Entity {
      */
     public function __construct (
         int $id,
-        string $vendor,
+        CreditCardProvider $cardProvider,
         string $nameOnCard,
         string $number,
         DateTime $expiration,
@@ -41,14 +42,14 @@ class CreditCard extends Entity {
     ) {
         parent::__construct($id);
         $this->nameOnCard = $nameOnCard;
-        $this->vendor = $vendor;
+        $this->cardProvider = $cardProvider;
         $this->number = $number;
         $this->expiration = $expiration;
         $this->cvn = $cvn;
     }
 
-    public function getVendor (): string {
-        return $this->vendor;
+    public function getCardProvider (): CreditCardProvider {
+        return $this->cardProvider;
     }
 
     public function getNameOnCard (): string {
@@ -86,7 +87,7 @@ class CreditCard extends Entity {
     }
 
     public function __toString(): string {
-        return parent::__toString() . ' ' . $this->vendor
+        return parent::__toString() . ' ' . $this->cardProvider->value
             . ' number:' . $this->securelyPrintCardNumber()
             . ' expiration:' . $this->printExpirationDate()
             . ' cvn:' . $this->cvn;
@@ -135,7 +136,7 @@ class CreditCard extends Entity {
             . '<tbody>'
             . '<tr>'
             . '<td>' . $this->getId() . '</td>'
-            . '<td>' . $this->vendor . '</td>'
+            . '<td>' . $this->cardProvider->value . '</td>'
             . '<td>**-' . $this->securelyPrintCardNumber() . '</td>'
             . '<td>' .  $this->printExpirationDate() .'</td>'
             . '<td>' . $this->cvn . '</td>'

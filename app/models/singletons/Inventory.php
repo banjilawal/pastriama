@@ -4,11 +4,11 @@ namespace app\models\singletons;
 
 use app\models\abstracts\Model;
 use app\models\abstracts\StoreItem;
-use app\models\concretes\InvoiceItem;
+use app\models\concretes\InventoryItem;
 use App\Models\Concretes\Order;
 use app\models\concretes\Pastry;
 use App\Models\Concretes\User;
-use app\models\lists\Invoice;
+use app\models\lists\Products;
 use App\Models\Lists\Orders;
 use app\models\lists\Pastries;
 use DateTime;
@@ -16,11 +16,11 @@ use Exception;
 
 class Inventory extends Model {
     private static $instance;
-    protected static Invoice $inventory;
+    protected static Products $items;
 
     private function __construct () {
         parent::__construct();
-        self::$inventory = new Invoice();
+        self::$items = new Products();
     }
 
     public static function getInstance (): Inventory {
@@ -30,8 +30,8 @@ class Inventory extends Model {
         return self::$instance;
     }
 
-    public static function getInventory(): Invoice {
-        return self::$inventory;
+    public static function getItems (): Products {
+        return self::$items;
     }
 
     private function __clone () {}
@@ -45,11 +45,11 @@ class Inventory extends Model {
 //        if (array_key_exists($pastry->getid(), self::$inventory->getItems())) {
 //            throw new Exception($pastry . ' is already recorded');
 //        }
-        self::$inventory->add(new InvoiceItem ($pastry, $quantity));
+        self::$items->add(new InventoryItem ($pastry, $quantity));
     }
 
-    public function add (InvoiceItem $item): void{
-        self::$inventory->add($item);
+    public function add (InventoryItem $item): void{
+        self::$items->add($item);
     }
 
     public function toTable (
@@ -68,7 +68,7 @@ class Inventory extends Model {
             . '</tr>'
             . '</thead>'
             . '<tbody>';
-        foreach (self::$inventory->getItems() as $id => $item) {
+        foreach (self::$items->getProducts() as $id => $item) {
             $elem .= '<tr onclick="send(' . $id . ')">'
                 . '<td>' . $id . '</td>'
                 . '<td>' . $item->getPastry()->getImgTag() . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'

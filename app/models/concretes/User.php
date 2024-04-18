@@ -3,7 +3,7 @@
 namespace app\models\concretes;
 
 
-use app\models\lists\Invoice;
+use app\models\lists\Products;
 use app\models\lists\PostalAddressList;
 use app\models\singletons\ReviewsCatalog;
 use app\models\abstracts\Person;
@@ -12,14 +12,14 @@ use app\models\lists\CreditCardList;
 use app\models\lists\Orders;
 use App\models\lists\ReviewList;
 use app\models\singletons\OrdersCatalog;
-use app\models\lists\Wishes;
+use app\models\lists\WishList;
 use DateTime;
 use Exception;
 
 class User extends Person {
 
-    private Wishes $wishes;
-    private Invoice $shoppingCart;
+    private WishList $wishList;
+    private Products $shoppingCart;
     private CreditCardList $creditCards;
     private PostalAddressList $shippingAddresses;
 
@@ -27,15 +27,15 @@ class User extends Person {
      * @throws Exception
      */
     public function __construct (
-        int $id,
-        string $firstname,
-        string $lastname,
-        DateTime $birthdate,
-        Phone $phone,
-        EmailAddress $email,
-        string $password,
+        int           $id,
+        string        $firstname,
+        string        $lastname,
+        DateTime      $birthdate,
+        Phone         $phone,
+        EmailAddress  $emailAddress,
+        string        $password,
         PostalAddress $billingAddress,
-        CreditCard $creditCard
+        CreditCard    $creditCard
     ) {
         parent::__construct(
             $id,
@@ -43,14 +43,14 @@ class User extends Person {
             $lastname,
             $birthdate,
             $phone,
-            $email,
+            $emailAddress,
             $password,
             $billingAddress
         );
         $this->shippingAddresses = new PostalAddressList();
         $this->creditCards = new CreditCardList();
-        $this->shoppingCart = new Invoice();
-        $this->wishes = new Wishes();
+        $this->shoppingCart = new Products();
+        $this->wishList = new WishList();
 
         $this->shippingAddresses->setPrimaryShippingAddress($billingAddress);
         $this->creditCards->add($creditCard);
@@ -68,12 +68,12 @@ class User extends Person {
         return $this->creditCards;
     }
 
-    public function getShoppingCart (): Invoice {
+    public function getShoppingCart (): Products {
         return $this->shoppingCart;
     }
 
-    public function getWishes(): Wishes {
-        return $this->wishes;
+    public function getWishList(): WishList {
+        return $this->wishList;
     }
 
     /**

@@ -7,7 +7,7 @@ use app\models\concretes\Wish;
 use DateTime;
 use Exception;
 
-class Wishes extends Model {
+class WishList extends Model {
     private array $items;
 
     public function __construct () {
@@ -49,8 +49,8 @@ class Wishes extends Model {
     /**
      * @throws Exception
      */
-    public function filter (DateTime $startDate, DaTeTime $endDate): Wishes {
-        $matches = new Wishes();
+    public function filter (DateTime $startDate, DaTeTime $endDate): WishList {
+        $matches = new WishList();
         foreach ($this->items as $wish) {
             if ($wish->getSubmitTime() >= $startDate && $wish->getSubbmitTime() <= $endDate)
                 $matches->add($wish);

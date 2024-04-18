@@ -4,10 +4,9 @@ namespace app\models\concretes;
 use app\models\abstracts\Entity;
 use app\models\abstracts\StoreItem;
 use Exception;
-use const app\oldpages\PASTRY_IMAGE_HEIGHT;
-use const app\oldpages\PASTRY_IMAGE_WIDTH;
 
-class InvoiceItem extends Entity {
+class InventoryItem extends Entity {
+    public const MAX_ORDER_QUANTITY = 12;
     private Pastry $pastry;
     private int $quantity;
 
@@ -71,7 +70,7 @@ class InvoiceItem extends Entity {
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
-        if ($object instanceof InvoiceItem)
+        if ($object instanceof InventoryItem)
             return  parent::equals($object)
                 && $this->pastry->equals($object->getPastry())
                 && $this->quantity === $object->getQuantity();
@@ -124,10 +123,9 @@ class InvoiceItem extends Entity {
     }
 
     public static function quantitySelector (): string {
-        $maxQuantity = 10;
         $elem = '<label for ="quantity">Quantity to Order</label>'
             . '<select id="quantity" name="quantity" required>';
-        for ($i = 1; $i <= $maxQuantity; $i++) {
+        for ($i = 1; $i <= InventoryItem::MAX_ORDER_QUANTITY; $i++) {
             $elem .= '<option value="' . $i . '">' . $i . '</option>';
         }
         $elem .= '</select>';

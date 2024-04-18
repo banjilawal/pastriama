@@ -5,7 +5,7 @@ namespace app\models\concretes;
 use app\models\abstracts\Model;
 use Exception;
 
-class State extends Model {
+class StateClass extends Model {
     public const STATES = [
         'AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas',
         'CA' => 'California', 'CO' => 'Colorado',' CT' => 'Connecticut', 'DE' => 'Delaware',
@@ -62,7 +62,7 @@ class State extends Model {
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
-        if ($object instanceof State) {
+        if ($object instanceof StateClass) {
             return parent::equals($object)
                 && $this->name === $object->getName()
                 && $this->postalCode === $object->getPostalCode();

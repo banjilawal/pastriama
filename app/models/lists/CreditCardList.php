@@ -180,7 +180,7 @@ class CreditCardList extends Model {
         return $elem;
     }
 
-    public function creditCardSelector (): string {
+    public function selector (): string {
         $elem = '<label for ="creditCard">Credit Card</label><select id="creditCard" name="creditCard" required>'
             . '<option value="'. $this->items[0] . '" selected>'
             . $this->items[0]->securelyPrintCardNumber . '</option>';

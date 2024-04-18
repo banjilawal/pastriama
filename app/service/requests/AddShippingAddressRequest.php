@@ -2,8 +2,10 @@
 
 namespace app\service\requests;
 
+use app\enums\MailingCategory;
+use app\enums\State;
 use app\models\concretes\PostalAddress;
-use app\models\concretes\State;
+use app\models\concretes\StateClass;
 use app\models\concretes\User;
 use app\models\concretes\Zipcode;
 use app\processors\Process;
@@ -12,25 +14,37 @@ use DateTime;
 use Exception;
 
 class AddShippingAddressRequest extends Request {
-    publi const ADRRES_CATEGORIES = ['primary', 'billing',]
+
     private User $user;
     private PostalAddress $address;
-    private string $category;
-
 
     /**
      * @param User $user
+     * @param string $street
+     * @param string $city
+     * @param string $statePostalCode
+     * @param string $zipcodeString
+     * @param string $mailingAddressCategory
      * @throws Exception
      */
-    public function __construct (User $user, string $street, string $city, string $statePostalCode,  string $zipcodeString) {
+    public function __construct (
+        User $user,
+        string $street,
+        string $city,
+        string $statePostalCode,
+        string $zipcodeString,
+        string $mailingAddressCategory
+    ) {
         parent::__construct();
         $this->user = $user;
         $this->address = new PostalAddress(
             sanitize_input($street),
             sanitize_input($city),
-            new State(sanitize_input($statePostalCode)),
-            new Zipcode(sanitize_input($zipcodeString))
+            State::from(sanitize_input($statePostalCode)),
+            new Zipcode(sanitize_input($zipcodeString)),
+            MailingCategory::from(sanitize_input($mailingAddressCategory))
         );
+
     }
 
     public function getUser (): User {

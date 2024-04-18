@@ -4,7 +4,7 @@ if (empty(session_id())) {
 }
 
 use app\models\concretes\CreditCard;
-use app\models\concretes\State;
+use app\models\concretes\StateClass;
 use app\test\ListGenerator;
 
 require_once 'bootstrap.php';
@@ -57,7 +57,7 @@ require_once 'bootstrap.php';
                         <label for="city">City</label>
                         <input type="text" id="city" name="city" size="30" required>
                     </p>
-                    <p><?php echo State::getSelector(); ?></p>
+                    <p><?php echo StateClass::getSelector(); ?></p>
 <!--                    <p>-->
 <!--                        <label for="state">State</label>-->
 <!--                        <select name="state" id="state" required>-->

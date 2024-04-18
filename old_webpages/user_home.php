@@ -9,7 +9,7 @@ use app\models\concretes\PageLink;
 use app\models\concretes\Pastry;
 use app\models\concretes\Phone;
 use app\models\concretes\PostalAddress;
-use app\models\concretes\State;
+use app\models\concretes\StateClass;
 use app\models\concretes\User;
 use app\models\concretes\Zipcode;
 use app\models\lists\PageLinkList;

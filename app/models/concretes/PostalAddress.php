@@ -2,27 +2,38 @@
 
 namespace app\models\concretes;
 
+use app\enums\MailingCategory;
+use app\enums\State;
 use app\models\abstracts\Address;
 
 
 class PostalAddress extends Address {
     private string $street;
     private string $city;
-    private State $state;
+    private State  $state;
     private Zipcode  $zipcode;
+    private MailingCategory $mailingCategory;
 
     /**
      * @param string $street
      * @param string $city
      * @param State $state
      * @param Zipcode $zipcode
+     * @param MailingCategory $mailingCategory
      */
-    public function __construct (string $street, string $city, State $state, Zipcode $zipcode) {
+    public function __construct (
+        string $street,
+        string $city,
+        State $state,
+        Zipcode $zipcode,
+        MailingCategory $mailingCategory=MailingCategory::DEFAULT_MAILING_ADDRESS
+    ) {
         parent::__construct();
         $this->street = $street;
         $this->city = $city;
         $this->state = $state;
         $this->zipcode = $zipcode;
+        $this->mailingCategory = $mailingCategory;
     }
 
     public function getStreet (): string {
@@ -41,6 +52,10 @@ class PostalAddress extends Address {
         return $this->zipcode;
     }
 
+    public function getMailingCategory (): MailingCategory {
+        return $this->mailingCategory;
+    }
+
     public function setStreet (string $street): void {
         $this->street = $street;
     }
@@ -57,6 +72,10 @@ class PostalAddress extends Address {
         $this->zipcode = $zipcode;
     }
 
+    public function setMailingCategory (MailingCategory $category): void {
+        $this->mailingCategory = $category;
+    }
+
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
@@ -64,24 +83,24 @@ class PostalAddress extends Address {
             return parent::equals($object)
                 && $this->street === $object->getStreet()
                 && $this->city === $object->getCity()
-                && $this->state->equals($object->getState())
+                && $this->state === $object->getState()
                 && $this->zipcode->equals($object->getZipcode());
         }
         return false;
     }
 
     public function __toString (): string {
-        return  $this->street . ' ' . $this->city . ', ' . $this->state->getPostalCode() . ' ' . $this->zipcode;
+        return  $this->street . ' ' . $this->city . ', ' . $this->state->code() . ' ' . $this->zipcode;
     }
 
-    public function toRow (): string {
-        return '<tr>'
-            . '<td>street</td>' . '<td>' . $this->street . '</td>'
-            . '<td>city</td>' . '<td>' . $this->city . '</td>'
-            . '<td>state</td>' . '<td>' . $this->state->getPostalCode() . '</td>'
-            . '<td>zipcode</td>' . '<td>' . $this->zipcode . '</td>'
-            . '</tr>';
-    }
+//    public function toRow (): string {
+//        return '<tr>'
+//            . '<td>street</td>' . '<td>' . $this->street . '</td>'
+//            . '<td>city</td>' . '<td>' . $this->city . '</td>'
+//            . '<td>state</td>' . '<td>' . $this->state->code() . '</td>'
+//            . '<td>zipcode</td>' . '<td>' . $this->zipcode . '</td>'
+//            . '</tr>';
+//    }
 
     public function toTable (): string {
         return '<table  id="postalAddressTable>'
@@ -97,7 +116,7 @@ class PostalAddress extends Address {
             . '<tr>'
             . '<td>' . $this->street . '</td>'
             . '<td>' . $this->city . '</td>'
-            . '<td>' . $this->state->getPostalCode() . '</td>'
+            . '<td>' . $this->state->code() . '</td>'
             . '<td>' . $this->zipcode . '</td>'
             . '</tr>'
             . '</tbody>'

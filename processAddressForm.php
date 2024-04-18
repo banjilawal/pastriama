@@ -4,7 +4,7 @@ use app\utils\Convert;
 use app\models\concretes\CreditCard;
 use app\models\concretes\EmailAddress;
 use app\models\concretes\PostalAddress;
-use app\models\concretes\State;
+use app\models\concretes\StateClass;
 use app\models\concretes\User;
 use app\models\concretes\Zipcode;
 use app\test\EntityGenerator;
@@ -33,7 +33,7 @@ try {
     echo $e;
 }
 try {
-    $state = new State(sanitize_input($_POST['state']));
+    $state = new StateClass(sanitize_input($_POST['state']));
 } catch (Exception $e) {
     echo $e;
 }

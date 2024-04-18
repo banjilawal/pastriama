@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use app\models\concretes\State;
+use app\models\concretes\StateClass;
 
 if (empty(session_id())) {
     session_start();
@@ -42,7 +42,7 @@ $pageTitle = 'Manage Your Postal Addresses and Phone Number ' . $user->printName
                     <input type="text" id="city" name="city" size="30" required>
                 </p>
                 <p>
-                    <?php echo State::getSelector(); ?>
+                    <?php echo StateClass::getSelector(); ?>
                 <label for="zipcode">Zipcode</label>
                 <input type="text" name="zipcode" id="zipcode" size="5" pattern="[0-9]{5}" required/>
                 </p>

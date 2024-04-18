@@ -1,0 +1,10 @@
+<?php declare(strict_types=1);
+
+namespace app\enums;
+
+enum MailingCategory: string {
+    case BILLING_ONLY = 'BILLING_ONLY';
+    case DEFAULT_MAILING_ADDRESS = 'DEFAULT_MAILING_ADDRESS';
+    case PRIMARY_PACKAGE_DELIVERY_CHOICE = 'PRIMARY_PACKAGE_DELIVERY_CHOICE';
+    case SECONDARY_PACKAGE_DELIVERY_CHOICE = 'SECONDARY_PACKAGE_DELIVERY_CHOICE';
+}

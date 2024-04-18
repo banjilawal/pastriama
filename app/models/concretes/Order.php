@@ -4,7 +4,7 @@ namespace app\models\concretes;
 
 use app\models\abstracts\Entity;
 use app\models\abstracts\StoreItem;
-use app\models\lists\Invoice;
+use app\models\lists\Products;
 use app\processors\Process;
 use app\service\requests\AddShippingAddressRequest;
 use DateTime;
@@ -17,7 +17,7 @@ class Order extends Entity {
     private CreditCard $creditCard;
 
 //    private DateTime $invalidDeliveryDate;
-    private Invoice $invoice;
+    private Products $invoice;
     private string $recipientName;
     private PostalAddress $shipToAddress;
     private DateTime $submissionTime;
@@ -50,7 +50,7 @@ class Order extends Entity {
         $this->dateDelivered = UNDELIVERED_DATE; //::$defaultDeliveryDate;
         //$this->submissionTime = DateTime::createFromFormat('U', date('Y-m-d H:i:s'));
         //$this->realDelivery = DateTime::createFromFormat('U', date('Y-m-d H:i:s')); //null;
-        $this->invoice = new Invoice();
+        $this->invoice = new Products();
 
 
 
@@ -78,7 +78,7 @@ class Order extends Entity {
         return $this->dateDelivered;
     }
 
-    public function getInvoice (): Invoice {
+    public function getInvoice (): Products {
         return $this->invoice;
     }
 
@@ -135,8 +135,8 @@ class Order extends Entity {
         $string = parent::__toString() . ' customer:' . $this->user->printName()
             . ' Deliver to:' . $this->recipientName . ' ' . $this->shipToAddress
             . ' submission date:' . $this->getSubmissionTime()->format('Y-m-d  H:i:s')
-            . ' total items=' . count($this->invoice->getItems()) . PHP_EOL;
-        foreach ($this->invoice->getItems() as $item) {
+            . ' total items=' . count($this->invoice->getProducts()) . PHP_EOL;
+        foreach ($this->invoice->getProducts() as $item) {
             $string .=  $item .PHP_EOL;
 //            echo 'item is ' . $item->getName();
         }
@@ -150,7 +150,7 @@ class Order extends Entity {
         return 'delivered on: ' . $this->dateDelivered->format('Y-m-d');
     }
 
-    public function search (Pastry $pastry): ?InvoiceItem {
+    public function search (Pastry $pastry): ?InventoryItem {
         foreach ($this->invoice as $id => $item) {
             if (!is_null($item->find($pastry)))
                 return $this->invoice[$item->getId()];
@@ -189,7 +189,7 @@ class Order extends Entity {
 //            . '<td>' . $this->printDeliveryDate() . '</td>'
 //            . '</tr>';
 //        $elem .= $this->items->toTable();
-        foreach ($this->invoice->getItems() as $item) {
+        foreach ($this->invoice->getProducts() as $item) {
             $elem .= '<tr>'
                 . '<td>' . $item->getId() . '</td>'
                 . '<td>' . $item->getPastry()->getName() . '</td>'
