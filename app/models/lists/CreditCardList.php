@@ -158,7 +158,7 @@ class CreditCardList extends Model {
             $elem .= '<tr id="row' . $counter . '">' // onclick="rowClickHandler()">'
                 . '<td>' . $counter . '</td>'
                 . '<td>' . $card->getId() . '</td>'
-                . '<td>'. $card->getVendor() . '</td>'
+                . '<td>'. $card->getCardProvider()->value . '</td>'
                 . '<td>***- ' . $card->securelyPrintCardNumber() . '</td>'
                 . '<td>' . $card->printExpirationDate() . '</td>'
                 . '<td>'

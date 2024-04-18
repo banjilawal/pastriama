@@ -4,64 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="Rewrote some classes implemented initial Request/Response successfully.">
-      <change afterPath="$PROJECT_DIR$/app/enums/CreditCardProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/Month.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/State.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/Renderable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/abstracts/Transaction.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/concretes/Refund.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/pages/FormComposer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/pages/Generate.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/pages/Page.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/pages/ProductPage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/pages/user/CreditCardsPage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/service/requests/RegisterAccountRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/test/CatalogPopulator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/classfulWelcome.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pageComponents.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/renders/getProductPage.php" afterDir="false" />
+    <list default="true" id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="Created classes, interfaces, and welcomePage that assembles a webpage from components">
+      <change afterPath="$PROJECT_DIR$/renders/getCreditCardsPage.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/enums/ShippingAddressCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/enums/MailingCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/Person.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Person.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/InvoiceItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/InventoryItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Pastry.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Pastry.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/State.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/StateClass.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/lists/CreditCardList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/CreditCardList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/Invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/Products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/PostalAddressList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/PostalAddressList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/Wishes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/WishList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/singletons/Inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/singletons/Inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/oldpages/OldPastryPage.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/oldpages/OldProductPage.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/requests/AddCreditCardRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/requests/AddCreditCardRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/requests/AddShippingAddressRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/requests/AddShippingAddressRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/responses/Response.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/responses/Response.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/ComplexEntityGenerator.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/EntityGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/EntityGenerator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/GenerateTestPastries.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/GenerateTestReviews.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/ListGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/ListGenerator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/OldPrimitiveGenerator.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/TestInvoice.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/TestReview.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/TestUser.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/QueryPredicate.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/createAccountForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/createAccountForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryItemPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/inventoryItemPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/user_home.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_webpages/user_home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processAddToCartForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/processAddToCartForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processAddressForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/processAddressForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processOneClickBuyForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/processOneClickBuyForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processPhoneForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/processPhoneForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processRegistrationForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/processRegistrationForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_index.php" beforeDir="false" afterPath="$PROJECT_DIR$/test_index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userContactDetailsPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/userContactDetailsPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/welcome.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userDashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/userDashboard.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +51,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/pastriama&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/pastriama/renders&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -118,11 +65,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\pastriama\renders" />
       <recent name="C:\xampp\htdocs\pastriama" />
       <recent name="C:\xampp\htdocs\pastriama\app\service\requests" />
       <recent name="C:\xampp\htdocs\pastriama\webpages" />
       <recent name="C:\xampp\htdocs\pastriama\webpages\user" />
-      <recent name="C:\xampp\htdocs\pastriama\app\webpages\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\pastriama" />
@@ -182,7 +129,8 @@
       <workItem from="1712773854033" duration="8975000" />
       <workItem from="1712881258997" duration="15349000" />
       <workItem from="1712972759709" duration="40602000" />
-      <workItem from="1713196004772" duration="111932000" />
+      <workItem from="1713196004772" duration="113850000" />
+      <workItem from="1713458723231" duration="299000" />
     </task>
     <task id="LOCAL-00001" summary="Gont classes to work with composer for autoloadng casses and managing dependencies">
       <option name="closed" value="true" />
@@ -208,7 +156,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713373303624</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Created classes, interfaces, and welcomePage that assembles a webpage from components">
+      <option name="closed" value="true" />
+      <created>1713428477218</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713428477218</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,7 +173,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Gont classes to work with composer for autoloadng casses and managing dependencies" />
     <MESSAGE value="Rewrote some classes implemented initial Request/Response successfully." />
-    <option name="LAST_COMMIT_MESSAGE" value="Rewrote some classes implemented initial Request/Response successfully." />
+    <MESSAGE value="Created classes, interfaces, and welcomePage that assembles a webpage from components" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created classes, interfaces, and welcomePage that assembles a webpage from components" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

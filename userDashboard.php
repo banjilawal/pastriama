@@ -116,7 +116,8 @@ $pageTitle = 'Welcome to Your Dashboard ' . $user->printName();
                 <a class="dashboard" id="contactDetailsPage" href="userSecuritySettingsPage.php">Manage Email address and password</a>
             </li>
             <li>
-                <a class="dashboard" id="creditCardsPage" href="creditCardPage.php">Your Credit Cards</a>
+                <a class="dashboard" id="creditCardsPage" href="renders/getCreditCardsPage.php">Your Credit Cards</a>
+<!--                <a class="dashboard" id="creditCardsPage" href="creditCardPage.php">Your Credit Cards</a>-->
             </li>
             <li>
                 <a class="dashboard" id="wishListPage" href="wishListPage.php">Your Wish List</a>
