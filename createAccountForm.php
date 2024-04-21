@@ -3,8 +3,10 @@ if (empty(session_id())) {
     session_start();
 }
 
-use app\models\concretes\CreditCard;
-use app\models\concretes\StateClass;
+use app\enums\CreditCardProvider;
+use app\enums\Month;
+use app\enums\State;
+use app\test\EntityGenerator;
 use app\test\ListGenerator;
 
 require_once 'bootstrap.php';
@@ -57,7 +59,7 @@ require_once 'bootstrap.php';
                         <label for="city">City</label>
                         <input type="text" id="city" name="city" size="30" required>
                     </p>
-                    <p><?php echo StateClass::getSelector(); ?></p>
+                    <p><?php echo State::selector(); ?></p>
 <!--                    <p>-->
 <!--                        <label for="state">State</label>-->
 <!--                        <select name="state" id="state" required>-->
@@ -134,7 +136,7 @@ require_once 'bootstrap.php';
             <fieldset id="creditCardInformation" name="creditCardInformation">
                 <legend>Credit Card Information</legend>
                 <div class="formElement">
-                    <p><?php echo CreditCard::getVendorSelector(); ?></p>
+                    <p><?php echo CreditCardProvider::selector(); ?></p>
                 </div>
                 <div class="formElement">
                     <p>
@@ -172,8 +174,8 @@ require_once 'bootstrap.php';
                 </div>
                 <div class="formElement">
                     <?php
-                        echo '<p>' . CreditCard::getExpirationMonthSelector() . '</p>';
-                        echo '<p>' . CreditCard::getExpirationYearSelector() . '</p>';
+                        echo '<p>' . Month::selector() . '</p>';
+                        echo '<p>' . EntityGenerator::yearSelector(DateTime::createFromFormat('Y', date('Y'))) . '</p>';
                     ?>
                 </div>
             </fieldset>

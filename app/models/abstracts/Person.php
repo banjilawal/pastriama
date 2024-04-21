@@ -6,6 +6,7 @@ use app\models\concretes\EmailAddress;
 use app\Models\Concretes\Phone;
 use app\models\concretes\PostalAddress;
 use DateTime;
+use Exception;
 
 abstract class Person extends NamedEntity {
     private string $lastname;
@@ -24,6 +25,7 @@ abstract class Person extends NamedEntity {
      * @param EmailAddress $emailAddress
      * @param string $password
      * @param PostalAddress $postalAddress
+     * @throws Exception
      */
     public function __construct (
         int           $id,

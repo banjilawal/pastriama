@@ -26,14 +26,6 @@ class Domain extends Model {
         return trim($this->tld, ' ');
     }
 
-    public function setName (string $name): void {
-        $this->name = trim($name, ' ');
-    }
-
-    public function setTld (string $tld): void {
-        $this->tld = trim($tld, ' ');
-    }
-
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;

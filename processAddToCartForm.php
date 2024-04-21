@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 use app\models\concretes\Order;
-use app\models\concretes\InventoryItem;
+use app\models\concretes\Product;
 use app\test\EntityGenerator;
 use app\utils\SerialNumber;
 
@@ -34,7 +34,7 @@ if (!isset($_SESSION['shoppingCart'])) {
     $_SESSION['shoppingCart'] = serialize($shoppingCart); // Set a default value if needed
 }
 $shoppingCart = unserialize($_SESSION['shoppingCart']);
-$shoppingCart->getItems()->addItem(new InventoryItem($pastry, (int) trim($_POST['quantity'])));
+$shoppingCart->getItems()->addItem(new Product($pastry, (int) trim($_POST['quantity'])));
 $_SESSION['shoppingCart'] = serialize($shoppingCart);
 
 

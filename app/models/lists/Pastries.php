@@ -9,15 +9,15 @@ use DateTime;
 use Exception;
 
 class Pastries extends Model {
-    private array $items;
+    private array $list;
 
     public function __construct () {
         parent::__construct();
-        $this->items = array();
+        $this->list = array();
     }
 
-    public function getItems (): Pastry|array {
-        return $this->items;
+    public function getList (): Pastry|array {
+        return $this->list;
     }
 
     /**
@@ -33,10 +33,10 @@ class Pastries extends Model {
      * @throws Exception
      */
     public function add (Pastry $pastry): void {
-        if (array_key_exists($pastry->getId(), $this->items)) {
+        if (array_key_exists($pastry->getId(), $this->list)) {
             throw new Exception($pastry->getId() . ' is already in the list');
         }
-        $this->items[$pastry->getId()] = $pastry;
+        $this->list[$pastry->getId()] = $pastry;
     }
 
     /**
@@ -53,25 +53,29 @@ class Pastries extends Model {
      */
     public function remove (Pastry $pastry): void {
         $id = $pastry->getId();
-        if (!array_key_exists($id, $this->items)) {
+        if (!array_key_exists($id, $this->list)) {
             throw new Exception($pastry->getName() . ' does not exist in order. Cannot remove nonexistent item');
         }
-        unset($this->items[$id]);
+        unset($this->list[$id]);
     }
 
     public function searchById (int $id): ?Pastry {
-        if (array_key_exists($id, $this->items)) {
-            return $this->items[$id];
+        if (array_key_exists($id, $this->list)) {
+            return $this->list[$id];
         }
         return null;
     }
 
     public function searchByName (string $name): ?Pastry {
-        foreach ($this->items as $pastry) {
+        foreach ($this->list as $pastry) {
             if ($pastry->getName() === $name)
                 return $pastry;
         }
         return null;
+    }
+
+    public function contains (Pastry $pastry): bool {
+        return array_key_exists($pastry->getId(), $this->list);
     }
 
     public function comparePrice (Pastry $a, Pastry $b): float {
@@ -81,8 +85,8 @@ class Pastries extends Model {
 
     public function __toString  (): string {
         $string = nl2br('Pastries' . PHP_EOL);
-        foreach ($this->items as $id => $pastry) {
-            $string  .= $this->items[$id] . PHP_EOL;
+        foreach ($this->list as $id => $pastry) {
+            $string  .= $this->list[$id] . PHP_EOL;
         }
         return $string;
     }
@@ -103,8 +107,8 @@ class Pastries extends Model {
             . '</tr>'
             . '</thead>'
             . '<tbody>';
-        foreach ($this->items as $id => $pastry) {
-            $elem .= '<tr onclick="send(' . $pastry->getId() . ')">'
+        foreach ($this->list as $id => $pastry) {
+            $elem .= '<tr onclick="rowClickHandler(' . $pastry->getId() . ')">'
                 . '<td>' . $id . '</td>'
                 . '<td>' . $pastry->getImgTag() . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
                 . '<td>' . $pastry->getName() . '</td>'
@@ -134,7 +138,7 @@ class Pastries extends Model {
             . '</tr>'
             . '</thead>'
             . '<tbody>';
-        foreach ($this->items as $pastry) {
+        foreach ($this->list as $pastry) {
             $elem .= '<tr id="' . $pastry->getId() . ' onclick="rowClickHandler($row)">'
                 . '<h3>' . $pastry->getName() . '</h3>'
                 . $pastry->getImgTag($imageWidth, $imageHeight)

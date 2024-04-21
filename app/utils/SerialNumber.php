@@ -8,6 +8,7 @@ class SerialNumber {
     protected static int $reviewId = 0;
     protected static int $orderId = 0;
     protected static int $creditCardId = 0;
+    protected static int $postalAddressId = 0;
 
     public static function nextUserId (): int {
         self::$userId++;
@@ -32,5 +33,10 @@ class SerialNumber {
     public static function nextOrderId (): int {
         self::$orderId++;
         return self::$orderId;
+    }
+
+    public static function nextPostalAddressId (): int {
+        self::$postalAddressId++;
+        return self::$postalAddressId;
     }
 }

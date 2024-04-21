@@ -17,7 +17,7 @@ echo $user;
 
 $page = new CreditCardsPage($user->getCreditCards(), 'Your Credit Cards ' . $user->getFirstname());
 try {
-    echo $page->getPage();
+    echo $page->page();
 } catch (Exception $e) {
     echo $e;
 }

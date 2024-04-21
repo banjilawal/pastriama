@@ -26,7 +26,7 @@ class CreditCard extends Entity {
     /**
      * @param int $id
      * @param CreditCardProvider $cardProvider
-     * @param $nameOnCard
+     * @param string $nameOnCard
      * @param string $number
      * @param DateTime $expiration
      * @param string $cvn
@@ -115,7 +115,7 @@ class CreditCard extends Entity {
     }
 
     public function toRow (): string {
-        return '<tr id="' . $this->securelyPrintCardNumber() . '" onclick="send_card(this)">'
+        return '<tr id="' . $this->securelyPrintCardNumber() . '" onclick="handleRowClick(this)">'
             . '<td>***-' . $this->securelyPrintCardNumber() . '</td>'
             . '<td>' .  $this->printExpirationDate() .'</td>'
             . '<td>' . $this->cvn . '</td>'
@@ -123,7 +123,7 @@ class CreditCard extends Entity {
     }
 
     public function toTable (): string {
-        return '<table class="creditCard_"' . $this->getId() .'_table">'
+        return '<table id="creditCard_"' . $this->getId() .'_table">'
             . '<thead>'
             . '<tr>'
             . '<th>ID</th>'
@@ -143,45 +143,5 @@ class CreditCard extends Entity {
             . '</tr>'
             . '</table>'
             . '</table>';
-    }
-
-    public static function getVendorSelector (): string {
-        $elem = '<label for="vendor">Credit Card Type</label>'
-            . '<select id="vendor" name="vendor" required>';
-        foreach (CreditCard::CREDIT_CARD_VENDORS as $vendor) {
-            $elem .= '<option value"' . $vendor . '">' . $vendor . '</option>';
-        }
-        $elem .= '</select>';
-        return $elem;
-    }
-
-    public static function getExpirationMonthSelector (): string {
-        return '<label for="expirationMonth">Expiration Month </label>'
-            . '<select name="expirationMonth" id="expirationMonth">'
-            . '<option value="1">January</option>'
-            . '<option value="2">February</option>'
-            . '<option value="3">March</option>'
-            . '<option value="4">April</option>'
-            . '<option value="5">May</option>'
-            . '<option value="6">June</option>'
-            . '<option value="7">July</option>'
-            . '<option value="8">August</option>'
-            . '<option value="9">September</option>'
-            . '<option value="10">October</option>'
-            . '<option value="11">November</option>'
-            . '<option value="12">December</option>'
-        . '</select>';
-    }
-
-    public static function getExpirationYearSelector (int $numberOfYears=5): string {
-        $currentYear= (int) date('Y');
-        $elem = '<label for="expirationYear"> Expiration Year </label>'
-            . '<select name="expirationYear" id="expirationYear">';
-        for ($i = 0; $i < $numberOfYears; $i++) {
-            $year = $currentYear + $i;
-            $elem .= '<option value="' . $year . '">' . $year . '</option>';
-        }
-        $elem .= '</selec>';
-        return $elem;
     }
 }

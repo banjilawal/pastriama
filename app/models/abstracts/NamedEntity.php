@@ -6,17 +6,23 @@ abstract class NamedEntity extends Entity {
     private string $name;
 
 
+    /**
+     * @throws \Exception
+     */
     public function __construct (int $id, string $name) {
         parent::__construct($id);
-        $this->name = $name;
+        $this->name = sanitize_input($name);
     }
 
     public function getName (): string {
         return $this->name;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function setName (string $name): void {
-        $this->name = $name;
+        $this->name = sanitize_input($name);
     }
 
     public function equals ($object): bool {

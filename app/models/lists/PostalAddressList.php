@@ -3,42 +3,42 @@
 namespace app\models\lists;
 
 use app\models\abstracts\Model;
-use app\models\concretes\CreditCard;
 use app\models\concretes\PostalAddress;
 use Exception;
 
 class PostalAddressList extends Model {
     public static int $PRIMARY_SHIPPING_ADDRESS_INDEX = 0;
-    private array $items;
+    private array $list;
 
     public function __construct () {
         parent::__construct();
-        $this->items = array();
+        $this->list = array();
     }
 
-    public function getItems (): PostalAddress|array {
-        return $this->items;
+    public function getList (): PostalAddress|array {
+        return $this->list;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function getPrimaryShippingAddress (): PostalAddress {
-        if (count($this->items) == 0) {
-            throw new Exception('There are no credit cards. Cannot get nonexistent primary credit card.');
-        }
-        return $this->items[0];
-    }
+//    /**
+//     * @throws Exception
+//     */
+//    public function getPrimaryShippingAddress (): PostalAddress {
+//        foreach ($this->list as $postalAddress) {
+//            if ($postalAddress->getMailingCategory() !== MailingCategory::PRIMARY_PACKAGE_DELIVERY_CHOICE)
+//                return $postalAddress;
+//        }
+//        return
+//    }
 
 
-    public function setPrimaryShippingAddress (PostalAddress $address): void {
-        $index = $this->getIndex($address);
-        if ($index === PHP_INT_MIN) {
-            $this->items[] = $address;
-            $index = count($this->items) - 1;
-        }
-        $this->switchAddresses(self::$PRIMARY_SHIPPING_ADDRESS_INDEX, $index);
-    }
+//    public function setPrimaryShippingAddress (PostalAddress $address): void {
+//        $index = $this->getIndex($address);
+//        if ($index === PHP_INT_MIN) {
+//            $this->list[] = $address;
+//            $index = count($this->list) - 1;
+//        }
+//        $this->switchAddresses(self::$PRIMARY_SHIPPING_ADDRESS_INDEX, $index);
+//    }
 
 //    /**
 //     * @throws Exception
@@ -72,11 +72,11 @@ class PostalAddressList extends Model {
     /**
      * @throws Exception
      */
-    public function add (PostalAddress $postalAddress): void {
-        if ($this->getIndex($postalAddress) != PHP_INT_MIN) {
-            throw new Exception($postalAddress . ' is already in the list');
+    public function add (PostalAddress $address): void {
+        if (array_key_exists($address->getId(), $this->list)) {
+            throw new Exception($address . ' is already in the list');
         }
-        $this->items[] = $postalAddress;
+        $this->list[$address->getId()] = $address;
     }
 
     /**
@@ -91,38 +91,26 @@ class PostalAddressList extends Model {
     /**
      * @throws Exception
      */
-    public function remove (PostalAddress $postalAddress): void {
-        if (count($this->items) <= 0) {
-            throw new Exception('Cannot remove the only address in the list.');
+    public function remove (PostalAddress $address): void {
+//        if (count($this->list) <= 0) {
+//            throw new Exception('Cannot remove the only address in the list.');
+//        }
+        if (!array_key_exists($address->getId(), $this->list)) {
+            throw new Exception($address . ' is not in the list. Cannot remove nonexistent postal address');
         }
-        $index = $this->getIndex($postalAddress);
-        if ($index === PHP_INT_MIN) {
-            throw new Exception($postalAddress
-                . ' is not in the list. Cannot remove nonexistent postal address');
-        }
-        unset($this->items[$index]);
+        unset($this->list[$address->getId()]);
     }
 
-    private function getIndex (PostalAddress $target): int {
-        $index = 0;
-        foreach ($this->items as $postalAddress) {
-            if ($postalAddress->equals($target)) {
-                return $index;
-            }
-            $index++;
+    public function searchById (int $id): ?PostalAddress {
+        if (array_key_exists($id, $this->list)) {
+            return $this->list[$id];
         }
-        return PHP_INT_MIN;
-    }
-
-    private function switchAddresses (int $locationA, int $locationB): void {
-        $temp = $this->items[$locationA];
-        $this->items[$locationA] = $this->items[$locationB];
-        $this->items[$locationB] = $temp;
+        return null;
     }
 
     public function toString  (): string {
         $string = 'Postal Addresses:' . PHP_EOL;
-        foreach ($this->items as $address) {
+        foreach ($this->list as $address) {
             $string  .=  $address . PHP_EOL;
         }
         return $string;
@@ -144,18 +132,18 @@ class PostalAddressList extends Model {
             . '<tr>'
             .   '<td></td>'
 //            .   '<td><label for="blankRadio"></label><input type="radio" id="blankRadio"></td>'
-            .   '<td>' . $this->items[0] . '</td>'
+            .   '<td>' . $this->list[0] . '</td>'
             .   '<td>'
             .       '<button type="button" id="removeButton1" onclick="removeAddress("'. 0 . '")>Remove</button>'
             .   '</td>'
             . '</tr>';
-        for ($i = 1; $i < count($this->items); $i++) {
+        for ($i = 1; $i < count($this->list); $i++) {
             $radioName = 'primaryMailingAddress' . $i;
             $buttonName = 'removeAddress' . $i;
             $radioLabel = '<label for="' . $radioName . '"></label>';
             $elem .= '<tr>'
                 . '<td>' . $radioLabel . '<input type="radio" id="' . $radioName . '" value="' . $i . '"></td>'
-                . '<td>' . $this->items[$i] . '</td>'
+                . '<td>' . $this->list[$i] . '</td>'
                 . '<td><button type="button" id="'. $buttonName . '" onclick="removeAddress("'. $i . '")>Remove</button></td>'
                 . '</tr>';
         }
@@ -165,13 +153,17 @@ class PostalAddressList extends Model {
 
     public function selector (): string {
         $elem = '<label for ="shipTo"">Ship To</label><select id="shipTo" name="shipTo">'
-            . '<option value="' . $this->items[self::$PRIMARY_SHIPPING_ADDRESS_INDEX] . '" selected>'
-            . $this->items[self::$PRIMARY_SHIPPING_ADDRESS_INDEX] . '</option>';
-        for ($i = 1; $i < count($this->items); $i++) {
-            $elem .= '<option value="' . $this->items[$i] . '">' . $this->items[$i] . '</option>';
+            . '<option value="' . $this->list[self::$PRIMARY_SHIPPING_ADDRESS_INDEX] . '" selected>'
+            . $this->list[self::$PRIMARY_SHIPPING_ADDRESS_INDEX] . '</option>';
+        for ($i = 1; $i < count($this->list); $i++) {
+            $elem .= '<option value="' . $this->list[$i] . '">' . $this->list[$i] . '</option>';
         }
         $elem .= '</select>';
         return $elem;
+    }
+
+    public function randomAddress (): PostalAddress {
+        return $this->list[array_rand($this->list)];
     }
 //
 //    public function billingAddressSelector (): string {

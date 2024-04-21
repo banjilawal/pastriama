@@ -4,10 +4,12 @@ namespace app\models\concretes;
 
 use app\enums\MailingCategory;
 use app\enums\State;
+use app\interfaces\Identifiable;
 use app\models\abstracts\Address;
 
 
-class PostalAddress extends Address {
+class PostalAddress extends Address implements Identifiable {
+    private int $id;
     private string $street;
     private string $city;
     private State  $state;
@@ -15,6 +17,7 @@ class PostalAddress extends Address {
     private MailingCategory $mailingCategory;
 
     /**
+     * @param int $id
      * @param string $street
      * @param string $city
      * @param State $state
@@ -22,6 +25,7 @@ class PostalAddress extends Address {
      * @param MailingCategory $mailingCategory
      */
     public function __construct (
+        int $id,
         string $street,
         string $city,
         State $state,
@@ -29,11 +33,16 @@ class PostalAddress extends Address {
         MailingCategory $mailingCategory=MailingCategory::DEFAULT_MAILING_ADDRESS
     ) {
         parent::__construct();
+        $this->id = $id;
         $this->street = $street;
         $this->city = $city;
         $this->state = $state;
         $this->zipcode = $zipcode;
         $this->mailingCategory = $mailingCategory;
+    }
+
+    public function getId (): int {
+        return $this->id;
     }
 
     public function getStreet (): string {
@@ -54,6 +63,10 @@ class PostalAddress extends Address {
 
     public function getMailingCategory (): MailingCategory {
         return $this->mailingCategory;
+    }
+
+    public function setId (int $id): void {
+        $this->id = $id;
     }
 
     public function setStreet (string $street): void {

@@ -6,7 +6,7 @@ use app\models\abstracts\Model;
 use App\Models\Concretes\Pastry;
 use App\Models\Concretes\Review;
 use App\Models\concretes\User;
-use App\models\Lists\ReviewList;
+use App\models\Lists\Reviews;
 use app\models\lists\Users;
 use DateTime;
 use Exception;
@@ -42,7 +42,7 @@ class UsersCatalog extends Model {
     }
 
     public function randomUser (): User {
-        return self::$users->getItems()[array_rand(self::$users->getItems())];
+        return self::$users->getList()[array_rand(self::$users->getList())];
     }
 
 //    /**

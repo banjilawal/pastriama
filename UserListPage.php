@@ -20,7 +20,7 @@ class UserListPage extends WebPage {
 
 $users = null;
 try {
-    $users = ListGenerator::userList(30);
+    $users = ListGenerator::users(30);
 } catch (Exception $e) {}
 
 $page = new UserListPage($users, 'Test Users');

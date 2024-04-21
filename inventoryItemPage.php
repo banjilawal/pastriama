@@ -6,7 +6,7 @@ if (session_status() != PHP_SESSION_ACTIVE) {
 require_once 'bootstrap.php';
 //require_once 'WebPage.php';
 
-use app\models\concretes\InventoryItem;
+use app\models\concretes\Product;
 use app\models\concretes\Pastry;
 use app\models\concretes\Review;
 use app\models\singletons\Inventory;
@@ -34,8 +34,8 @@ use app\test\ListGenerator;
 //$inventory = unserialize($_SESSION['inventory']);
 //$inventoryItem = $inventory->getInventory()->searchById((int) $_COOKIE['inventoryItemId']);
 $user = unserialize($_SESSION['user']);
-$inventoryItem = unserialize($_SESSION['products'])->searchById((int) $_COOKIE['inventoryItemId']);
-$reviews = unserialize($_SESSION['reviewsCatalog']); //)->filterByPastry($inventoryItem->getPastry());
+$inventoryItem = unserialize($_SESSION['products'])->searchById((int) $_COOKIE['productId']);
+//$reviews = unserialize($_SESSION['reviewsCatalog']); //)->filterByPastry($inventoryItem->getPastry());
 //echo print_r($reviews->getItems());
 
 $title = $inventoryItem->getPastry()->getName() . ' price:' . $inventoryItem->getPastry()->getName();
@@ -123,7 +123,7 @@ echo $inventoryItem;
             >
                 <fieldset>
                     <legend>Add to Your Cart</legend>
-                    <div class="formElement"><p> <?php echo InventoryItem::quantitySelector(); ?> </p></div>
+                    <div class="formElement"><p> <?php echo Product::quantitySelector(); ?> </p></div>
                     <p><input type="submit" name="addToCart" id="addToCart" value="Add to Cart"></p>
                 </fieldset>
             </form>

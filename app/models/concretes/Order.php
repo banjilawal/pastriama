@@ -3,10 +3,7 @@
 namespace app\models\concretes;
 
 use app\models\abstracts\Entity;
-use app\models\abstracts\StoreItem;
 use app\models\lists\Products;
-use app\processors\Process;
-use app\service\requests\AddShippingAddressRequest;
 use DateTime;
 use Exception;
 
@@ -22,8 +19,6 @@ class Order extends Entity {
     private PostalAddress $shipToAddress;
     private DateTime $submissionTime;
     private DateTime $dateDelivered;
-
-
 
     /**
      * @throws Exception
@@ -44,16 +39,9 @@ class Order extends Entity {
         $this->creditCard = $creditCard;
         $this->recipientName = $recipientName;
         $this->shipToAddress = $shipToAddress;
-        $this->submissionTime = $submissionTime; //new DateTime('now');
-//        $this->invalidDeliveryDate = new DateTime('2525-01-01');
-//        self::$defaultDeliveryDate = new DateTime('2525-01-01');
-        $this->dateDelivered = UNDELIVERED_DATE; //::$defaultDeliveryDate;
-        //$this->submissionTime = DateTime::createFromFormat('U', date('Y-m-d H:i:s'));
-        //$this->realDelivery = DateTime::createFromFormat('U', date('Y-m-d H:i:s')); //null;
+        $this->submissionTime = $submissionTime;
+        $this->dateDelivered = UNDELIVERED_DATE;
         $this->invoice = new Products();
-
-
-
 //        if (empty(trim($recipientName)) || $recipientName === $user->getName()) {
 //            $this->recipientName = $user->getName();
 //        }
@@ -132,56 +120,66 @@ class Order extends Entity {
     }
 
     public function __toString (): string {
-        $string = parent::__toString() . ' customer:' . $this->user->printName()
+        $string = 'id:' . $this->getId()
+            . ' customer:' . $this->user->printName()
             . ' Deliver to:' . $this->recipientName . ' ' . $this->shipToAddress
-            . ' submission date:' . $this->getSubmissionTime()->format('Y-m-d  H:i:s')
-            . ' total items=' . count($this->invoice->getProducts()) . PHP_EOL;
-        foreach ($this->invoice->getProducts() as $item) {
+            . ' submission date:' . $this->getSubmissionTime()->format(DATE_TIME_FORMAT)
+            . ' total items=' . count($this->invoice->getList()) . PHP_EOL;
+        foreach ($this->invoice->getList() as $item) {
             $string .=  $item .PHP_EOL;
 //            echo 'item is ' . $item->getName();
         }
-        $string .= 'total:' . $this->getInvoice()->getTotalCharge() . PHP_EOL . $this->printDeliveryDate();
+        $string .= 'total:' . $this->getInvoice()->getTotalCharge()
+            . PHP_EOL . $this->printDeliveryDate();
         return $string;
     }
 
     public function printDeliveryDate (): string {
         if ($this->dateDelivered === UNDELIVERED_DATE)
-            return 'estimated delivery on ' . $this->getProjectedDelivery()->format('Y-m-d');
-        return 'delivered on: ' . $this->dateDelivered->format('Y-m-d');
-    }
-
-    public function search (Pastry $pastry): ?InventoryItem {
-        foreach ($this->invoice as $id => $item) {
-            if (!is_null($item->find($pastry)))
-                return $this->invoice[$item->getId()];
-        }
-        return null;
+            return 'estimated delivery on ' . $this->getProjectedDelivery()->format(DATE_FORMAT);
+        return 'delivered on: ' . $this->dateDelivered->format(DATE_FORMAT);
     }
 
     public function toRow (): string {
-        return '<tr>' // onclick="rowClickHandler($row)">'
+        return '<tr id="orderRow_' . $this->getId() . '" onclick="rowClickHandler(' . $this->getId() . ')">'
 //            . '<td>' . $this->getCustomer()->getFirstname() . ' ' . $this->getCustomer()->getLastname() . '</td>'
 //            . '<td>' .  $this->creditCard->toString() .'</td>'
             . '<td>' . $this->getId() . '</td>'
-            . '<td>' . $this->submissionTime->format('Y-m-d H:i:s') . '</td>'
+            . '<td>' . $this->submissionTime->format(DATE_TIME_FORMAT) . '</td>'
+            . '<td>' . $this->recipientName . ' ' . $this->shipToAddress . '</td>'
             . '<td>' . $this->printDeliveryDate() . '</td>'
             . '<td>' . number_format($this->invoice->getTotalCharge(), 2) . '</td></tr>';
-//            . '<td>' . $this->recipientName . ' ' . $this->shipToAddress . '</td>';
     }
 
-    public function toTable (): string {
-        $elem = '<table id="order_' . $this->getId() . '_table"' . '>'
+    public function tableHeader (): string {
+        return '<table id="orderTable_' . $this->getId() . '">'
             . '<thead>'
             . '<tr>'
             . '<th>id</th>'
-            . '<th>Name</th>'
-            . '<th>Picture</th>'
-            . '<th>Price</th>'
-            . '<th>Quantity</th>'
-            . '<th>Cost</th>'
+            . '<th>Submission Time</th>'
+            . '<th>Delivery Address</th>'
+            . '<th>Delivery Status</th>'
+            . '<th>Total</th>'
             . '</tr>'
             . '</thead>'
             . '<tbody>';
+    }
+
+    public function toTable (): string {
+        return $this->tableHeader() . '<tbody>' .$this->toRow() . '<tr>' . $this->invoice->toTable()
+            . '</tr></tbody></table>';
+//        $elem = '<table id="orderTable_' . $this->getId() . '">'
+//            . '<thead>'
+//            . '<tr>'
+//            . '<th>id</th>'
+//            . '<th>Name</th>'
+//            . '<th>Picture</th>'
+//            . '<th>Price</th>'
+//            . '<th>Quantity</th>'
+//            . '<th>Cost</th>'
+//            . '</tr>'
+//            . '</thead>'
+//            . '<tbody>';
 //            . '<tr>'
 //            . '<td>' . $this->getId() . '</td>'
 //            . '<td>' . $this->getUser()->getFirstname() . ' ' . $this->getUser()->getLastname() . '</td>'
@@ -189,29 +187,29 @@ class Order extends Entity {
 //            . '<td>' . $this->printDeliveryDate() . '</td>'
 //            . '</tr>';
 //        $elem .= $this->items->toTable();
-        foreach ($this->invoice->getProducts() as $item) {
-            $elem .= '<tr>'
-                . '<td>' . $item->getId() . '</td>'
-                . '<td>' . $item->getPastry()->getName() . '</td>'
-                . '<td>' . $item->getPastry()->getImgTag() . '</td>'
-                . '<td>' . number_format($item->getPastry()->getPrice(), 2) . '</td>'
-                . '<td>' . $item->getQuantity() . '</td>'
-                . '<td>' . $item->getCost() . '<td>'
-                . '</tr>'; //</strong></td></tr></tr>' $item->toRow(
+//        foreach ($this->invoice->getProducts() as $item) {
+//            $elem .= '<tr>'
+//                . '<td>' . $item->getId() . '</td>'
+//                . '<td>' . $item->getPastry()->getName() . '</td>'
+//                . '<td>' . $item->getPastry()->getImgTag() . '</td>'
+//                . '<td>' . number_format($item->getPastry()->getPrice(), 2) . '</td>'
+//                . '<td>' . $item->getQuantity() . '</td>'
+//                . '<td>' . $item->getCost() . '<td>'
+//                . '</tr>'; //</strong></td></tr></tr>' $item->toRow(
 //                StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
 //                StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
 //            );
-        }
+//        }
 //
 //                    . '<td>' . $this-> . '</td>'
 //            . '<td>' . $this->getName() . '</td>'
 //            . '<td>' . $this->description . '</td>'
 //            . '<td>' . number_format($this->price, 2) . '</td>'
 //            . '</tr>'
-        $elem .= '<tr><td>Subtotal</td><td></td><td></td><td></td><td></td><td>' . number_format($this->invoice->getSubTotal(), 2) . '</td></tr>'
-            . '<tr><td>Tax</td><td></td><td></td><td></td><td></td><td>' . number_format($this->invoice->getTax(), 2) . '</td></tr>'
-            . '<tr><td>Total Charge</td><td></td><td></td><td></td><td></td><td>' . number_format($this->invoice->getTotalCharge(), 2)  . '</td></tr>'
-            . '</tr></tbody></table>';
-        return $elem;
+//        $elem .= '<tr><td>Subtotal</td><td></td><td></td><td></td><td></td><td>' . number_format($this->invoice->getSubTotal(), 2) . '</td></tr>'
+//            . '<tr><td>Tax</td><td></td><td></td><td></td><td></td><td>' . number_format($this->invoice->getTax(), 2) . '</td></tr>'
+//            . '<tr><td>Total Charge</td><td></td><td></td><td></td><td></td><td>' . number_format($this->invoice->getTotalCharge(), 2)  . '</td></tr>'
+//            . '</tr></tbody></table>';
+//        return $elem;
     }
 }

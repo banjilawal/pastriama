@@ -6,17 +6,17 @@ use app\models\abstracts\Model;
 use App\Models\Concretes\Pastry;
 use App\Models\Concretes\Review;
 use App\Models\concretes\User;
-use App\models\Lists\ReviewList;
+use App\models\Lists\Reviews;
 use DateTime;
 use Exception;
 
 class ReviewsCatalog extends Model {
     private static $instance;
-    protected static ReviewList $reviews;
+    protected static Reviews $reviews;
 
     private function __construct () {
         parent::__construct();
-        self::$reviews = new ReviewList();
+        self::$reviews = new Reviews();
     }
 
     public static function getInstance(): ReviewsCatalog {
@@ -29,7 +29,7 @@ class ReviewsCatalog extends Model {
 //    private function __clone () {}
     public function __wakeup () {}
 
-    public function getReviews (): ReviewList {
+    public function getReviews (): Reviews {
         return self::$reviews;
     }
 
@@ -37,7 +37,7 @@ class ReviewsCatalog extends Model {
      * @throws Exception
      */
     public function add (Review $review): void {
-        self::$reviews->add($review);
+        self::$reviews->addReview($review);
     }
 
 //    /**

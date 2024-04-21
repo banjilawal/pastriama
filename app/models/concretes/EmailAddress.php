@@ -4,6 +4,7 @@ namespace app\models\concretes;
 
 
 use app\models\abstracts\Address;
+use Exception;
 
 class EmailAddress extends Address {
     private string $mailbox;
@@ -12,10 +13,11 @@ class EmailAddress extends Address {
     /**
      * @param string $mailbox
      * @param Domain $domain
+     * @throws Exception
      */
     public function __construct (string $mailbox, Domain $domain) {
         parent::__construct();
-        $this->mailbox = trim($mailbox, ' ');
+        $this->mailbox = sanitize_input($mailbox);
         $this->domain = $domain;
     }
 

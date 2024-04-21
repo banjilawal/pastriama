@@ -3,11 +3,9 @@
 namespace app\processors;
 
 use app\models\concretes\CreditCard;
-use app\models\concretes\User;
-use app\service\requests\AddCreditCardRequest;
-use app\service\requests\AddShippingAddressRequest;
+use app\requests\requests\AddCreditCardRequest;
+use app\requests\requests\AddShippingAddressRequest;
 use app\test\EntityGenerator;
-use DateTime;
 use Exception;
 
 class Process {
@@ -24,7 +22,7 @@ class Process {
             $request->getExpirationDate(),
             $request->getCvn()
         );
-        $request->getUser()->getCreditCards()->add($card);
+        $request->getUser()->getCreditCards()->addCard($card);
         // Add code to update table
     }
 

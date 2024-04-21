@@ -3,7 +3,7 @@
 namespace app\models\lists;
 
 use app\models\abstracts\Model;
-use app\models\concretes\InventoryItem;
+use app\models\concretes\Product;
 use app\models\concretes\Pastry;
 use app\models\singletons\Inventory;
 use Exception;
@@ -14,24 +14,24 @@ class Products extends Model {
     public const MINIMUM_TAX_PERCENTAGE = 0;
     public const MAXIMUM_TAX_PERCENTAGE = 35;
     public const DEFAULT_TAX_PERCENTAGE = 5;
-    private array $products;
+    private array $list;
 
 
     public function __construct () {
         parent::__construct();
-        $this->products = array();
+        $this->list = array();
     }
 
     /**
-     * @return InventoryItem|array
+     * @return Product|array
      */
-    public function getProducts (): InventoryItem|array {
-        return $this->products;
+    public function getList (): Product|array {
+        return $this->list;
     }
 
     public function getNumberOfItems (): int {
         $totalItems = 0;
-        foreach ($this->products as $item) {
+        foreach ($this->list as $item) {
             $totalItems += $item->getQuantity();
         }
         return $totalItems;
@@ -39,14 +39,14 @@ class Products extends Model {
 
     public function getSubTotal (): float {
         $subTotal = 0.00;
-        foreach ($this->products as $item) {
-            $subTotal += $item->getCost();
+        foreach ($this->list as $product) {
+            $subTotal += $product->getCost();
         }
         return $subTotal;
     }
 
     public function getTax (): float {
-        return $this->getSubTotal() * self::DEFAULT_TAX_PERCENTAGE / 100;
+        return $this->getSubTotal() * DEFAULT_TAX_PERCENTAGE / 100;
     }
 
     public function getTotalCharge (): float  {
@@ -54,21 +54,36 @@ class Products extends Model {
     }
 
     /**
-     * @param Products $items
+     * @throws Exception
      */
-    public function addItems (Products $items): void {
-        foreach ($items as $item) {
-            $this->add($item);
+    public function add (Pastry $pastry, int $quantity): void {
+        if ($quantity <= 0) {
+            throw new \Exception('Cannot add ' . $quantity . ' of ' . $pastry->getName() . ' to the list.');
+        }
+        $product = $this->searchByPastry($pastry);
+        if (!is_null($product)) {
+            $this->list[$product->getId()]->increaseQuantity($quantity);
+        }
+        $product = new Product($pastry, $quantity);
+        $this->list[$product->getId()] = $product;
+    }
+
+    /**
+     * @param Products $products
+     */
+    public function addProducts (Products $products): void {
+        foreach ($products as $item) {
+            $this->addProduct($item);
         }
     }
 
-    public function add (InventoryItem $item): void {
-        $id = $item->getId();
-        if (array_key_exists($id, $this->products)) {
-            $this->products[$id]->increaseQuantity($item->getQuantity());
+    public function addProduct (Product $product): void {
+        $id = $product->getId();
+        if (array_key_exists($id, $this->list)) {
+            $this->list[$id]->increaseQuantity($product->getQuantity());
         }
         else {
-            $this->products[$id] = $item;
+            $this->list[$id] = $product;
         }
     }
 
@@ -85,12 +100,13 @@ class Products extends Model {
     /**
      * @throws Exception
      */
-    public function remove (InventoryItem $item): void {
+    public function remove (Product $item): void {
         $id = $item->getId();
-        if (!array_key_exists($id, $this->products)) {
-            throw new Exception($item->getPastry()->__toString() . ' does not exist in order. Cannot remove nonexistent item');
+        if (!array_key_exists($id, $this->list)) {
+            throw new Exception($item->getPastry()->__toString()
+                . ' does not exist in order. Cannot remove nonexistent item');
         }
-        unset($this->products[$id]);
+        unset($this->list[$id]);
     }
 
     /**
@@ -98,17 +114,46 @@ class Products extends Model {
      */
     public function increase (Pastry $pastry, int $quantity): void {
         $id = $pastry->getId();
-        if (array_key_exists($id, $this->products)) {
-            $this->products[$id]->increasQuantity($quantity);
+        if (array_key_exists($id, $this->list)) {
+            $this->list[$id]->increasQuantity($quantity);
         }
-        else { $this->products[$pastry->getId()] = new InventoryItem($pastry, $quantity); }
+        else { $this->list[$pastry->getId()] = new Product($pastry, $quantity); }
     }
 
-    public function transferToTarget (Products $target): void {
-        foreach($this->products as $id => $item) {
-            $target->add($this->products[$id]);
-            unset($this->products[$id]);
+    /**
+     * @throws Exception
+     */
+    public function transferProductTo (Products $destination, Pastry $pastry, int $quantity): void {
+        $product = $this->searchByPastry($pastry);
+        if (is_null($product)) {
+            throw new Exception($pastry->getName() . ' is not in the list. Cannot transfer to destination.');
         }
+        $destination->addProduct($product);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function emptyToTarget (Products $target): void {
+        foreach ($this->list as $product) {
+            $target->getFromSource($this, $product);
+        }
+//        foreach($this->list as $id => $item) {
+//            $target->addProduct($this->list[$id]);
+//            unset($this->list[$id]);
+//        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getFromSource (Products $source, Product $product): void {
+        $id = $product->getId();
+        if (!array_key_exists($id, $source->getList())) {
+            throw new Exception('The product does not exist in the source so it cannot be transferred.');
+        }
+        $this->addProduct($source->getList()[$id]);
+        unset($source->getList()[$id]);
     }
 
     /**
@@ -116,7 +161,7 @@ class Products extends Model {
      */
     public function decrease (Pastry $pastry, int $quantity): void {
         $id = $pastry->getId();
-        if (!array_key_exists($id, $this->products)) {
+        if (!array_key_exists($id, $this->list)) {
             throw new Exception($pastry->getName() . ' does not exist in the invoice. Cannot be decreased');
         }
         if ($quantity < 1) {
@@ -126,46 +171,47 @@ class Products extends Model {
                 . $pastry->getName() . ' from your list instead'
             );
         }
-        if ($quantity > $this->products[$id]->getQuantity) {
+        if ($quantity > $this->list[$id]->getQuantity) {
             throw new Exception(
                 $quantity
                 . ' exceeds the amount of  ' . $pastry->getName()
                 . ' in the invoice. Remove from your invoice instead.'
             );
         }
-        if ($this->products[$id]->getQuantiy() > 1) {
-            $this->products[$id]->removeQuantity($quantity);
+        if ($this->list[$id]->getQuantiy() > 1) {
+            $this->list[$id]->removeQuantity($quantity);
         }
-        if ($this->products[$id]->getQuantiy() == 1) {
-            unset($this->products[$id]);
+        if ($this->list[$id]->getQuantiy() == 1) {
+            unset($this->list[$id]);
         }
     }
 
-    public function searchById (int $id): ?InventoryItem {
-        if (array_key_exists($id, $this->products)) {
-            return $this->products[$id];
+    public function searchById (int $id): ?Product {
+        if (array_key_exists($id, $this->list)) {
+            return $this->list[$id];
         }
         return null;
     }
 
-    public function searchByPastry (Pastry $pastry): ?InventoryItem {
-        if (array_key_exists($pastry->getId(), $this->products)) {
-            return $this->products[$pastry->getId()];
-        }
-        return null;
+    public function searchByProduct (Product $product): ?Product {
+        return $this->searchById($product->getId());
     }
 
-    public function searchByName (string $pastryName): ?InventoryItem {
-        foreach ($this->products as $item) {
-            if ($item->getPastry()->getName === $pastryName)
-                return $item;
+    public function contains (Product $product): bool {
+        return (array_key_exists($product->getId(), $this->list));
+    }
+
+    public function searchByPastry (Pastry $pastry): ?Product {
+        foreach ($this->list as $id => $product) {
+            if ($product->getPastry()->equals($pastry))
+                return $this->list[$id];
         }
         return null;
     }
 
     public function __toString (): string {
         $string = ''; //$this->items
-        foreach ($this->products as $item) {
+        foreach ($this->list as $item) {
             $string .= $item . PHP_EOL;
         };
         $string .= 'subtotal:' . number_format($this->getSubTotal() , 2)
@@ -174,15 +220,15 @@ class Products extends Model {
         return $string;
     }
 
-    public function randomItem (): InventoryItem {
+    public function randomItem (): Product {
 //        $index = array_rand(array_keys($this->products));
-        $key = array_keys($this->products)[array_rand(array_keys($this->products))];
-        if ($this->products[$key]->getQuantity() <= Products::MINIMUM_QUANTITY) {
-            $this->products[$key]->increaseQuantity(Products::MINIMUM_QUANTITY * 20);
+        $key = array_keys($this->list)[array_rand(array_keys($this->list))];
+        if ($this->list[$key]->getQuantity() <= Products::MINIMUM_QUANTITY) {
+            $this->list[$key]->increaseQuantity(Products::MINIMUM_QUANTITY * 20);
         }
         $quantity = rand(1, (Products::MINIMUM_QUANTITY * 2));
-        $this->products[$key]->decreaseQuantity($quantity);
-        return new InventoryItem($this->products[$key]->getPastry(), $quantity);
+        $this->list[$key]->decreaseQuantity($quantity);
+        return new Product($this->list[$key]->getPastry(), $quantity);
     }
 
     public function toTable (): string {
@@ -199,20 +245,22 @@ class Products extends Model {
             . '</tr>'
             . '</thead>'
             . '<tbody>';
-        foreach ($this->products as $id => $item) {
-            $elem .= '<tr onclick="send(' . $id . ')">'
-                . '<td>' . $id . '</td>'
-                . '<td>' . $item->getPastry()->getImgTag() . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
-                . '<td>' . $item->getPastry()->getName() . '</td>'
-                . '<td>' . $item->getPastry()->getDescription() . '</td>'
-                . '<td>' . number_format($item->getPastry()->getPrice(), 2) . '</td>'
-                . '<td>' .  '</td>'
+        foreach ($this->list as $id => $item) {
+            $elem .= $this->list[$id]->toRow();
+        }
+//            $elem .= '<tr onclick="send(' . $id . ')">'
+//                . '<td>' . $id . '</td>'
+//                . '<td>' . $item->getPastry()->getImgTag() . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
+//                . '<td>' . $item->getPastry()->getName() . '</td>'
+//                . '<td>' . $item->getPastry()->getDescription() . '</td>'
+//                . '<td>' . number_format($item->getPastry()->getPrice(), 2) . '</td>'
+//                . '<td>' .  '</td>'
 //                . '<td>' . $pastry->getReveiws(
 //                    DateTime::createFromFormat('Y-m-d', '2020-01-01'),
 //                    DateTime::createFromFormat('Y-m-d', '2029-01-01')
 //                )->getAverageRating() . '</td>'
-                . '</tr>';
-        }
+//                . '</tr>';
+//        }
         $elem .= '</tbody></table>';
         return $elem;
 //        foreach ($this->items as $item) {

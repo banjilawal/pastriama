@@ -3,6 +3,8 @@
 namespace app\models\abstracts;
 
 
+use Exception;
+
 abstract class StoreItem extends NamedEntity {
     const DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH = 90;
     const DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT = 100;
@@ -14,9 +16,12 @@ abstract class StoreItem extends NamedEntity {
     private float $price;
 
     /**
+     * @param int $id
+     * @param string $name
      * @param string $description
      * @param string $imageName
      * @param float $price
+     * @throws Exception
      */
     public function __construct(
         int $id,
@@ -89,8 +94,8 @@ abstract class StoreItem extends NamedEntity {
         int $imageWidth=self::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
         int $imageHeight=self::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
     ): string {
-        return '<tr class="store-item-row" id="store-item-id-"' . $this->getId() . ' onclick="rowClickHandler($row)">'
-            . '<td id="id-cell" hidden>' . $this->getId() . '</td>'
+        return '<tr id="storeItemId_"' . $this->getId() . ' onclick="rowClickHandler($row)">'
+            . '<td id="idCell" hidden>' . $this->getId() . '</td>'
             . '<td>' . $this->getImgTag($imageWidth, $imageHeight) . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
             . '<td>' . $this->getName() . '</td>'
             . '<td>' . $this->description . '</td>'
@@ -102,7 +107,7 @@ abstract class StoreItem extends NamedEntity {
         int $imageWidth=self::DEFAULT_STORE_ITEM_TABLE_IMAGE_WIDTH,
         int $imageHeight=self::DEFAULT_STORE_ITEM_TABLE_IMAGE_HEIGHT
     ): string {
-        return '<table class="item-table">'
+        return '<table>'
             . '<thead>'
             . '<tr>'
             . '<th>' . $this->getName() . '</th>'

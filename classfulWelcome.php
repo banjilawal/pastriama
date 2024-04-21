@@ -14,33 +14,42 @@ use app\models\singletons\UsersCatalog;
 use app\test\ListGenerator;
 require_once 'bootstrap.php';
 
-$datasets = null;
+//$datasets = null;
+$pastries = null;
+$products = null;
+$users = null;
 try {
-    $datasets = ListGenerator::lists(4, 10);
+    $pastries = ListGenerator::pastries();
+    $products = ListGenerator::products($pastries);
+    $users = ListGenerator::users(4);
+//    $datasets = ListGenerator::lists(4, 10);
 } catch (Exception $e) {
     echo $e . '<br>' . PHP_EOL;
 }
-$users = $datasets['users'];
-$products = $datasets['products'];
-$orders = $datasets['orders'];
-$reviews = $datasets['reviews'];
+//echo print_r($datasets->getList());
+
+//$users = $datasets['users'];
+//$pastries = $datasets['pastries'];
+//$products = $datasets['products'];
+//$orders = $datasets['orders'];
+//$reviews = $datasets['reviews'];
 
 $_SESSION['users'] = serialize($users);
 $_SESSION['products'] = serialize($products);
-$_SESSION['orders'] = serialize($orders);
-$_SESSION['reviews'] = serialize($reviews);
-
-$user = $users->getItems()[array_rand($users->getItems())];
-$_SESSION['user'] = serialize($user);
-echo 'unserial ' . unserialize($_SESSION['user']);
-
-if (is_null($users->searchByEmail($user->getEmailAddress()))) {
-    echo nl2br(PHP_EOL . 'Could not find user by email' . PHP_EOL);
-}
-else {
-    echo nl2br(PHP_EOL . 'Hello ' . $user->printName() . PHP_EOL);
-}
-echo $user;
+//$_SESSION['orders'] = serialize($orders);
+//$_SESSION['reviews'] = serialize($reviews);
+//
+//$user = $users->getItems()[array_rand($users->getItems())];
+//$_SESSION['user'] = serialize($user);
+//echo 'unserial ' . unserialize($_SESSION['user']);
+//
+//if (is_null($users->searchByEmail($user->getEmailAddress()))) {
+//    echo nl2br(PHP_EOL . 'Could not find user by email' . PHP_EOL);
+//}
+//else {
+//    echo nl2br(PHP_EOL . 'Hello ' . $user->printName() . PHP_EOL);
+//}
+//echo $user;
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +111,7 @@ echo $user;
     ?>
 
     <script>
-        function send (id) {
+        function rowClickHandler (id) {
            let cookie = document.cookie = "productId=" + id + ""; // + "; max-age=5";
             alert(cookie);
             location.href = "renders/getProductPage.php";

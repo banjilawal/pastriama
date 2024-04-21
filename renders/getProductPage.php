@@ -10,14 +10,18 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 require_once '..\bootstrap.php';
 use app\pages\ProductPage;
 
-$user = unserialize($_SESSION['user']);
-echo $user;
-$product = unserialize($_SESSION['products'])->searchById((int) $_COOKIE['inventoryItemId']);
+//$user = null;
+//if (array_key_exists('user', $_SESSION)) {
+//    $user = unserialize($_SESSION['user']);
+//    echo $user;
+//}
+
+$product = unserialize($_SESSION['products'])->searchById((int) $_COOKIE['productId']);
 $reviews = unserialize($_SESSION['reviews']); //)->filterByPastry($inventoryItem->getPastry());
 
 $page = new ProductPage($product);
 try {
-    echo $page->getPage();
+    echo $page->page();
 } catch (Exception $e) {
     echo $e;
 }

@@ -189,8 +189,8 @@ echo $user;
     ?>
 
     <script>
-        function send (id) {
-           let cookie = document.cookie = "inventoryItemId=" + id + ""; // + "; max-age=5";
+        function rowClickHandler (id) {
+           let cookie = document.cookie = "productId=" + id + ""; // + "; max-age=5";
             alert(cookie);
            location.href = "inventoryItemPage.php";
            //location.href = "renders/getProductPage.php";

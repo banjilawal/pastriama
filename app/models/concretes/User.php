@@ -8,19 +8,19 @@ use app\models\lists\PostalAddressList;
 use app\models\singletons\ReviewsCatalog;
 use app\models\abstracts\Person;
 
-use app\models\lists\CreditCardList;
+use app\models\lists\CreditCards;
 use app\models\lists\Orders;
-use App\models\lists\ReviewList;
+use App\models\lists\Reviews;
 use app\models\singletons\OrdersCatalog;
-use app\models\lists\WishList;
+use app\models\lists\Wishlist;
 use DateTime;
 use Exception;
 
 class User extends Person {
 
-    private WishList $wishList;
+    private Wishlist $wishList;
     private Products $shoppingCart;
-    private CreditCardList $creditCards;
+    private CreditCards $creditCards;
     private PostalAddressList $shippingAddresses;
 
     /**
@@ -48,12 +48,12 @@ class User extends Person {
             $billingAddress
         );
         $this->shippingAddresses = new PostalAddressList();
-        $this->creditCards = new CreditCardList();
+        $this->creditCards = new CreditCards();
         $this->shoppingCart = new Products();
-        $this->wishList = new WishList();
+        $this->wishList = new Wishlist();
 
-        $this->shippingAddresses->setPrimaryShippingAddress($billingAddress);
-        $this->creditCards->add($creditCard);
+//        $this->shippingAddresses->setPrimaryShippingAddress($billingAddress);
+        $this->creditCards->addCard($creditCard);
     }
 
     public function getBillingAddress (): PostalAddress {
@@ -64,7 +64,7 @@ class User extends Person {
         return $this->shippingAddresses;
     }
 
-    public function getCreditCards (): CreditCardList {
+    public function getCreditCards (): CreditCards {
         return $this->creditCards;
     }
 
@@ -72,7 +72,7 @@ class User extends Person {
         return $this->shoppingCart;
     }
 
-    public function getWishList(): WishList {
+    public function getWishList(): Wishlist {
         return $this->wishList;
     }
 
@@ -86,7 +86,7 @@ class User extends Person {
     /**
      * @throws Exception
      */
-    public function getReviews (ReviewList $source): ReviewList { //DateTime $startDate, DateTime $endDate): ReviewList {
+    public function getReviews (Reviews $source): Reviews { //DateTime $startDate, DateTime $endDate): ReviewList {
         return $source->filterByUser($this); //userSearch($this, $startDate, $endDate);
     }
 

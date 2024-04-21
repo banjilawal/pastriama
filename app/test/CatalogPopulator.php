@@ -16,7 +16,7 @@ class CatalogPopulator {
      * @throws Exception
      */
     public static function inventory (Inventory $inventory, Products $invoice): void {
-        foreach ($invoice->getProducts() as $item) {
+        foreach ($invoice->getList() as $item) {
             $inventory->add($item);
         }
     }
@@ -25,7 +25,7 @@ class CatalogPopulator {
      * @throws Exception
      */
     public static function usersCatalog (UsersCatalog $catalog, Users $users): void {
-        foreach ($users->getItems() as $user) {
+        foreach ($users->getList() as $user) {
            $catalog->add($user);
         }
     }
@@ -38,8 +38,8 @@ class CatalogPopulator {
         UsersCatalog $users,
         Inventory $inventory
     ): void {
-        $reviews = ListGenerator::reviewList($users->getUsers(), $inventory->getItems());
-        foreach ($reviews->getItems() as $review) {
+        $reviews = ListGenerator::reviews($users->getUsers(), $inventory->getItems());
+        foreach ($reviews->getList() as $review) {
             $catalog->add($review);
         }
     }

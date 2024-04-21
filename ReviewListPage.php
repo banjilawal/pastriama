@@ -2,18 +2,18 @@
 
 require_once 'WebPage.php';
 
-use app\models\lists\ReviewList;
+use app\models\lists\Reviews;
 use app\test\ListGenerator;
 
 class ReviewListPage extends WebPage {
-    private ReviewList $reviewList;
+    private Reviews $reviewList;
 
-    public function __construct (ReviewList $reviewList, string $title) {
+    public function __construct (Reviews $reviewList, string $title) {
         parent::__construct($title);
         $this->reviewList = $reviewList;
     }
 
-    public function getReviewList (): ReviewList {
+    public function getReviewList (): Reviews {
         return $this->reviewList;
     }
 }
@@ -21,23 +21,23 @@ class ReviewListPage extends WebPage {
 
 $pastries = null;
 try {
-    $pastries = ListGenerator::pastryList(30);
+    $pastries = ListGenerator::pastries(30);
 } catch (Exception $e) {
 }
-echo 'total pastries:' . count($pastries->getItems()) . '<br>' . PHP_EOL;
+echo 'total pastries:' . count($pastries->getList()) . '<br>' . PHP_EOL;
 
 $users = null;
 try {
-    $users = ListGenerator::userList(15);
+    $users = ListGenerator::users(15);
 } catch (Exception $e) {
 }
-echo 'total users:' . count($users->getItems()) . '<br>' . PHP_EOL;
+echo 'total users:' . count($users->getList()) . '<br>' . PHP_EOL;
 
 $reviews = null;
 try {
-    $reviews = ListGenerator::reviewList($pastries, $users);
+    $reviews = ListGenerator::reviews($pastries, $users);
 } catch (Exception $e) {}
-echo 'number of reviews:' . count($reviews->getItems());
+echo 'number of reviews:' . count($reviews->getList());
 
 $page = new ReviewListPage($reviews, 'Pastry Reviews');
 ?>
@@ -56,7 +56,7 @@ $page = new ReviewListPage($reviews, 'Pastry Reviews');
 </header>
 <main>
     <?php
-    echo count($page->getReviewList()->getItems());
+    echo count($page->getReviewList()->getList());
     echo $page->getReviewList()->toTable();
     ?>
 </main>

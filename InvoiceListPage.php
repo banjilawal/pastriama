@@ -20,17 +20,17 @@ class InvoiceListPage extends WebPage {
 
 $pastries = null;
 try {
-    $pastries = ListGenerator::pastryList(30);
+    $pastries = ListGenerator::pastries(30);
 } catch (Exception $e) {
 }
-echo 'Number of pastries:' . count($pastries->getItems()) . '<br>' . PHP_EOL;
+echo 'Number of pastries:' . count($pastries->getList()) . '<br>' . PHP_EOL;
 
 $users = null;
 try {
-    $users = ListGenerator::userList(15);
+    $users = ListGenerator::users(15);
 } catch (Exception $e) {
 }
-echo 'Number of users:' . count($users->getItems()) . '<br>' . PHP_EOL;
+echo 'Number of users:' . count($users->getList()) . '<br>' . PHP_EOL;
 
 $invoices = null;
 try {

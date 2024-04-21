@@ -11,15 +11,15 @@ use DateTime;
 use Exception;
 
 class Orders extends Model {
-    private array $items;
+    private array $list;
 
     public function __construct () {
         parent::__construct();
-        $this->items = array();
+        $this->list = array();
     }
 
-    public function getItems (): Order|array {
-        return $this->items;
+    public function getList (): Order|array {
+        return $this->list;
     }
 
     /**
@@ -35,17 +35,17 @@ class Orders extends Model {
      * @throws Exception
      */
     public function addOrder (Order $order): void {
-        if (array_key_exists($order->getId(), $this->items)) {
+        if (array_key_exists($order->getId(), $this->list)) {
             throw new Exception($order->getId() . ' is already in the list');
         }
-        $this->items[$order->getId()] = $order;
+        $this->list[$order->getId()] = $order;
     }
 
     /**
      * @throws Exception
      */
     public function removeOrders (Orders $order): void {
-        foreach ($this->items as $id => $order) {
+        foreach ($this->list as $id => $order) {
             $this->remove($order);
         }
     }
@@ -55,10 +55,10 @@ class Orders extends Model {
      */
     public function remove (Order $order): void {
         $id = $order->getId();
-        if (!array_key_exists($id, $this->items)) {
+        if (!array_key_exists($id, $this->list)) {
             throw new Exception($id . ' is not in the list. Cannot remove nonexistent card');
         }
-        unset($this->items[$id]);
+        unset($this->list[$id]);
     }
 
     /**
@@ -66,8 +66,8 @@ class Orders extends Model {
      */
     public function filterByPastry (Pastry $pastry): Orders {
         $matches = new Orders();
-        foreach ($this->items as $order) {
-            if (!is_null($order->search($pastry)))
+        foreach ($this->list as $order) {
+            if (!is_null($order->getInvoice()->searchByPastry($pastry)))
                 $matches->addOrder($order);
         }
         return $matches;
@@ -78,7 +78,7 @@ class Orders extends Model {
      */
     public function filterByUser (User $user): Orders {
         $matches = new Orders();
-        foreach ($this->items as $order) {
+        foreach ($this->list as $order) {
             if ($order->getUser()->equals($user))
                 $matches->addOrder($order);
         }
@@ -90,7 +90,7 @@ class Orders extends Model {
      */
     public function filterByDateRange (DateTime $startDate, DateTime $endDate): Orders {
         $matches = new Orders();
-        foreach ($this->items as $order) {
+        foreach ($this->list as $order) {
             if ($order->getSubmitTime() >= $startDate && $order->getSubbmitTime() <= $endDate)
                 $matches->addOrder($order);
         }
@@ -102,40 +102,48 @@ class Orders extends Model {
      */
     public function filterByCreditCard (CreditCard $creditCard): Orders {
         $matches = new Orders();
-        foreach ($this->items as $order) {
+        foreach ($this->list as $order) {
             if ($creditCard->equals($order->getCreditCard()))
                 $matches->addOrder($order);
         }
         return $matches;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function search (User $user, Pastry $pastry, DateTime $startDate, DateTime $endDate): Orders {
-        return (($this->filterByDateRange($startDate, $endDate))->filterByPastry($pastry))->filterByUser($user);
+    public function contains (Order $order): bool {
+        return array_key_exists($order->getid(), $this->list);
     }
 
     public function __toString  (): string {
         $string =  'Orders:' . PHP_EOL;
-        foreach ($this->items as $order) {
+        foreach ($this->list as $order) {
             $string  .= $order . PHP_EOL;
         }
         return nl2br($string);
     }
 
-    public function toTable (): string {
-        $elem = '<table id="ordersTable">'
+    public function tableHeader (): string {
+        return '<table id="ordersTable">'
             . '<thead>'
             . '<tr>'
             . '<th>id</th>'
             . '<th>Customer</th>'
+            . '<th>Delivery Address</th>'
             . '<th>Submission Date</th>'
-            . '<th>Delivery</th>'
-            . '</thead>'
-            . '<tbody>';
-        foreach ($this->items as $order) {
-            $elem .= '<tr>' . $order->toTable() . '</tr>';
+            . '<th>Delivery Date</th>'
+            . ' <th>Total</th>'
+            . '</thead>';
+    }
+
+    public function toTable (): string {
+        $elem = $this->tableHeader() . '<tbody>';
+        foreach ($this->list as $id => $order) {
+            $elem .= '<tr>'
+                . '<td>' . $order->getId() . '</td>'
+                . '<td>' . $order->getUser()->printName() . '</td>'
+                . '<td>' . $order->getRecipientName() . ' ' . $order->getShippingAddress() . '</td>'
+                . '<td>' . $order->submissionTime->format(DATE_TIME_FORMAT) . '</td>'
+                . '<td>' . $order->printDeliveryDate() . '</td>'
+                . '<td>' . number_format($order->getTotalCharge(), 2) . '</td></tr>';
         }
         $elem .= '</tbody></table>';
         return $elem;

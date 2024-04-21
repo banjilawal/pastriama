@@ -3,10 +3,6 @@
 namespace app\models\concretes;
 
 use app\models\abstracts\StoreItem;
-use app\models\lists\ReviewList;
-use app\models\singletons\ReviewsCatalog;
-use DateTime;
-use Exception;
 
 class Pastry extends StoreItem {
 
@@ -36,16 +32,9 @@ class Pastry extends StoreItem {
     }
 
     public function __toString (): string {
-        return $this->getId()
-            . ' ' . $this->getName()
-            . ' ' . number_format($this->getPrice(), 2)
-            . ' ' . $this->getDescription();
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getReviews (): ReviewList { //(ReviewList $reviews): ReviewList {
-        return new ReviewList();
+        return 'id: ' . $this->getId()
+            . ' name:' . $this->getName()
+            . ' price:' . number_format($this->getPrice(), 2)
+            . ' description:' . $this->getDescription();
     }
 }

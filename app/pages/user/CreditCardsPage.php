@@ -4,7 +4,7 @@ namespace app\pages\user;
 
 use app\enums\CreditCardProvider;
 use app\enums\Month;
-use app\models\lists\CreditCardList;
+use app\models\lists\CreditCards;
 use app\pages\Generate;
 use app\pages\Page;
 use app\test\EntityGenerator;
@@ -12,13 +12,13 @@ use DateTime;
 
 class CreditCardsPage extends Page {
 
-    private CreditCardList $creditCards;
+    private CreditCards $creditCards;
     private string $nameOnCard;
 
     /**
-     * @param CreditCardList $creditCards
+     * @param CreditCards $creditCards
      */
-    public function __construct (CreditCardList $creditCards, string $title) {
+    public function __construct (CreditCards $creditCards, string $title) {
         parent::__construct($title);
         $this->nameOnCard = '';
         $this->creditCards = $creditCards;
@@ -101,7 +101,7 @@ class CreditCardsPage extends Page {
         . '</body>';
     }
 
-    public function getPage (): string {
+    public function page (): string {
         return Generate::htmlHead($this->getTitle())
             . Generate::header()
             . Generate::navbar()

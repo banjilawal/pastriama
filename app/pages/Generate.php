@@ -2,6 +2,8 @@
 
 namespace app\pages;
 
+require_once 'styles.css';
+
 class Generate {
     public static function htmlHead (string $title): string {
         return '<!DOCTYPE html><html lang="en">'
@@ -40,7 +42,31 @@ class Generate {
             . '<div class="navItem">'
             . '<a id="shoppingCart" name="shoppingCart" href="userShoppingCart.php">Your Shopping Cart</a>'
             . '</div>'
+            . '<div>' . self::loginForm() . '</div>'
             . '</nav>';
+    }
+
+    public static function loginForm (): string {
+        return '<div class="form">'
+                . '<form name="loginForm" id="loginForm" action="processLoginForm.php" method="post">'
+                    . '<fieldset name="login" id="login">'
+                        . '<legend>Login to Your Account</legend>'
+                        . '<div class="formElement">'
+                            . '<p>'
+                                . '<label for="email">Email</label>'
+                                . '<input type="email" name="email" id="email"  size="30" required>'
+                            . '</p>'
+                        . '</div>'
+                        . '<div class="formElement">'
+                            . '<p>'
+                                . '<label for="password">Password</label>'
+                                . '<input type="password" id="password" name="password" size="30" required>'
+                            . '</p>'
+                        . '</div>'
+                        . '<input type="submit" value="login">'
+                    . '</fieldset>'
+                . '</form>'
+            . '</div>';
     }
 
     public static function footer (): string {

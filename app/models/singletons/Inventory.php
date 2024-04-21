@@ -4,7 +4,7 @@ namespace app\models\singletons;
 
 use app\models\abstracts\Model;
 use app\models\abstracts\StoreItem;
-use app\models\concretes\InventoryItem;
+use app\models\concretes\Product;
 use App\Models\Concretes\Order;
 use app\models\concretes\Pastry;
 use App\Models\Concretes\User;
@@ -45,11 +45,11 @@ class Inventory extends Model {
 //        if (array_key_exists($pastry->getid(), self::$inventory->getItems())) {
 //            throw new Exception($pastry . ' is already recorded');
 //        }
-        self::$items->add(new InventoryItem ($pastry, $quantity));
+        self::$items->addProduct(new Product ($pastry, $quantity));
     }
 
-    public function add (InventoryItem $item): void{
-        self::$items->add($item);
+    public function add (Product $item): void{
+        self::$items->addProduct($item);
     }
 
     public function toTable (
@@ -68,7 +68,7 @@ class Inventory extends Model {
             . '</tr>'
             . '</thead>'
             . '<tbody>';
-        foreach (self::$items->getProducts() as $id => $item) {
+        foreach (self::$items->getList() as $id => $item) {
             $elem .= '<tr onclick="send(' . $id . ')">'
                 . '<td>' . $id . '</td>'
                 . '<td>' . $item->getPastry()->getImgTag() . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'

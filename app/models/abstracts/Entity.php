@@ -2,6 +2,8 @@
 
 namespace app\models\abstracts;
 
+use app\enums\Status;
+
 abstract class Entity extends Model {
     private int $id;
     private Status $staus;

@@ -8,16 +8,27 @@ namespace {
     const APP = PROJECT_ROOT . '\app';
     const TEST = PROJECT_ROOT . '\test';
     const DATASETS = TEST . '\datasets';
-    const FOOD_IMAGES = DATASETS . '\food_images';
+ //   const FOOD_IMAGES = DATASETS . '\food_images';
+    const TESTING_DATASETS = PROJECT_ROOT . '\testing_datasets';
+    const FOOD_IMAGES = TESTING_DATASETS . '\food_images';
+
 //const ASSETS =  PROJECT_ROOT . '\assets';
     const WEBPAGES = PROJECT_ROOT . '\webpages';
     const WEBPAGE_COMPONENTS = WEBPAGES . '\components';
     const NAVIGATION_PAGES = WEBPAGE_COMPONENTS . '\navigation';
 
-    echo nl2br('From bootstrap.php: Datasets_PATH = ' . DATASETS . PHP_EOL);
+//    echo nl2br('From bootstrap.php: Datasets_PATH = ' . DATASETS . PHP_EOL);
+    echo nl2br('From bootstrap.php: Testing_Datasets_PATH = ' . TESTING_DATASETS . PHP_EOL);
 
 //$files = scandir(DATASETS);
 //print_r($files);
+
+
+    const DATE_FORMAT = 'Y-m-d';
+    const DATE_TIME_FORMAT = 'Y-m-d h:m:s.n';
+    const MINIMUM_TAX_PERCENTAGE = 0;
+    const MAXIMUM_TAX_PERCENTAGE = 35;
+    const DEFAULT_TAX_PERCENTAGE = 5;
 
     const LETTERS = array(
         'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
@@ -63,7 +74,7 @@ namespace {
         if (!isset($data)) {
             Throw new \Exception($data . ' Cannot process null data');
         }
-        $data = trim($data);
+        $data = trim($data, " \t\n\r\0\x0B.");
         $data = stripslashes($data);
         return htmlspecialchars($data);
     }

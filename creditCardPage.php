@@ -6,9 +6,13 @@ if (session_status() != PHP_SESSION_ACTIVE) {
 require_once 'bootstrap.php';
 //require_once 'WebPage.php';
 
+use app\enums\CreditCardProvider;
+use app\enums\Month;
 use app\models\concretes\CreditCard;
 use app\models\concretes\User;
-//use app\models\lists\CreditCardList;
+use app\test\EntityGenerator;
+
+//use app\models\lists\CreditCards;
 //use app\test\EntityGenerator;
 
 
@@ -25,7 +29,7 @@ use app\models\concretes\User;
 //        return $this->user;
 //    }
 //
-//    public function getCreditCards (): CreditCardList {
+//    public function getCreditCards (): CreditCards {
 //        return $this->user->getCreditCards();
 //    }
 //
@@ -201,7 +205,7 @@ $title = 'Your Credit Cards ' . $user->printName();
             <fieldset name="cardInformationFieldset" id="cardInformationFieldset">
                 <legend>Credit Card Information</legend>
                 <div class="formElement">
-                    <?php echo CreditCard::getVendorSelector(); ?>
+                    <?php echo CreditCardProvider::selector(); ?>
                 </div>
                 <div class="formElement">
                     <p>
@@ -247,8 +251,8 @@ $title = 'Your Credit Cards ' . $user->printName();
                 <div class="formElement">
                     <p>
                         <?php
-                            echo CreditCard::getExpirationMonthSelector();
-                            echo CreditCard::getExpirationYearSelector();
+                            echo Month::selector();
+                            echo EntityGenerator::yearSelector(DateTime::createFromFormat('Y', date('Y')));
                         ?>
                     </p>
                 </div>

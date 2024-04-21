@@ -8,15 +8,15 @@ use app\models\concretes\User;
 use Exception;
 
 class Users extends Model {
-    private array $items;
+    private array $list;
 
     public function __construct () {
         parent::__construct();
-        $this->items = array();
+        $this->list = array();
     }
 
-    public function getItems (): User|array {
-        return $this->items;
+    public function getList (): User|array {
+        return $this->list;
     }
 
     /**
@@ -32,13 +32,13 @@ class Users extends Model {
      * @throws Exception
      */
     public function add (User $user): void {
-        if (array_key_exists($user->getId(), $this->items)) {
+        if (array_key_exists($user->getId(), $this->list)) {
             throw new Exception($user->getId() . ' is already in the list');
         }
         if (!is_null($this->searchByEmail($user->getEmailAddress()))) {
            throw new Exception('A user with email ' . $user->getEmailAddress() . ' already exists. Adding user operations failed');
         }
-        $this->items[$user->getId()] = $user;
+        $this->list[$user->getId()] = $user;
     }
 
     /**
@@ -55,15 +55,15 @@ class Users extends Model {
      */
     public function remove (User $user): void {
         $id = $user->getId();
-        if (!array_key_exists($id, $this->items)) {
+        if (!array_key_exists($id, $this->list)) {
             throw new Exception($user->getEmailAddress()
                 . ' does not exist in the list. Cannot remove nonexistent user named ' . $user->getName());
         }
-        unset($this->items[$id]);
+        unset($this->list[$id]);
     }
 
     public function searchByEmail (EmailAddress $email): ?User {
-        foreach ($this->items as $user) {
+        foreach ($this->list as $user) {
 //            echo nl2br('testing if ' . $user->printName() . ' has email ' . $email . PHP_EOL);
             if ($user->getEmailAddress()->equals($email) === true) { //__toString() === $email->__toString()) {
                 echo nl2br($user->printName() . ' has email ' . $email . PHP_EOL);
@@ -74,7 +74,7 @@ class Users extends Model {
     }
 
     public function searchById (int $id): ?User {
-        foreach ($this->items as $user) {
+        foreach ($this->list as $user) {
             if ($user->getId() === $id)
                 return $user;
         }
@@ -92,8 +92,8 @@ class Users extends Model {
             . '</tr>'
             . '</thead>'
             . '<tbody>';
-        foreach ($this->items as $id => $user) {
-            $elem .= $this->items[$id]->toRow();
+        foreach ($this->list as $id => $user) {
+            $elem .= $this->list[$id]->toRow();
         }
         $elem .= '</tbody></table>';
         return $elem;
