@@ -94,6 +94,7 @@ class PostalAddress extends Address implements Identifiable {
         if (is_null($object)) return false;
         if ($object instanceof PostalAddress) {
             return parent::equals($object)
+                && $this->id === $object->getId()
                 && $this->street === $object->getStreet()
                 && $this->city === $object->getCity()
                 && $this->state === $object->getState()

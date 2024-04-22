@@ -4,7 +4,6 @@ namespace app\models\lists;
 
 use app\models\abstracts\Model;
 use app\models\concretes\CreditCard;
-use app\models\concretes\User;
 use Exception;
 
 class CreditCards extends Model {
@@ -193,5 +192,9 @@ class CreditCards extends Model {
         }
         $elem .= '</select>';
         return $elem;
+    }
+
+    public function randomCreditCard (): CreditCard {
+        return $this->list[array_rand($this->list)];
     }
 }

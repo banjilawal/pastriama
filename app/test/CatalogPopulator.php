@@ -4,10 +4,10 @@ namespace app\test;
 
 use app\models\lists\Products;
 use app\models\lists\Users;
-use app\models\singletons\Inventory;
-use app\models\singletons\OrdersCatalog;
-use app\models\singletons\ReviewsCatalog;
-use app\models\singletons\UsersCatalog;
+use app\models\catalogs\Inventory;
+use app\models\catalogs\OrdersCatalog;
+use app\models\catalogs\ReviewsCatalog;
+use app\models\catalogs\UsersCatalog;
 use Exception;
 
 class CatalogPopulator {
@@ -38,7 +38,7 @@ class CatalogPopulator {
         UsersCatalog $users,
         Inventory $inventory
     ): void {
-        $reviews = ListGenerator::reviews($users->getUsers(), $inventory->getItems());
+        $reviews = ListGenerator::reviews($users->getUsers(), $inventory->getProducts());
         foreach ($reviews->getList() as $review) {
             $catalog->add($review);
         }
@@ -46,7 +46,7 @@ class CatalogPopulator {
 
     public static function populateShoppingCarts (UsersCatalog $users, Inventory $inventory): void {
         foreach ($users->getUsers() as $user) {
-            EntityGenerator::invoice($inventory->getItems())->transferToTarget($user->getShoppingCart());
+            EntityGenerator::invoice($inventory->getProducts())->transferToTarget($user->getShoppingCart());
         }
     }
 

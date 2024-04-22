@@ -7,7 +7,7 @@ use app\models\abstracts\StoreItem;
 use DateTime;
 
 class Wish extends Entity {
-    private int $id;
+
     private Pastry $pastry;
     private DateTime $creationTime;
 
@@ -30,7 +30,7 @@ class Wish extends Entity {
         if (is_null($object)) return false;
         if ($object instanceof Wish) {
             return parent::equals($object)
-                && $this->id === $object->getId()
+                && $this->getId() === $object->getId()
                 && $this->pastry->equals($object->getPastry())
                 && $this->creationTime === $object->getCreationTime();
         }
@@ -41,7 +41,7 @@ class Wish extends Entity {
         return 'id:' . $this->getId()
             . ' ' . $this->pastry->getName()
             . ' price:' . number_format($this->pastry->getPrice())
-            . ' created at:' . $this->creationTime->format(DATE_TIME_FORMAT);
+            . ' add at:' . $this->creationTime->format(DATE_TIME_FORMAT);
     }
 
     public function toRow (

@@ -19,7 +19,7 @@ use app\models\concretes\User;
 use app\models\concretes\Zipcode;
 use app\models\lists\Products;
 use app\models\lists\Pastries;
-use app\models\singletons\Inventory;
+use app\models\catalogs\Inventory;
 use app\utils\SerialNumber;
 use DateTime;
 use Exception;

@@ -4,100 +4,88 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="Wrote and tested first draft of CreditCard class">
-      <change afterPath="$PROJECT_DIR$/app/clients/Client.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/dispatchers/Dispatcher.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/dispatchers/ReviewDispatcher.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/Dashboard.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/Dispatch.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/Identifiable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/PageAssembler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/Receive.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/ReceiveReply.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/ReceiveRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/Reply.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/Request.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/SendReply.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/SendRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/review/ReviewClient.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/review/ReviewDispatch.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/review/ReviewServer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/pages/OrderPage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/pages/ReviewPage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/pages/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/pages/user/WishlistPage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/requests/Request.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/requests/Requestor.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/requests/reviews/GetReviewsRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/servers/Reply.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/servers/ReviewServer/ReviewServerReply.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/servers/ReviewServer/ReviewServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/servers/Server.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/Service.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/review/ReviewClientRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/review/ReviewClients.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/review/ReviewService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/AssemblePage.php" afterDir="false" />
+    <list default="true" id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="Started working on microsevices and despatchers. Got first draft of content service working that sends page components.">
+      <change afterPath="$PROJECT_DIR$/app/enums/HostType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/enums/Service.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/Equality.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/catalogs/PastriesCatalog.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/dispatchers/ReviewDispatcher.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/identifiers/ClientAddress.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/identifiers/HostAddress.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/identifiers/ServerAddress.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/identifiers/ServerReplyIdentifier.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/identifiers/ServiceRequestIdentifier.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/lists/ClientAddressList.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/lists/ServerAddressList.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/requests/AccountServiceRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/requests/ServiceRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/enums/ClientType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/enums/ReviewService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/hosts/ReviewServiceClients.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/hosts/ReviewServiceResponders.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/interfaces/ReviewServer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/interfaces/ReviewServiceClient.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/interfaces/ReviewServiceDispatcher.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/messages/PastryQuery.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/messages/ReviewServerResponse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/messages/ReviewServiceQuery.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/messages/UserQuery.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/messages/collections/ReviewServerRepliesQueue.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/messages/collections/ReviewServerResponses.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/services/reviewService/messages/collections/ReviewServiceQueries.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvoiceListPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/InvoiceListPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReviewListPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/ReviewListPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserListPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/UserListPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/interfaces/Renderable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/interfaces/Render.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/clients/Client.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dispatchers/Dispatcher.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dispatchers/ReviewDispatcher.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/enums/Month.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/enums/Month.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/enums/State.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/enums/State.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/Identifiable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/interfaces/Identifiable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/Receive.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/ReceiveReply.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/interfaces/Disable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/ReceiveRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/Reply.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/Request.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/SendReply.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/SendRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/review/ReviewClient.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/review/ReviewDispatch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/review/ReviewServer.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/abstracts/Entity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Entity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/NamedEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/NamedEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/Person.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Person.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/Status.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/enums/Status.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/StoreItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/StoreItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Domain.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Domain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/EmailAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/EmailAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/InventoryItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Pastry.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Pastry.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Review.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/Wish.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Wish.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/CreditCardList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/CreditCards.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/Orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/lists/CreditCards.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/CreditCards.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/lists/Pastries.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/Pastries.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/PostalAddressList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/PostalAddressList.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/lists/Products.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/Products.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/ReviewList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/Reviews.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/lists/Reviews.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/Reviews.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/lists/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/Users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/WishList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/lists/Wishlist.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/singletons/Inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/singletons/Inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/singletons/ReviewsCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/singletons/ReviewsCatalog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/singletons/UsersCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/singletons/UsersCatalog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/FormComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/FormComposer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/Generate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/Generate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/Page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/ProductPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/ProductPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/user/CreditCardsPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/user/CreditCardsPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/singletons/Inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/Inventory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/singletons/OrdersCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/OrdersCatalog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/singletons/ReviewsCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/ReviewsCatalog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/singletons/UsersCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/UsersCatalog.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/processors/Process.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/processors/Process.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/requests/AddCreditCardRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/requests/requests/AddCreditCardRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/requests/AddShippingAddressRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/requests/requests/AddShippingAddressRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/requests/LoginRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/requests/requests/LoginRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/requests/RegisterAccountRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/requests/requests/RegisterAccountRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/requests/queries/PastryQueryRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/requests/requests/queries/PastryQueryRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/responses/Response.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/requests/Request.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/requests/Request.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/requests/Requestor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/requests/requests/AddCreditCardRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/requests/requests/AddCreditCardRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/requests/requests/AddShippingAddressRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/requests/requests/AddShippingAddressRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/requests/requests/LoginRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/requests/requests/LoginRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/requests/requests/RegisterAccountRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/requests/requests/RegisterAccountRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/requests/requests/queries/PastryQueryRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/requests/reviews/GetReviewsRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/servers/Reply.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/replies/ServerReply.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/servers/ReviewServer/ReviewServerReply.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/servers/ReviewServer/ReviewServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/servers/Server.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/Service.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/review/ReviewClientRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/review/ReviewClients.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/review/ReviewService.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/test/CatalogPopulator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/CatalogPopulator.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/test/EntityGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/EntityGenerator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/ListGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/ListGenerator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/datasets/addresses.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/utils/SerialNumber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/SerialNumber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classfulWelcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/classfulWelcome.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/createAccountForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/createAccountForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/creditCardPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/creditCardPage.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inventoryItemPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/inventoryItemPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processAddToCartForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/processAddToCartForm.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/processLoginForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/processLoginForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renders/getCreditCardsPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/renders/getCreditCardsPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renders/getProductPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/renders/getProductPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/welcome.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -134,25 +122,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/pastriama/app/pages&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;php.override.implement.member.chooser.php.doc&quot;: &quot;NONE&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/xampp/htdocs/pastriama/app/pages",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "php.override.implement.member.chooser.php.doc": "NONE",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\pastriama\app\pages" />
@@ -221,6 +209,8 @@
       <workItem from="1712972759709" duration="40602000" />
       <workItem from="1713196004772" duration="113850000" />
       <workItem from="1713458723231" duration="100765000" />
+      <workItem from="1713708381969" duration="16487000" />
+      <workItem from="1713729909536" duration="33697000" />
     </task>
     <task id="LOCAL-00001" summary="Gont classes to work with composer for autoloadng casses and managing dependencies">
       <option name="closed" value="true" />
@@ -262,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713459142376</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Started working on microsevices and despatchers. Got first draft of content service working that sends page components.">
+      <option name="closed" value="true" />
+      <created>1713708575329</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1713708575329</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,7 +271,8 @@
     <MESSAGE value="Rewrote some classes implemented initial Request/Response successfully." />
     <MESSAGE value="Created classes, interfaces, and welcomePage that assembles a webpage from components" />
     <MESSAGE value="Wrote and tested first draft of CreditCard class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Wrote and tested first draft of CreditCard class" />
+    <MESSAGE value="Started working on microsevices and despatchers. Got first draft of content service working that sends page components." />
+    <option name="LAST_COMMIT_MESSAGE" value="Started working on microsevices and despatchers. Got first draft of content service working that sends page components." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -296,6 +295,11 @@
           <url>file://$PROJECT_DIR$/pageComponents.php</url>
           <line>29</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/replies/ReviewServer/ReviewServiceProvider.php</url>
+          <line>6</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -7,7 +7,6 @@ enum Month: int {
     case FEBRUARY = 2;
     case MARCH = 3;
     case APRIL = 4;
-
     case MAY = 5;
     case JUNE = 6;
     case JULY = 7;

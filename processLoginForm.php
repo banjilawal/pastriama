@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-use app\requests\requests\LoginRequest;
 use app\service\responses\Response;
+use app\services\requests\requests\LoginRequest;
 
 if (empty(session_id())) {
     session_start();

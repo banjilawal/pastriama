@@ -7,10 +7,10 @@ else {
     session_start();
 }
 
-use app\models\singletons\Inventory;
-use app\models\singletons\OrdersCatalog;
-use app\models\singletons\ReviewsCatalog;
-use app\models\singletons\UsersCatalog;
+use app\models\catalogs\Inventory;
+use app\models\catalogs\OrdersCatalog;
+use app\models\catalogs\ReviewsCatalog;
+use app\models\catalogs\UsersCatalog;
 use app\test\ListGenerator;
 require_once 'bootstrap.php';
 

@@ -10,6 +10,11 @@ class SerialNumber {
     protected static int $creditCardId = 0;
     protected static int $postalAddressId = 0;
 
+    protected static int $reviewServerReplyId = 0;
+    protected static int $reviewServiceRequestId = 0;
+
+
+
     public static function nextUserId (): int {
         self::$userId++;
         return self::$userId;
@@ -38,5 +43,15 @@ class SerialNumber {
     public static function nextPostalAddressId (): int {
         self::$postalAddressId++;
         return self::$postalAddressId;
+    }
+
+    public static function nextReviewServerReplyId  (): int {
+        self::$reviewServerReplyId++;
+        return self::$reviewServerReplyId;
+    }
+
+    public static function nextReviewServiceRequestId   (): int {
+        self::$reviewServiceRequestId ++;
+        return self::$reviewServiceRequestId ;
     }
 }

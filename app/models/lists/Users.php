@@ -98,4 +98,8 @@ class Users extends Model {
         $elem .= '</tbody></table>';
         return $elem;
     }
+
+    public function randomUser (): User {
+        return $this->list[array_rand($this->list)];
+    }
 }

@@ -4,7 +4,6 @@ namespace app\models\lists;
 
 use app\models\abstracts\Model;
 use app\models\concretes\Pastry;
-use app\models\concretes\Product;
 use app\models\concretes\Review;
 use app\models\concretes\User;
 use DateTime;
@@ -176,5 +175,9 @@ class Reviews extends Model {
         }
         $elem .= '</tbody></table>';
         return $elem;
+    }
+
+    public function randomReview (): Review {
+        return $this->list[array_rand($this->list)];
     }
 }

@@ -3,8 +3,8 @@
 namespace app\processors;
 
 use app\models\concretes\CreditCard;
-use app\requests\requests\AddCreditCardRequest;
-use app\requests\requests\AddShippingAddressRequest;
+use app\services\requests\requests\AddCreditCardRequest;
+use app\services\requests\requests\AddShippingAddressRequest;
 use app\test\EntityGenerator;
 use Exception;
 

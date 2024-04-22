@@ -5,6 +5,7 @@ namespace app\models\lists;
 use app\models\abstracts\Model;
 use app\models\abstracts\StoreItem;
 use App\models\concretes\Pastry;
+use app\models\concretes\User;
 use DateTime;
 use Exception;
 
@@ -147,5 +148,9 @@ class Pastries extends Model {
         }
         $elem .= '</tbody></table>';
         return $elem;
+    }
+
+    public function randomPastry (): Pastry {
+        return $this->list[array_rand($this->list)];
     }
 }

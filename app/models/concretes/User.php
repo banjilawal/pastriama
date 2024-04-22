@@ -5,13 +5,13 @@ namespace app\models\concretes;
 
 use app\models\lists\Products;
 use app\models\lists\PostalAddressList;
-use app\models\singletons\ReviewsCatalog;
+use app\models\catalogs\ReviewsCatalog;
 use app\models\abstracts\Person;
 
 use app\models\lists\CreditCards;
 use app\models\lists\Orders;
 use App\models\lists\Reviews;
-use app\models\singletons\OrdersCatalog;
+use app\models\catalogs\OrdersCatalog;
 use app\models\lists\Wishlist;
 use DateTime;
 use Exception;

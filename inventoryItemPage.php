@@ -9,7 +9,7 @@ require_once 'bootstrap.php';
 use app\models\concretes\Product;
 use app\models\concretes\Pastry;
 use app\models\concretes\Review;
-use app\models\singletons\Inventory;
+use app\models\catalogs\Inventory;
 use app\test\ListGenerator;
 
 //class PastryPage extends WebPage {

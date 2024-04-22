@@ -5,7 +5,7 @@ namespace app\models\lists;
 use app\models\abstracts\Model;
 use app\models\concretes\Product;
 use app\models\concretes\Pastry;
-use app\models\singletons\Inventory;
+use app\models\catalogs\Inventory;
 use Exception;
 
 class Products extends Model {
@@ -220,16 +220,16 @@ class Products extends Model {
         return $string;
     }
 
-    public function randomItem (): Product {
-//        $index = array_rand(array_keys($this->products));
-        $key = array_keys($this->list)[array_rand(array_keys($this->list))];
-        if ($this->list[$key]->getQuantity() <= Products::MINIMUM_QUANTITY) {
-            $this->list[$key]->increaseQuantity(Products::MINIMUM_QUANTITY * 20);
-        }
-        $quantity = rand(1, (Products::MINIMUM_QUANTITY * 2));
-        $this->list[$key]->decreaseQuantity($quantity);
-        return new Product($this->list[$key]->getPastry(), $quantity);
-    }
+//    public function randomItem (): Product {
+////        $index = array_rand(array_keys($this->products));
+//        $key = array_keys($this->list)[array_rand(array_keys($this->list))];
+//        if ($this->list[$key]->getQuantity() <= Products::MINIMUM_QUANTITY) {
+//            $this->list[$key]->increaseQuantity(Products::MINIMUM_QUANTITY * 20);
+//        }
+//        $quantity = rand(1, (Products::MINIMUM_QUANTITY * 2));
+//        $this->list[$key]->decreaseQuantity($quantity);
+//        return new Product($this->list[$key]->getPastry(), $quantity);
+//    }
 
     public function toTable (): string {
         $elem = '<table id="invoiceTable">'
@@ -273,5 +273,7 @@ class Products extends Model {
 //        return $elem;
     }
 
-
+    public function randomProduct (): Product {
+        return $this->list[array_rand($this->list)];
+    }
 }
