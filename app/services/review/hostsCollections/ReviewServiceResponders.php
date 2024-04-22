@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace app\services\reviewService\hosts;
+namespace app\services\review\hostsCollections;
 
 use app\services\identifiers\ServerAddress;
-use app\services\reviewService\interfaces\ReviewServer;
+use app\services\review\interfaces\ReviewServer;
 use Exception;
 
 class ReviewServiceResponders {

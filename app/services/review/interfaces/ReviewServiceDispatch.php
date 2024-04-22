@@ -1,12 +1,12 @@
 <?php
 
-namespace app\services\reviewService\interfaces;
+namespace app\services\review\interfaces;
 
-use app\services\reviewService\messages\collections\ReviewServiceQueries;
-use app\services\reviewService\messages\ReviewServerResponse;
-use app\services\reviewService\messages\ReviewServiceQuery;
+use app\services\review\messages\client\ReviewServiceQueries;
+use app\services\review\messages\client\ReviewServiceQuery;
+use app\services\review\messages\server\ReviewServerResponse;
 
-interface ReviewServiceDispatcher {
+interface ReviewServiceDispatch {
 
     public function getId ();
     public function getRequestQueue (): ReviewServiceQueries;

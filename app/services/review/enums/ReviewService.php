@@ -1,6 +1,6 @@
 <?php
 
-namespace app\services\reviewService\enums;
+namespace app\services\review\enums;
 
 enum ReviewService: string {
 

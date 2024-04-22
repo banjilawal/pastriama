@@ -1,12 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace app\services\reviewService\messages\collections;
+namespace app\services\review\messages\server;
 
-use app\services\reviewService\messages\ReviewServerResponse;
 use Exception;
 use SplQueue;
 
-class ReviewServerRepliesQueue {
+class ServerResponseQueue {
 
     private SplQueue $queue;
 
@@ -37,9 +36,9 @@ class ReviewServerRepliesQueue {
     /**
      * @throws Exception
      */
-    public function copy (): ReviewServerRepliesQueue {
-        $copy = new ReviewServerRepliesQueue();
-        $temp = new ReviewServerRepliesQueue();
+    public function copy (): ServerResponseQueue {
+        $copy = new ServerResponseQueue();
+        $temp = new ServerResponseQueue();
         $request = null;
 
         while (!$this->queue->isEmpty()) {

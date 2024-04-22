@@ -1,28 +1,28 @@
 <?php
 
-namespace app\services\reviewService\messages;
+namespace app\services\review\messages\client;
 
 use app\services\identifiers\ClientAddress;
 use app\services\identifiers\ServiceRequestIdentifier;
 use app\services\requests\ServiceRequest;
-use app\services\reviewService\enums\ClientType;
-use app\services\reviewService\enums\ReviewService;
+use app\services\review\enums\ReviewService;
+use app\services\review\enums\ReviewServiceClientType;
 
 abstract class ReviewServiceQuery extends ServiceRequest {
 
     private ReviewService $service;
-    private ClientType $clientType;
+    private ReviewServiceClientType $clientType;
 
     /**
      * @param ReviewService $service
-     * @param ClientType $clientType
+     * @param ReviewServiceClientType $clientType
      * @param ClientAddress $clientAddress
      * @param ServiceRequestIdentifier $queryId
      */
     public function __construct (
-        ReviewService $service,
-        ClientType $clientType,
-        CLientAddress $clientAddress,
+        ReviewService            $service,
+        ReviewServiceClientType  $clientType,
+        CLientAddress            $clientAddress,
         ServiceRequestIdentifier $queryId,
     ) {
         parent::__construct($clientAddress, $queryId);
@@ -34,7 +34,7 @@ abstract class ReviewServiceQuery extends ServiceRequest {
         return $this->service;
     }
 
-    public function getClientType (): ClientType {
+    public function getClientType (): ReviewServiceClientType {
         return $this->clientType;
     }
 

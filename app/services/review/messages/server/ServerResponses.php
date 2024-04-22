@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace app\services\reviewService\messages\collections;
+namespace app\services\review\messages\server;
 
 use app\services\identifiers\ServerReplyIdentifier;
-use app\services\reviewService\messages\ReviewServerResponse;
+use app\services\review\messages\client\ReviewServiceQuery;
 use Exception;
 
-class ReviewServerResponses {
+class ServerResponses {
     private array $list;
 
     public function __construct () {
@@ -40,10 +40,17 @@ class ReviewServerResponses {
 
     }
 
-    public function searchById (ServerReplyIdentifier $responseId): ?ReviewServerResponse {
+    public function searchByResponseId (ServerReplyIdentifier $responseId): ?ReviewServerResponse {
         foreach ($this->list as $response) {
             if ($response->responseId()->equals($responseId))
                 return $response;
+        }
+        return null;
+    }
+
+    public function searchByQuery (ReviewServiceQuery $query): ?ReviewServerResponse {
+        foreach ($this->list as $response) {
+            if ($response->getQuery()->equals($query)) { return $response; }
         }
         return null;
     }
