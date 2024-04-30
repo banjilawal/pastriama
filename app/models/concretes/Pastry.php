@@ -1,10 +1,9 @@
 <?php declare(strict_types=1);
-
 namespace app\models\concretes;
 
-use app\models\abstracts\StoreItem;
+use app\models\abstracts\Product;
 
-class Pastry extends StoreItem {
+class Pastry extends Product {
 
     public function __construct (
         int $id,
@@ -31,10 +30,10 @@ class Pastry extends StoreItem {
         return false;
     }
 
-    public function __toString (): string {
-        return 'id: ' . $this->getId()
-            . ' name:' . $this->getName()
-            . ' price:' . number_format($this->getPrice(), 2)
-            . ' description:' . $this->getDescription();
-    }
+//    public function __toString (): string {
+//        return 'id: ' . $this->getId()
+//            . ' name:' . $this->getName()
+//            . ' price:' . number_format($this->getPrice(), 2)
+//            . ' description:' . $this->getDescription();
+//    }
 }

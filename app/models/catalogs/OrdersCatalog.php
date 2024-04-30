@@ -3,9 +3,9 @@
 namespace app\models\catalogs;
 
 use app\models\abstracts\Model;
-use App\Models\Concretes\Order;
+use App\Models\Concretes\NewOrder;
 use App\Models\Concretes\User;
-use App\Models\Lists\Orders;
+use App\Models\collections\Orders;
 use DateTime;
 use Exception;
 
@@ -35,7 +35,7 @@ class OrdersCatalog extends Model {
     /**
      * @throws Exception
      */
-    public function add (Order $order): void {
+    public function add (NewOrder $order): void {
         self::$orders->addOrder($order);
     }
 //

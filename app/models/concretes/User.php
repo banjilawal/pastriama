@@ -3,25 +3,25 @@
 namespace app\models\concretes;
 
 
-use app\models\lists\Products;
-use app\models\lists\PostalAddressList;
+use app\models\collections\InvoiceItems;
+use app\models\collections\Addresses;
 use app\models\catalogs\ReviewsCatalog;
 use app\models\abstracts\Person;
 
-use app\models\lists\CreditCards;
-use app\models\lists\Orders;
-use App\models\lists\Reviews;
+use app\models\collections\CreditCards;
+use app\models\collections\Orders;
+use App\models\collections\Reviews;
 use app\models\catalogs\OrdersCatalog;
-use app\models\lists\Wishlist;
+use app\models\collections\Wishlist;
 use DateTime;
 use Exception;
 
 class User extends Person {
 
     private Wishlist $wishList;
-    private Products $shoppingCart;
+    private InvoiceItems $shoppingCart;
     private CreditCards $creditCards;
-    private PostalAddressList $shippingAddresses;
+    private Addresses $shippingAddresses;
 
     /**
      * @throws Exception
@@ -47,9 +47,9 @@ class User extends Person {
             $password,
             $billingAddress
         );
-        $this->shippingAddresses = new PostalAddressList();
+        $this->shippingAddresses = new Addresses();
         $this->creditCards = new CreditCards();
-        $this->shoppingCart = new Products();
+        $this->shoppingCart = new InvoiceItems();
         $this->wishList = new Wishlist();
 
 //        $this->shippingAddresses->setPrimaryShippingAddress($billingAddress);
@@ -60,7 +60,7 @@ class User extends Person {
         return $this->getPostalAddress();
     }
 
-    public function getShippingAddresses (): PostalAddressList {
+    public function getShippingAddresses (): Addresses {
         return $this->shippingAddresses;
     }
 
@@ -68,7 +68,7 @@ class User extends Person {
         return $this->creditCards;
     }
 
-    public function getShoppingCart (): Products {
+    public function getShoppingCart (): InvoiceItems {
         return $this->shoppingCart;
     }
 
@@ -76,19 +76,34 @@ class User extends Person {
         return $this->wishList;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function getOrders (Orders $source): Orders { //DateTime $startDate, DateTime $endDate): Orders {
-        return $source->filterByUser($this);
-    }
+//    public function displayShoppingCart (): string {
+//        $elem = '<div class="shoppingCart"><ul class="shoppingCart">';
+//        foreach ($this->shoppingCart as $id => $item) {
+//            $checkboxId = 'saveProduct_' . $id;
+//            $radioButtonId = 'deleteProduct_' .$id;
+//            $elem .= '<li class="shoppingCartItem">'
+//                . '<label for ' . $checkboxId . '>Save for later</label>'
+//                . '<input type="checkbox" id="' . $checkboxId . '" name="save" value="' . $id .'">'
+//                . '&nbsp;' .$item->toTable() . '&nbsp;'
+//                . '<label for ' . $radioButtonId . '>Remove from your shopping cart</label>'
+//                . '<input type="radio" id="' .$radioButtonId . '" name="delete" value="'.  $id . '">';
+//        }
+//        return $elem . '</ul></div>';
+//    }
 
-    /**
-     * @throws Exception
-     */
-    public function getReviews (Reviews $source): Reviews { //DateTime $startDate, DateTime $endDate): ReviewList {
-        return $source->filterByUser($this); //userSearch($this, $startDate, $endDate);
-    }
+//    /**
+//     * @throws Exception
+//     */
+//    public function getOrders (Orders $source): Orders { //DateTime $startDate, DateTime $endDate): Orders {
+//        return $source->filterByUser($this);
+//    }
+//
+//    /**
+//     * @throws Exception
+//     */
+//    public function getReviews (Reviews $source): Reviews { //DateTime $startDate, DateTime $endDate): ReviewList {
+//        return $source->filterByUser($this); //userSearch($this, $startDate, $endDate);
+//    }
 
     public function equals ($object): bool {
         if ($object instanceof User) return parent::equals($object);

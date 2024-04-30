@@ -9,13 +9,13 @@ if (session_status() === PHP_SESSION_ACTIVE) {
 
 require_once '..\bootstrap.php';
 
-use app\pages\user\CreditCardsPage;
+use app\elements\user\CreditCardsPageElement;
 
 
 $user = unserialize($_SESSION['user']);
 echo $user;
 
-$page = new CreditCardsPage($user->getCreditCards(), 'Your Credit Cards ' . $user->getFirstname());
+$page = new CreditCardsPageElement($user->getCreditCards(), 'Your Credit Cards ' . $user->getFirstname());
 try {
     echo $page->page();
 } catch (Exception $e) {

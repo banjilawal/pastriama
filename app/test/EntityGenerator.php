@@ -9,16 +9,17 @@ use app\enums\State;
 use app\models\concretes\CreditCard;
 use app\models\concretes\Domain;
 use app\models\concretes\EmailAddress;
+use app\models\concretes\NewOrder;
+use app\models\concretes\InventoryItem;
 use app\models\concretes\Order;
-use app\models\concretes\Product;
 use app\models\concretes\Pastry;
 use app\models\concretes\Phone;
 use app\models\concretes\PostalAddress;
-use app\models\concretes\Review;
+use app\models\concretes\NewReview;
 use app\models\concretes\User;
 use app\models\concretes\Zipcode;
-use app\models\lists\Products;
-use app\models\lists\Pastries;
+use app\models\collections\InvoiceItems;
+use app\models\collections\Pastries;
 use app\models\catalogs\Inventory;
 use app\utils\SerialNumber;
 use DateTime;
@@ -30,17 +31,10 @@ define('TRANSACTION_DATE_FLOOR', DateTime::createFromFormat('Y-m-d', '2020-01-01
 define('PICTURES_PATH', '..\..\testing_datasets\food_images');
 class EntityGenerator {
 
-
     private const MAX_SHIPPING_ADDRESSES = 2;
-    private const MIN_PASTRY_PRICE = 1;
-    private const MAX_PASTRY_PRICE = 3;
 
-    private const MIN_INVOICE_SIZE = 0;
-    private const MAX_INVOICE_SIZE = 4;
     private const MIN_ADDITIONAL_CARDS = 0;
     private const MAX_ADDITIONAL_CARDS = 5;
-    private const MINIMUM_ITEM_QUANTITY = 1;
-    private const MAXIMUM_ITEM_QUANTITY = 24;
 
 //   private const FIRSTNAMES = DATASETS . DIRECTORY_SEPARATOR . 'firstnames.csv'; //DATASETS . '\lastnames.txt';
 //    private const LASTNAMES = DATASETS . DIRECTORY_SEPARATOR . 'lastnames.txt'; //DATASETS . '\firstnames.csv';
@@ -54,7 +48,6 @@ class EntityGenerator {
     private const ADDRESSES = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'addresses.csv';
     private const FOODS = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'foods.csv';
     private const IMAGES = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'food_images';
-
     private const FOOD_REVIEWS = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'food_reviews.csv';
 
 
@@ -89,7 +82,7 @@ class EntityGenerator {
         $number = explode(',\'', $fields[0])[1];
         $street = $number . ' ' . $fields[1];
         $city = trim($fields[2], ' \'');
-        $state = State::from('Minnesota');
+        $state = State::MINNESOTA;
         $zipcode = new Zipcode($fields[3]);
         return new PostalAddress(SerialNumber::nextPostalAddressId(), $street, $city, $state, $zipcode);
     }
@@ -185,15 +178,10 @@ class EntityGenerator {
         $separator = trim(EMAIL_SEPARATORS[array_rand(EMAIL_SEPARATORS)]);
         $extraChars = trim(self::getExtraChars());
         $mailbox = trim(strtolower($firstname)) . trim($separator) . trim(strtolower($lastname)) . $extraChars;
-        $index = array_rand(EMAIL_PROVIDERS);
         $fields = explode('.', EMAIL_PROVIDERS[array_rand(EMAIL_PROVIDERS)]);
-        $name = trim(implode('.', array_slice($fields, 0, -1))); //$providerFields)
+        $name = trim(implode('.', array_slice($fields, 0, -1)));
         $tld = trim($fields[count($fields) - 1], ' ');
-//        $array = explode('.', EMAIL_PROVIDERS[$index]);
-//        $name = trim(implode('.', array_slice($array, 0, -1)), ' ');
         $domain = new Domain($name, $tld);
-//        echo '<br>domain:' . $domain . PHP_EOL . '<br>';
-//        $domain = new Domain($name, $array[count($array) - 1]);
         return new EmailAddress($mailbox, $domain);
     }
 
@@ -240,26 +228,23 @@ class EntityGenerator {
             $name,
             $description,
             self::imagePath(),
-            self::amount(self::MIN_PASTRY_PRICE, self::MAX_PASTRY_PRICE)
+            self::amount(LOWEST_PRICE, HIGHEST_PRICE)
         );
     }
 
     /**
      * @throws Exception
      */
-    public static function review (User $user, Pastry $pastry): Review {
+    public static function review (User $user, Pastry $pastry): NewReview {
         $lines = file(self::FOOD_REVIEWS);
         $tuple = explode(',', $lines[rand(2, count($lines) - 1)]);
-//        $index = rand(2, count($lines) -1);
-//        $data = explode(',', $lines[$index]);
-//        print_r($data);
         $title = trim($tuple[0], '"');
         $content = trim($tuple[1], '"');
-        return new Review(
+        return new NewReview(
             SerialNumber::nextReviewId(),
             $user,
             $pastry,
-            rand(Review::MINIMUM_RATING, Review::MAXIMUM_RATING),
+            rand(MINIMUM_RATING, MAXIMUM_RATING),
             $title,
             $content,
             self::someDateTime(
@@ -273,10 +258,6 @@ class EntityGenerator {
         return 'p';
     }
 
-//    public static function pickShippingAddress (User $user): PostalAddress {
-//        $index = array_rand($user->getCreditCards()->getItems());
-//        return $user->getShippingAddresses()->getItems()[$index];
-//    }
 
     public static function pickCreditCard (User $user): CreditCard {
         $index = array_rand($user->getCreditCards()->getList());
@@ -287,8 +268,8 @@ class EntityGenerator {
         return $pastries->getList()[array_rand($pastries->getList())];
     }
 
-//    public static function (Products $products): Products {
-//        $invoice = new Products();
+//    public static function (InvoiceItems $products): InvoiceItems {
+//        $invoice = new InvoiceItems();
 //        $totalItems = rand(0, count($products->getList()));
 //        for ($i = 0; $i < $totalItems; $i++) {
 //            $invoice->addProduct($products->randomItem());
@@ -347,7 +328,7 @@ class EntityGenerator {
      */
     public static function order (User $user): ?Order {
         if (count($user->getShoppingCart()->getList()) > 0) {
-            $order = new Order(
+            $order = new NewOrder(
                 SerialNumber::nextOrderId(),
                 $user,
                 self::pickCreditCard($user),
@@ -379,7 +360,7 @@ class EntityGenerator {
 //        );
 //        for ($i = 0; $i < rand(self::MIN_INVOICE_SIZE, self::MAX_INVOICE_SIZE); $i++) {
 //            $order->getInvoice()->add(
-//                new Product(
+//                new InvoiceItem(
 //                    self::pickPastry($pastries),
 //                    rand(self::MINIMUM_ITEM_QUANTITY, self::MAXIMUM_ITEM_QUANTITY)
 //                ));

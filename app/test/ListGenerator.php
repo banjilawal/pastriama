@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 namespace app\test;
 
-use app\models\concretes\Product;
+use app\models\concretes\InventoryItem;
 use app\models\concretes\Pastry;
-use app\models\lists\Products;
-use app\models\lists\Orders;
-use app\models\lists\Pastries;
-use app\models\lists\Reviews;
-use app\models\lists\Users;
+use app\models\collections\InvoiceItems;
+use app\models\collections\Orders;
+use app\models\collections\Pastries;
+use app\models\collections\Reviews;
+use app\models\collections\Users;
 use Exception;
 
 class ListGenerator {
@@ -23,7 +23,7 @@ class ListGenerator {
         for ($i = 0; $i < $size; $i++) {
 //            echo app\test\EntityGenerator::pastryName();
 //            echo 'pastry# ' . $i . '<br>' . PHP_EOL;
-            $pastries->add(EntityGenerator::pastry());
+            $pastries->add(NewEntityGenerator::pastry());
         }
         return $pastries;
     }
@@ -31,10 +31,10 @@ class ListGenerator {
     /**
      * @throws Exception
      */
-    public static function products (Pastries $pastries): Products {
-        $products = new Products();
+    public static function products (Pastries $pastries): InvoiceItems {
+        $products = new InvoiceItems();
         foreach ($pastries->getList() as $pastry) {
-            $products->add($pastry, rand((Product::RESTOCK_THRESHOLD * 2), Product::DEFAULT_RESTOCK_QUANTITY)); ;
+            $products->add($pastry, rand((RESTOCK_LEVEL * 2), DEFAULT_RESTOCK_QUANTITY)); ;
         }
         return $products;
     }
@@ -50,16 +50,16 @@ class ListGenerator {
         $users = new Users();
         for ($i = 0; $i < $size; $i++) {
 //            echo 'user#' . $i . '<br>' . PHP_EOL;
-            $users->add(EntityGenerator::user());
+            $users->add(NewEntityGenerator::user());
         }
         return $users;
     }
 
-    public static function fillShoppingCarts (Users $users, Products $products): Users {
+    public static function fillShoppingCarts (Users $users, InvoiceItems $products): Users {
         foreach($users->getList() as $user) {
             $shoppingCartSize = rand(0, (int) (count($products->getList()) / 4));
             for ($i = 0; $i < $shoppingCartSize; $i++) {
-                $purchaseAmount = rand(1, (CUSTOMER_MAX_PRODUCT_PER_ORDER / 4));
+                $purchaseAmount = rand(1, (MAX_QUANTITY_PER_ORDER / 4));
                 $product = $products->getList()[array_rand($products->getList())];
                 if ($product->getQuantity() - $purchaseAmount === 0) {
                     $products[$product->getId()]->transfer($user->getShoppingCart(), $purchaseAmount);
@@ -79,8 +79,8 @@ class ListGenerator {
             for ($i = 0; $i < $numberOfReviews; $i++) {
                 $user = $users->getList()[array_rand($users->getList())];
                 if (count($reviews->filterByUser($user)->filterByPastry($pastry)->getList()) === 0) {
-                    $review = EntityGenerator::review($user, $pastry);
-                    echo('CREATED REVIEW: ' . $review);
+                    $review = NewEntityGenerator::review($user, $pastry);
+//                    echo('CREATED REVIEW: ' . $review);
                     $reviews->addReview($review);
                 }
             }
@@ -94,7 +94,7 @@ class ListGenerator {
     public static function orders (Users $users): Orders {
         $orders = new Orders();
         foreach ($users->getList() as $user) {
-            $order = EntityGenerator::order($user);
+            $order = NewEntityGenerator::order($user);
             $orderSize = rand(0, (count($user->getShoppingCart()->getList())));
             for ($i = 0; $i < $orderSize; $i++) {
                 $product = $user->getShoppingCart()->randomProduct(); //->getList()[array_rand($user->getShoppingCart()->getList())];

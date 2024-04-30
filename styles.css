@@ -42,3 +42,8 @@ input[type=button], input[type=submit], input[type=reset] {
     padding: 20px 20px 20px;
     width: 310px;
 }
+
+.divRow {
+    display: inline-block; /* Display elements in a single row */
+    margin: 10px; /* Optional: Add some space between elements */
+}

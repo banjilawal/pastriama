@@ -4,6 +4,7 @@ namespace app\utils;
 
 class SerialNumber {
     protected static int $userId = 0;
+    protected static int $wishId = 0;
     protected static int $pastryId = 0;
     protected static int $reviewId = 0;
     protected static int $orderId = 0;
@@ -53,5 +54,10 @@ class SerialNumber {
     public static function nextReviewServiceRequestId   (): int {
         self::$reviewServiceRequestId ++;
         return self::$reviewServiceRequestId ;
+    }
+
+    public static function nextWishId (): int {
+        self::$wishId++;
+        return self::$wishId;
     }
 }

@@ -2,12 +2,18 @@
 
 namespace app\utils;
 
+use app\enums\Rating;
 use app\models\concretes\Domain;
 use app\models\concretes\EmailAddress;
 use app\models\concretes\Phone;
+use Exception;
 
 class Convert {
 
+
+    /**
+     * @throws Exception
+     */
     public static function stringToEmailAddress (string $string): EmailAddress {
         $array = explode('@', trim($string));
         $mailbox = $array[0];
@@ -18,7 +24,7 @@ class Convert {
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function stringToPhone (string $string): Phone {
         $array = preg_split("/[\s.\-)]+/", trim(trim($string), '('));
@@ -26,5 +32,9 @@ class Convert {
         $exchange = $array[1];
         $line = $array[2];
         return new Phone($areaCode, $exchange, $line);
+    }
+
+    public static function ratingToStars (Rating $rating): Rating {
+        return $rating;
     }
 }

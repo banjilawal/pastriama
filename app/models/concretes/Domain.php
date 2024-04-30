@@ -38,6 +38,6 @@ class Domain extends Model {
     }
 
     public function __toString (): string {
-        return $this->getName() . '.' . $this->getTld();
+        return $this->name . '.' . $this->tld;
     }
 }

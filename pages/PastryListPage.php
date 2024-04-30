@@ -4,11 +4,10 @@
 //}
 
 namespace pages;
-//require_once 'WebPage.php';
 
-use app\models\lists\Pastries;
+use app\models\collections\Pastries;
 
-class PastryListPage extends \WebPage {
+class PastryListPage extends Page {
     private Pastries $pastryList;
 
     public function __construct (Pastries $pastryList, string $title) {
@@ -30,16 +29,7 @@ $pastries = null;
 //}
 
 
-//try {
-//    $pastries = ListGenerator::pastryList(60);
-//} catch (Exception $e) {}
-//$page = new PastryListPage($pastries, 'Test Pastries');
-//
-//$_SESSION['pastries'] = serialize($pastries);
 
-//foreach($pastries->getItems() as $pastry) {
-//    echo $pastry . PHP_EOL;
-//}
 ?>
 
 <!DOCTYPE html>

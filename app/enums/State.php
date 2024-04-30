@@ -132,7 +132,7 @@ enum State: string {
         $elem = '<label for="state">State</label>'
             . '<select id="state" name="state" required>';
         foreach (State::cases() as $state) {
-            $elem .= '<option value"' . $state->code() . '">' . $state->value . '</option>';
+            $elem .= '<option value"' . $state->name . '">' . $state->value . '</option>';
         }
         $elem .= '</select>';
         return $elem;

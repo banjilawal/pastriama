@@ -12,7 +12,7 @@ abstract class Entity extends Model implements Equality {
      */
     public function __construct (int $id) {
         parent::__construct();
-        $this->id = $id;
+        $this->id = abs($id);
     }
 
     public function getId (): int {

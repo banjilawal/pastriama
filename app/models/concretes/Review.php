@@ -2,17 +2,19 @@
 
 namespace app\models\concretes;
 
+define ('MINIMUM_RATING', 1);
+define ('MAXIMUM_RATING', 5);
+
 use app\models\abstracts\Entity;
 
+use app\models\abstracts\Product;
 use DateTime;
 use Exception;
 
 class Review extends Entity {
 
-    public const MINIMUM_RATING =  0;
-    public const MAXIMUM_RATING = 5;
     private User $user;
-    private Pastry $pastry;
+    private Product $product;
     private int $rating;
     private string $title;
     private string $comment;
@@ -25,22 +27,22 @@ class Review extends Entity {
     public function __construct(
         int  $id,
         User $user,
-        Pastry  $pastry,
+        Product $product,
         int $rating,
         string $title,
         string $comment,
         DateTime $submissionTime
     ) {
         parent::__construct($id);
-        echo nl2br(PHP_EOL . 'checking if ' . $rating . ' is in the valid range' . PHP_EOL);
-        if ($rating < self::MINIMUM_RATING || $rating > self::MAXIMUM_RATING) {
+        //echo nl2br(PHP_EOL . 'checking if ' . $rating . ' is in the valid range' . PHP_EOL);
+        if ($rating < MINIMUM_RATING || $rating > MAXIMUM_RATING) {
             throw new Exception($rating . ' is outside the range');
         }
         $this->user = $user;
-        $this->pastry = $pastry;
-        $this->rating = abs($rating);
-        $this->title = sanitize_input($title);
-        $this->comment = sanitize_input($comment);
+        $this->$product = $product;
+        $this->rating = $rating;
+        $this->title = $title;
+        $this->comment = $comment;
         $this->submissionTime = $submissionTime; // DateTime(); //DateTime::createFromFormat('U', date('Y-m-d H:i:s'));
     }
 
@@ -48,8 +50,8 @@ class Review extends Entity {
         return $this->user;
     }
 
-    public function getPastry (): Pastry {
-        return $this->pastry;
+    public function getProduct (): Product {
+        return $this->product;
     }
 
     public function getRating (): int {
@@ -68,24 +70,26 @@ class Review extends Entity {
         return $this->submissionTime;
     }
 
+    /**
+     * @throws Exception
+     */
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
-        if ($object instanceof Review) {
+        if ($object instanceof NewReview) {
             return parent::equals($object)
                 && $this->user->equals($object->getUser())
-                && $this->pastry->equals($object->getPastry())
+                && $this->product->equals($object->getProduct())
                 && $this->title === $object->getTitle()
                 && $this->rating === $object->getRating()
-                && $this->comment === $object->getComment()
-                && $this->submissionTime === $object->getSubmissionTime();
+                && $this->comment === $object->getComment();
         }
         return false;
     }
 
     public function __toString (): string {
         return 'id:' . $this->getId()
-            . 'pastry:' . $this->pastry->getName()
+            . ' product:' . $this->getProduct()->getName()
             . ' submitted:' . $this->submissionTime->format('Y-m-d H:i:s')
             . ' reviewer:' . $this->user->printName() //getFirstname() . ' ' . substr($this->user->getLastname(), 0, 1)
             . ' title:' . $this->title
@@ -98,7 +102,7 @@ class Review extends Entity {
             . '<td>' . $this->getId() . '</td>'
             . '<td>' . $this->submissionTime->format(DATE_TIME_FORMAT) . '</td>'
             . '<td>' . $this->user->printName() . '</td>'
-            . '<td>' . $this->pastry->getName() . '</td>'
+            . '<td>' . $this->getProduct()->getName() . '</td>'
             . '<td>' . $this->title . '</td>'
             . '<td>' . $this->rating . '</td>'
             . '<td>' . $this->comment . '</td>'
@@ -106,13 +110,13 @@ class Review extends Entity {
     }
 
     public function toTable (string $tableId=''): string {
-        return Review::tableHeader($tableId) . '<tbody>' . $this->toRow() . '</tbody></table>';
+        return NewReview::tableHeader($tableId) . '<tbody>' . $this->toRow() . '</tbody></table>';
     }
 
     public static function ratingSelector (): string {
         $elem = '<label for="rating">How Many Stars</label>'
             . '<select id="rating" name="rating" required>';
-        for ($i = Review::MINIMUM_RATING; $i <= Review::MAXIMUM_RATING; $i++) {
+        for ($i = MINIMUM_RATING; $i <= MAXIMUM_RATING; $i++) {
             $elem .= '<option value="' . $i . '">' . $i . '</option>';
         }
         $elem .= '</select>';

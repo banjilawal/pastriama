@@ -4,8 +4,8 @@ namespace app\utils;
 
 use app\interfaces\Dashboard;
 use app\interfaces\PageAssembler;
-use app\pages\Generate;
-use app\pages\Page;
+use app\elements\Generate;
+use app\elements\PageElement;
 
 class AssemblePage implements PageAssembler {
     public static function htmlHead (string $title): string {
@@ -86,16 +86,16 @@ class AssemblePage implements PageAssembler {
     }
 
 
-    public static function buildSimpleMain (Page $page): string {
+    public static function buildSimpleMain (PageElement $page): string {
         return '';
     }
 
-    public static function buildSimpleBody (Page $page): string {
+    public static function buildSimpleBody (PageElement $page): string {
         return '<body>' . '<h1>' . $page->getBodyHeading() . '</h1>'
             . self::buildSimpleMain($page) . '</body>';
     }
 
-    public static function factory (Page $page): string {
+    public static function factory (PageElement $page): string {
         if ($page instanceof Dashboard) {
             return self::htmlHead($page->getTitle())
                 . self::header()
@@ -110,7 +110,7 @@ class AssemblePage implements PageAssembler {
             . self::footer();
     }
 
-    public static function assemble (Page $page): string {
+    public static function assemble (PageElement $page): string {
         return self::factory($page);
     }
 

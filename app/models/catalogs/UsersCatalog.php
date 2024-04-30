@@ -4,10 +4,10 @@ namespace app\models\catalogs;
 
 use app\models\abstracts\Model;
 use App\Models\Concretes\Pastry;
-use App\Models\Concretes\Review;
+use App\Models\Concretes\NewReview;
 use App\Models\concretes\User;
-use App\models\Lists\Reviews;
-use app\models\lists\Users;
+use App\models\collections\Reviews;
+use app\models\collections\Users;
 use DateTime;
 use Exception;
 

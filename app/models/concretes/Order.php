@@ -2,19 +2,24 @@
 
 namespace app\models\concretes;
 
+define ('ESTIMATED_TRANSIT_DAYS', 5);
+define ('DAYS_FOR_REFUND', 30);
+
+use app\enums\StylingClass;
 use app\models\abstracts\Entity;
-use app\models\lists\Products;
+use app\models\collections\InvoiceItems;
+use app\query\select\clause\where\NumberClause;
 use DateTime;
 use Exception;
 
 class Order extends Entity {
 //    protected static DateTime $defaultDeliveryDate;
-    public const ESTIMATED_TRANSIT_DAYS = 5;
+
     private User $user;
     private CreditCard $creditCard;
 
 //    private DateTime $invalidDeliveryDate;
-    private Products $invoice;
+    private InvoiceItems $invoice;
     private string $recipientName;
     private PostalAddress $shipToAddress;
     private DateTime $submissionTime;
@@ -41,7 +46,7 @@ class Order extends Entity {
         $this->shipToAddress = $shipToAddress;
         $this->submissionTime = $submissionTime;
         $this->dateDelivered = UNDELIVERED_DATE;
-        $this->invoice = new Products();
+        $this->invoice = new InvoiceItems();
 //        if (empty(trim($recipientName)) || $recipientName === $user->getName()) {
 //            $this->recipientName = $user->getName();
 //        }
@@ -66,7 +71,7 @@ class Order extends Entity {
         return $this->dateDelivered;
     }
 
-    public function getInvoice (): Products {
+    public function getInvoice (): InvoiceItems {
         return $this->invoice;
     }
 
@@ -79,8 +84,9 @@ class Order extends Entity {
     }
 
     public function getProjectedDelivery (): DateTime {
-        return $this->submissionTime->modify('+ ' . self::ESTIMATED_TRANSIT_DAYS . ' days');
+        return $this->submissionTime->modify('+ ' . ESTIMATED_TRANSIT_DAYS . ' days');
     }
+
 
     public function setDateDelivered (DateTime $deliveryDate): void {
         $this->dateDelivered = $deliveryDate;
@@ -108,7 +114,7 @@ class Order extends Entity {
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
-        if ($object instanceof Order) {
+        if ($object instanceof NewOrder) {
             return parent::equals($object)
                 && $this->user->equals($object->getUser())
                 && $this->creditCard->equals($object->getCreditCard())
@@ -141,7 +147,7 @@ class Order extends Entity {
     }
 
     public function toRow (): string {
-        return '<tr id="orderRow_' . $this->getId() . '" onclick="rowClickHandler(' . $this->getId() . ')">'
+        return '<tr id="orderId_' . $this->getId() . '" onclick="rowClickHandler(' . $this->getId() . ')">'
 //            . '<td>' . $this->getCustomer()->getFirstname() . ' ' . $this->getCustomer()->getLastname() . '</td>'
 //            . '<td>' .  $this->creditCard->toString() .'</td>'
             . '<td>' . $this->getId() . '</td>'
@@ -149,6 +155,40 @@ class Order extends Entity {
             . '<td>' . $this->recipientName . ' ' . $this->shipToAddress . '</td>'
             . '<td>' . $this->printDeliveryDate() . '</td>'
             . '<td>' . number_format($this->invoice->getTotalCharge(), 2) . '</td></tr>';
+    }
+
+    private function orderItemDashboardHeading (InventoryItem $product): string {
+        return '<div class="'. StylingClass::CONTAINER->value . '">'
+            . '<table>'
+            . '<thead>'
+                . '<tr>'
+                    . '<th>Order Placed</th>'
+                    . '<th>Total</th>'
+                    . '<th>Ship To</th>'
+                    . '<th>Order #' . $this->getId() . '</th>'
+                . '</tr>'
+            . '</thead>'
+            . '<tbody>'
+                . '<tr>'
+                . '<td>' .  $this->submissionTime->format(DATE_FORMAT) . '</td>'
+                . '<td>' . number_format($product->getCost(), 2) . '</td>'
+                . '<td>' . $this->shipToAddress . '</td>'
+                . '<td><a href="orderPage.php">View order details</a></td>'
+                . '</tr>'
+            . '</tbody>'
+            . '</table></div>';
+    }
+
+    private function orderItemDashboard (InventoryItem $product): string {
+        return self::orderItemDashboardHeading($product)
+            . '<div class"' . StylingClass::ORDER_ITEM_DASHBOARD->value . '">'
+                . '<a href="productPage.php">' . $product->getPastry()->getName() . '</a>'
+                . '<div class="' .  StylingClass::CONTAINER->value . '">'
+                    . '<ul class="' . StylingClass::INTERACTIVE_LIST->value .  '">'
+                        . '<li><a href="returnPage.php" class="'. StylingClass::BEVELED_LINK->value. '">Return Product</a></li>'
+                    . '</ul>'
+                .  '</div>'
+            . '</div>';
     }
 
     public function tableHeader (): string {
@@ -196,8 +236,8 @@ class Order extends Entity {
 //                . '<td>' . $item->getQuantity() . '</td>'
 //                . '<td>' . $item->getCost() . '<td>'
 //                . '</tr>'; //</strong></td></tr></tr>' $item->toRow(
-//                StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
-//                StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
+//                Product::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
+//                Product::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
 //            );
 //        }
 //

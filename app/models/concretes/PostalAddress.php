@@ -15,6 +15,7 @@ class PostalAddress extends Address implements Identifiable {
     private State  $state;
     private Zipcode  $zipcode;
     private MailingCategory $mailingCategory;
+    private int $totalDeliveries;
 
     /**
      * @param int $id
@@ -39,6 +40,7 @@ class PostalAddress extends Address implements Identifiable {
         $this->state = $state;
         $this->zipcode = $zipcode;
         $this->mailingCategory = $mailingCategory;
+        $this->totalDeliveries = 0;
     }
 
     public function getId (): int {
@@ -65,6 +67,10 @@ class PostalAddress extends Address implements Identifiable {
         return $this->mailingCategory;
     }
 
+    public function getTotalDeliveries (): int {
+        return $this->totalDeliveries;
+    }
+
     public function setId (int $id): void {
         $this->id = $id;
     }
@@ -89,6 +95,10 @@ class PostalAddress extends Address implements Identifiable {
         $this->mailingCategory = $category;
     }
 
+    public function setTotalDeliveries (): void {
+        $this->totalDeliveries++;
+    }
+
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
@@ -104,17 +114,8 @@ class PostalAddress extends Address implements Identifiable {
     }
 
     public function __toString (): string {
-        return  $this->street . ' ' . $this->city . ', ' . $this->state->code() . ' ' . $this->zipcode;
+        return  $this->street . ' ' . $this->city . ', ' . $this->state->value . ' ' . $this->zipcode;
     }
-
-//    public function toRow (): string {
-//        return '<tr>'
-//            . '<td>street</td>' . '<td>' . $this->street . '</td>'
-//            . '<td>city</td>' . '<td>' . $this->city . '</td>'
-//            . '<td>state</td>' . '<td>' . $this->state->code() . '</td>'
-//            . '<td>zipcode</td>' . '<td>' . $this->zipcode . '</td>'
-//            . '</tr>';
-//    }
 
     public function toTable (): string {
         return '<table  id="postalAddressTable>'
@@ -130,7 +131,7 @@ class PostalAddress extends Address implements Identifiable {
             . '<tr>'
             . '<td>' . $this->street . '</td>'
             . '<td>' . $this->city . '</td>'
-            . '<td>' . $this->state->code() . '</td>'
+            . '<td>' . $this->state->value . '</td>'
             . '<td>' . $this->zipcode . '</td>'
             . '</tr>'
             . '</tbody>'

@@ -2,7 +2,7 @@
 
 namespace app\services\review\messages\client;
 
-use app\models\lists\Reviews;
+use app\models\collections\Reviews;
 use app\services\identifiers\ClientAddress;
 use app\services\review\interfaces\ReviewServiceClient;
 use app\services\review\messages\server\ReviewServerResponse;

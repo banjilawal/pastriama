@@ -2,27 +2,23 @@
 
 namespace app\models\abstracts;
 
+use Exception;
+
 abstract class NamedEntity extends Entity {
     private string $name;
 
 
-    /**
-     * @throws \Exception
-     */
     public function __construct (int $id, string $name) {
         parent::__construct($id);
-        $this->name = sanitize_input($name);
+        $this->name = $name;
     }
 
     public function getName (): string {
         return $this->name;
     }
 
-    /**
-     * @throws \Exception
-     */
     public function setName (string $name): void {
-        $this->name = sanitize_input($name);
+        $this->name = $name;
     }
 
     public function equals ($object): bool {

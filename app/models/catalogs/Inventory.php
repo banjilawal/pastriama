@@ -3,24 +3,24 @@
 namespace app\models\catalogs;
 
 use app\models\abstracts\Model;
-use app\models\abstracts\StoreItem;
-use app\models\concretes\Product;
-use App\Models\Concretes\Order;
+use app\models\abstracts\Product;
+use app\models\concretes\InventoryItem;
+use App\Models\Concretes\NewOrder;
 use app\models\concretes\Pastry;
 use App\Models\Concretes\User;
-use app\models\lists\Products;
-use App\Models\Lists\Orders;
-use app\models\lists\Pastries;
+use app\models\collections\InvoiceItems;
+use App\Models\collections\Orders;
+use app\models\collections\Pastries;
 use DateTime;
 use Exception;
 
 class Inventory extends Model {
     private static $instance;
-    protected static Products $products;
+    protected static InvoiceItems $products;
 
     private function __construct () {
         parent::__construct();
-        self::$products = new Products();
+        self::$products = new InvoiceItems();
     }
 
     public static function getInstance (): Inventory {
@@ -30,7 +30,7 @@ class Inventory extends Model {
         return self::$instance;
     }
 
-    public static function getProducts (): Products {
+    public static function getProducts (): InvoiceItems {
         return self::$products;
     }
 
@@ -48,13 +48,13 @@ class Inventory extends Model {
 //        self::$products->add($pastry, $quantity);
 //    }
 
-//    public function add (Product $item): void{
+//    public function add (InvoiceItem $item): void{
 //        self::$products->addProduct($item);
 //    }
 
 //    public function toTable (
-//        int $imageWidth=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
-//        int $imageHeight=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
+//        int $imageWidth=Product::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
+//        int $imageHeight=Product::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
 //    ): string {
 //        $elem ='<table id="inventoryTable">'
 //            . '<thead>'

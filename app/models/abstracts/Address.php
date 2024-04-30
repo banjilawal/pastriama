@@ -13,7 +13,7 @@ abstract class Address extends Model {
         else return false;
     }
 
-    public function __toString (): string {
-        return parent::__toString();
-    }
+//    public function __toString (): string {
+//        return parent::__toString();
+//    }
 }

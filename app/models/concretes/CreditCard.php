@@ -5,17 +5,11 @@ namespace app\models\concretes;
 use app\enums\CreditCardProvider;
 use app\models\abstracts\Entity;
 use app\models\abstracts\Model;
-use app\test\EntityGenerator;
+use app\test\NewEntityGenerator;
 use DateTime;
 use Exception;
 
 class CreditCard extends Entity {
-
-    public const MINIMUM_CREDIT_CARD_LENGTH = 16;
-    public const MAXIMUM_CREDIT_CARD_LENGTH = 20;
-    public const CREDIT_CARD_CVN_PATTERN = '/[0-9]{3}/';
-    public const CREDIT_CARD_NUMBER_PATTERN = '/([0-9]{4,} ){4,}/i';
-    public const CREDIT_CARD_VENDORS = ['Mastercard', 'Visa', 'American Express', 'Discover'];
 
     private CreditCardProvider $cardProvider;
     private string $nameOnCard;

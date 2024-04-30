@@ -15,7 +15,7 @@ enum CreditCardProvider: string {
         $elem = '<label for="cardProvider">Credit Card Provider</label>'
             . '<select id="cardProvider" name="cardProvider" required>';
         foreach (CreditCardProvider::cases() as $cardProvider) {
-            $elem .= '<option value"' . $cardProvider->value . '">' . $cardProvider->value . '</option>';
+            $elem .= '<option value"' . $cardProvider->value . '">' . $cardProvider->name . '</option>';
         }
         $elem .= '</select>';
         return $elem;

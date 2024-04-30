@@ -4,13 +4,13 @@ namespace app\models\catalogs;
 
 use app\models\abstracts\Model;
 use App\Models\Concretes\Pastry;
-use App\Models\Concretes\Review;
+use App\Models\Concretes\NewReview;
 use App\Models\concretes\User;
-use App\models\Lists\Reviews;
+use App\models\collections\Reviews;
 use DateTime;
 use Exception;
 
-class ReviewsCatalog extends Model implements ReviewServer {
+class ReviewsCatalog extends Model {
     private static $instance;
     protected static Reviews $reviews;
 

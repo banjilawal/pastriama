@@ -17,7 +17,7 @@ class EmailAddress extends Address {
      */
     public function __construct (string $mailbox, Domain $domain) {
         parent::__construct();
-        $this->mailbox = sanitize_input($mailbox);
+        $this->mailbox = $mailbox;
         $this->domain = $domain;
     }
 
@@ -39,11 +39,11 @@ class EmailAddress extends Address {
 
     public function equals ($object): bool {
         if ($this->__toString() === $object->__toString()) {
-            echo $this . ' is equal <br>' . PHP_EOL;
+//            echo $this . ' is equal <br>' . PHP_EOL;
             return true;
         }
         else {
-            echo $this . ' is not equal to ' . $object . '<br>' . PHP_EOL;
+//            echo $this . ' is not equal to ' . $object . '<br>' . PHP_EOL;
             return false;
         }
 //        if ($this === $object) return true;

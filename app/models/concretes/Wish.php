@@ -3,7 +3,7 @@
 namespace app\models\concretes;
 
 use app\models\abstracts\Entity;
-use app\models\abstracts\StoreItem;
+use app\models\abstracts\Product;
 use DateTime;
 
 class Wish extends Entity {
@@ -45,8 +45,8 @@ class Wish extends Entity {
     }
 
     public function toRow (
-        int $imageWidth=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
-        int $imageHeight=StoreItem::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
+        int $imageWidth=DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
+        int $imageHeight=DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
     ): string {
         $elem = '<tr id="wishRow"' . $this->getId() . ' onclick="rowClickHandler(' . $this->getId() . ')">'
             . '<td>' . $this->creationTime->format(DATE_TIME_FORMAT) . '</td>'
@@ -69,12 +69,13 @@ class Wish extends Entity {
             . '<th>Name</th>'
             . '<th>Description</th>'
             . '<th>Price</th>'
-            . '</tr></thead>';
+            . '</tr>'
+            . '</thead>';
     }
 
     public function toTable (
-        int $imageWidth=StoreItem::DEFAULT_STORE_ITEM_TABLE_IMAGE_WIDTH,
-        int $imageHeight=StoreItem::DEFAULT_STORE_ITEM_TABLE_IMAGE_HEIGHT
+        int $imageWidth=DEFAULT_STORE_ITEM_TABLE_IMAGE_WIDTH,
+        int $imageHeight=DEFAULT_STORE_ITEM_TABLE_IMAGE_HEIGHT
     ): string {
         return $this->tableHeader() . $this->toRow($imageWidth, $imageHeight) . '</tbody></table>';
     }

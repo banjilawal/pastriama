@@ -2,8 +2,8 @@
 
 namespace app\test;
 
-use app\models\lists\Products;
-use app\models\lists\Users;
+use app\models\collections\InvoiceItems;
+use app\models\collections\Users;
 use app\models\catalogs\Inventory;
 use app\models\catalogs\OrdersCatalog;
 use app\models\catalogs\ReviewsCatalog;
@@ -15,7 +15,7 @@ class CatalogPopulator {
     /**
      * @throws Exception
      */
-    public static function inventory (Inventory $inventory, Products $invoice): void {
+    public static function inventory (Inventory $inventory, InvoiceItems $invoice): void {
         foreach ($invoice->getList() as $item) {
             $inventory->add($item);
         }
@@ -46,7 +46,7 @@ class CatalogPopulator {
 
     public static function populateShoppingCarts (UsersCatalog $users, Inventory $inventory): void {
         foreach ($users->getUsers() as $user) {
-            EntityGenerator::invoice($inventory->getProducts())->transferToTarget($user->getShoppingCart());
+            NewEntityGenerator::invoice($inventory->getProducts())->transferToTarget($user->getShoppingCart());
         }
     }
 
@@ -55,7 +55,7 @@ class CatalogPopulator {
      */
     public static function ordersCatalog (OrdersCatalog $catalog, UsersCatalog $users): void {
         foreach ($users->getUsers() as $user) {
-            $order = EntityGenerator::order($user);
+            $order = NewEntityGenerator::order($user);
             if (!is_null($order)) {
                 $catalog->getOrders()->addOrder($order);
             }

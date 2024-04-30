@@ -28,13 +28,13 @@ abstract class Person extends NamedEntity {
      * @throws Exception
      */
     public function __construct (
-        int           $id,
-        string        $firstname,
-        string        $lastname,
-        DateTime      $birthdate,
-        Phone         $phone,
-        EmailAddress  $emailAddress,
-        string        $password,
+        int $id,
+        string $firstname,
+        string $lastname,
+        DateTime $birthdate,
+        Phone $phone,
+        EmailAddress $emailAddress,
+        string $password,
         PostalAddress $postalAddress
     ) {
         parent::__construct($id, $firstname);

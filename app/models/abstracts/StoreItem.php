@@ -2,127 +2,98 @@
 
 namespace app\models\abstracts;
 
+//define ('LOWEST_PRICE', 1);
+//define ('HIGHEST_PRICE', 3);
+//define ('DEFAULT_TAX_PERCENTAGE', 5);
+//define ('MINIMUM_TAX_PERCENTAGE', 0);
+//define  ('MAXIMUM_TAX_PERCENTAGE', 35);
 
+
+use app\models\concretes\Pastry;
 use Exception;
 
-abstract class StoreItem extends NamedEntity {
-    const DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH = 90;
-    const DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT = 100;
-    const DEFAULT_STORE_ITEM_TABLE_IMAGE_WIDTH = 180;
-    const DEFAULT_STORE_ITEM_TABLE_IMAGE_HEIGHT = 160;
+abstract class StoreItem extends Entity {
 
-    private string $description;
-    private string $imageName;
-    private float $price;
+    private Product $product;
+    private int $quantity;
 
     /**
-     * @param int $id
-     * @param string $name
-     * @param string $description
-     * @param string $imageName
-     * @param float $price
+     * @param Product $product
+     * @param int $quantity
      * @throws Exception
      */
     public function __construct(
-        int $id,
-        string $name,
-        string $description,
-        string $imageName,
-        float $price
+        Product $product,
+        int $quantity
     ) {
-        parent::__construct ($id, $name);
-        $this->description = $description;
-        $this->imageName = $imageName;
-        $this->price = $price;
+//        if ($quantity < 0) {
+//            throw new Exception('The quantity cannot be less than zero.');
+//        }
+        parent::__construct ($product->getId());
+        $this->product = $product;
+        $this->quantity = abs($quantity);
     }
 
-    public function getDescription (): string {
-        return $this->description;
+    public function getProduct (): Product {
+        return $this->product;
+    }
+    public function getQuantity (): int {
+        return $this->quantity;
     }
 
-    public function getImageName (): string {
-        return $this->imageName;
+    /**
+     * @throws Exception
+     */
+    public function decreaseQuantity (int $amount): void {
+//        if ($amount < 0) {
+//            throw new Exception('The amount must be greater than zero');
+//        }
+        if (abs($amount) > $this->quantity) {
+            throw new Exception('The decrease amount cannot be greater than the current quantity in stock');
+        }
+        $this->quantity -= abs($amount);
     }
 
-    public function getPrice (): float {
-        return $this->price;
+    /**
+     * @throws Exception
+     */
+    public function increaseQuantity (int $amount): void {
+//        if ($amount < 0) {
+//            throw new Exception('Cannot increase by a negative number');
+//        }
+        $this->quantity += abs($amount);
     }
 
-    public function setDescription (string $description): void {
-        $this->description = $description;
+    public function getCost (): float {
+        return $this->product->getPrice() * $this->quantity;
     }
 
-    public function setImageName (string $imageName): void {
-        $this->imageName = $imageName;
-    }
-
-    public function setPrice (float $price): void {
-        $this->price = $price;
-    }
-
+    /**
+     * @throws Exception
+     */
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
         if ($object instanceof StoreItem) {
             return parent::equals($object)
-                && $this->price === $object->getPrice()
-                && $this->imageName === $object->getImageName()
-                && $this->description === $object->getDescription();
+                && $this->product->equals($object->getProduct())
+                && $this->quantity === $object->getQuantity();
         }
         return false;
     }
 
     public function __toString (): string {
         return parent::__toString()
-            . ' image_path:' . $this->imageName
-            . ' description:' . $this->description
-            . ' price:' . number_format($this->price, 2);
+            . ' ' . $this->product . ' quantity:' . $this->quantity;
     }
 
-
-    public function getImgTag (
-        int $width=self::DEFAULT_STORE_ITEM_TABLE_IMAGE_WIDTH,
-        int $height=self::DEFAULT_STORE_ITEM_TABLE_IMAGE_HEIGHT
-        ): string {
-        return '<img src="' . $this->imageName
-            . '" width="' . $width
-            . '" height="' . $height
-            . '">';
-    }
-
-    public function toRow (
-        int $imageWidth=self::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
-        int $imageHeight=self::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
-    ): string {
-        return '<tr id="storeItemId_"' . $this->getId() . ' onclick="rowClickHandler($row)">'
-            . '<td id="idCell" hidden>' . $this->getId() . '</td>'
-            . '<td>' . $this->getImgTag($imageWidth, $imageHeight) . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
-            . '<td>' . $this->getName() . '</td>'
-            . '<td>' . $this->description . '</td>'
-            . '<td>' . number_format($this->price, 2) . '</td>'
-            . '</tr>';
-    }
-
-    public function toTable (
-        int $imageWidth=self::DEFAULT_STORE_ITEM_TABLE_IMAGE_WIDTH,
-        int $imageHeight=self::DEFAULT_STORE_ITEM_TABLE_IMAGE_HEIGHT
-    ): string {
-        return '<table>'
-            . '<thead>'
-            . '<tr>'
-            . '<th>' . $this->getName() . '</th>'
-            . '<th>Description</th>'
-            . '<th>Price</th>'
-            . '</tr>'
-            . '</thead>'
-            . '<tbody>'
-            . '<tr>'
-            . '<td>' . $this->getImgTag($imageWidth, $imageHeight) . '</td>'
-            . '<td>' . $this->description . '</td>'
-            . '<td>' . number_format($this->price, 2) . '</td>'
-            . '</tr>'
-            . '</tbody>'
-            . '</table>'
-            . '<br>product id:' . $this->getId();
+    public static function quantitySelector (): string {
+        $elem = '<label for ="quantity">Quantity to Order</label>'
+            . '<select id="quantity" name="quantity" required>';
+        for ($i = 1; $i <= MAX_QUANTITY_PER_ORDER; $i++) {
+            $elem .= '<option value="' . $i . '">' . $i . '</option>';
+        }
+        $elem .= '</select>';
+        return $elem;
     }
 }
