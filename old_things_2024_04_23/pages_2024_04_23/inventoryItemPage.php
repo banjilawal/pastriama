@@ -8,7 +8,7 @@ require_once 'bootstrap.php';
 
 use app\models\concretes\InventoryItem;
 use app\models\concretes\Pastry;
-use app\models\concretes\NewReview;
+use app\models\concretes\review;
 use app\models\catalogs\Inventory;
 use app\test\ListGenerator;
 
@@ -133,7 +133,7 @@ echo $inventoryItem;
             <form id="ratingForm" name="ratingForm" method="post" action="processReviewForm.php">
                 <fieldset>
                     <legend>Write a Review></legend>
-                    <div class="formElement"><p> <?php echo NewReview::ratingSelector(); ?></p></div>
+                    <div class="formElement"><p> <?php echo review::ratingSelector(); ?></p></div>
                     <div class="formElement">
                         <p>
                             <label for="reviewTitle">Title</label>

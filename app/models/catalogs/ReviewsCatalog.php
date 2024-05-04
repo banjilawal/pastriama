@@ -4,19 +4,19 @@ namespace app\models\catalogs;
 
 use app\models\abstracts\Model;
 use App\Models\Concretes\Pastry;
-use App\Models\Concretes\NewReview;
+use App\Models\Concretes\review;
 use App\Models\concretes\User;
 use App\models\collections\Reviews;
 use DateTime;
 use Exception;
 
-class ReviewsCatalog extends Model {
+final class ReviewsCatalog extends Model {
     private static $instance;
-    protected static Reviews $reviews;
+    private Reviews $reviews;
 
     private function __construct () {
         parent::__construct();
-        self::$reviews = new Reviews();
+        $this->reviews = new Reviews();
     }
 
     public static function getInstance(): ReviewsCatalog {
@@ -27,10 +27,19 @@ class ReviewsCatalog extends Model {
     }
 
 //    private function __clone () {}
-    public function __wakeup () {}
+    public function __sleep() {
+        // Returning an empty array prevents serializing instance variables
+        return [];
+    }
+
+    public function __wakeup() {
+        // When unserialized, ensure the singleton pattern is maintained
+        // then reinstate the instance.
+        self::$instance = $this;
+    }
 
     public function getReviews (): Reviews {
-        return self::$reviews;
+        return $this->reviews;
     }
 
 //    /**

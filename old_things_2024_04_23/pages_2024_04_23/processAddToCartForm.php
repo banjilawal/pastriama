@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-use app\models\concretes\NewOrder;
+use app\models\concretes\Order;
 use app\models\concretes\InventoryItem;
-use app\test\NewEntityGenerator;
+use app\test\EntityGenerator;
 use app\utils\SerialNumber;
 
 if (empty(session_id())) {
@@ -22,7 +22,7 @@ $creditCard = $user->getCreditCards->randomCard();
 $shoppingCart = null;
 if (!isset($_SESSION['shoppingCart'])) {
     try {
-        $shoppingCart = new NewOrder(
+        $shoppingCart = new Order(
             SerialNumber::nextOrderId(),
             $user,
             $creditCard,

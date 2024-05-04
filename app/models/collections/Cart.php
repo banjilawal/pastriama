@@ -5,7 +5,7 @@ namespace app\models\collections;
 use app\models\abstracts\Model;
 use app\models\abstracts\Product;
 use app\models\abstracts\StoreItem;
-use app\models\catalogs\NewInventory;
+use app\models\catalogs\Inventory;
 use app\models\concretes\CartItem;
 use app\models\concretes\InventoryItem;
 use app\models\concretes\Pastry;
@@ -59,7 +59,7 @@ class Cart extends Model {
             $this->items[$id] = new CartItem($product, $amount, $additionTime);
         }
 //        try {
-//            $item = NewInventory::getInstance()->remove($product, $amount);
+//            $item = Inventory::getInstance()->remove($product, $amount);
 //        } catch (Exception $e) { echo $e; }
 //        if ($this->contains($product)) {
 //            $this->items[$id]->increaseQuantity($amount);

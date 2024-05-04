@@ -6,7 +6,7 @@ use app\enums\CreditCardProvider;
 use app\enums\MailingCategory;
 use app\enums\State;
 use app\models\concretes\CreditCard;
-use app\models\concretes\EmailAddress;
+use app\models\concretes\Email;
 use app\models\concretes\Phone;
 use app\models\concretes\PostalAddress;
 use app\models\concretes\Zipcode;
@@ -19,7 +19,7 @@ class RegisterAccountRequest {
     private string $lastname;
     private DateTime $birthdate;
     private Phone $phone;
-    private EmailAddress $emailAddress;
+    private Email $emailAddress;
     private string $password;
     private PostalAddress $postalAddress;
     private CreditCard $creditCard;
@@ -104,7 +104,7 @@ class RegisterAccountRequest {
         return $this->phone;
     }
 
-    public function getEmailAddress (): EmailAddress {
+    public function getEmailAddress (): Email {
         return $this->emailAddress;
     }
 

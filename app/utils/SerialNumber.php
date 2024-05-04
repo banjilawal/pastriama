@@ -10,6 +10,7 @@ class SerialNumber {
     protected static int $orderId = 0;
     protected static int $creditCardId = 0;
     protected static int $postalAddressId = 0;
+    protected static int $requestId = 0;
 
     protected static int $reviewServerReplyId = 0;
     protected static int $reviewServiceRequestId = 0;

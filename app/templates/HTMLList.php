@@ -3,14 +3,17 @@
 namespace app\templates;
 
 use app\enums\ListTag;
+use app\enums\Orientation;
 use app\enums\StylingClass;
-use app\models\catalogs\NewInventory;
+use app\models\catalogs\Inventory;
 use app\models\collections\Addresses;
 use app\models\collections\CreditCards;
 use app\models\collections\Reviews;
+use app\models\collections\Reviews;
 use app\models\concretes\InventoryItem;
 use app\models\concretes\User;
-use app\utils\Util;
+use app\models\concretes\User;
+use app\utils\Create;
 
 class HTMLList {
 
@@ -21,20 +24,21 @@ class HTMLList {
 
     public static function shoppingCart (User $user): string {
         $elem = '<ol>';
-        foreach ($user->getShoppingCart()->getList() as $id => $item) {
-            $saveCheckbox = Util::addCheckbox('Save for later', ('saveProduct_' . $id), $id, '');
-            $deleteButton = Util::addButton('Remove from your shopping cart', ('deleteProduct_' . $id), $id);
-            $controls = Util::addList(ListTag::UNORDERED, [$saveCheckbox, $deleteButton]);
-            $elem .= '<li><div>' . $controls . '</div><div>' . Dashboard::pastry($item->getPastry()) . '</div></li>';
+        foreach ($user->getCart()->getItems() as $id => $item) {
+            $saveCheckbox = Create::addCheckbox('Save for later', ('saveProduct_' . $id), ' ' . $id, '');
+            $deleteButton = Create::addButton('Remove from your shopping cart', ('deleteProduct_' . $id), '' . $id);
+            $controls = Create::addList(ListTag::UNORDERED, [$saveCheckbox, $deleteButton]);
+            echo $item;
+            $elem .= '<li><div>' . $controls . '</div><div>' . $item . '</div></li>';
         }
-        return Util::addDivTag(($elem . '</ol>'), StylingClass::SHOPPING_CART);
+        return Create::addDivTag(($elem . '</ol>'), StylingClass::SHOPPING_CART);
     }
 
-    public static function inventory (NewInventory $inventory): string {
+    public static function inventory (Inventory $inventory): string {
         $elem = '';
         foreach ($inventory->getItems() as $id => $item) {
             $elem .= '<li ' . StylingClass::NONE->value . ' id="' . $id . '" onclick="rowClickHandler(' . $id . ')">'
-                . Util::addDivTag(
+                . Create::addDivTag(
                    ('' . $item->getProduct()->getImgTag()
                         . ' ' .$item->getProduct()->getName()
                         . ' ' . $item->getProduct()->getDescription()
@@ -43,7 +47,7 @@ class HTMLList {
                      StylingClass::DIV_ROW)
                 . '</li>';
         }
-        return Util::addDivTag(($elem . '</ul>'), StylingClass::NONE);
+        return Create::addDivTag(($elem . '</ul>'), StylingClass::NONE);
     }
 
     public static function creditCards (CreditCards $cards): string {
@@ -51,35 +55,35 @@ class HTMLList {
         $size = count($cards->getList());
         foreach ($cards->getList() as $id => $card) {
             $primaryButton = '';
-            $deleteCheckbox = Util::addCheckbox('Delete Card', ('deleteCard_' . $id), $id,'');
+            $deleteCheckbox = Create::addCheckbox('Delete Card', ('deleteCard_' . $id), 'delelte', 'delete', Orientation::RIGHT,);
 //            $buttonId = 'primaryCard_' . $id;
 //            $checkboxId = 'deleteCard_' . $id;
             if ($size > 1) {
-                $primaryButton  = Util::addRadioButton('Mark as Primary', ('primaryCard_' . $id), 'primaryCreditCard', $id, '');
-//                $innerHTML = Util::addRadioButton(
+                $primaryButton  = Create::addRadioButton('Mark as Primary', ('primaryCard_' . $id), 'primaryCreditCard', ' ' . $id, '');
+//                $innerHTML = Create::addRadioButton(
 //                    'Mark as Primary', //'primaryCreditCard',
 //                    $buttonId,
 //                    'primaryCreditCard',
 //                    $id,
-//                    Util::addCheckbox('Delete Card', $checkboxId, $id, $card, Orientation::LEFT),
+//                    Create::addCheckbox('Delete Card', $checkboxId, $id, $card, Orientation::LEFT),
 //                );
             }
-                $controls = Util::addList(ListTag::UNORDERED, [$primaryButton, $deleteCheckbox]);
+                $controls = Create::addList(ListTag::UNORDERED, [$primaryButton, $deleteCheckbox]);
                 $elem .= '<li><div>' . $controls . '</div><div>' . $card . '</div></li>';
-//            else { $innerHTML = Util::addCheckbox('Delete Card', $checkboxId, $id, $card, Orientation::LEFT); }
+//            else { $innerHTML = Create::addCheckbox('Delete Card', $checkboxId, $id, $card, Orientation::LEFT); }
             $elem .= '</ul>';
         }
-        return Util::addDivTag($elem, StylingClass::CONTAINER);
+        return Create::addDivTag($elem, StylingClass::CONTAINER);
     }
 
     public static function addresses (Addresses $addresses): string {
         $elem = '<ul>';
         foreach ($addresses->getList() as $id => $address) {
             $buttonId = 'deleteAddress_' . $id;
-            $elem .= Util::addRadioButton('Delete', $buttonId, 'deleteAddress', $id, $address);
+            $elem .= Create::addRadioButton('Delete', $buttonId, 'deleteAddress', $id, $address);
         }
         $elem .= '</ul>';
-        return Util::addDivTag($elem, StylingClass::CONTAINER);
+        return Create::addDivTag($elem, StylingClass::CONTAINER);
     }
 
     public static function reviews (Reviews $reviews): string {
@@ -88,6 +92,6 @@ class HTMLList {
             $elem .= '<li ' . StylingClass::NONE->value . ' id="' . $id . '" onclick="rowClickHandler(' . $id . ')">'
                 . Dashboard::review($review) . '</li>';
         }
-        return Util::addDivTag(($elem . '</ul>'), StylingClass::NONE);
+        return Create::addDivTag(($elem . '</ul>'), StylingClass::NONE);
     }
 }

@@ -5,7 +5,7 @@ require_once 'bootstrap.php';
 require_once 'WebPage.php';
 
 use app\models\concretes\User;
-use app\test\NewEntityGenerator;
+use app\test\EntityGenerator;
 use app\test\ListGenerator;
 
 
@@ -52,7 +52,7 @@ $user = $datasets['users']->getItems()[array_rand($datasets['users']->getItems()
 for ($i = 0; $i < rand(4, 8); $i++) {
     if (rand(0, 9) < 4) {
         try {
-            $datasets['invoices']->add(NewEntityGenerator::order($user, $datasets['pastries']));
+            $datasets['invoices']->add(EntityGenerator::order($user, $datasets['pastries']));
         } catch (Exception $e) {
             echo $e;
         }
@@ -77,7 +77,7 @@ $page = new CreditCardManagementPage($user);
 <?php echo '<h1>' . $page->getTitle() . '</h1>'; ?>
 <main>
     <?php
-    echo '<p>' . $page->getUser()->getEmailAddress() . '<br>';
+    echo '<p>' . $page->getUser()->getEmail() . '<br>';
     echo $page->getUser()->getPostalAddress() . '<br>';
     echo $page->getUser()->getPhone() . '<br>';
     echo $page->getUser()->getCreditCards()->toTable() . '</p>';

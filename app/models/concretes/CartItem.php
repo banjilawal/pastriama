@@ -1,43 +1,40 @@
 <?php declare(strict_types=1);
 namespace app\models\concretes;
 
-use app\interfaces\Quantifiable;
-use app\models\abstracts\Entity;
 use app\models\abstracts\Product;
 use app\models\abstracts\StoreItem;
-use app\models\collections\Reviews;
 use DateTime;
 use Exception;
 
 class CartItem extends StoreItem {
 
-    private DateTime $additionTime;
+    private DateTime $timestamp;
 
 
     /**
      * @param Product $product
      * @param int $quantity
-     * @param DateTime $additionTime
+     * @param DateTime $timestamp
      * @throws Exception
      */
-    public function __construct (Product $product, int $quantity, DateTime $additionTime) {
+    public function __construct (Product $product, int $quantity, DateTime $timestamp) {
         parent::__construct($product, $quantity);
-        $this->additionTime = $additionTime;
+        $this->timestamp = $timestamp;
     }
 
-    public function getAdditionTime (): DateTime {
-        return $this->additionTime;
+    public function getTimestamp (): DateTime {
+        return $this->timestamp;
     }
 
     public function equals ($object): bool {
         if ($this === $object) return true;
         if (is_null($object)) return false;
         if ($object instanceof CartItem)
-            return  parent::equals($object) && $this->additionTime === $object->getAdditionTime();
+            return  parent::equals($object) && $this->timestamp === $object->getTimestamp();
         return false;
     }
 
     public function __toString (): string {
-        return parent::__toString() . ' added on ' . $this->additionTime->format(DATE_FORMAT);
+        return parent::__toString() . ' submiited:' . $this->timestamp->format(DATE_FORMAT);
     }
 }

@@ -3,14 +3,15 @@
 namespace app\models\concretes;
 
 use app\models\abstracts\Model;
+use Exception;
 
 class Zipcode extends Model {
-    private const  ZIP_CODE_PATTERN = '/[0-9]{5}/';
+
     private string $zipcode;
 
     public function __construct (string $zipcode) {
         parent::__construct();
-        if (preg_match(self::ZIP_CODE_PATTERN, $zipcode) != 1) {
+        if (preg_match(ZIP_CODE_PATTERN, $zipcode) != 1) {
             throw new Exception ($zipcode . ' is not a valid zip code');
         }
         $this->zipcode = $zipcode;
@@ -20,8 +21,11 @@ class Zipcode extends Model {
         return $this->zipcode;
     }
 
+    /**
+     * @throws Exception
+     */
     public function setZipcode (string $zipcode): void {
-        if (preg_match(self::ZIP_CODE_PATTERN, $zipcode) != 1) {
+        if (preg_match(ZIP_CODE_PATTERN, $zipcode) != 1) {
             throw new Exception ($zipcode . ' is not a valid zip code');
         }
         $this->zipcode = $zipcode;

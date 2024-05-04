@@ -5,19 +5,19 @@ session_start();
 require_once 'bootstrap.php';
 require_once 'WebPage.php';
 
-use app\models\concretes\NewOrder;
+use app\models\concretes\Order;
 use app\test\ListGenerator;
 
 
 class InvoicePage extends WebPage {
-    private NewOrder $order;
+    private Order $order;
 
-    public function __construct (NewOrder $order) {
+    public function __construct (Order $order) {
         parent::__construct('Order# ' . $order->getId() . ' Details'); //  $invoice->getSubmissionTime()->format('Y-m-d H:i:s'));
         $this->order = $order;
     }
 
-    public function getOrder (): NewOrder {
+    public function getOrder (): Order {
         return $this->order;
     }
 
@@ -42,11 +42,11 @@ class InvoicePage extends WebPage {
             . '</thead>'
             . '<tbody>'
             . '<tr>'
-            . '<td>' . $this->order->getSubmissionTime()->format('Y-m-d') . '</td>'
+            . '<td>' . $this->order->getTimestamp()->format('Y-m-d') . '</td>'
             . '<td>' . number_format($this->order->getInvoice()->getTotalCharge(), 2) . '</td>'
-            . '<td>Card ending **' . $this->order->getCreditCard()->getSecureNumber() . '</td>'
-            . '<td>' . $this->order->getShipToAddress() . '</td>'
-            . '<td>' . $this->order->getDateDelivered()->format('Y-m-d') . '</td>'
+            . '<td>Card ending **' . $this->order->getCreditCard()->getLastNumberBlock() . '</td>'
+            . '<td>' . $this->order->getDeliveryAddress() . '</td>'
+            . '<td>' . $this->order->getDeliveryDate()->format('Y-m-d') . '</td>'
             . '</tr>'
             . '</tbody></table>';
 //        return $elem;

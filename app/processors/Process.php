@@ -5,7 +5,7 @@ namespace app\processors;
 use app\models\concretes\CreditCard;
 use app\services\requests\requests\AddCreditCardRequest;
 use app\services\requests\requests\AddShippingAddressRequest;
-use app\test\NewEntityGenerator;
+use app\test\EntityGenerator;
 use Exception;
 
 class Process {
@@ -15,7 +15,7 @@ class Process {
      */
     public static function addCreditCard (AddCreditCardRequest $request): void {
         $card = new CreditCard(
-            NewEntityGenerator::id(),
+            EntityGenerator::id(),
             $request->getVendor(),
             $request->getNameOnCard(),
             $request->getNumber(),

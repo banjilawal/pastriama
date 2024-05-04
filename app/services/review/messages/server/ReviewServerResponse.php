@@ -2,7 +2,7 @@
 
 namespace app\services\review\messages\server;
 
-use app\interfaces\Equality;
+use app\interfaces\adapters\Equality;
 use app\services\identifiers\ServerReplyIdentifier;
 use app\services\replies\ServerReply;
 use app\services\review\messages\client\ReviewServiceQuery;

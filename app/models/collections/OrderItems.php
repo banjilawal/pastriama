@@ -4,7 +4,7 @@ namespace app\models\collections;
 
 use app\models\abstracts\Model;
 use app\models\abstracts\Product;
-use app\models\catalogs\NewInventory;
+use app\models\catalogs\Inventory;
 use app\models\concretes\CartItem;
 use app\models\concretes\OrderItem;
 use app\models\concretes\Pastry;
@@ -60,7 +60,7 @@ class OrderItems extends Model {
         }
         $item = null;
         try {
-            $item = NewInventory::getInstance()->putInCart($product, $quantity);
+            $item = Inventory::getInstance()->putInCart($product, $quantity);
         } catch(Exception $e) {
             echo $e;
         }

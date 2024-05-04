@@ -3,6 +3,7 @@
 namespace app\models\concretes;
 
 
+use app\models\collections\Cart;
 use app\models\collections\InvoiceItems;
 use app\models\collections\Addresses;
 use app\models\catalogs\ReviewsCatalog;
@@ -19,23 +20,21 @@ use Exception;
 class User extends Person {
 
     private Wishlist $wishList;
-    private InvoiceItems $shoppingCart;
+    private Cart $cart;
     private CreditCards $creditCards;
-    private Addresses $shippingAddresses;
+    private Addresses $addresses;
 
-    /**
-     * @throws Exception
-     */
+
     public function __construct (
-        int           $id,
-        string        $firstname,
-        string        $lastname,
-        DateTime      $birthdate,
-        Phone         $phone,
-        EmailAddress  $emailAddress,
-        string        $password,
+        int $id,
+        string $firstname,
+        string $lastname,
+        DateTime $birthdate,
+        Phone $phone,
+        Email $email,
+        string $password,
         PostalAddress $billingAddress,
-        CreditCard    $creditCard
+        CreditCard $creditCard
     ) {
         parent::__construct(
             $id,
@@ -43,33 +42,32 @@ class User extends Person {
             $lastname,
             $birthdate,
             $phone,
-            $emailAddress,
+            $email,
             $password,
             $billingAddress
         );
-        $this->shippingAddresses = new Addresses();
+        $this->addresses = new Addresses();
         $this->creditCards = new CreditCards();
-        $this->shoppingCart = new InvoiceItems();
+        $this->cart = new Cart();
         $this->wishList = new Wishlist();
-
-//        $this->shippingAddresses->setPrimaryShippingAddress($billingAddress);
         $this->creditCards->addCard($creditCard);
+        $this->addresses->add($billingAddress);
     }
 
     public function getBillingAddress (): PostalAddress {
         return $this->getPostalAddress();
     }
 
-    public function getShippingAddresses (): Addresses {
-        return $this->shippingAddresses;
+    public function getAddresses (): Addresses {
+        return $this->addresses;
     }
 
     public function getCreditCards (): CreditCards {
         return $this->creditCards;
     }
 
-    public function getShoppingCart (): InvoiceItems {
-        return $this->shoppingCart;
+    public function getCart (): Cart {
+        return $this->cart;
     }
 
     public function getWishList(): Wishlist {

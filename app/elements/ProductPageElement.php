@@ -6,7 +6,7 @@ use app\interfaces\Dashboard;
 use app\interfaces\Render;
 use app\models\catalogs\ReviewsCatalog;
 use app\models\concretes\InventoryItem;
-use app\models\concretes\NewReview;
+use app\models\concretes\review;
 use app\models\concretes\User;
 use app\models\collections\Reviews;
 use app\elements\PageElement;
@@ -87,7 +87,7 @@ class ProductPageElement extends PageElement implements Render, Dashboard {
             . '<form id="ratingForm" name="ratingForm" method="post" action="processReviewForm.php">'
             . '<fieldset>'
             . '<legend>Write a Review</legend>'
-            . '<div class="formElement"><p>' . NewReview::ratingSelector() . '</p></div>'
+            . '<div class="formElement"><p>' . review::ratingSelector() . '</p></div>'
             . '<div class="formElement">'
                 . '<p>'
                     . '<label for="reviewTitle">Title</label>'
@@ -191,10 +191,10 @@ class ProductPageElement extends PageElement implements Render, Dashboard {
 //     * @throws Exception
 //     */
 //    public function page (): string {
-//        return Generate::htmlHead($this->getTitle())
-//            . Generate::header()
-//            . Generate::navbar()
+//        return HTMLSection::htmlHead($this->getTitle())
+//            . HTMLSection::header()
+//            . HTMLSection::navbar()
 //            . $this->getBody()
-//            . Generate::footer();
+//            . HTMLSection::footer();
 //     }
 }

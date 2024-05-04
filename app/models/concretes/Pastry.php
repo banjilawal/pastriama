@@ -29,11 +29,4 @@ class Pastry extends Product {
         }
         return false;
     }
-
-//    public function __toString (): string {
-//        return 'id: ' . $this->getId()
-//            . ' name:' . $this->getName()
-//            . ' price:' . number_format($this->getPrice(), 2)
-//            . ' description:' . $this->getDescription();
-//    }
 }

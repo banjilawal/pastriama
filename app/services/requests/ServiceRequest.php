@@ -2,8 +2,7 @@
 
 namespace app\services\requests;
 
-use app\interfaces\Equality;
-use app\interfaces\Identifiable;
+use app\interfaces\adapters\Equality;
 use app\services\identifiers\ClientAddress;
 use app\services\identifiers\ServiceRequestIdentifier;
 

@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 namespace app\services\requests\requests;
 
-use app\models\concretes\EmailAddress;
+use app\models\concretes\Email;
 use app\services\requests\Request;
 use app\utils\Convert;
 use Exception;
 
 class LoginRequest extends Request {
-    private EmailAddress $email;
+    private Email $email;
     private string $password;
 
     /**
@@ -21,7 +21,7 @@ class LoginRequest extends Request {
         $this->password = sanitize_input($password);
     }
 
-    public function getEmail (): EmailAddress {
+    public function getEmail (): Email {
         return $this->email;
     }
 

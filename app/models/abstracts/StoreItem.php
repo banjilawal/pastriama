@@ -8,11 +8,13 @@ namespace app\models\abstracts;
 //define ('MINIMUM_TAX_PERCENTAGE', 0);
 //define  ('MAXIMUM_TAX_PERCENTAGE', 35);
 
-
-use app\models\concretes\Pastry;
+use app\interfaces\adapters\GetId;
+use app\interfaces\adapters\GetProduct;
+use app\interfaces\adapters\DecreaseQuantity;
+use app\interfaces\adapters\IncreaseQuantity;
 use Exception;
 
-abstract class StoreItem extends Entity {
+abstract class StoreItem extends Entity implements IncreaseQuantity, DecreaseQuantity, GetId, GetProduct {
 
     private Product $product;
     private int $quantity;
@@ -26,9 +28,9 @@ abstract class StoreItem extends Entity {
         Product $product,
         int $quantity
     ) {
-//        if ($quantity < 0) {
-//            throw new Exception('The quantity cannot be less than zero.');
-//        }
+        if ($quantity < 0) {
+            throw new Exception('The product cannot have a negative quantity. StoreItem creation failed.');
+        }
         parent::__construct ($product->getId());
         $this->product = $product;
         $this->quantity = abs($quantity);
@@ -45,23 +47,23 @@ abstract class StoreItem extends Entity {
      * @throws Exception
      */
     public function decreaseQuantity (int $amount): void {
-//        if ($amount < 0) {
-//            throw new Exception('The amount must be greater than zero');
-//        }
-        if (abs($amount) > $this->quantity) {
-            throw new Exception('The decrease amount cannot be greater than the current quantity in stock');
+        if ($amount < 0) {
+            throw new Exception('Negative numbers are not supported. Enter unsigned numbers only.');
         }
-        $this->quantity -= abs($amount);
+        if (abs($amount) - $this->quantity < 0) {
+            throw new Exception('Attempting to remove more items than exist. Removal request failed');
+        }
+        $this->quantity -= $amount;
     }
 
     /**
      * @throws Exception
      */
     public function increaseQuantity (int $amount): void {
-//        if ($amount < 0) {
-//            throw new Exception('Cannot increase by a negative number');
-//        }
-        $this->quantity += abs($amount);
+        if ($amount < 0) {
+            throw new Exception('Negative numbers are not supported. Enter unsigned numbers only.');
+        }
+        $this->quantity += $amount;
     }
 
     public function getCost (): float {
@@ -85,15 +87,5 @@ abstract class StoreItem extends Entity {
     public function __toString (): string {
         return parent::__toString()
             . ' ' . $this->product . ' quantity:' . $this->quantity;
-    }
-
-    public static function quantitySelector (): string {
-        $elem = '<label for ="quantity">Quantity to Order</label>'
-            . '<select id="quantity" name="quantity" required>';
-        for ($i = 1; $i <= MAX_QUANTITY_PER_ORDER; $i++) {
-            $elem .= '<option value="' . $i . '">' . $i . '</option>';
-        }
-        $elem .= '</select>';
-        return $elem;
     }
 }

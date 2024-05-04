@@ -4,649 +4,170 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="I made it really complicated want to save this to the autoloading branch">
-      <change afterPath="$PROJECT_DIR$/app/enums/DataCategory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/EntityList.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/FormType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/ListTag.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/Orientation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/Rating.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/StylingClass.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/Quantifiable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/abstracts/Product.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/catalogs/NewInventory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/catalogs/NewUsersCatalog.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/collections/Cart.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/collections/NewOrders.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/collections/NewReviews.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/collections/NewUsers.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/collections/OrderItems.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/collections/Pastries.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/collections/Products.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/concretes/InventoryItem.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/concretes/InvoiceItem.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/concretes/NewOrder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/concretes/NewReview.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/concretes/NewUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/concretes/OrderItem.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/Dashboard.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/HTMLForm.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/HTMLList.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/test/NewCatalogPopulator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/test/NewEntityGenerator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/test/NewListGenerator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils/Util.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/constants.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_loader.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/newest_welcome.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/old_bootstrap.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/welcome.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/Page.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/Table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productPage.php" afterDir="false" />
+    <list default="true" id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="Added templates and created classes to handle the ordering products flow.">
+      <change afterPath="$PROJECT_DIR$/addressPage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/constants/PersonConstant.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/contexts/Search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/enums/RequestStatus.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/enums/Resource.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/enums/SearchCriteria.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/handlers/AddNewItemHandler.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/handlers/DecreaseQuantityHandler.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/handlers/Handler.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/handlers/IdExistsHandler.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/DecreaseQuantity.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetEmail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetName.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetPrice.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetProduct.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetQuantity.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetReview.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/IncreaseQuantity.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/Random.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/responsibilities/BooleanValidator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/responsibilities/Handle.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/responsibilities/Valid.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/responsibilities/Validator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/strategies/PaymentStrategy.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/strategies/SearchStrategy.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/visitors/AddStoreItem.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/interfaces/visitors/RandomItem.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/abstracts/Aggregation.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/concretes/Receipt.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/requests/Request.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/strategies/payment/CreditCardPayment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/strategies/search/SearchById.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/strategies/search/SearchByName.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/strategies/search/SearchByProduct.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/strategies/search/SearchByQuantity.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/strategies/search/SearchByUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/Form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/HTMLSelector.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/Script.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/test/Create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/validators/CanDecreaseQuantity.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/validators/DoesContain.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/validators/DoesNotContain.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/validators/IsEmpty.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/validators/NotNegative.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/validators/UniqueEmail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/validators/UniqueID.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/validators/UniqueProduct.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/validators/ValidatorChain.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/creditCardPage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/processors/processLoginForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shoppingCartPage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/Element.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/containers/Container.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/containers/Div.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/containers/Form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/containers/Listing.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/containers/Section.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/containers/Table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/userDashboard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CreditCardManagementPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/CreditCardManagementPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvoiceListPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/InvoiceListPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvoicePage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/InvoicePage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReviewListPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/ReviewListPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReviewPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/ReviewPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserListPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/UserListPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/WebPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/enums/CreditCardProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/enums/CreditCardProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/enums/State.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/enums/State.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/interfaces/PageAssembler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/interfaces/PageAssembler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/elements/Generate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/HTMLSection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/elements/OrderPageElement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/OrderPageElement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/elements/ProductPageElement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/ProductPageElement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/elements/ReviewPageElement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/ReviewPageElement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/elements/user/CreditCardsPageElement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/user/CreditCardsPageElement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/enums/Service.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/enums/Service.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/Equality.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/interfaces/adapters/Equality.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/Identifiable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetId.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/Quantifiable.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/abstracts/Address.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Address.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/abstracts/Entity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Entity.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/abstracts/NamedEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/NamedEntity.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/abstracts/Person.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Person.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/abstracts/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/abstracts/StoreItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/StoreItem.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/catalogs/Inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/Inventory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/catalogs/NewInventory.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/catalogs/NewUsersCatalog.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/catalogs/OrdersCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/OrdersCatalog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/catalogs/PastriesCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/PastriesCatalog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/catalogs/PastriesCatalog.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/catalogs/ReviewsCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/ReviewsCatalog.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/catalogs/UsersCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/UsersCatalog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/Addresses.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Addresses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/CreditCards.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/CreditCards.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/InvoiceItems.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/NewOrders.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/NewReviews.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/NewUsers.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/OrderItems.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/OrderItems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Orders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/PageLinkList.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/Reviews.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Reviews.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/CartItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/CartItem.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Domain.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Domain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/EmailAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/EmailAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/EmailAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Email.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/InvoiceItem.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/NewOrder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/NewReview.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/NewUser.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/OrderItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/OrderItem.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/PageLink.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/Pastry.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Pastry.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/Phone.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Phone.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/CartItem.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/Refund.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/ReturnTransaction.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Review.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/StateClass.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/concretes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Wish.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Wish.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/CreditCards.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/CreditCards.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/PageLinkList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/PageLinkList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/Pastries.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/PostalAddressList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Addresses.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/Products.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/InvoiceItems.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/Reviews.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Reviews.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/lists/Wishlist.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Wishlist.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/FormComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/FormComposer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/Generate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/Generate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/OrderPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/OrderPageElement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/PageElement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/ProductPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/ProductPageElement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/ReviewPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/ReviewPageElement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/user/CreditCardsPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/user/CreditCardsPageElement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/user/WishlistPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/user/WishlistPageElement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concretes/Zipcode.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Zipcode.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/processors/Process.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/processors/Process.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/review/messages/client/PastryReviewsQuery.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/review/messages/client/PastryReviewsQuery.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/identifiers/ClientAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/identifiers/ClientAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/identifiers/HostAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/identifiers/HostAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/identifiers/ServerAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/identifiers/ServerAddress.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/identifiers/ServerReplyIdentifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/identifiers/ServerReplyIdentifier.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/identifiers/ServiceRequestIdentifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/identifiers/ServiceRequestIdentifier.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/replies/ServerReply.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/replies/ServerReply.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/requests/ServiceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/requests/ServiceRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/requests/requests/LoginRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/requests/requests/LoginRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/requests/requests/RegisterAccountRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/requests/requests/RegisterAccountRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/review/ReviewServiceDispatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/review/ReviewServiceDispatcher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/services/review/messages/server/ReviewServerResponse.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/review/messages/server/ReviewServerResponse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/Dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/Dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/HTMLForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/HTMLForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/HTMLList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/HTMLList.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/test/CatalogPopulator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/CatalogPopulator.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/test/EntityGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/EntityGenerator.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/test/ListGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/ListGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/test/NewCatalogPopulator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/NewCatalogPopulator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/test/NewEntityGenerator.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/test/NewListGenerator.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/utils/AssemblePage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/AssemblePage.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/utils/Convert.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/Convert.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/utils/SerialNumber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/SerialNumber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classfulWelcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/new_welcome.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/createAccountForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/createAccountForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/creditCardPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/creditCardPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/id.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/100.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/101.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/102.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/103.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/104.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/105.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/106.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/107.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/108.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/109.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/110.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/111.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/112.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/113.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/114.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/115.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/116.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/117.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/118.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/119.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/12.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/120.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/121.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/122.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/123.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/124.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/125.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/126.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/127.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/128.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/129.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/13.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/130.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/131.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/132.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/133.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/134.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/135.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/136.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/137.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/138.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/139.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/14.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/140.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/141.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/142.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/143.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/144.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/145.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/146.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/147.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/148.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/149.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/15.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/150.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/151.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/152.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/153.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/154.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/155.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/156.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/157.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/158.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/159.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/16.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/160.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/161.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/162.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/163.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/164.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/165.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/166.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/167.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/168.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/169.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/17.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/170.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/171.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/172.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/173.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/174.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/175.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/176.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/177.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/178.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/179.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/18.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/180.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/181.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/182.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/183.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/184.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/185.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/186.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/187.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/188.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/189.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/19.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/190.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/191.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/192.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/193.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/194.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/195.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/196.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/197.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/198.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/199.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/20.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/201.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/202.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/203.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/204.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/205.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/206.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/207.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/208.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/209.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/21.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/210.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/211.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/212.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/213.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/214.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/215.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/216.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/217.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/218.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/219.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/22.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/220.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/221.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/222.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/223.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/224.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/225.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/226.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/227.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/228.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/229.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/23.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/230.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/231.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/232.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/233.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/234.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/235.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/236.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/237.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/238.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/239.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/24.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/240.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/241.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/242.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/243.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/244.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/245.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/246.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/247.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/248.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/249.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/25.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/250.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/251.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/252.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/253.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/254.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/255.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/256.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/257.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/258.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/259.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/26.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/260.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/261.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/262.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/263.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/264.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/265.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/266.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/267.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/268.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/269.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/27.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/270.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/271.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/272.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/273.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/274.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/275.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/276.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/277.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/278.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/279.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/28.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/280.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/281.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/282.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/283.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/284.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/285.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/286.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/287.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/288.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/289.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/29.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/290.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/291.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/292.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/293.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/294.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/295.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/296.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/297.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/298.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/299.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/30.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/300.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/301.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/302.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/303.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/304.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/305.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/306.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/307.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/308.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/309.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/31.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/310.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/311.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/312.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/313.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/314.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/315.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/316.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/317.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/318.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/319.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/32.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/320.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/321.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/322.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/323.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/324.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/325.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/326.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/327.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/328.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/329.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/33.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/330.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/331.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/332.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/333.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/334.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/335.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/336.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/337.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/338.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/339.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/34.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/340.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/341.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/342.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/343.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/344.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/345.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/346.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/347.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/348.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/349.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/35.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/350.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/351.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/352.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/353.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/354.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/355.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/356.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/357.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/358.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/359.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/36.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/360.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/361.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/362.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/363.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/364.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/365.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/366.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/367.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/368.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/369.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/37.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/370.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/371.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/372.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/373.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/374.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/375.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/376.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/377.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/378.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/379.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/38.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/380.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/381.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/382.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/383.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/384.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/385.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/386.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/387.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/388.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/389.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/39.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/390.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/391.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/392.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/393.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/394.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/395.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/396.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/397.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/398.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/399.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/40.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/400.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/401.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/402.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/403.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/404.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/405.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/406.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/407.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/408.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/409.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/41.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/410.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/411.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/412.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/413.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/414.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/415.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/416.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/417.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/418.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/419.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/42.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/420.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/421.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/422.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/423.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/424.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/425.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/426.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/427.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/428.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/429.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/43.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/430.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/431.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/432.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/433.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/434.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/435.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/436.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/437.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/438.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/439.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/44.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/440.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/441.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/442.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/443.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/444.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/445.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/446.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/447.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/448.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/449.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/45.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/450.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/451.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/452.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/453.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/454.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/455.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/456.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/457.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/458.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/459.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/46.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/460.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/461.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/462.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/463.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/464.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/465.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/466.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/467.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/468.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/469.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/47.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/470.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/471.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/472.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/473.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/474.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/475.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/476.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/477.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/478.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/479.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/48.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/480.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/481.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/482.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/483.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/484.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/485.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/486.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/487.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/488.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/489.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/49.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/490.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/491.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/492.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/493.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/494.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/495.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/496.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/497.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/498.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/499.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/50.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/51.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/52.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/53.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/54.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/55.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/56.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/57.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/58.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/59.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/60.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/61.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/62.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/63.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/64.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/65.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/66.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/67.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/68.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/69.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/70.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/71.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/72.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/73.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/74.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/75.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/76.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/77.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/78.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/79.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/80.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/81.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/82.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/83.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/84.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/85.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/86.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/87.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/88.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/89.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/90.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/91.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/92.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/93.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/94.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/95.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/96.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/97.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/98.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/99.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/file.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryItemPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/inventoryItemPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/navigation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/components/navigation/bread.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/components/navigation/bread.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/components/navigation/cake.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/components/navigation/cake.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/components/navigation/cookie.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/components/navigation/cookie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/components/navigation/savory.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/components/navigation/savory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/user_cards.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_cards.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/user_contact_info.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_contact_info.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/user_dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/user_home.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/user_orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/user_security.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_security.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/user_shopping_cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_shopping_cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_webpages/user_wishlist.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_wishlist.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ordersPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/ordersPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pageComponents.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/pageComponents.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/PastryListPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/PastryListPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/popup.html" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/popup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processAddToCartForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processAddToCartForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processAddressForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processAddressForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processLoginForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processLoginForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processOneClickBuyForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processOneClickBuyForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processPasswordChangeForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processPasswordChangeForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processPhoneForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processPhoneForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processRegistrationForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processRegistrationForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processReviewForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processReviewForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renders/getCreditCardsPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/renders/getCreditCardsPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/renders/getProductPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/renders/getProductPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shoppingCart.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/shoppingCart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/datasets/addresses.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/datasets/food_reviews.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/datasets/foods.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/userContactDetailsPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/userContactDetailsPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userDashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/userDashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userSecuritySettingsPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/userSecuritySettingsPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/welcome.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wishListPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/wishListPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils/Util.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/Util.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/autoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/constants.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_loader.php" beforeDir="false" afterPath="$PROJECT_DIR$/data_loader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new_welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/new_welcome.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newest_welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/newest_welcome.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_home.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/CreditCardManagementPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/CreditCardManagementPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/InvoicePage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/InvoicePage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/ReviewPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/ReviewPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/createAccountForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/createAccountForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/creditCardPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/creditCardPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/inventoryItemPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/inventoryItemPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processAddToCartForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processAddToCartForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processAddressForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processAddressForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processOneClickBuyForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processOneClickBuyForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processPhoneForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processPhoneForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processRegistrationForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processRegistrationForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processReviewForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processReviewForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/productPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_index.php" beforeDir="false" afterPath="$PROJECT_DIR$/test_index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -689,7 +210,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/xampp/htdocs/pastriama",
+    "last_opened_file_path": "C:/xampp/htdocs/pastriama/app/utils",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -703,18 +224,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\pastriama" />
-      <recent name="C:\xampp\htdocs\pastriama\app\models\concretes" />
+      <recent name="C:\xampp\htdocs\pastriama\app\utils" />
       <recent name="C:\xampp\htdocs\pastriama\app\test" />
-      <recent name="C:\xampp\htdocs\pastriama\app\models\abstracts" />
-      <recent name="C:\xampp\htdocs\pastriama\app\pages" />
+      <recent name="C:\xampp\htdocs\pastriama" />
+      <recent name="C:\xampp\htdocs\pastriama\app\templates" />
+      <recent name="C:\xampp\htdocs\pastriama\processors" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\pastriama\app\test" />
       <recent name="C:\xampp\htdocs\pastriama\app\templates" />
       <recent name="C:\xampp\htdocs\pastriama\old_things_2024_04_23\pages_2024_04_23" />
       <recent name="C:\xampp\htdocs\pastriama\old_things_2024_04_23" />
       <recent name="C:\xampp\htdocs\pastriama\old-things-2024-04-23" />
-      <recent name="C:\xampp\htdocs\pastriama\pages_2024_04_23" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.new_welcome.php">
@@ -781,7 +302,9 @@
       <workItem from="1713729909536" duration="55390000" />
       <workItem from="1713855271400" duration="59806000" />
       <workItem from="1714021485442" duration="103030000" />
-      <workItem from="1714402660864" duration="52260000" />
+      <workItem from="1714402660864" duration="70715000" />
+      <workItem from="1714513687502" duration="8174000" />
+      <workItem from="1714524170583" duration="87259000" />
     </task>
     <task id="LOCAL-00001" summary="Gont classes to work with composer for autoloadng casses and managing dependencies">
       <option name="closed" value="true" />
@@ -847,7 +370,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713800907992</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added templates and created classes to handle the ordering products flow.">
+      <option name="closed" value="true" />
+      <created>1714488928532</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1714488928532</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -861,7 +392,8 @@
     <MESSAGE value="Started working on microsevices and despatchers. Got first draft of content service working that sends page components." />
     <MESSAGE value="Worked on the service infrastructure." />
     <MESSAGE value="I made it really complicated want to save this to the autoloading branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="I made it really complicated want to save this to the autoloading branch" />
+    <MESSAGE value="Added templates and created classes to handle the ordering products flow." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added templates and created classes to handle the ordering products flow." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -891,14 +423,19 @@
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/test/NewEntityGenerator.php</url>
+          <url>file://$PROJECT_DIR$/app/test/EntityGenerator.php</url>
           <line>5</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/test/NewListGenerator.php</url>
-          <line>70</line>
+          <url>file://$PROJECT_DIR$/app/test/ListGenerator.php</url>
+          <line>71</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/models/concretes/Phone.php</url>
+          <line>4</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,71 +1,52 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace app\models\catalogs;
 
 use app\models\abstracts\Model;
-use App\Models\Concretes\Pastry;
-use App\Models\Concretes\NewReview;
-use App\Models\concretes\User;
-use App\models\collections\Reviews;
+use app\models\abstracts\Product;
+use app\models\abstracts\StoreItem;
+use app\models\collections\Reviews;
 use app\models\collections\Users;
+use app\models\concretes\CartItem;
+use app\models\concretes\InventoryItem;
+use App\Models\Concretes\Order;
+use app\models\concretes\Pastry;
+use App\Models\Concretes\User;
+use app\models\collections\InvoiceItems;
+use App\Models\collections\Orders;
+use app\models\collections\Pastries;
 use DateTime;
 use Exception;
 
 class UsersCatalog extends Model {
     private static $instance;
-    protected static Users $users;
+    protected Users $users;
 
     private function __construct () {
         parent::__construct();
-        self::$users = new Users();
+        $this->users = new Users();
     }
 
-    public static function getInstance(): UsersCatalog {
+    public static function getInstance (): UsersCatalog {
         if (!isset(self::$instance)) {
             self::$instance = new self();
         }
         return self::$instance;
     }
 
-//    private function __clone () {}
-    public function __wakeup () {}
+    private function __clone () {}
+    public function __sleep() {
+        // Returning an empty array prevents serializing instance variables
+        return [];
+    }
+
+    public function __wakeup() {
+        // When unserialized, ensure the singleton pattern is maintained
+        // then reinstate the instance.
+        self::$instance = $this;
+    }
 
     public function getUsers (): Users {
-        return self::$users;
+        return $this->users;
     }
-
-    /**
-     * @throws Exception
-     */
-    public function add (User $user): void {
-        self::$users->add($user);
-    }
-
-
-
-//    /**
-//     * @throws Exception
-//     */
-//    public function filterByDate (DateTime $startDate, DateTime $endDate): ReviewList {
-//        $matches = new ReviewList();
-//        foreach (self::$reviews as $review) {
-//            if ($review->getSubmitTime() >= $startDate && $review->getSubmitTime() <= $endDate)
-//                $matches->add($review);
-//        }
-//        return $matches;
-//    }
-//
-//    /**
-//     * @throws Exception
-//     */
-//    public static function userSearch (User $user, DateTime $startDate, DateTime $endDate): ReviewList {
-//        return (self::$reviews->filterByDateRange($startDate, $endDate))->filterByUser($user);
-//    }
-//
-//    /**
-//     * @throws Exception
-//     */
-//    public static function pastrySearch (Pastry $pastry, DateTime $startDate, DateTime $endDate): ReviewList {
-//        return (self::$reviews->filterByDateRange($startDate, $endDate))->filterByPastry($pastry);
-//    }
 }

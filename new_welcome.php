@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-use app\models\catalogs\NewInventory;
-use app\test\NewEntityGenerator;
-use app\test\NewListGenerator;
+use app\models\catalogs\Inventory;
+use app\test\EntityGenerator;
+use app\test\ListGenerator;
 
 if (session_status() === PHP_SESSION_ACTIVE) {
     session_unset();
@@ -22,10 +22,10 @@ $products = null;
 $users = null;
 $reviews = null;
 try {
-    $product = NewEntityGenerator::product();
-    $user = NewEntityGenerator::user();
-    $review = NewEntityGenerator::review($user, $product);
-    $order = NewEntityGenerator::order($user);
+    $product = EntityGenerator::product();
+    $user = EntityGenerator::user();
+    $review = EntityGenerator::review($user, $product);
+    $order = EntityGenerator::order($user);
 //    echo nl2br(
 //            'product:' . $review->product->getName()
 //            . 'reviewer:' . $review->getUser()->printName()
@@ -35,12 +35,12 @@ try {
 //            . ' submitDate:' . $review->getSubmissionTime()->format(DATE_FORMAT) . PHP_EOL
 //    );
 //    if (is_null($review)) {echo 'null';} else { echo 'not null';}
-    $products = NewListGenerator::products(19);
-    $users = NewListGenerator::users(30);
-    $reviews = NewListGenerator::reviews($users, $products);
+    $products = ListGenerator::products(19);
+    $users = ListGenerator::users(30);
+    $reviews = ListGenerator::reviews($users, $products);
 } catch (Exception $e) { echo $e; }
 
-$inventory = NewInventory::getInstance();
+$inventory = Inventory::getInstance();
 foreach ($products->getItems() as $item) {
     try {
         $inventory->add($item, rand(1, DEFAULT_RESTOCK_QUANTITY));
@@ -48,13 +48,13 @@ foreach ($products->getItems() as $item) {
 }
 echo println('number of products in inventory: ' . count($inventory->getItems()));
 try {
-    $users = NewListGenerator::shoppingCarts($users);
+    $users = ListGenerator::shoppingCarts($users);
 } catch (Exception $e) { echo $e; }
 
 foreach ($users->getLIst() as $id => $user) {
 //    echo println($user->printName() . '\'s ' . $user->getCart());
     try {
-        $order = NewEntityGenerator::order($user);
+        $order = EntityGenerator::order($user);
     } catch (Exception $e) { echo $e; }
     echo $order;
 }

@@ -4,11 +4,11 @@ namespace app\models\concretes;
 
 use app\enums\MailingCategory;
 use app\enums\State;
-use app\interfaces\Identifiable;
+use app\interfaces\adapters\GetId;
 use app\models\abstracts\Address;
 
 
-class PostalAddress extends Address implements Identifiable {
+class PostalAddress extends Address implements GetId {
     private int $id;
     private string $street;
     private string $city;
@@ -71,31 +71,11 @@ class PostalAddress extends Address implements Identifiable {
         return $this->totalDeliveries;
     }
 
-    public function setId (int $id): void {
-        $this->id = $id;
-    }
-
-    public function setStreet (string $street): void {
-        $this->street = $street;
-    }
-
-    public function setCity (string $city): void {
-        $this->city = $city;
-    }
-
-    public function setState (State $state): void {
-        $this->state = $state;
-    }
-
-    public function setZipcode (Zipcode $zipcode): void {
-        $this->zipcode = $zipcode;
-    }
-
     public function setMailingCategory (MailingCategory $category): void {
         $this->mailingCategory = $category;
     }
 
-    public function setTotalDeliveries (): void {
+    public function incrementTotalDeliveries (): void {
         $this->totalDeliveries++;
     }
 
@@ -108,33 +88,13 @@ class PostalAddress extends Address implements Identifiable {
                 && $this->street === $object->getStreet()
                 && $this->city === $object->getCity()
                 && $this->state === $object->getState()
-                && $this->zipcode->equals($object->getZipcode());
+                && $this->zipcode->equals($object->getZipcode())
+                && $this->totalDeliveries === $object->getTotalDeliveries();
         }
         return false;
     }
 
     public function __toString (): string {
         return  $this->street . ' ' . $this->city . ', ' . $this->state->value . ' ' . $this->zipcode;
-    }
-
-    public function toTable (): string {
-        return '<table  id="postalAddressTable>'
-            . '<thead>'
-            . '<tr>'
-            .   '<th>Street</th>'
-            .   '<th>City</th>'
-            .   '<th>State</th>'
-            .   '<th>Zip</th>'
-            .   '</tr>'
-            . '</thead>'
-            . '<tbody>'
-            . '<tr>'
-            . '<td>' . $this->street . '</td>'
-            . '<td>' . $this->city . '</td>'
-            . '<td>' . $this->state->value . '</td>'
-            . '<td>' . $this->zipcode . '</td>'
-            . '</tr>'
-            . '</tbody>'
-            . '</table>';
     }
 }

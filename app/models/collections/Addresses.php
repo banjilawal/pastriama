@@ -10,7 +10,6 @@ use app\models\concretes\Zipcode;
 use Exception;
 
 class Addresses extends Model {
-    public static int $PRIMARY_SHIPPING_ADDRESS_INDEX = 0;
     private array $list;
 
     public function __construct () {
@@ -66,15 +65,6 @@ class Addresses extends Model {
     /**
      * @throws Exception
      */
-    public function addAddresses (Addresses $addresses): void {
-        foreach ($addresses as $address) {
-            $this->add($address);
-        }
-    }
-
-    /**
-     * @throws Exception
-     */
     public function add (PostalAddress $address): void {
         if (array_key_exists($address->getId(), $this->list)) {
             throw new Exception($address . ' is already in the list');
@@ -82,14 +72,6 @@ class Addresses extends Model {
         $this->list[$address->getId()] = $address;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function removeAddresses (Addresses $addresses): void {
-        foreach ($addresses as $address) {
-            $this->remove($address);
-        }
-    }
 
     /**
      * @throws Exception
@@ -273,7 +255,7 @@ class Addresses extends Model {
         return $elem;
     }
 
-    public function randomAddress (): PostalAddress {
+    public function random (): PostalAddress {
         return $this->list[array_rand($this->list)];
     }
 }

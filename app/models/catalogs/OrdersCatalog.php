@@ -3,19 +3,19 @@
 namespace app\models\catalogs;
 
 use app\models\abstracts\Model;
-use App\Models\Concretes\NewOrder;
+use App\Models\Concretes\Order;
 use App\Models\Concretes\User;
 use App\Models\collections\Orders;
 use DateTime;
 use Exception;
 
-class OrdersCatalog extends Model {
+final class OrdersCatalog extends Model {
     private static $instance;
-    protected static Orders $orders;
+    protected Orders $orders;
 
     private function __construct () {
         parent::__construct();
-        self::$orders = new Orders();
+        $this->orders = new Orders();
     }
 
     public static function getInstance(): OrdersCatalog {
@@ -26,17 +26,18 @@ class OrdersCatalog extends Model {
     }
 
     private function __clone () {}
-    public function __wakeup () {}
 
-    public static function getOrders(): Orders {
-        return self::$orders;
+    public function __sleep() {
+        return []; // Returning an empty array prevents serializing instance variables
     }
 
-    /**
-     * @throws Exception
-     */
-    public function add (NewOrder $order): void {
-        self::$orders->addOrder($order);
+    public function __wakeup() {
+        // When unserialized, ensure the singleton pattern is maintained
+        self::$instance = $this; // Reinstate the singleton instance
+    }
+
+    public function getOrders (): Orders {
+        return $this->orders;
     }
 //
 //    /**

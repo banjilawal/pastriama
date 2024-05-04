@@ -10,7 +10,7 @@ use app\enums\CreditCardProvider;
 use app\enums\Month;
 use app\models\concretes\CreditCard;
 use app\models\concretes\User;
-use app\test\NewEntityGenerator;
+use app\test\EntityGenerator;
 
 //use app\models\lists\CreditCards;
 //use app\test\EntityGenerator;
@@ -252,7 +252,7 @@ $title = 'Your Credit Cards ' . $user->printName();
                     <p>
                         <?php
                             echo Month::selector();
-                            echo NewEntityGenerator::yearSelector(DateTime::createFromFormat('Y', date('Y')));
+                            echo EntityGenerator::yearSelector(DateTime::createFromFormat('Y', date('Y')));
                         ?>
                     </p>
                 </div>

@@ -4,11 +4,13 @@ namespace app\templates;
 use app\enums\CreditCardProvider;
 use app\enums\FormType;
 use app\enums\Month;
+use app\enums\Rating;
 use app\enums\State;
 use app\enums\StylingClass;
 use app\models\collections\InvoiceItems;
 use app\models\concretes\InventoryItem;
-use app\models\concretes\NewReview;
+use app\models\concretes\review;
+use app\models\concretes\User;
 use app\models\concretes\User;
 use DateTime;
 
@@ -22,14 +24,16 @@ class HTMLForm {
     private static function openingTag (FormType $formType, StylingClass $class): string {
         return '<div class="' . $class->value . '">'
             . '<form name="' . $formType->value . 'HTMLForm " id="' . $formType->value . 'HTMLForm"'
-            . ' action="' . ACTION_HOME . $formType->value . 'HTMLForm.php" method="post">';
+            . ' action="' . PROCESS_LOGIN_FORM . $formType->value . 'HTMLForm.php" method="post">';
     }
 
     public static function loginForm (
 //
         StylingClass $class=StylingClass::FORM_CONTAINER
     ): string {
-        return self::openingTag(FormType::LOGIN, $class) .'<fieldset name="login" id="login">'
+        return '<form name="loginForm" id="loginForm" action="processors/processLoginForm.php" method="post">'
+//            '<div class="' . $class->value . '" id="loginForm'
+//            . ' action="' . PROCEESS_LOGIN_FORM . '" method="post">'
             . '<legend>Login to Your Account</legend>'
             . '<div><p>'
             . '<label for="email">Email</label>'
@@ -76,7 +80,7 @@ class HTMLForm {
     }
 
     public static function creditCardForm (
-        User $user,
+        User         $user,
         StylingClass $class=StylingClass::FORM_CONTAINER
     ): string {
         return self::openingTag(FormType::CREDIT_CARD, $class) . self::creditCardFieldset($user->printName())
@@ -87,8 +91,8 @@ class HTMLForm {
         StylingClass $class=StylingClass::FORM_CONTAINER
     ): string {
         return self::openingTag(FormType::REVIEW, $class) . '<fieldset>'
-            . '<legend>Write a Review></legend>'
-			. '<div class="formElement"><p>' . NewReview::ratingSelector() . '</p></div>'
+            . '<legend>Write a Review</legend>'
+			. '<div class="formElement"><p>' . Rating::selector() . '</p></div>'
             . '<div class="formElement"><p>'
                 . '<label for="reviewTitle">Title</label>'
                 . '<input type="text" id="reviewTitle" name="reviewTitle" size="50" required>'
@@ -166,6 +170,7 @@ class HTMLForm {
                 . '<label for="zipcode">Zipcode</label>'
                 . '<input type="text" name="zipcode" id="zipcode" size="5" pattern="[0-9]{5}" required/>'
             . '</p>'
+            . '<button type="submit" name="submitButton" id="submitButton" value="submit">Submit</button>'
             . '</div>'
             . '</fieldset>';
     }
@@ -173,7 +178,7 @@ class HTMLForm {
     public static function postalAddressForm (
 //        string $name='postalAddress',
         StylingClass $class=StylingClass::FORM_CONTAINER
-    ): string { return self::openingTag(FormType::POSTAL_ADDRESS, $class) . self::postalAddressFieldset() . '</form></div>'; }
+    ): string { return '<form name="addressForm" id="addressForm" action="processAddressForm.php" method="post">' . self::postalAddressFieldset() . '</form></div>'; }
 
     public static function passwordFieldset (string $legend): string {
         return '<fieldset>'

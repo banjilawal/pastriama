@@ -2,10 +2,9 @@
 
 namespace app\utils;
 
+use app\elements\PageElement;
 use app\interfaces\Dashboard;
 use app\interfaces\PageAssembler;
-use app\elements\Generate;
-use app\elements\PageElement;
 
 class AssemblePage implements PageAssembler {
     public static function htmlHead (string $title): string {

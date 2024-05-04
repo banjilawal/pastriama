@@ -13,7 +13,7 @@ use app\models\catalogs\ReviewsCatalog;
 use app\models\collections\Reviews;
 use Exception;
 
-class Product extends NamedEntity {
+abstract class Product extends NamedEntity {
 
     private string $description;
     private string $imageName;
@@ -97,47 +97,4 @@ class Product extends NamedEntity {
             . '" height="' . $height
             . '">';
     }
-
-    public function toRow (
-        int $imageWidth=DEFAULT_ROW_IMAGE_WIDTH,
-        int $imageHeight=DEFAULT_ROW_IMAGE_HEIGHT
-    ): string {
-        return '<tr id="storeItemId_"' . $this->getId() . ' onclick="rowClickHandler($row)">'
-            . '<td id="idCell" hidden>' . $this->getId() . '</td>'
-            . '<td>' . $this->getImgTag($imageWidth, $imageHeight) . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
-            . '<td>' . $this->getName() . '</td>'
-            . '<td>' . $this->description . '</td>'
-            . '<td>' . number_format($this->price, 2) . '</td>'
-            . '</tr>';
-    }
-
-    public function toTable (
-        int $imageWidth=DEFAULT_TABLE_IMAGE_WIDTH,
-        int $imageHeight=DEFAULT_TABLE_IMAGE_HEIGHT
-    ): string {
-        return '<table>'
-            . '<thead>'
-            . '<tr>'
-            . '<th>' . $this->getName() . '</th>'
-            . '<th>Description</th>'
-            . '<th>Price</th>'
-            . '</tr>'
-            . '</thead>'
-            . '<tbody>'
-            . '<tr>'
-            . '<td>' . $this->getImgTag($imageWidth, $imageHeight) . '</td>'
-            . '<td>' . $this->description . '</td>'
-            . '<td>' . number_format($this->price, 2) . '</td>'
-            . '</tr>'
-            . '</tbody>'
-            . '</table>'
-            . '<br>product id:' . $this->getId();
-    }
-
-//    /**
-//     * @throws Exception
-//     */
-//    public function getReviews (): Reviews {
-//        return ReviewsCatalog::getInstance()->getReviews()->filterByPastry($this);
-//    }
 }

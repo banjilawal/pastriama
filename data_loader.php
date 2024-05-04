@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 namespace {
-    use app\models\catalogs\NewInventory;
+    use app\models\catalogs\Inventory;
     use app\test\NewCatalogPopulator;
-    use app\test\NewEntityGenerator;
-    use app\test\NewListGenerator;
+    use app\test\EntityGenerator;
+    use app\test\ListGenerator;
 
     if (session_status() === PHP_SESSION_ACTIVE) {
         session_unset();
@@ -20,20 +20,33 @@ namespace {
     $review = null;
     $order = null;
     $products = null;
+    $orders = null;
     $users = null;
     $reviews = null;
     $inventory = null;
     try {
-        $inventory = NewCatalogPopulator::inventory(NewListGenerator::products(10));
+        $products = ListGenerator::products(40);
+        $inventory = NewCatalogPopulator::inventory($products);
+        $users = ListGenerator::users(15);
+        $reviews = ListGenerator::reviews($users, $products);
+//        $orders = ListGenerator::orders($users);
     } catch (Exception $e) { echo $e; }
 //    echo $inventory;
+//    echo $users->getUsers();
+//    echo $reviews->getReviews();
+//    foreach ($users->getList() as $id => $user) {
+//        echo nl2br($user->printName() . PHP_EOL . 'Shopping Cart' . PHP_EOL . $user->getCart() . PHP_EOL);
+//    }
 
     $_SESSION['inventory'] = serialize($inventory);
+    $_SESSION['users'] = serialize($users);
+    $_SESSION['reviews'] = serialize($reviews);
+
 //    try {
-//        $product = NewEntityGenerator::product();
-//        $user = NewEntityGenerator::user();
-//        $review = NewEntityGenerator::review($user, $product);
-//        $order = NewEntityGenerator::order($user);
+//        $product = EntityGenerator::product();
+//        $user = EntityGenerator::user();
+//        $review = EntityGenerator::review($user, $product);
+//        $order = EntityGenerator::order($user);
     //    echo nl2br(
     //            'product:' . $review->product->getName()
     //            . 'reviewer:' . $review->getUser()->printName()
@@ -43,12 +56,12 @@ namespace {
     //            . ' submitDate:' . $review->getSubmissionTime()->format(DATE_FORMAT) . PHP_EOL
     //    );
     //    if (is_null($review)) {echo 'null';} else { echo 'not null';}
-//        $products = NewListGenerator::products(19);
-//        $users = NewListGenerator::users(30);
-//        $reviews = NewListGenerator::reviews($users, $products);
+//        $products = ListGenerator::products(19);
+//        $users = ListGenerator::users(30);
+//        $reviews = ListGenerator::reviews($users, $products);
 //    } catch (Exception $e) { echo $e; }
 //
-//    $inventory = NewInventory::getInstance();
+//    $inventory = Inventory::getInstance();
 //    foreach ($products->getItems() as $item) {
 //        try {
 //            $inventory->add($item, rand(1, DEFAULT_RESTOCK_QUANTITY));
@@ -56,13 +69,13 @@ namespace {
 //    }
 //    echo println('number of products in inventory: ' . count($inventory->getItems()));
 //    try {
-//        $users = NewListGenerator::shoppingCarts($users);
+//        $users = ListGenerator::shoppingCarts($users);
 //    } catch (Exception $e) { echo $e; }
 //
 //    foreach ($users->getLIst() as $id => $user) {
 //    //    echo println($user->printName() . '\'s ' . $user->getCart());
 //        try {
-//            $order = NewEntityGenerator::order($user);
+//            $order = EntityGenerator::order($user);
 //        } catch (Exception $e) { echo $e; }
 //        echo $order;
 //    }

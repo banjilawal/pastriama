@@ -1,14 +1,11 @@
 <?php declare(strict_types=1);
 namespace app\models\concretes;
 
-use app\interfaces\Quantifiable;
 use app\models\abstracts\Product;
 use app\models\abstracts\StoreItem;
-
-use app\models\catalogs\NewInventory;
 use Exception;
 
-class OrderItem extends StoreItem implements Quantifiable {
+class OrderItem extends StoreItem {
 
     /**
      * @param Product $product

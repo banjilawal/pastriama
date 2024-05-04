@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use app\models\concretes\NewReview;
+use app\models\concretes\review;
 use app\utils\SerialNumber;
 
 if (empty(session_id())) {
@@ -33,7 +33,7 @@ try {
 }
 
 try {
-    $reviewsCatalog->add(new NewReview(
+    $reviewsCatalog->add(new review(
             SerialNumber::nextReviewId(),
             $user,
             $inventoryItem->getPastry(),

@@ -12,8 +12,4 @@ abstract class Address extends Model {
         if ($this === $object) return true;
         else return false;
     }
-
-//    public function __toString (): string {
-//        return parent::__toString();
-//    }
 }

@@ -4,20 +4,20 @@ namespace old_things_2024_04_23\pages_2024_04_23;
 require_once 'bootstrap.php';
 require_once 'WebPage.php';
 
-use app\models\concretes\NewReview;
+use app\models\concretes\review;
 use app\test\ListGenerator;
 
 
 class ReviewPage extends WebPage {
 
-    private NewReview $review;
+    private review $review;
 
-    public function __construct (NewReview $review) {
+    public function __construct (review $review) {
         parent::__construct($review->getTitle());
         $this->review = $review;
     }
 
-    public function getReview (): NewReview {
+    public function getReview (): review {
         return $this->review;
     }
 }

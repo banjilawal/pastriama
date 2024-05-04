@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use app\templates\Dashboard;
+use app\templates\Script;
 
 if (session_status() != PHP_SESSION_ACTIVE) {
     session_start();
@@ -12,81 +13,17 @@ require_once 'data_loader.php';
 //echo print_r($_SESSION);
 
 
+
 $inventory = unserialize($_SESSION['inventory']);
-$inventoryItem = $inventory->searchById(((int) $_COOKIE['productId'])); //getInventory()->searchById((int) $_COOKIE['inventoryItemId']);
-echo $inventoryItem;
+
+$inventoryItem = unserialize($_SESSION['inventory'])->searchById(((int) $_COOKIE['productId']));
+$reviews = unserialize($_SESSION['reviews'])->filterByProduct($inventoryItem->getProduct());
+
+
+//echo $inventoryItem;
 
 $title = $inventoryItem->getProduct()->__toString();
-//class PastryPage extends old_things_2024_04_23\pages_2024_04_23\WebPage {
-//    private Pastry $pastry;
-//
-//    public function __construct (Pastry $pastry) {
-//        parent::__construct($pastry->__toString());
-//        $this->pastry = $pastry;
-//    }
-//
-//    public function getPastry (): Pastry {
-//        return $this->pastry;
-//    }
-//} // end class PastryPage
-//$lists = null;
-//try {
-//    $lists = ListGenerator::lists(30, 60);
-//} catch (Exception $e) {
-//    echo $e;
-//}
-//echo print_r($_SESSION['inventory']);
 
-//$user = unserialize($_SESSION['user']);
-//$inventoryItem = unserialize($_SESSION['products'])->searchById((int) $_COOKIE['productId']);
-//$reviews = unserialize($_SESSION['reviewsCatalog']); //)->filterByPastry($inventoryItem->getPastry());
-//echo print_r($reviews->getItems());
-
-//$title = $inventoryItem->getPastry()->getName() . ' price:' . $inventoryItem->getPastry()->getName();
-//echo $inventoryItem;
-//echo $inventory;
-//print_r($_SESSION['inventory']->get);
-//echo nl2br(print_r($_COOKIE) . ' ' . PHP_EOL);
-//$pastry = $lists['pastries']->getItems()[array_rand($lists['pastries']->getItems())];
-//$inventory = unserialize($_SESSION['inventory']);
-//$inventoryItem = $inventory->getInventory()->searchById((int) $_COOKIE['inventoryItemId']);
-//$title = $inventoryItem->getPastry->getName() . ' price:' . $inventoryItem->getPastry()->getName();
-//$pastry = $lists['pastries']->getItems()[];
-//$_SESSION['pastry'] = serialize($pastry);
-//$reviews = $lists['reviews'];
-//$page = new PastryPage($pastry);
-
-//
-//$pastries = null;
-//try {
-//    $pastries = ListGenerator::pastryList(40);
-//} catch (Exception $e) {
-//    echo $e;
-//}
-//
-//$users = null;
-//try {
-//    $users = ListGenerator::userList(15);
-//} catch (Exception $e) {
-//    echo $e;
-//}
-//echo 'total users:' . count($users->getItems()) . '<br>' . PHP_EOL;
-//
-//$pastry = $pastries->getItems()[(array_rand($pastries->getItems()))];
-//$reviews = new ReviewList();
-//foreach ($users->getItems() as $user) {
-//    if (rand(1, 4) < 3) {
-//        echo '   Adding a review by ' . $user->getFirstname() . '<br>' . PHP_EOL;
-//        try {
-//            $reviews->add(EntityGenerator::review($user, $pastry));
-//        } catch (Exception $e) {
-//            echo $e;
-//        }
-//        echo count($reviews->getItems()) . ' reviews';
-//    }
-//}
-
-//$page = new PastryPage($pastry);
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +41,7 @@ $title = $inventoryItem->getProduct()->__toString();
 <main>
     <?php
     try {
-        echo Dashboard::product($inventoryItem->getProduct());
+        echo Dashboard::product($inventoryItem->getProduct(), $reviews);
     } catch (Exception $e) { echo $e; }
     ?>
 <!--    --><?php
@@ -142,7 +79,7 @@ $title = $inventoryItem->getProduct()->__toString();
 <!--            <form id="ratingForm" name="ratingForm" method="post" action="processReviewForm.php">-->
 <!--                <fieldset>-->
 <!--                    <legend>Write a Review></legend>-->
-<!--                    <div class="formElement"><p> --><?php //echo NewReview::ratingSelector(); ?><!--</p></div>-->
+<!--                    <div class="formElement"><p> --><?php //echo review::ratingSelector(); ?><!--</p></div>-->
 <!--                    <div class="formElement">-->
 <!--                        <p>-->
 <!--                            <label for="reviewTitle">Title</label>-->

@@ -46,7 +46,7 @@ class CatalogPopulator {
 
     public static function populateShoppingCarts (UsersCatalog $users, Inventory $inventory): void {
         foreach ($users->getUsers() as $user) {
-            NewEntityGenerator::invoice($inventory->getProducts())->transferToTarget($user->getShoppingCart());
+            EntityGenerator::invoice($inventory->getProducts())->transferToTarget($user->getShoppingCart());
         }
     }
 
@@ -55,7 +55,7 @@ class CatalogPopulator {
      */
     public static function ordersCatalog (OrdersCatalog $catalog, UsersCatalog $users): void {
         foreach ($users->getUsers() as $user) {
-            $order = NewEntityGenerator::order($user);
+            $order = EntityGenerator::order($user);
             if (!is_null($order)) {
                 $catalog->getOrders()->addOrder($order);
             }

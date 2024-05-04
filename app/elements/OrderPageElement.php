@@ -3,20 +3,20 @@
 namespace app\elements;
 
 use app\interfaces\Dashboard;
-use app\models\concretes\NewOrder;
-use app\models\concretes\NewReview;
+use app\models\concretes\Order;
+use app\models\concretes\review;
 use app\elements\PageElement;
 use app\utils\AssemblePage;
 
 class OrderPageElement extends PageElement implements Dashboard {
 
-    private NewOrder $order;
+    private Order $order;
     private string $dashboardHeading;
 
     /**
-     * @param NewOrder $order
+     * @param Order $order
  */
-    public function __construct (NewOrder $order) {
+    public function __construct (Order $order) {
         parent::__construct($order->__toString());
         $this->order = $order;
         $this->dashboardHeading = '';

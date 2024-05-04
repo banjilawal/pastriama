@@ -2,9 +2,9 @@
 
 namespace webpages;
 
-use app\test\NewEntityGenerator;
+use app\test\EntityGenerator;
 
- = new NewEntityGenerator()->$pastry;
+ = new EntityGenerator()->$pastry;
 
 $title = '<title>This is the search</title>';
 $heading = '<h1>Search</h1>';

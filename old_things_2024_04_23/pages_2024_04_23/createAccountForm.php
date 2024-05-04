@@ -6,7 +6,7 @@ if (empty(session_id())) {
 use app\enums\CreditCardProvider;
 use app\enums\Month;
 use app\enums\State;
-use app\test\NewEntityGenerator;
+use app\test\EntityGenerator;
 use app\test\ListGenerator;
 
 require_once 'bootstrap.php';
@@ -175,7 +175,7 @@ require_once 'bootstrap.php';
                 <div class="formElement">
                     <?php
                         echo '<p>' . Month::selector() . '</p>';
-                        echo '<p>' . NewEntityGenerator::yearSelector(DateTime::createFromFormat('Y', date('Y'))) . '</p>';
+                        echo '<p>' . EntityGenerator::yearSelector(DateTime::createFromFormat('Y', date('Y'))) . '</p>';
                     ?>
                 </div>
             </fieldset>

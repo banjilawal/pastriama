@@ -2,9 +2,9 @@
 
 namespace app\models\abstracts;
 
-use Exception;
+use app\interfaces\adapters\GetName;
 
-abstract class NamedEntity extends Entity {
+abstract class NamedEntity extends Entity implements GetName {
     private string $name;
 
 

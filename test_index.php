@@ -28,7 +28,7 @@ namespace {
 //    $lastname = 'madeira';
 //    $phone = new Phone('865', '309', '2020');
 //    //$pastry0 = new Pastry(0, 'donut', 'a classic', 'donut.jpg', 1.99);
-//    $email = new EmailAddress(($firstname . '.' . $lastname), new Domain('wargame', 'com'));
+//    $email = new Email(($firstname . '.' . $lastname), new Domain('wargame', 'com'));
 //    $postalAddress = new PostalAddress('2020 Clearview Ave', 'Manzikert', new State('IA'), new Zipcode('12345') );
 //    $creditCard = null;
 //    try {

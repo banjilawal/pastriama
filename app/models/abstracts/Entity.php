@@ -2,10 +2,10 @@
 
 namespace app\models\abstracts;
 
-use app\enums\Status;
-use app\interfaces\Equality;
+use app\interfaces\adapters\Equality;
+use app\interfaces\adapters\GetId;
 
-abstract class Entity extends Model implements Equality {
+abstract class Entity extends Model implements GetId, Equality {
     private int $id;
     /**
      * @param int $id
@@ -29,6 +29,6 @@ abstract class Entity extends Model implements Equality {
     }
 
     public function __toString (): string {
-        return ' id:' . $this->id;
+        return 'id:' . $this->id;
     }
 }

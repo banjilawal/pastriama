@@ -9,14 +9,14 @@ namespace {
 //    const APP = PROJECT_ROOT . '\app';
 //    const TEST = PROJECT_ROOT . '\test';
 //    const DATASETS = TEST . '\datasets';
-// //   const FOOD_IMAGES = DATASETS . '\food_images';
+// //   const FOOD_IMAGES = DATASETS . '\pictures';
 //    const TESTING_DATASETS = PROJECT_ROOT . '\testing_datasets';
-//    const FOOD_IMAGES = TESTING_DATASETS . '\food_images';
+//    const FOOD_IMAGES = TESTING_DATASETS . '\pictures';
 //    const FIRSTNAMES = TESTING_DATASETS . DIRECTORY_SEPARATOR . 'firstnames.csv';
 //    const LASTNAMES = TESTING_DATASETS . DIRECTORY_SEPARATOR . 'lastnames.txt';
 //    const ADDRESSES = TESTING_DATASETS . DIRECTORY_SEPARATOR . 'addresses.csv';
 //    const FOODS = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'foods.csv';
-//    const IMAGES = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'food_images';
+//    const IMAGES = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'pictures';
 //    const FOOD_REVIEWS = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'food_reviews.csv';
 //
 ////const ASSETS =  PROJECT_ROOT . '\assets';
@@ -58,7 +58,7 @@ namespace {
 ////    define ('LASTNAMES', TESTING_DATASETS . DIRECTORY_SEPARATOR . 'lastnames.txt');
 ////    define ('ADDRESSES', TESTING_DATASETS . DIRECTORY_SEPARATOR . 'addresses.csv');
 ////    define ('FOODS', TESTING_DATASETS. DIRECTORY_SEPARATOR . 'foods.csv');
-////    define ('IMAGES', TESTING_DATASETS. DIRECTORY_SEPARATOR . 'food_images');
+////    define ('IMAGES', TESTING_DATASETS. DIRECTORY_SEPARATOR . 'pictures');
 ////    define ('FOOD_REVIEWS', TESTING_DATASETS. DIRECTORY_SEPARATOR . 'food_reviews.csv');
 //
 //    const EMAIL_SEPARATORS = array('', '.', '_', '-');

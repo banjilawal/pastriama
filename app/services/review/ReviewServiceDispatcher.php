@@ -2,20 +2,18 @@
 
 namespace app\services\review;
 
-use app\interfaces\Identifiable;
+use app\interfaces\adapters\GetId;
 use app\services\lists\ClientAddressList;
 use app\services\lists\ServerAddressList;
 use app\services\review\hostsCollections\ReviewServiceClients;
 use app\services\review\hostsCollections\ReviewServiceResponders;
-use app\services\review\interfaces\ReviewServiceClient;
-use app\services\review\interfaces\ReviewServiceDispatch;
 use app\services\review\messages\client\ReviewServiceQueries;
 use app\services\review\messages\client\ReviewServiceQuery;
 use app\services\review\messages\server\ReviewServerResponse;
 use app\services\review\messages\server\ServerResponses;
 use Exception;
 
-class ReviewServiceDispatcher implements ReviewServiceDispatcher, Identifiable {
+class ReviewServiceDispatcher implements ReviewServiceDispatcher, GetId {
 
     private int $id;
     private ReviewServiceQueries $queries;

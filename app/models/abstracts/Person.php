@@ -2,7 +2,7 @@
 
 namespace app\models\abstracts;
 
-use app\models\concretes\EmailAddress;
+use app\models\concretes\Email;
 use app\Models\Concretes\Phone;
 use app\models\concretes\PostalAddress;
 use DateTime;
@@ -12,7 +12,7 @@ abstract class Person extends NamedEntity {
     private string $lastname;
     private DateTime $birthdate;
     private Phone $phone;
-    private EmailAddress $emailAddress;
+    private Email $email;
     private string $password;
     private PostalAddress $postalAddress;
 
@@ -22,18 +22,18 @@ abstract class Person extends NamedEntity {
      * @param string $lastname
      * @param DateTime $birthdate
      * @param Phone $phone
-     * @param EmailAddress $emailAddress
+     * @param Email $email
      * @param string $password
      * @param PostalAddress $postalAddress
      * @throws Exception
      */
     public function __construct (
         int $id,
-        string $firstname,
+        string  $firstname,
         string $lastname,
         DateTime $birthdate,
         Phone $phone,
-        EmailAddress $emailAddress,
+        Email $email,
         string $password,
         PostalAddress $postalAddress
     ) {
@@ -41,7 +41,7 @@ abstract class Person extends NamedEntity {
         $this->lastname = $lastname;
         $this->birthdate = $birthdate;
         $this->phone = $phone;
-        $this->emailAddress = $emailAddress;
+        $this->email = $email;
         $this->password = $password;
         $this->postalAddress = $postalAddress;
     }
@@ -62,8 +62,8 @@ abstract class Person extends NamedEntity {
         return $this->phone;
     }
 
-    public function getEmailAddress (): EmailAddress {
-        return $this->emailAddress;
+    public function getEmail (): Email {
+        return $this->email;
     }
 
     public function getPassword (): string {
@@ -90,8 +90,8 @@ abstract class Person extends NamedEntity {
         $this->phone = $phone;
     }
 
-    public function setEmails (EmailAddress $email): void {
-        $this->emailAddress = $email;
+    public function setEmails (Email $email): void {
+        $this->email = $email;
     }
 
     public function setPassword (string $password): void {
@@ -110,7 +110,7 @@ abstract class Person extends NamedEntity {
                 && $this->lastname === $object->getLastname()
                 && $this->birthdate === $object->getBirthdate()
                 && $this->phone->equals($object->getPhone())
-                && $this->emailAddress->equals($object->getEmailAddress())
+//                && $this->email->equals($object->getEmail())
                 && $this->postalAddress->equals($object->getPostalAddress());
         }
         return false;
@@ -125,7 +125,7 @@ abstract class Person extends NamedEntity {
             . ' name:' . $this->printName() // . '<br>' . PHP_EOL
             . ' birthdate:' . $this->birthdate->format('Y-m-d') //. '<br>' . PHP_EOL
             . ' phone:' . $this->phone //.'<br>' . PHP_EOL
-            . ' email:' . $this->emailAddress //.'<br>' . PHP_EOL
+            . ' email:' . $this->email //.'<br>' . PHP_EOL
             . ' postal address:' . $this->postalAddress; // .'<br>' . PHP_EOL;
     }
 
@@ -133,7 +133,7 @@ abstract class Person extends NamedEntity {
         return '<tr id="' . $this->getId() . '">' // onclick="get_item(this)">'
             . '<td>' . $this->printName() . '</td>'
             . '<td>' . $this->phone .'</td>'
-            . '<td>' . $this->emailAddress . '</td>'
+            . '<td>' . $this->email . '</td>'
             . '<td>' . $this->postalAddress . '</td>'
             . '</tr>';
     }

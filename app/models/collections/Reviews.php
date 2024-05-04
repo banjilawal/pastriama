@@ -2,9 +2,12 @@
 
 namespace app\models\collections;
 
+use app\enums\Rating;
 use app\models\abstracts\Model;
+use app\models\abstracts\Product;
+use app\models\concretes\User;
 use app\models\concretes\Pastry;
-use app\models\concretes\NewReview;
+use app\models\concretes\review;
 use app\models\concretes\User;
 use DateTime;
 use Exception;
@@ -17,69 +20,24 @@ class Reviews extends Model {
         $this->list = array();
     }
 
-    public function getList (): NewReview|array {
+    public function getList (): review|array {
         return $this->list;
     }
 
     /**
      * @throws Exception
      */
-    public function addReviews (Reviews $reviews): void {
-        foreach ($reviews as $id => $review) {
-            echo println('adding review' . $review . PHP_EOL);
-            $this->addReview($review);
-        }
-    }
-
-
-    /**
-     * @throws Exception
-     */
-    public function addReview (NewReview $review): void {
+    public function addReview (review $review): void {
         if (array_key_exists($review->getId(), $this->list)) {
             throw new Exception('A review with that id ' . $review->getId() . ' already exists');
         }
-//        foreach ($this->list as $r) {
-//            if ($r->getUser()->equals($review->getUser()) && $r->getPastry()->equals($review->getPastry())) {
-//                $message = $r->getUser()->printName() . '=' . $review->getUser()->printName() . ' and '
-//                    . ' ' . $r->getPastry()->getName() . ' = '
-//                . $review->getPastry()->getName();
-//                throw new Exception($message);
-//            }
-//
-//        }
-//        if (!is_null($this->search($review->getUser(), $review->getPastry()))) {
-//            throw new Exception($review->getUser()->printName()
-//                . ' already reviewed ' . $review->getPastry()->getName());
-//        }
         $this->list[$review->getId()] = $review;
     }
 
-
     /**
      * @throws Exception
      */
-    public function removeReviews (Reviews $reviews): void {
-        foreach ($reviews as $review) {
-            $this->remove($review);
-        }
-    }
-
-
-    /**
-     * @throws Exception
-     */
-    public function remove (NewReview $review): void {
-        if (!array_key_exists($review->getId(), $this->list)) {
-            throw new Exception($review->getId() . ' is not in the list. Cannot remove nonexistent card');
-        }
-        unset($this->list[$review->getId()]);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function filterByRating (int $rating): Reviews {
+    public function filterByRating (Rating $rating): Reviews {
         $matches = new Reviews();
         foreach ($this->list as $review) {
             if ($review->getRating() === $rating)
@@ -91,10 +49,10 @@ class Reviews extends Model {
     /**
      * @throws Exception
      */
-    public function filterByPastry (Pastry $pastry): Reviews {
+    public function filterByProduct (Product $product): Reviews {
         $matches = new Reviews();
         foreach ($this->list as $review) {
-            if ($review->getPastry()->equals($pastry))
+            if ($review->getProduct()->equals($product))
                 $matches->addReview($review);
         }
         return $matches;
@@ -129,15 +87,15 @@ class Reviews extends Model {
         usort($this->list, 'compareByRating');
     }
 
-    public function compareByRating (NewReview $a, NewReview $b): int {
-        return $a->getRating() - $b->getRating();
+    public function compareByRating (review $a, review $b): int {
+        return $a->getRating()->value - $b->getRating()->value;
     }
 
     /**
      * @throws Exception
      */
-    public function search (User $user, Pastry $pastry): Reviews {
-        return $this->filterByUser($user)->filterByPastry($pastry);
+    public function search (User $user, Product $product): Reviews {
+        return $this->filterByUser($user)->filterByProduct($product);
     }
 
     public function getAverageRating (): int {
@@ -146,39 +104,21 @@ class Reviews extends Model {
         }
         $sum = 0;
         foreach ($this->list as $review) {
-            $sum += $review->getRating();
+            $sum += $review->getRating()->value;
         }
         return $sum / count($this->list);
     }
 
     public function __toString  (): string {
-        $string = nl2br('Reviews:');
+        $string = 'Reviews:' . PHP_EOL;
         foreach ($this->list as $id => $review) {
-            $string  .= nl2br($review . PHP_EOL);
+            $string  .= $review . PHP_EOL;
         }
         return $string;
     }
 
-    public function toTable (): string {
-        $elem = '<table id="reviewsTable">'
-            . '<thead>'
-            . '<tr>'
-            . '<th>Date</th>'
-            . '<th>Reviewer</th>'
-            . '<th>Pastry</th>'
-            . '<th>Stars</th>'
-            . '<th>Comment</th>'
-            . '</tr>'
-            . '</thead>'
-            . '<tbody>';
-        foreach ($this->list as $id => $review) {
-            $elem .= '<tr>' . $review->toTable() . '</tr>';
-        }
-        $elem .= '</tbody></table>';
-        return $elem;
-    }
 
-    public function randomReview (): NewReview {
+    public function randomReview (): review {
         return $this->list[array_rand($this->list)];
     }
 }

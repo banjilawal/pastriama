@@ -4,7 +4,7 @@ namespace app\services\identifiers;
 
 use app\enums\HostType;
 use app\enums\Service;
-use app\interfaces\Equality;
+use app\interfaces\adapters\Equality;
 
 abstract class HostAddress implements Equality {
     private Service $service;

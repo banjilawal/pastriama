@@ -2,7 +2,11 @@
 
 namespace app\enums;
 
-enum Service: int {
-    case REVIEW_SERVICE = 1;
+enum Service: string {
+
+    case ADD = 'add';
+    case REMOVE = 'remove';
+    case READ = 'read';
+    case SEARCH = 'search';
 
 }

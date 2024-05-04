@@ -2,25 +2,21 @@
 
 namespace app\models\catalogs;
 
-use app\models\abstracts\Model;
+use app\models\abstracts\Aggregation;
 use app\models\abstracts\Product;
 use app\models\concretes\InventoryItem;
-use App\Models\Concretes\NewOrder;
-use app\models\concretes\Pastry;
-use App\Models\Concretes\User;
-use app\models\collections\InvoiceItems;
-use App\Models\collections\Orders;
-use app\models\collections\Pastries;
+
+use app\validators\ValidatorChain;
 use DateTime;
 use Exception;
 
-class Inventory extends Model {
+final class Inventory extends Aggregation {
     private static $instance;
-    protected static InvoiceItems $products;
+    protected array $items;
 
-    private function __construct () {
-        parent::__construct();
-        self::$products = new InvoiceItems();
+    private function __construct (ValidatorChain $validators) {
+        parent::__construct($validators);
+        $this->items = array ();
     }
 
     public static function getInstance (): Inventory {
@@ -30,58 +26,101 @@ class Inventory extends Model {
         return self::$instance;
     }
 
-    public static function getProducts (): InvoiceItems {
-        return self::$products;
+    private function __clone () {}
+
+    public function __sleep() {
+        return []; // Returning an empty array prevents serializing instance variables
     }
 
-    private function __clone () {}
-    public function __wakeup () {}
+    public function __wakeup() {
+        // When unserialized, ensure the singleton pattern is maintained
+        self::$instance = $this; // Reinstate the singleton instance
+    }
 
+    public function getItems (): InventoryItem|array {
+        return $this->items;
+    }
 
-//    /**
-//     * @throws Exception
-//     */
-//    public function addPastry (Pastry $pastry, int $quantity=50): void {
-//        if (array_key_exists($pastry->getid(), self::$inventory->getItems())) {
-//            throw new Exception($pastry . ' is already recorded');
+    /**
+     * @throws Exception
+     */
+    public function add (Product $product, int $amount): void {
+        foreach($this->validators as $validator) {
+
+        }
+//        if ($amount < 0) {
+//            throw new Exception('Cannot add less than zero items of ' . $product->getName() . ' to the inventory.');
 //        }
-//        self::$products->add($pastry, $quantity);
-//    }
+        $id = $product->getId();
+        if ($this->contains($product)) {
+            $this->items[$id]->increaseQuantity($amount);
+        } else { $this->items[$id] = new InventoryItem($product, $amount); }
+    }
 
-//    public function add (InvoiceItem $item): void{
-//        self::$products->addProduct($item);
-//    }
+    /**
+     * @throws Exception
+     */
+    public function remove (Product $product, int $amount): InventoryItem {
+        if (!$this->amountExists($product, $amount)) {
+            throw new Exception ('There is an insufficient amount of ' . $product . ' to meet the request');
+        }
+        $id = $product->getId();
+        $this->items[$id]->decreaseQuantity($amount);
+        if ($this->items[$id]->getQuantity() <= RESTOCK_LEVEL) {
+            $this->items[$id]->increaseQuantity(DEFAULT_RESTOCK_QUANTITY);
+        }
+        return new InventoryItem($product, $amount);
+    }
 
-//    public function toTable (
-//        int $imageWidth=Product::DEFAULT_STORE_ITEM_ROW_IMAGE_WIDTH,
-//        int $imageHeight=Product::DEFAULT_STORE_ITEM_ROW_IMAGE_HEIGHT
-//    ): string {
-//        $elem ='<table id="inventoryTable">'
-//            . '<thead>'
-//            . '<tr>'
-//            . '<th>Id</th>'
-//            . '<th>Picture</th>'
-//            . '<th>Name</th>'
-//            . '<th>Description</th>'
-//            . '<th>Price</th>'
-////                . '<th>Average Rating</th>'
-//            . '</tr>'
-//            . '</thead>'
-//            . '<tbody>';
-//        foreach (self::$products->getList() as $id => $item) {
-//            $elem .= '<tr onclick="send(' . $id . ')">'
-//                . '<td>' . $id . '</td>'
-//                . '<td>' . $item->getPastry()->getImgTag() . '</td>' #<img src="' . $this->imagePath . '" width="90" height="100"></td>'
-//                . '<td>' . $item->getPastry()->getName() . '</td>'
-//                . '<td>' . $item->getPastry()->getDescription() . '</td>'
-//                . '<td>' . number_format($item->getPastry()->getPrice(), 2) . '</td>'
-//                . '<td>' . $pastry->getReveiws(
-//                    DateTime::createFromFormat('Y-m-d', '2020-01-01'),
-//                    DateTime::createFromFormat('Y-m-d', '2029-01-01')
-//                )->getAverageRating() . '</td>'
-//                . '</tr>';
-//        }
-//        $elem .= '</tbody></table>';
-//        return $elem;
-//    }
+    public function searchByName (string $name): ?InventoryItem {
+        foreach ($this->items as $id => $item) {
+            if ($this->items[$id]->getProduct()->getName() === $name) {
+                return $this->items[$id];
+            }
+        }
+        return null;
+    }
+
+    public function searchByProduct (Product $product): ?InventoryItem {
+        foreach ($this->items as $id => $item) {
+            if ($this->items[$id]->getProduct()->equals($product)) {
+                return $this->items[$id];
+            }
+        }
+        return null;
+    }
+
+    public function searchById (int $id): ?InventoryItem {
+        if (array_key_exists($id, $this->items))
+            return $this->items[$id];
+        return null;
+    }
+
+    public function contains (Product $product): bool {
+        return (array_key_exists($product->getId(), $this->items));
+    }
+
+    public function amountExists (Product $product, int $amount): bool {
+        $id = $product->getId();
+        return array_key_exists($id, $this->items) && $this->items[$id]->getQuantity() >= $amount;
+    }
+
+    public function getQuantity (Product $product): int {
+        if (!$this->contains($product))
+            return PHP_INT_MIN;
+        else
+            return $this->items[$product->getId()]->getQuantity();
+    }
+
+    public function __toString (): string {
+        $string = 'Inventory' . PHP_EOL;
+        foreach ($this->items as $item) {
+            $string .= $item . PHP_EOL;
+        }
+        return $string;
+    }
+
+    public function random (): InventoryItem {
+        return $this->items[array_rand($this->items)];
+    }
 }

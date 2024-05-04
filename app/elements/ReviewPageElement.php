@@ -3,20 +3,20 @@
 namespace app\elements;
 
 use app\interfaces\Dashboard;
-use app\models\concretes\NewReview;
+use app\models\concretes\review;
 use app\elements\PageElement;
 use app\utils\AssemblePage;
 use Exception;
 
 class ReviewPageElement extends PageElement implements Dashboard {
 
-    private NewReview $review;
+    private review $review;
     private string $dashboardHeading;
 
     /**
-     * @param NewReview $review
+     * @param review $review
      */
-    public function __construct (NewReview $review) {
+    public function __construct (review $review) {
         parent::__construct($review->getTitle());
         $this->review = $review;
         $this->dashboardHeading = '';

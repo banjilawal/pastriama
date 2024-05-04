@@ -3,7 +3,7 @@
 namespace app\services\identifiers;
 
 use app\enums\Service;
-use app\interfaces\Equality;
+use app\interfaces\adapters\Equality;
 
 class ServiceRequestIdentifier implements Equality {
     private Service $service;

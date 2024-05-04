@@ -2,12 +2,12 @@
 
 namespace app\elements\user;
 
+use app\elements\PageElement;
 use app\enums\CreditCardProvider;
 use app\enums\Month;
 use app\models\collections\CreditCards;
-use app\elements\Generate;
-use app\elements\PageElement;
-use app\test\NewEntityGenerator;
+use app\templates\HTMLSection;
+use app\test\EntityGenerator;
 use DateTime;
 
 class CreditCardsPageElement extends PageElement {
@@ -73,7 +73,7 @@ class CreditCardsPageElement extends PageElement {
                         . '</p>'
                     . '</div>'
                 . '<div class="formElement"><p>' . Month::selector()
-                . ' ' . NewEntityGenerator::yearSelector(DateTime::createFromFormat('Y', date('Y')))
+                . ' ' . EntityGenerator::yearSelector(DateTime::createFromFormat('Y', date('Y')))
                 . '</div>'
                 . '<div class="formElement">'
                     . '<p>'
@@ -102,10 +102,10 @@ class CreditCardsPageElement extends PageElement {
     }
 
     public function page (): string {
-        return Generate::htmlHead($this->getTitle())
-            . Generate::header()
-            . Generate::navbar()
+        return HTMLSection::head($this->getTitle())
+            . HTMLSection::header()
+            . HTMLSection::navbar()
             . $this->body()
-            . Generate::footer();
+            . HTMLSection::footer();
     }
 }

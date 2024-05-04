@@ -3,19 +3,23 @@ namespace {
     require_once 'vendor/autoload.php'; // DIRECTORY_SEPARATOR . 'autoload.php';
 
     define("UNDELIVERED_DATE", DateTime::createFromFormat('Y-m-d', '2525-01-01'));
+//    define('ROOT_DIR', dirname(__DIR__));
+//    define ('PICTURES', ROOT_DIR . '\pictures');
 
     const PROJECT_ROOT = __DIR__;
     const APP = PROJECT_ROOT . '\app';
     const TEST = PROJECT_ROOT . '\test';
+    const PROCESS = PROJECT_ROOT . DIRECTORY_SEPARATOR . 'processors';
+    const PROCESS_LOGIN_FORM = PROCESS . '\processLoginForm.php';
     const DATASETS = TEST . '\datasets';
- //   const FOOD_IMAGES = DATASETS . '\food_images';
+ //   const FOOD_IMAGES = DATASETS . '\pictures';
     const TESTING_DATASETS = PROJECT_ROOT . '\testing_datasets';
     const FOOD_IMAGES = TESTING_DATASETS . '\food_images';
     const FIRSTNAMES = TESTING_DATASETS . DIRECTORY_SEPARATOR . 'firstnames.csv';
     const LASTNAMES = TESTING_DATASETS . DIRECTORY_SEPARATOR . 'lastnames.txt';
     const ADDRESSES = TESTING_DATASETS . DIRECTORY_SEPARATOR . 'addresses.csv';
     const FOODS = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'foods.csv';
-    const IMAGES = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'food_images';
+//    const FOOD_IMAGES = TESTING_DATASETS. '\food_images';
     const FOOD_REVIEWS = TESTING_DATASETS. DIRECTORY_SEPARATOR . 'food_reviews.csv';
 
 //const ASSETS =  PROJECT_ROOT . '\assets';
@@ -28,7 +32,24 @@ namespace {
 
 //$files = scandir(DATASETS);
 //print_r($files);
+    function imagePath ()  {
+        $path = explode('\\', PROJECT_ROOT . DIRECTORY_SEPARATOR . 'pictures');
+        return $path[4]; //implode(DIRECTORY_SEPARATOR, array_slice($path, 3, 4));
 
+    }
+
+    function pagePath () {
+        $path = explode ('\\', APP . '\app\\models\\');
+        return $path;
+    }
+    echo print_r(pagePath());
+
+    function processPath () {
+        $path = explode('\\', PROJECT_ROOT . DIRECTORY_SEPARATOR . 'processors');
+        return $path[4];
+    }
+//    echo imagePath();
+    echo processPath();
 
     const DATE_FORMAT = 'Y-m-d';
     const DATE_TIME_FORMAT = 'Y-m-d h:m:s.n';
@@ -48,10 +69,18 @@ namespace {
     const MAX_QUANTITY_PER_ORDER = 12;
     const DEFAULT_RESTOCK_QUANTITY = 144;
 
-    const MINIMUM_CREDIT_CARD_LENGTH = 16;
-    const MAXIMUM_CREDIT_CARD_LENGTH = 20;
-    const CREDIT_CARD_CVN_PATTERN = '/[0-9]{3}/';
-    const CREDIT_CARD_NUMBER_PATTERN = '/([0-9]{4,} ){4,}/i';
+    const AREA_CODE_PATTERN = '/([0-9]{3}|\([0-9]{3}\))/';
+    const EXCHANGE_PATTERN = '/[0-9]{3}/';
+    const LINE_NUMBER_PATTERN = '/[0-9]{4}/';
+    const  ZIP_CODE_PATTERN = '/[0-9]{5}/';
+
+//    const MINIMUM_CREDIT_CARD_LENGTH = 16;
+//    const MAXIMUM_CREDIT_CARD_LENGTH = 20;
+//    const CREDIT_CARD_CVN_PATTERN = '/[0-9]{3}/';
+//    const CREDIT_CARD_NUMBER_PATTERN = '/([0-9]{4,} ){4,}/i';
+
+    const DELIVERY_WINDOW = 5;
+    const RETURN_WINDOW = 30;
 
     const EMAIL_SEPARATORS = array('', '.', '_', '-');
 

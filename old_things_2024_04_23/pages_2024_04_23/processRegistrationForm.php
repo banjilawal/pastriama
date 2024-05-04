@@ -2,12 +2,12 @@
 
 use app\utils\Convert;
 use app\models\concretes\CreditCard;
-use app\models\concretes\EmailAddress;
+use app\models\concretes\Email;
 use app\models\concretes\PostalAddress;
 use app\models\concretes\StateClass;
 use app\models\concretes\User;
 use app\models\concretes\Zipcode;
-use app\test\NewEntityGenerator;
+use app\test\EntityGenerator;
 use app\utils\SerialNumber;
 
 if (empty(session_id())) {
@@ -111,7 +111,7 @@ try {
 $creditCard = null;
 try {
     $creditCard = new CreditCard(
-        NewEntityGenerator::nextCreditCardId(),
+        EntityGenerator::nextCreditCardId(),
         $vendor,
         $nameOnCard,
         $cardNumber,
@@ -138,11 +138,11 @@ try {
         SerialNumber::nextUserId(),
         $firstname,
         $lastname,
-        NewEntityGenerator::someDateTime(
+        EntityGenerator::someDateTime(
             DateTime::createFromFormat('Y-m-d', '1927-01-01'),
             DateTime::createFromFormat('Y-m-d', '2002-01-01')
         ),
-        NewEntityGenerator::phone(),
+        EntityGenerator::phone(),
         $email, //EntityGenerator::email($firstname, $lastname),
         $password,
         $postalAddress,
