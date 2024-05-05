@@ -2,16 +2,17 @@
 
 namespace app\models\collections;
 
+use app\models\abstracts\Aggregation;
 use app\models\abstracts\Model;
 use app\models\abstracts\Product;
 use app\models\catalogs\Inventory;
 use app\models\concretes\CartItem;
 use app\models\concretes\OrderItem;
 use app\models\concretes\Pastry;
-use app\models\catalogs\Inventory;
+
 use Exception;
 
-class OrderItems extends Model {
+class OrderItems extends Aggregation {
     private array $list;
 
 
@@ -266,7 +267,7 @@ class OrderItems extends Model {
         return $elem . '</tbody></table>';
     }
 
-    public function randomProduct (): OrderItem {
+    public function random (): OrderItem {
         return $this->list[array_rand($this->list)];
     }
 }

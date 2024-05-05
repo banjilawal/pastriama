@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 namespace app\models\collections;
 
+use app\models\abstracts\Aggregation;
 use app\models\abstracts\Model;
 use app\models\abstracts\Product;
 use app\models\concretes\CreditCard;
@@ -10,7 +11,7 @@ use app\models\concretes\User;
 use DateTime;
 use Exception;
 
-class Orders extends Model {
+class Orders extends Aggregation {
     private array $list;
 
     public function __construct () {
@@ -103,5 +104,5 @@ class Orders extends Model {
         return$string;
     }
 
-    public function randomOrder (): Order { return $this->list[array_rand($this->list)]; }
+    public function random (): Order { return $this->list[array_rand($this->list)]; }
 }

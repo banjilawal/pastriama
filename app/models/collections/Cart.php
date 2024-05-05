@@ -2,6 +2,7 @@
 
 namespace app\models\collections;
 
+use app\models\abstracts\Aggregation;
 use app\models\abstracts\Model;
 use app\models\abstracts\Product;
 use app\models\abstracts\StoreItem;
@@ -13,7 +14,7 @@ use app\models\concretes\Pastry;
 use DateTime;
 use Exception;
 
-class Cart extends Model {
+class Cart extends Aggregation {
 
     private array $items;
 

@@ -4,170 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="Added templates and created classes to handle the ordering products flow.">
-      <change afterPath="$PROJECT_DIR$/addressPage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/constants/PersonConstant.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/contexts/Search.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/RequestStatus.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/Resource.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/enums/SearchCriteria.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/handlers/AddNewItemHandler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/handlers/DecreaseQuantityHandler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/handlers/Handler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/handlers/IdExistsHandler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/DecreaseQuantity.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetEmail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetName.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetPrice.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetProduct.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetQuantity.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetReview.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/IncreaseQuantity.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/adapters/Random.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/responsibilities/BooleanValidator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/responsibilities/Handle.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/responsibilities/Valid.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/responsibilities/Validator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/strategies/PaymentStrategy.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/strategies/SearchStrategy.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/visitors/AddStoreItem.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/interfaces/visitors/RandomItem.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/abstracts/Aggregation.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/concretes/Receipt.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/requests/Request.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/strategies/payment/CreditCardPayment.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/strategies/search/SearchById.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/strategies/search/SearchByName.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/strategies/search/SearchByProduct.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/strategies/search/SearchByQuantity.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/strategies/search/SearchByUser.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/Form.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/HTMLSelector.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/templates/Script.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/test/Create.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/validators/CanDecreaseQuantity.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/validators/DoesContain.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/validators/DoesNotContain.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/validators/IsEmpty.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/validators/NotNegative.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/validators/UniqueEmail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/validators/UniqueID.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/validators/UniqueProduct.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/validators/ValidatorChain.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/creditCardPage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/processors/processLoginForm.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shoppingCartPage.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/Element.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/containers/Container.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/containers/Div.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/containers/Form.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/containers/Listing.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/containers/Section.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/containers/Table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userDashboard.php" afterDir="false" />
+    <list default="true" id="0c670c57-4e3b-4f17-8748-5e8d6f541026" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/elements/Generate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/HTMLSection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/elements/OrderPageElement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/OrderPageElement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/elements/ProductPageElement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/ProductPageElement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/elements/ReviewPageElement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/ReviewPageElement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/elements/user/CreditCardsPageElement.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/elements/user/CreditCardsPageElement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/enums/Service.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/enums/Service.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/interfaces/Equality.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/interfaces/adapters/Equality.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/interfaces/Identifiable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/interfaces/adapters/GetId.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/interfaces/Quantifiable.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/Address.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Address.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/Entity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Entity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/NamedEntity.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/NamedEntity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/Person.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Person.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/abstracts/StoreItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/abstracts/StoreItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/catalogs/Inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/Inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/catalogs/NewInventory.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/catalogs/NewUsersCatalog.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/catalogs/OrdersCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/OrdersCatalog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/catalogs/PastriesCatalog.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/catalogs/ReviewsCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/ReviewsCatalog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/catalogs/UsersCatalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/catalogs/UsersCatalog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/handlers/DecreaseQuantityHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/handlers/DecreaseQuantityHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/handlers/IdExistsHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/handlers/IdExistsHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/responsibilities/Handle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/interfaces/responsibilities/Handle.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/collections/Addresses.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Addresses.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/collections/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/collections/CreditCards.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/CreditCards.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/collections/InvoiceItems.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/collections/NewOrders.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/collections/NewReviews.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/collections/NewUsers.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/collections/OrderItems.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/OrderItems.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/collections/Orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/collections/PageLinkList.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/Products.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Products.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/collections/Reviews.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Reviews.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/collections/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/CartItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/CartItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/CreditCard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/EmailAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Email.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/InvoiceItem.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/NewOrder.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/NewReview.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/NewUser.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/OrderItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/OrderItem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/PageLink.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Pastry.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Pastry.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Phone.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Phone.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/PostalAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Refund.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/ReturnTransaction.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Review.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/StateClass.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/concretes/Zipcode.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concretes/Zipcode.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/processors/Process.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/processors/Process.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/identifiers/ClientAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/identifiers/ClientAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/identifiers/HostAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/identifiers/HostAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/identifiers/ServerAddress.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/identifiers/ServerAddress.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/identifiers/ServerReplyIdentifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/identifiers/ServerReplyIdentifier.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/identifiers/ServiceRequestIdentifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/identifiers/ServiceRequestIdentifier.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/replies/ServerReply.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/replies/ServerReply.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/requests/ServiceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/requests/ServiceRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/requests/requests/LoginRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/requests/requests/LoginRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/requests/requests/RegisterAccountRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/requests/requests/RegisterAccountRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/review/ReviewServiceDispatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/review/ReviewServiceDispatcher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/review/messages/server/ReviewServerResponse.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/review/messages/server/ReviewServerResponse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/Dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/Dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/HTMLForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/HTMLForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/HTMLList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/HTMLList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/CatalogPopulator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/CatalogPopulator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/EntityGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/EntityGenerator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/ListGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/ListGenerator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/NewCatalogPopulator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/test/NewCatalogPopulator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/NewEntityGenerator.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/test/NewListGenerator.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/AssemblePage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/AssemblePage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/Convert.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/Convert.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/SerialNumber.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/SerialNumber.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/utils/Util.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils/Util.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/autoload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/constants.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_loader.php" beforeDir="false" afterPath="$PROJECT_DIR$/data_loader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/new_welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/new_welcome.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newest_welcome.php" beforeDir="false" afterPath="$PROJECT_DIR$/newest_welcome.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_bootstrap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/search.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_home.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/CreditCardManagementPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/CreditCardManagementPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/InvoicePage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/InvoicePage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/ReviewPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/ReviewPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/createAccountForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/createAccountForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/creditCardPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/creditCardPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/inventoryItemPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/inventoryItemPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processAddToCartForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processAddToCartForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processAddressForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processAddressForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processOneClickBuyForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processOneClickBuyForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processPhoneForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processPhoneForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processRegistrationForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processRegistrationForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processReviewForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/processReviewForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/productPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_index.php" beforeDir="false" afterPath="$PROJECT_DIR$/test_index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/collections/Wishlist.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/collections/Wishlist.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,14 +27,6 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="CSS File" />
-        <option value="HTML File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -195,253 +36,47 @@
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 7
+  &quot;associatedIndex&quot;: 4
 }</component>
-  <component name="ProjectId" id="2aEqk6CEzk2fs0UplCkNiMSRpPe" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2g0dlbQSPdpsAR98hQgaEK24O8v" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/xampp/htdocs/pastriama/app/utils",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "php.override.implement.member.chooser.php.doc": "NONE",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\pastriama\app\utils" />
-      <recent name="C:\xampp\htdocs\pastriama\app\test" />
-      <recent name="C:\xampp\htdocs\pastriama" />
-      <recent name="C:\xampp\htdocs\pastriama\app\templates" />
-      <recent name="C:\xampp\htdocs\pastriama\processors" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\pastriama\app\test" />
-      <recent name="C:\xampp\htdocs\pastriama\app\templates" />
-      <recent name="C:\xampp\htdocs\pastriama\old_things_2024_04_23\pages_2024_04_23" />
-      <recent name="C:\xampp\htdocs\pastriama\old_things_2024_04_23" />
-      <recent name="C:\xampp\htdocs\pastriama\old-things-2024-04-23" />
-    </key>
-  </component>
-  <component name="RunManager" selected="PHP Script.new_welcome.php">
-    <configuration name="EntityGenerator.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/pastriama/EntityGenerator.php" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
-    <configuration name="GenerateTestPastries.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/pastriama/app/test/GenerateTestPastries.php" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
-    <configuration name="FormType.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/app/enums/FormType.php">
-      <method v="2" />
-    </configuration>
-    <configuration name="new_welcome.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/new_welcome.php">
-      <method v="2" />
-    </configuration>
-    <configuration name="user_cards.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_cards.php">
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="PHP Script.new_welcome.php" />
-        <item itemvalue="PHP Script.FormType.php" />
-        <item itemvalue="JavaScript Debug.GenerateTestPastries.php" />
-        <item itemvalue="JavaScript Debug.EntityGenerator.php" />
-        <item itemvalue="PHP Script.user_cards.php" />
-      </list>
-    </recent_temporary>
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PS-241.15989.102" />
+        <option value="bundled-php-predefined-ba97393d7c68-c76157a7178b-com.jetbrains.php.sharedIndexes-PS-241.15989.102" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="526e8000-baef-4170-938e-d70672815aa8" name="Changes" comment="" />
-      <created>1703894228358</created>
+      <changelist id="0c670c57-4e3b-4f17-8748-5e8d6f541026" name="Changes" comment="" />
+      <created>1714838580927</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1703894228358</updated>
-      <workItem from="1703894229846" duration="13183000" />
-      <workItem from="1703952529499" duration="61778000" />
-      <workItem from="1704297175566" duration="30207000" />
-      <workItem from="1704651427665" duration="20001000" />
-      <workItem from="1704845724381" duration="14558000" />
-      <workItem from="1705007805987" duration="14792000" />
-      <workItem from="1705040118999" duration="18112000" />
-      <workItem from="1705153913670" duration="8861000" />
-      <workItem from="1705248791578" duration="2102000" />
-      <workItem from="1705456836968" duration="1481000" />
-      <workItem from="1705521389318" duration="431000" />
-      <workItem from="1706060688107" duration="3899000" />
-      <workItem from="1706069405924" duration="3121000" />
-      <workItem from="1706131064782" duration="9840000" />
-      <workItem from="1706660859043" duration="5591000" />
-      <workItem from="1706713664114" duration="10857000" />
-      <workItem from="1710866023935" duration="73643000" />
-      <workItem from="1711130907142" duration="1600000" />
-      <workItem from="1711734150683" duration="902000" />
-      <workItem from="1712412475717" duration="76380000" />
-      <workItem from="1712625699504" duration="20526000" />
-      <workItem from="1712773854033" duration="8975000" />
-      <workItem from="1712881258997" duration="15349000" />
-      <workItem from="1712972759709" duration="40602000" />
-      <workItem from="1713196004772" duration="113850000" />
-      <workItem from="1713458723231" duration="100765000" />
-      <workItem from="1713708381969" duration="16487000" />
-      <workItem from="1713729909536" duration="55390000" />
-      <workItem from="1713855271400" duration="59806000" />
-      <workItem from="1714021485442" duration="103030000" />
-      <workItem from="1714402660864" duration="70715000" />
-      <workItem from="1714513687502" duration="8174000" />
-      <workItem from="1714524170583" duration="87259000" />
+      <updated>1714838580927</updated>
+      <workItem from="1714838582546" duration="1123000" />
+      <workItem from="1714841147857" duration="143000" />
+      <workItem from="1714841295458" duration="4155000" />
     </task>
-    <task id="LOCAL-00001" summary="Gont classes to work with composer for autoloadng casses and managing dependencies">
-      <option name="closed" value="true" />
-      <created>1704003854532</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1704003854532</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Gont classes to work with composer for autoloadng casses and managing dependencies">
-      <option name="closed" value="true" />
-      <created>1712414450145</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1712414450145</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Rewrote some classes implemented initial Request/Response successfully.">
-      <option name="closed" value="true" />
-      <created>1713373303623</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1713373303624</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Created classes, interfaces, and welcomePage that assembles a webpage from components">
-      <option name="closed" value="true" />
-      <created>1713428477218</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1713428477218</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Wrote and tested first draft of CreditCard class">
-      <option name="closed" value="true" />
-      <created>1713459142376</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1713459142376</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Started working on microsevices and despatchers. Got first draft of content service working that sends page components.">
-      <option name="closed" value="true" />
-      <created>1713708575329</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1713708575329</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Worked on the service infrastructure.">
-      <option name="closed" value="true" />
-      <created>1713766560987</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1713766560987</updated>
-    </task>
-    <task id="LOCAL-00008" summary="I made it really complicated want to save this to the autoloading branch">
-      <option name="closed" value="true" />
-      <created>1713800907992</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1713800907992</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Added templates and created classes to handle the ordering products flow.">
-      <option name="closed" value="true" />
-      <created>1714488928532</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1714488928532</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Gont classes to work with composer for autoloadng casses and managing dependencies" />
-    <MESSAGE value="Rewrote some classes implemented initial Request/Response successfully." />
-    <MESSAGE value="Created classes, interfaces, and welcomePage that assembles a webpage from components" />
-    <MESSAGE value="Wrote and tested first draft of CreditCard class" />
-    <MESSAGE value="Started working on microsevices and despatchers. Got first draft of content service working that sends page components." />
-    <MESSAGE value="Worked on the service infrastructure." />
-    <MESSAGE value="I made it really complicated want to save this to the autoloading branch" />
-    <MESSAGE value="Added templates and created classes to handle the ordering products flow." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added templates and created classes to handle the ordering products flow." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/old_things_2024_04_23/old_webpages/user_orders.php</url>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/test_index.php</url>
-          <line>9</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/test/RandomPastryList.php</url>
-          <line>37</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/old_things_2024_04_23/pages_2024_04_23/pageComponents.php</url>
-          <line>29</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/replies/ReviewServer/ReviewServiceProvider.php</url>
-          <line>6</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/test/EntityGenerator.php</url>
-          <line>5</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/test/ListGenerator.php</url>
-          <line>71</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/models/concretes/Phone.php</url>
-          <line>4</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

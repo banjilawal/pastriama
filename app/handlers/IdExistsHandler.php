@@ -14,26 +14,85 @@ class IdExistsHandler extends Handler {
 }
 
 
-// Create the Chain of Responsibility
-$checkExists = new \app\interfaces\responsibilities\CheckIfItemExistsHandler();
-$addNewItem = new \app\interfaces\responsibilities\AddNewItemHandler();
-$incrementItem = new \app\interfaces\responsibilities\IncrementItemValueHandler();
+// Define the interface for handling requests
+interface Handler {
+    public function setNext (Handler $handler): Handler;
 
-// Set the chain sequence
-$checkExists->setNext($addNewItem); // If item doesn't exist, add it
-$addNewItem->setNext($incrementItem); // If item exists, increment it
+    public function handle (array $product);
+}
 
-// Example array
-$array = [
-    'apple' => 10,
-    'banana' => 5,
-];
+// Abstract class implementing the Handler interface
+abstract class AbstractHandler implements Handler {
+    private $nextHandler;
 
-// Test the chain with an item that exists
-$checkExists->handle($array, 'apple', 2); // Increments the value of 'apple' by 2
+    public function setNext (Handler $handler): Handler {
+        $this->nextHandler = $handler;
+        return $handler;
+    }
 
-// Test the chain with an item that doesn't exist
-$checkExists->handle($array, 'orange', 3); // Adds 'orange' with a value of 3
+    public function handle (array $product) {
+        if ($this->nextHandler) {
+            return $this->nextHandler->handle($product);
+        }
 
-// Output the updated array
-print_r($array); // Output: ['apple' => 12, 'banana' => 5, 'orange' => 3]
+        return null;
+    }
+}
+
+// Concrete handler to add a new product to the inventory
+class AddNewProductHandler extends AbstractHandler {
+    private $inventory;
+
+    public function __construct (array &$inventory) {
+        $this->inventory = &$inventory;
+    }
+
+    public function handle (array $product) {
+        $productId = $product['id'];
+
+        if (!isset($this->inventory[$productId])) {
+            $this->inventory[$productId] = $product;
+            echo "Product added to inventory.\n";
+        } else {
+            echo "Product already exists in inventory.\n";
+        }
+
+        return parent::handle($product);
+    }
+}
+
+// Concrete handler to increase the quantity of an existing product
+class IncreaseQuantityHandler extends AbstractHandler {
+    private $inventory;
+
+    public function __construct (array &$inventory) {
+        $this->inventory = &$inventory;
+    }
+
+    public function handle (array $product) {
+        $productId = $product['id'];
+
+        if (isset($this->inventory[$productId])) {
+            $this->inventory[$productId]['quantity'] += $product['quantity'];
+            echo "Quantity increased for product in inventory.\n";
+        }
+
+        return parent::handle($product);
+    }
+}
+
+// Example usage
+$inventory = [];
+
+// Construct the chain of responsibility
+$addNewProductHandler = new AddNewProductHandler($inventory);
+$increaseQuantityHandler = new IncreaseQuantityHandler($inventory);
+
+$addNewProductHandler->setNext($increaseQuantityHandler);
+
+// Simulate adding new products and increasing quantities
+$addNewProductHandler->handle(['id' => 1, 'name' => 'Product A', 'quantity' => 10]);
+$addNewProductHandler->handle(['id' => 2, 'name' => 'Product B', 'quantity' => 20]);
+$addNewProductHandler->handle(['id' => 1, 'name' => 'Product A', 'quantity' => 5]);
+
+print_r($inventory);

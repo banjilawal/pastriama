@@ -3,13 +3,14 @@
 namespace app\models\collections;
 
 use app\enums\State;
+use app\models\abstracts\Aggregation;
 use app\models\abstracts\Model;
 use app\models\concretes\InventoryItem;
 use app\models\concretes\PostalAddress;
 use app\models\concretes\Zipcode;
 use Exception;
 
-class Addresses extends Model {
+class Addresses extends Aggregation {
     private array $list;
 
     public function __construct () {

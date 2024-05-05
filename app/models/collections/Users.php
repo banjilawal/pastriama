@@ -2,12 +2,13 @@
 
 namespace app\models\collections;
 
+use app\models\abstracts\Aggregation;
 use app\models\abstracts\Model;
 use app\models\concretes\Email;
 use app\models\concretes\User;
 use Exception;
 
-class Users extends Model {
+class Users extends Aggregation {
     private array $list;
 
     public function __construct () {
@@ -91,7 +92,7 @@ class Users extends Model {
         return $string;
     }
 
-    public function randomUser (): User {
+    public function random (): User {
         return $this->list[array_rand($this->list)];
     }
 }

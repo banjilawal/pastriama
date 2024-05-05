@@ -2,12 +2,13 @@
 
 namespace app\models\collections;
 
+use app\models\abstracts\Aggregation;
 use app\models\abstracts\Model;
 use app\models\abstracts\Product;
 
 use Exception;
 
-class Products extends Model {
+class Products extends Aggregation {
     private array $items;
 
     public function __construct () {
@@ -77,5 +78,5 @@ class Products extends Model {
         return $string;
     }
 
-    public function randomProduct (): Product { return $this->items[array_rand($this->items)]; }
+    public function random (): Product { return $this->items[array_rand($this->items)]; }
 }

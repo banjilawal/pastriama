@@ -6,6 +6,6 @@ use app\requests\Request;
 
 interface Handle {
 
-    public function handle (& $array, Request $request): bool;
+    public function handle (Request $request): bool;
     public function setNext (Handle $handler): void;
 }

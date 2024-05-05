@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 namespace app\models\collections;
 
+use app\models\abstracts\Aggregation;
 use app\models\abstracts\Model;
 use app\models\concretes\Pastry;
 use app\models\concretes\InventoryItem;
@@ -9,7 +10,7 @@ use app\utils\SerialNumber;
 use DateTime;
 use Exception;
 
-class Wishlist extends Model {
+class Wishlist extends Aggregation {
     private array $list;
 
     public function __construct () {
@@ -99,5 +100,5 @@ class Wishlist extends Model {
         return $elem;
     }
 
-    public function randomWish () { return $this->list[array_rand($this->list)]; }
+    public function random (): Wish { return $this->list[array_rand($this->list)]; }
 }

@@ -3,6 +3,7 @@
 namespace app\models\collections;
 
 use app\enums\Rating;
+use app\models\abstracts\Aggregation;
 use app\models\abstracts\Model;
 use app\models\abstracts\Product;
 use app\models\concretes\User;
@@ -12,7 +13,7 @@ use app\models\concretes\User;
 use DateTime;
 use Exception;
 
-class Reviews extends Model {
+class Reviews extends Aggregation {
     private array $list;
 
     public function __construct () {
@@ -118,7 +119,7 @@ class Reviews extends Model {
     }
 
 
-    public function randomReview (): review {
+    public function random (): review {
         return $this->list[array_rand($this->list)];
     }
 }
