@@ -6,8 +6,8 @@ import lombok.Data;
 
 import org.lawal.banji.pastriama.orderItem.model.OrderItem;
 import org.lawal.banji.pastriama.people.Customer;
-import org.lawal.banji.pastriama.shipping.Shippment;
-import org.lawal.banji.pastriama.transaction.model.Charge;
+import org.lawal.banji.pastriama.billing.model.Bill;
+import org.lawal.banji.pastriama.shipping.model.Shipment;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,11 +27,11 @@ public class Order {
 
     @OneToOne
     @JoinColumn(name = "payment_id", nullable = false)
-    private Charge charge;
+    private Bill bill;
 
     @OneToOne
     @JoinColumn(name = "shipping_id", nullable = false, unique = true)
-    Shippment shippment;
+    Shipment shipment;
 
     @OneToMany(mappedBy="order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     Set<OrderItem> items = new HashSet<>();

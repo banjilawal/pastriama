@@ -6,9 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.lawal.banji.pastriama.billing.model.Bill;
 import org.lawal.banji.pastriama.people.Customer;
+import org.lawal.banji.pastriama.refund.model.Refund;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Entity
@@ -36,5 +39,8 @@ public class CreditCard {
     private Customer customer;
 
     @OneToMany(mappedBy="creditCard", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    Set<Charge> charges;
+    Set<Bill> bills;
+
+    @OneToMany(mappedBy="creditCard", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    Set<Refund> refunds;
 }

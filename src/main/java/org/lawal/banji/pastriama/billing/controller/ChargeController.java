@@ -1,4 +1,4 @@
-package org.lawal.banji.pastriama.transaction.controller;
+package org.lawal.banji.pastriama.billing.controller;
 
 import org.springframework.stereotype.Controller;
 

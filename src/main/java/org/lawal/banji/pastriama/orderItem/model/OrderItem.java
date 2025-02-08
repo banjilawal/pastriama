@@ -29,6 +29,4 @@ public class OrderItem {
     @Column(nullable=false)
     @Positive
     private int quantity;
-
-    public Double getPrice() { return storeItem.getPrice() * quantity; }
 }

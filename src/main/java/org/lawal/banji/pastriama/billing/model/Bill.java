@@ -1,4 +1,4 @@
-package org.lawal.banji.pastriama.transaction.model;
+package org.lawal.banji.pastriama.billing.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Charge {
+public class Bill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +27,7 @@ public class Charge {
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
-    @OneToOne
-    @JoinColumn(name = "card_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "credit_card_id", nullable = false)
     private CreditCard creditCard;
 }
