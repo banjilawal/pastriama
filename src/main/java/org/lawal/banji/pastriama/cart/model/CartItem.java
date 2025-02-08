@@ -1,32 +1,32 @@
-package org.lawal.banji.pastriama.wish;
+package org.lawal.banji.pastriama.cart.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.lawal.banji.pastriama.item.model.StoreItem;
 import org.lawal.banji.pastriama.people.Customer;
-
-import java.time.LocalDateTime;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Wish {
+public class CartItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    Long id;
 
-    @NotNull
-    LocalDateTime time;
+    @NonNull
+    Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name = "store_item_id", nullable = false, unique = true)
+    @JoinColumn(name = "store_iem_id", nullable = false)
     private StoreItem storeItem;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer;
+    @JoinColumn(name = "customer_id")
+    Customer customer;
+
 }

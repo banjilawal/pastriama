@@ -1,4 +1,8 @@
 package org.lawal.banji.pastriama.order.repo;
 
-public class OrderRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface OrderRepo extends JpaRepository {
 }
