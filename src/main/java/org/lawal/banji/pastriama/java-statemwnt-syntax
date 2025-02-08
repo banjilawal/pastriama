@@ -1,0 +1,19 @@
+2 types
+those that evaluate to something
+those that evaluate to nothing (void)
+
+DataType identifier(variable) = expression
+LHS = RHS (void is not like this)
+
+void statement syntax
+command
+
+
+for (String line in file.getLines() {
+    print(line)
+}
+
+while (currentNumber < numberOfLines ) {
+    statement || statements
+    statement for changing currentNumber
+}
