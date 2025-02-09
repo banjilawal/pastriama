@@ -1,4 +1,4 @@
-package org.lawal.banji.pastriama.cart.controller;
+package org.lawal.banji.pastriama.cartItem.controller;
 
 import org.springframework.stereotype.Controller;
 

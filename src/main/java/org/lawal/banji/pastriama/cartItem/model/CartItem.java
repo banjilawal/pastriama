@@ -1,4 +1,4 @@
-package org.lawal.banji.pastriama.cart.model;
+package org.lawal.banji.pastriama.cartItem.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

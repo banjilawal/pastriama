@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.lawal.banji.pastriama.address.Address;
-import org.lawal.banji.pastriama.cart.model.CartItem;
+import org.lawal.banji.pastriama.cartItem.model.CartItem;
 import org.lawal.banji.pastriama.order.model.Order;
 import org.lawal.banji.pastriama.creditCard.CreditCard;
 import org.lawal.banji.pastriama.phone.model.Phone;
